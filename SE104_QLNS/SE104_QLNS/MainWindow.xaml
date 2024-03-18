@@ -5,9 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SE104_QLNS"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="720"
+        Title="MainWindow" Height="650" Width="950"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Background="Transparent" AllowsTransparency="True">
+    <Border Background="White" CornerRadius="15">
+        <Grid>
+
+        </Grid>
+    </Border>
 
 </Window>
