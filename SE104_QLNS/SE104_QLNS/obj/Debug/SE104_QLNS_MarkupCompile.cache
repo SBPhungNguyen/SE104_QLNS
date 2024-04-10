@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\App.xaml
-3-200036785
+71739235369
 
-7-629398745
+12-732554945
 14-1656046352
-MainWindow.xaml;SignIn.xaml;SignUp.xaml;
+MainWindow.xaml;SignIn.xaml;SignUp.xaml;View\Uct_BookImport.xaml;View\Uct_Books.xaml;View\Uct_Customer.xaml;View\Uct_Employee.xaml;
 
-False
+True
 

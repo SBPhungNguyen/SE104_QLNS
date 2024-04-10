@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="SE104_QLNS.View.Uct_Customer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SE104_QLNS.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="180"
+             Margin="35,0,0,30">
+    <UserControl.Template>
+        <ControlTemplate>
+            <Border CornerRadius="15">
+                <Grid>
+                    <Image Name="img_Icon" Height="20" Width="20" Source="{Binding Img_Type}" Stretch="Fill" Margin="146,14,14,166"/>
+                    <Label Name="lbl_CustomerID" Content="{Binding CustomerID}" Margin="0,36,0,138" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                    <Label Name="lbl_CustomerName" Content="{Binding CustomerName}" Margin="0,58,0,105" FontWeight="Bold" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                    <TextBlock Text="SĐT:" Margin="13,102,124,72" />
+                    <TextBlock Text="Đã mua:" Margin="12,132,115,42" />
+                    <TextBlock Text="Nợ:" Margin="12,162,116,12" />
+                    <TextBlock Name="tbl_PhoneNumber" Text="{Binding CustomerPhonenumber}" Margin="83,102,13,77"/>
+                    <TextBlock Name="tbl_Spending" Text="{Binding CustomerSpending}" Margin="83,131,14,48"/>
+                    <TextBlock Name="tbl_Debt" Text="{Binding CustomerDebt}" Margin="83,160,15,19" Foreground="Red" FontWeight="Bold"/>
+                </Grid>
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="Background" Value="#F5F5ED"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FFC2DECE"/>
+                            </Trigger>
+                        </Style.Triggers>
+
+                    </Style>
+                </Border.Style>
+            </Border>
+        </ControlTemplate>
+    </UserControl.Template>
+</UserControl>

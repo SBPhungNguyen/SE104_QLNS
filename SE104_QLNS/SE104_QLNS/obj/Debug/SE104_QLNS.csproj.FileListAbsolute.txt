@@ -34,3 +34,11 @@ D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\SE104_QLNS.csproj.GenerateR
 D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\SE104_QLNS.csproj.CoreCompileInputs.cache
 D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\SE104_QLNS.exe
 D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\SE104_QLNS.pdb
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\View\Uct_BookImport.g.cs
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\View\Uct_BookImport.baml
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\View\Uct_Books.g.cs
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\View\Uct_Books.baml
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\View\Uct_Customer.g.cs
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\View\Uct_Customer.baml
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\View\Uct_Employee.g.cs
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\View\Uct_Employee.baml

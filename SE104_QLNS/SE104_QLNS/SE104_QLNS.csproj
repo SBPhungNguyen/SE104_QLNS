@@ -62,6 +62,18 @@
     <Compile Include="SignUp.xaml.cs">
       <DependentUpon>SignUp.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Uct_BookImport.xaml.cs">
+      <DependentUpon>Uct_BookImport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Uct_Books.xaml.cs">
+      <DependentUpon>Uct_Books.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Uct_Customer.xaml.cs">
+      <DependentUpon>Uct_Customer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Uct_Employee.xaml.cs">
+      <DependentUpon>Uct_Employee.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -79,6 +91,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SignUp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Uct_BookImport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Uct_Books.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Uct_Customer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Uct_Employee.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -138,6 +166,25 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Img_Back2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\icon_addcircle.png" />
+    <Resource Include="Images\icon_birthday.png" />
+    <Resource Include="Images\icon_close.png" />
+    <Resource Include="Images\icon_debt.png" />
+    <Resource Include="Images\icon_eye.png" />
+    <Resource Include="Images\icon_eyeslash.png" />
+    <Resource Include="Images\icon_gender.png" />
+    <Resource Include="Images\icon_location.png" />
+    <Resource Include="Images\icon_mail.png" />
+    <Resource Include="Images\icon_moneybag.png" />
+    <Resource Include="Images\icon_phone.png" />
+    <Resource Include="Images\icon_trashcan.png" />
+    <Resource Include="Images\icon_useravatar.png" />
+    <Resource Include="Images\icon_userID.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\icon_trashcan.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
