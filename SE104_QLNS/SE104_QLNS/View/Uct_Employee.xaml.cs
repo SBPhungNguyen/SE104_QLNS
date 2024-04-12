@@ -20,9 +20,25 @@ namespace SE104_QLNS.View
     /// </summary>
     public partial class Uct_Employee : UserControl
     {
+        public string Icon
+        { get; set; }
+        public string EmployeeID
+        { get; set; }
+        public string EmployeeName
+        { get; set; }
+        public string EmployeePhonenumber
+        { get; set; }
+        public string EmployeeOccupation
+        { get; set; }
+        public string EmployeeTime
+        { get; set; }
+        public string PicURL
+        { get; set; }
         public Uct_Employee()
         {
             InitializeComponent();
+            this.DataContext = this;
+
         }
     }
 }

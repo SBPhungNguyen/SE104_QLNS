@@ -42,3 +42,12 @@ D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\View\Uct_Customer.g.cs
 D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\View\Uct_Customer.baml
 D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\View\Uct_Employee.g.cs
 D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\View\Uct_Employee.baml
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\BookDeletePopup.g.cs
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\BookDeletePopup.baml
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\BookInfoPopup.g.cs
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\BookInfoPopup.baml
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\CustomerDelete.g.cs
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\CustomerDelete.baml
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\CustomerInfo.g.cs
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\CustomerInfo.baml

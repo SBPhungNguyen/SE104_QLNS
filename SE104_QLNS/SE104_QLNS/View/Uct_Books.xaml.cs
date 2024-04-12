@@ -23,6 +23,35 @@ namespace SE104_QLNS.View
         public Uct_Books()
         {
             InitializeComponent();
+            this.DataContext = this;
+        }
+        public string BookURL
+        {
+            get; set;
+        }
+        public string BookName
+        { get; set; }
+        public string BookNum
+        {
+            get; set;
+        }
+        public string BookPriceImport
+        { get; set; }
+        public string BookPriceExport
+        { get; set; }
+        public string BookID
+        { get; set; }
+        public string Icon
+        { get; set; }
+        public void LoadData(string BookCode, string BookName, string URL, string NumOfBook, string PriceImport, string PriceExport, string Icon)
+        {
+            this.BookID = BookCode;
+            this.BookName = BookName;
+            this.BookURL = URL;
+            BookNum = NumOfBook;
+            this.BookPriceImport = PriceImport;
+            this.BookPriceExport = PriceExport;
+            this.Icon = Icon;
         }
     }
 }

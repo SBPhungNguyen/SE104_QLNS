@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("view/icon_trashcan.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/icon_calendar.png")]
 
 

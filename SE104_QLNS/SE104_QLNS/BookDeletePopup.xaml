@@ -1,0 +1,125 @@
+﻿<Window x:Class="SE104_QLNS.BookDeletePopup"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SE104_QLNS"
+        mc:Ignorable="d"
+        Title="BookDeletePopup" Height="400" Width="600"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True" Background="Transparent">
+    <Border CornerRadius="10" Background="White" BorderBrush="Black" BorderThickness="1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Border CornerRadius="10,10,0,0" Background="#C2DECE"/>
+                <TextBlock Text="Xoá Sách"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       VerticalAlignment="Center" Margin="15,0,438,0"/>
+                <Image Source="/Images/icon_close.png" Width="23" Height="23" Stretch="Fill" Margin="569,3,8,4" RenderTransformOrigin="1.864,0.792"/>
+            </Grid>
+            <Grid Grid.Row="1">
+
+                <Border Width="150" Height="200" Margin="47,54,401,114" CornerRadius="10">
+                    <Border.Background>
+                        <ImageBrush x:Name="img_BookImage" Stretch="Fill"/>
+                    </Border.Background>
+                </Border>
+                <TextBlock Text="Xoá sách này khỏi danh sách sách?" 
+                           FontSize="23" FontWeight="Bold" FontFamily="Tahoma" Margin="104,11,70,323"/>
+                <TextBlock Text="ID:" Height="30" Width="20" FontSize="18" 
+                            Margin="235,48,343,290"/>
+                <TextBlock Text="Tên Sách:" Height="30" FontSize="18" 
+                            Margin="235,84,281,254"/>
+                <TextBlock Text="Thể Loại:" Height="30" FontSize="18" 
+                            Margin="235,121,281,217"/>
+                <TextBlock Text="Tác giả:" Height="30" FontSize="18" 
+                            Margin="235,157,281,181"/>
+                <TextBlock Text="Giá nhập:" Height="30" FontSize="18" 
+                            Margin="235,195,281,143"/>
+                <TextBlock Text="Giá bán:" Height="30" FontSize="18" 
+                            Margin="235,232,281,106"/>
+                <TextBlock Text="Số lượng:" Height="30" FontSize="18" 
+                            Margin="235,269,281,69"/>
+
+                <TextBlock Name="tbl_BookID" Text="ID" FontWeight="Bold"
+                           Height="30" FontSize="18" 
+                           Margin="362,48,32,290"/>
+                <TextBlock Name="tbl_BookName" Text="Ten sach" FontWeight="Bold"
+                           Height="30" FontSize="18" 
+                           Margin="362,84,10,254"/>
+                <TextBlock Name="tbl_Gerne" FontWeight="Bold"
+                           Text="Thể Loại:" Height="30" FontSize="18" 
+                           Margin="362,121,10,217"/>
+                <TextBlock Name="tbl_Author" FontWeight="Bold"
+                           Text="Tác giả:" Height="30" FontSize="18" 
+                           Margin="362,157,10,181"/>
+                <TextBlock Name="tbl_ImportPrice" FontWeight="Bold"
+                           Text="Giá nhập:" Height="30" FontSize="18" 
+                           Margin="362,195,10,143"/>
+                <TextBlock Name="tbl_ExportPrice" FontWeight="Bold"
+                           Text="Giá bán:" Height="30" FontSize="18" 
+                           Margin="362,232,10,106"/>
+                <TextBlock Name="tbl_Quantity" FontWeight="Bold"
+                           Text="Số lượng:" Height="30" FontSize="18" 
+                           Margin="362,269,10,69"/>
+                <Button Name="btn_Delete" Height="35" Margin="45,315,298,18"
+                        Content="Xoá Sách" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#154348"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Green"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="200" Height="30"
+                                                        CornerRadius="15"
+                                                        Background="{TemplateBinding Background}"
+                                                        BorderThickness="1"
+                                                        BorderBrush="#3CB76D">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                                      HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button Name="btn_Back" Height="35" Margin="299,315,44,18"
+                        Content="Quay Lại" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#6FB3B8"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#56A399"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="200" Height="30"
+                                                        CornerRadius="15"
+                                                        Background="{TemplateBinding Background}"
+                                                        BorderThickness="1"
+                                                        BorderBrush="#3CB76D">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                                      HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

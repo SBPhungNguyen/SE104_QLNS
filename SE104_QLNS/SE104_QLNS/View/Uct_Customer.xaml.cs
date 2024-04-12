@@ -20,9 +20,17 @@ namespace SE104_QLNS.View
     /// </summary>
     public partial class Uct_Customer : UserControl
     {
+        public string CustomerName { get; set; }
+        public string CustomerID { get; set; }
+        public string CustomerPhonenumber { get; set; }
+        public string CustomerSpending { get; set; }
+        public string CustomerDebt { get; set; }
+        public string Img_Type { get; set; }
         public Uct_Customer()
         {
             InitializeComponent();
+            this.DataContext = this;
+
         }
     }
 }

@@ -56,6 +56,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BookDeletePopup.xaml.cs">
+      <DependentUpon>BookDeletePopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BookInfoPopup.xaml.cs">
+      <DependentUpon>BookInfoPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerDelete.xaml.cs">
+      <DependentUpon>CustomerDelete.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerInfo.xaml.cs">
+      <DependentUpon>CustomerInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SignIn.xaml.cs">
       <DependentUpon>SignIn.xaml</DependentUpon>
     </Compile>
@@ -74,6 +86,22 @@
     <Compile Include="View\Uct_Employee.xaml.cs">
       <DependentUpon>Uct_Employee.xaml</DependentUpon>
     </Compile>
+    <Page Include="BookDeletePopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BookInfoPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomerDelete.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomerInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -185,6 +213,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="View\icon_trashcan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\icon_calendar.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

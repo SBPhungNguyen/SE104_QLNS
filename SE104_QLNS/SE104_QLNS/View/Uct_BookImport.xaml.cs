@@ -20,9 +20,19 @@ namespace SE104_QLNS.View
     /// </summary>
     public partial class Uct_BookImport : UserControl
     {
+        public string BookName
+        { get; set; }
+        public string BookURL
+        { get; set; }
+        public string BookImportPrice
+        { get; set; }
+        public string BookQuantity
+        { get; set; }
         public Uct_BookImport()
         {
             InitializeComponent();
+            this.DataContext = this;
+
         }
     }
 }
