@@ -3,19 +3,39 @@
   "WorkspaceRootPath": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|d:\\github\\se104_qlns\\se104_qlns\\se104_qlns\\employeeinfo.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|solutionrelative:se104_qlns\\employeeinfo.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|d:\\github\\se104_qlns\\se104_qlns\\se104_qlns\\savereceiptpopup.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|solutionrelative:se104_qlns\\savereceiptpopup.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|d:\\github\\se104_qlns\\se104_qlns\\se104_qlns\\employeeupdate.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|solutionrelative:se104_qlns\\employeeupdate.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|d:\\github\\se104_qlns\\se104_qlns\\se104_qlns\\employeedelete.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|solutionrelative:se104_qlns\\employeedelete.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|d:\\github\\se104_qlns\\se104_qlns\\se104_qlns\\employeeadd.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|solutionrelative:se104_qlns\\employeeadd.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|d:\\github\\se104_qlns\\se104_qlns\\se104_qlns\\customerinfo.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|solutionrelative:se104_qlns\\customerinfo.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|d:\\github\\se104_qlns\\se104_qlns\\se104_qlns\\customerdelete.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\se104_qlns\\customerdelete.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|solutionrelative:se104_qlns\\customerdelete.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|d:\\github\\se104_qlns\\se104_qlns\\se104_qlns\\bookinfopopup.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\se104_qlns\\bookinfopopup.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|solutionrelative:se104_qlns\\bookinfopopup.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|d:\\github\\se104_qlns\\se104_qlns\\se104_qlns\\bookdeletepopup.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\se104_qlns\\bookdeletepopup.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|solutionrelative:se104_qlns\\bookdeletepopup.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
@@ -31,11 +51,11 @@
       "RelativeMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|solutionrelative:se104_qlns\\view\\uct_books.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|d:\\github\\se104_qlns\\se104_qlns\\se104_qlns\\view\\uct_books.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\se104_qlns\\view\\uct_books.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|solutionrelative:se104_qlns\\view\\uct_books.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|d:\\github\\se104_qlns\\se104_qlns\\se104_qlns\\view\\uct_bookimport.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\se104_qlns\\view\\uct_bookimport.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|solutionrelative:se104_qlns\\view\\uct_bookimport.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -43,7 +63,7 @@
       "RelativeMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|solutionrelative:se104_qlns\\view\\uct_bookimport.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|d:\\github\\se104_qlns\\se104_qlns\\se104_qlns\\view\\uct_customer.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\se104_qlns\\view\\uct_customer.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|solutionrelative:se104_qlns\\view\\uct_customer.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -51,11 +71,11 @@
       "RelativeMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|solutionrelative:se104_qlns\\view\\uct_customer.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|d:\\github\\se104_qlns\\se104_qlns\\se104_qlns\\view\\uct_employee.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\se104_qlns\\view\\uct_employee.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|solutionrelative:se104_qlns\\view\\uct_employee.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|d:\\github\\se104_qlns\\se104_qlns\\se104_qlns\\view\\uct_employee.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\se104_qlns\\view\\uct_employee.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|solutionrelative:se104_qlns\\view\\uct_employee.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
@@ -91,6 +111,70 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "EmployeeInfo.xaml",
+              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\EmployeeInfo.xaml",
+              "RelativeDocumentMoniker": "SE104_QLNS\\EmployeeInfo.xaml",
+              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\EmployeeInfo.xaml",
+              "RelativeToolTip": "SE104_QLNS\\EmployeeInfo.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-12T01:20:11.473Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SaveReceiptPopup.xaml",
+              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\SaveReceiptPopup.xaml",
+              "RelativeDocumentMoniker": "SE104_QLNS\\SaveReceiptPopup.xaml",
+              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\SaveReceiptPopup.xaml",
+              "RelativeToolTip": "SE104_QLNS\\SaveReceiptPopup.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-12T01:18:21.629Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EmployeeUpdate.xaml",
+              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\EmployeeUpdate.xaml",
+              "RelativeDocumentMoniker": "SE104_QLNS\\EmployeeUpdate.xaml",
+              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\EmployeeUpdate.xaml",
+              "RelativeToolTip": "SE104_QLNS\\EmployeeUpdate.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-12T01:16:57.705Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "EmployeeDelete.xaml",
+              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\EmployeeDelete.xaml",
+              "RelativeDocumentMoniker": "SE104_QLNS\\EmployeeDelete.xaml",
+              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\EmployeeDelete.xaml",
+              "RelativeToolTip": "SE104_QLNS\\EmployeeDelete.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-12T01:15:15.439Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "EmployeeAdd.xaml",
+              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\EmployeeAdd.xaml",
+              "RelativeDocumentMoniker": "SE104_QLNS\\EmployeeAdd.xaml",
+              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\EmployeeAdd.xaml",
+              "RelativeToolTip": "SE104_QLNS\\EmployeeAdd.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-12T01:13:54.858Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "CustomerInfo.xaml",
               "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\CustomerInfo.xaml",
               "RelativeDocumentMoniker": "SE104_QLNS\\CustomerInfo.xaml",
@@ -102,7 +186,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "CustomerDelete.xaml",
               "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\CustomerDelete.xaml",
               "RelativeDocumentMoniker": "SE104_QLNS\\CustomerDelete.xaml",
@@ -114,7 +198,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "BookInfoPopup.xaml",
               "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\BookInfoPopup.xaml",
               "RelativeDocumentMoniker": "SE104_QLNS\\BookInfoPopup.xaml",
@@ -126,7 +210,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "BookDeletePopup.xaml",
               "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\BookDeletePopup.xaml",
               "RelativeDocumentMoniker": "SE104_QLNS\\BookDeletePopup.xaml",
@@ -138,7 +222,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 10,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\MainWindow.xaml",
               "RelativeDocumentMoniker": "SE104_QLNS\\MainWindow.xaml",
@@ -150,31 +234,29 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 11,
               "Title": "Uct_Books.xaml",
               "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_Books.xaml",
               "RelativeDocumentMoniker": "SE104_QLNS\\View\\Uct_Books.xaml",
               "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_Books.xaml",
               "RelativeToolTip": "SE104_QLNS\\View\\Uct_Books.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-10T14:13:44.784Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-10T14:13:44.784Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 14,
               "Title": "Uct_BookImport.xaml",
               "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_BookImport.xaml",
               "RelativeDocumentMoniker": "SE104_QLNS\\View\\Uct_BookImport.xaml",
               "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_BookImport.xaml",
               "RelativeToolTip": "SE104_QLNS\\View\\Uct_BookImport.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-10T14:10:23.524Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-10T14:10:23.524Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 13,
               "Title": "View\\Uct_BookImport.xaml.cs",
               "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_BookImport.xaml.cs",
               "RelativeDocumentMoniker": "SE104_QLNS\\View\\Uct_BookImport.xaml.cs",
@@ -182,12 +264,11 @@
               "RelativeToolTip": "SE104_QLNS\\View\\Uct_BookImport.xaml.cs",
               "ViewState": "AQIAABgAAAAAAAAAAAAswCUAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-12T00:51:30.377Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-12T00:51:30.377Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 9,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "SE104_QLNS\\MainWindow.xaml.cs",
@@ -195,12 +276,11 @@
               "RelativeToolTip": "SE104_QLNS\\MainWindow.xaml.cs",
               "ViewState": "AQIAAAgAAAAAAAAAAAAkwBoAAAA8AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-17T13:49:30.365Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-17T13:49:30.365Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 12,
               "Title": "View\\Uct_Books.xaml.cs",
               "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_Books.xaml.cs",
               "RelativeDocumentMoniker": "SE104_QLNS\\View\\Uct_Books.xaml.cs",
@@ -208,12 +288,11 @@
               "RelativeToolTip": "SE104_QLNS\\View\\Uct_Books.xaml.cs",
               "ViewState": "AQIAAB0AAAAAAAAAAAAwwDYAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-12T00:52:20.691Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-12T00:52:20.691Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 15,
               "Title": "View\\Uct_Customer.xaml.cs",
               "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_Customer.xaml.cs",
               "RelativeDocumentMoniker": "SE104_QLNS\\View\\Uct_Customer.xaml.cs",
@@ -221,24 +300,22 @@
               "RelativeToolTip": "SE104_QLNS\\View\\Uct_Customer.xaml.cs",
               "ViewState": "AQIAABEAAAAAAAAAAAAkwCEAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-12T00:52:32.671Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-12T00:52:32.671Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 16,
               "Title": "Uct_Customer.xaml",
               "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_Customer.xaml",
               "RelativeDocumentMoniker": "SE104_QLNS\\View\\Uct_Customer.xaml",
               "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_Customer.xaml",
               "RelativeToolTip": "SE104_QLNS\\View\\Uct_Customer.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-10T14:15:12.222Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-10T14:15:12.222Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 17,
               "Title": "View\\Uct_Employee.xaml.cs",
               "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_Employee.xaml.cs",
               "RelativeDocumentMoniker": "SE104_QLNS\\View\\Uct_Employee.xaml.cs",
@@ -246,28 +323,22 @@
               "RelativeToolTip": "SE104_QLNS\\View\\Uct_Employee.xaml.cs",
               "ViewState": "AQIAABMAAAAAAAAAAAAkwCkAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-12T00:53:14.962Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-12T00:53:14.962Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 18,
               "Title": "Uct_Employee.xaml",
               "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_Employee.xaml",
               "RelativeDocumentMoniker": "SE104_QLNS\\View\\Uct_Employee.xaml",
               "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_Employee.xaml",
               "RelativeToolTip": "SE104_QLNS\\View\\Uct_Employee.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-10T14:26:50.249Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+              "WhenOpened": "2024-04-10T14:26:50.249Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 22,
               "Title": "App.xaml",
               "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\App.xaml",
               "RelativeDocumentMoniker": "SE104_QLNS\\App.xaml",
@@ -279,7 +350,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 21,
               "Title": "SignUp.xaml.cs",
               "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\SignUp.xaml.cs",
               "RelativeDocumentMoniker": "SE104_QLNS\\SignUp.xaml.cs",
@@ -291,18 +362,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 19,
               "Title": "SignIn.xaml",
               "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\SignIn.xaml",
               "RelativeDocumentMoniker": "SE104_QLNS\\SignIn.xaml",
               "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\SignIn.xaml",
               "RelativeToolTip": "SE104_QLNS\\SignIn.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-03-18T13:33:05.728Z"
+              "WhenOpened": "2024-03-18T13:33:05.728Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 20,
               "Title": "SignUp.xaml",
               "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\SignUp.xaml",
               "RelativeDocumentMoniker": "SE104_QLNS\\SignUp.xaml",

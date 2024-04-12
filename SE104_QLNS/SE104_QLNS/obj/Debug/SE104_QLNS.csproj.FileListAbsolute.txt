@@ -51,3 +51,13 @@ D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\CustomerDelete.g.cs
 D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\CustomerDelete.baml
 D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\CustomerInfo.g.cs
 D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\CustomerInfo.baml
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\EmployeeAdd.g.cs
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\EmployeeAdd.baml
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\EmployeeDelete.g.cs
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\EmployeeDelete.baml
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\EmployeeUpdate.g.cs
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\EmployeeUpdate.baml
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\SaveReceiptPopup.g.cs
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\SaveReceiptPopup.baml
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\EmployeeInfo.g.cs
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\EmployeeInfo.baml

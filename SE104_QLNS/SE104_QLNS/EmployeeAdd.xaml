@@ -1,0 +1,113 @@
+﻿<Window x:Class="SE104_QLNS.EmployeeAdd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SE104_QLNS"
+        mc:Ignorable="d"
+        Title="EmployeeAdd" Height="450" Width="750"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True" Background="Transparent">
+    <Border CornerRadius="10" Background="White" BorderBrush="Black" BorderThickness="1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Border Background="#C2DECE" CornerRadius="10,10,0,0"/>
+                <TextBlock Text="Thêm nhân viên"
+                           FontSize="18"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center" Margin="15,0,251,0"/>
+                <Image Source="/Images/icon_close.png" Width="23" Height="23" Stretch="Fill"  RenderTransformOrigin="1.864,0.792" Margin="718,3,7,4"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <TextBlock Text="Thêm nhân viên mới" 
+                           FontSize="25"
+                           FontWeight="Bold"
+                           FontFamily="Tahoma"
+                           HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,9,0,0"/>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Border Name="bdr_EmployeeImage" Width="150" Height="200" Margin="33,15,565,113" CornerRadius="10">
+                    <Border.Background>
+                        <ImageBrush x:Name="img_EmployeeImage" Stretch="Fill" ImageSource="/Images/totoro.jpg"/>
+                    </Border.Background>
+                </Border>
+                <TextBlock Text="ID:" FontSize="18" Height="25" Width="50" Margin="251,12,447,291" RenderTransformOrigin="0.184,-0.376"/>
+                <TextBlock Text="Tên:" FontSize="18" Height="25" Margin="251,44,393,259" RenderTransformOrigin="0.184,-0.376" />
+                <TextBlock Text="Giới tính:" FontSize="18" Height="25" Margin="251,78,394,225" RenderTransformOrigin="0.184,-0.376"/>
+                <TextBlock Text="CMND/CCCD:" FontSize="18" Height="25" Margin="251,110,377,193" RenderTransformOrigin="0.184,-0.376" />
+                <TextBlock Text="SĐT:" FontSize="18" Height="25" Margin="251,143,395,160" RenderTransformOrigin="0.184,-0.376"/>
+                <TextBlock Text="Địa chỉ:" FontSize="18" Height="25" Margin="251,174,393,129" RenderTransformOrigin="0.184,-0.376"/>
+                <TextBlock Text="Vị trí:" FontSize="18" Height="25" Margin="251,213,392,90" RenderTransformOrigin="0.184,-0.376" />
+                <TextBlock Text="Ca làm việc:" FontSize="18" Height="25" Margin="251,245,393,58" RenderTransformOrigin="0.184,-0.376"/>
+
+                <TextBox Name="tbl_EmployeeID" Text="NV000001" FontSize="18" Height="25" Margin="384,11,250,292" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"
+                         BorderThickness="0,0,0,1" VerticalContentAlignment="Bottom"/>
+                <TextBox Name="tbl_EmployeeName" Text="Ninh Dương Lan Ngọc" FontSize="18" Height="25" Margin="384,44,20,259" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"
+                         BorderThickness="0,0,0,1"/>
+                <TextBox Name="tbl_EmployeeGender" Text="Nữ" FontSize="18" Height="25" Margin="384,78,285,225" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"
+                         BorderThickness="0,0,0,1"/>
+                <TextBox Name="tbl_EmployeeCard" Text="010203040506" FontSize="18" Height="25" Margin="384,110,166,193" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"
+                         BorderThickness="0,0,0,1"/>
+                <TextBox Name="tbl_EmployeePhone" Text="SĐT:" FontSize="18" Height="25" Margin="384,143,166,160" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"
+                         BorderThickness="0,0,0,1"/>
+                <TextBox Name="tbl_EmployeeAddress" Text="Địa chỉ:" FontSize="18" Margin="384,174,21,127" RenderTransformOrigin="0.184,-0.376" TextWrapping="Wrap" FontWeight="Bold"
+                         BorderThickness="0,0,0,1"/>
+                <TextBox Name="tbl_EmployeeOccupation" Text="Nhân viên" FontSize="18" Height="25" Margin="384,213,21,90" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"
+                         BorderThickness="0,0,0,1"/>
+                <TextBox Name="tbl_EmployeeShift" Text="13h-18h" FontSize="18" Height="25" Margin="384,245,20,58" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"
+                         BorderThickness="0,0,0,1"/>
+                <TextBlock Text="Ngày sinh:" FontSize="18" Height="25" Margin="492,78,153,225" RenderTransformOrigin="0.184,-0.376" />
+                <TextBlock Name="tbl_EmployeeBirthday" Text="22/02/2000" FontSize="18" Height="25" Margin="587,78,46,225" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"/>
+                <Image Height="20" Width="20" Stretch="Fill" Margin="706,80,22,228" Source="/Images/icon_calendar.png" RenderTransformOrigin="15.06,-3.72" Cursor="Hand"/>
+
+
+                <TextBlock Text="Tên tài khoản:" FontSize="14" Height="25" Margin="12,248,650,55"/>
+                <TextBlock Text="Password:" FontSize="14" Height="25" Margin="12,274,672,29"/>
+                <TextBox x:Name="tbl_EmployeeTK" Text="nv000001" FontSize="14" Height="25" Margin="104,243,554,60" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"
+                         BorderThickness="0,0,0,1" VerticalContentAlignment="Bottom"/>
+                <TextBox Name="tbl_EmployeePass" Text="Hehehe" FontSize="14" Height="25" Margin="104,269,554,34" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"
+                         BorderThickness="0,0,0,1" VerticalContentAlignment="Bottom"/>
+
+                <Image Height="20" Width="20" Stretch="Fill" Margin="198,274,530,34" Source="/Images/icon_eye.png" Cursor="Hand"/>
+            </Grid>
+
+            <Grid Grid.Row="3">
+                <Button Name="btn_Delete" 
+                        Content="Thêm nhân viên" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="228,-9,227,19">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#154348"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Green"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="250" Height="35"
+                                                        CornerRadius="15"
+                                                        Background="{TemplateBinding Background}"
+                                                        BorderThickness="1"
+                                                        BorderBrush="#3CB76D">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                                      HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
+

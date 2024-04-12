@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\App.xaml
-11246193087
+16334157525
 
-16-286992291
+21-1429433201
 14-1656046352
-BookDeletePopup.xaml;BookInfoPopup.xaml;CustomerDelete.xaml;CustomerInfo.xaml;MainWindow.xaml;SignIn.xaml;SignUp.xaml;View\Uct_BookImport.xaml;View\Uct_Books.xaml;View\Uct_Customer.xaml;View\Uct_Employee.xaml;
+BookDeletePopup.xaml;BookInfoPopup.xaml;CustomerDelete.xaml;CustomerInfo.xaml;EmployeeAdd.xaml;EmployeeDelete.xaml;EmployeeInfo.xaml;EmployeeUpdate.xaml;MainWindow.xaml;SaveReceiptPopup.xaml;SignIn.xaml;SignUp.xaml;View\Uct_BookImport.xaml;View\Uct_Books.xaml;View\Uct_Customer.xaml;View\Uct_Employee.xaml;
 
 True
 
