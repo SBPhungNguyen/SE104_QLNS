@@ -25,7 +25,7 @@
                 <!--this is Main_Home panel-->
                 <Canvas Visibility="Hidden" Name="cvs_Books">
                     <ScrollViewer Canvas.Left="5" Canvas.Top="6" HorizontalAlignment="Center" Height="461" VerticalAlignment="Top" Width="938"
-                              Visibility="Visible">
+                              Visibility="Hidden">
                         <WrapPanel Name="wpn_Books" Orientation="Horizontal">
                             <!--Day la vi du, co the xoa-->
                             <View:Uct_Books BookURL="/Images/BG_img.png" BookName="I don't know but yeah" 
@@ -38,6 +38,27 @@
                                             Icon="/Images/Img_Information.png"/>
                         </WrapPanel>
                     </ScrollViewer>
+
+                    <DataGrid Name="dtg_Books" Visibility="Visible" ItemsSource="{Binding Books}" Style="{StaticResource DataGrid}" Width="930" Height="470" ColumnHeaderHeight="40" Margin="10,0,10,10">
+                        <DataGrid.Columns>
+                            <DataGridCheckBoxColumn Binding="{Binding IsChecked}" Width="Auto"/>
+                            <DataGridTextColumn Header="#" Binding="{Binding BookNum}" Width="0.5*" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Mã sách" Binding="{Binding BookID}" Width="*" IsReadOnly="True"/>
+                            <DataGridTemplateColumn Header="Ảnh" Width="Auto" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding BookURL}" Width="Auto" Height="Auto"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Sản phẩm" Binding="{Binding BookName}" Width="2*" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Tác giả" Binding="{Binding BookAuthor}" Width="*" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Giá nhập" Binding="{Binding BookPriceImport}" Width="*" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Giá bán" Binding="{Binding BookPriceExport}" Width="*" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Tồn" Binding="{Binding Amount}" Width="*" IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
                 </Canvas>
 
                 <!--this is ImportBook panel-->
@@ -49,7 +70,9 @@
                             <ColumnDefinition Width="650"/>
                             <ColumnDefinition Width="300"/>
                         </Grid.ColumnDefinitions>
-                        <Canvas Grid.Column="0">
+
+
+                        <Canvas Grid.Column="0" Visibility="Hidden">
                             <ScrollViewer Height="484" Width="643" HorizontalAlignment="Left" VerticalAlignment="Center"
                               HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                                 <WrapPanel Orientation="Horizontal">
@@ -68,6 +91,37 @@
                                 </WrapPanel>
                             </ScrollViewer>
                         </Canvas>
+
+                        <!--this is DataGrid-->
+                        <Canvas Grid.Column="0" Visibility="Hidden">
+                            <StackPanel>
+                                <DataGrid Name="dtg_ImportBooks" ItemsSource="{Binding Books}" Style="{StaticResource DataGrid}" Width="630" Height="428" ColumnHeaderHeight="40" Margin="10,0,10,10">
+                                    <DataGrid.Columns>
+                                        <DataGridCheckBoxColumn Binding="{Binding IsChecked}" Width="Auto"/>
+                                        <DataGridTextColumn Header="#" Binding="{Binding BookNum}" Width="0.5*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Mã sách" Binding="{Binding BookID}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTemplateColumn Header="Ảnh" Width="Auto" IsReadOnly="True">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Image Source="{Binding BookURL}" Width="Auto" Height="Auto"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTextColumn Header="Sản phẩm" Binding="{Binding BookName}" Width="2*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Tác giả" Binding="{Binding BookAuthor}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Giá nhập" Binding="{Binding BookPriceImport}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Giá bán" Binding="{Binding BookPriceExport}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Tồn" Binding="{Binding Amount}" Width="*" IsReadOnly="True"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+
+                                <Button x:Name="btn_AddNewBook" 
+                                        Style="{StaticResource LightGreenButton}"
+                                        Content="Thêm sách mới">
+                                </Button>
+                            </StackPanel>
+                        </Canvas>
+
 
                         <Canvas Grid.Column="1">
                             <Border CornerRadius="15" Background="#BADFE7" Width="296" Height="476" HorizontalAlignment="Center" VerticalAlignment="Top">
@@ -156,6 +210,9 @@
                     </Grid>
                 </Canvas>
 
+
+
+
                 <!--this is Customer panel-->
 
                 <Canvas Name="cvs_Customer" Visibility="Hidden">
@@ -215,6 +272,62 @@
                         </WrapPanel>
                     </ScrollViewer>
                 </Canvas>
+
+
+                <!--this is Report panel-->
+                <Canvas Name="cvs_Report" Visibility="Visible">
+                    <Canvas Name="cvs_AmountReport" Visibility="Visible">
+                        <StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.17*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <ComboBox x:Name="cbx_AmountReportMonth" 
+                                          Text="Tháng"
+                                          Grid.Column="0"
+                                          Margin="20, 10, 0, 10"
+                                          
+                                          Style="{StaticResource Comboxbox}" BorderThickness="0,0,0,2" BorderBrush="#154448"></ComboBox>
+                                <ComboBox x:Name="cbx_AmountReportYear" 
+                                          Grid.Column="1"
+                                          Text="Năm"
+                                          Margin="20, 10, 0, 10"
+                                          Style="{StaticResource Comboxbox}" BorderThickness="0,0,0,2" BorderBrush="#154448"></ComboBox>
+                                <Label x:Name="lb_AmountReportTotalCustomer" 
+                                       Content="Tổng: 100 sách"
+                                       Grid.Column="2"
+                                       Margin="50,0,0,0"
+                                       VerticalAlignment="Center"
+                                       FontSize="18"
+                                       Foreground="#154448"></Label>
+                            </Grid>
+                            <DataGrid Name="dtg_AmountReport" ItemsSource="{Binding Books}" Style="{StaticResource DataGrid}" Width="930" Height="470" ColumnHeaderHeight="40" Margin="10,0,10,10">
+                                <DataGrid.Columns>
+                                    <DataGridCheckBoxColumn Binding="{Binding IsChecked}" Width="Auto"/>
+                                    <DataGridTextColumn Header="#" Binding="{Binding BookNum}" Width="0.5*" IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Mã sách" Binding="{Binding BookID}" Width="*" IsReadOnly="True"/>
+                                    <DataGridTemplateColumn Header="Ảnh" Width="Auto" IsReadOnly="True">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Image Source="{Binding BookURL}" Width="Auto" Height="Auto"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Header="Sản phẩm" Binding="{Binding BookName}" Width="2*" IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Tồn đầu" Binding="{Binding BookStartAmount}" Width="*" IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Phát Sinh" Binding="{Binding BookImportAmount}" Width="*" IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Bán ra" Binding="{Binding BookSellAmount}" Width="*" IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Tồn cuối" Binding="{Binding BookEndAmount}" Width="*" IsReadOnly="True"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </StackPanel>
+
+                    </Canvas>
+                </Canvas>
+
             </Grid>
         </Grid>
     </Border>
