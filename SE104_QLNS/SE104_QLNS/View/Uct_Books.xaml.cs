@@ -30,6 +30,10 @@ namespace SE104_QLNS.View
             get; set;
         }
         public string BookName
+        { get; set; }        
+        public string BookAuthor
+        { get; set; }        
+        public string BookGenre
         { get; set; }
         public string BookNum
         {
@@ -43,10 +47,12 @@ namespace SE104_QLNS.View
         { get; set; }
         public string Icon
         { get; set; }
-        public void LoadData(string BookCode, string BookName, string URL, string NumOfBook, string PriceImport, string PriceExport, string Icon)
+        public void LoadData(string BookCode, string BookName, string BookAuthor, string BookGenre, string URL, string NumOfBook, string PriceImport, string PriceExport, string Icon)
         {
             this.BookID = BookCode;
             this.BookName = BookName;
+            this.BookAuthor = BookAuthor;
+            this.BookGenre = BookGenre;
             this.BookURL = URL;
             BookNum = NumOfBook;
             this.BookPriceImport = PriceImport;
