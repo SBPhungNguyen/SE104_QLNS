@@ -13,7 +13,6 @@
             <Setter Property="ColumnHeaderHeight" Value="30"/>
             <Setter Property="SelectionMode" Value="Single"/>
             <Setter Property="SelectionUnit" Value="FullRow"/>
-            <Setter Property="RowHeight" Value="25"/>
             <Setter Property="CanUserResizeRows" Value="False"/>
             <Setter Property="CanUserResizeColumns" Value="False"/>
             <Setter Property="CanUserReorderColumns" Value="False"/>
@@ -67,12 +66,22 @@
                     <Style TargetType="DataGridCell">
                         <Setter Property="HorizontalAlignment" Value="Center"/>
                         <Setter Property="VerticalAlignment" Value="Center"/>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="BorderBrush" Value="Transparent" />
+                                <Setter Property="Foreground" Value="#154448" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Trigger>
+                        </Style.Triggers>
                     </Style>
                 </Setter.Value>
             </Setter>
         </Style>
 
-        <!--Row-->
+
+        <!--DataGrid Row-->
         <Style TargetType="DataGridRow">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
@@ -147,6 +156,37 @@
             <Setter Property="IsReadOnly" Value="True"/>
         </Style>
 
+
+        <!--TabItem-->
+        <Style TargetType="TabItem">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <!-- Định nghĩa nội dung của TabItem -->                        
+                        <Border x:Name="border" 
+                                Background="Transparent"
+                                CornerRadius="5">
+                            <ContentPresenter ContentSource="Header"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <!-- Trigger khi hover -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" 
+                                        Value="#BADFE7"/>
+                            </Trigger>
+
+                            <!-- Trigger khi được chọn -->
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="border" Property="Background" 
+                                        Value="#C2DECE"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
     </Application.Resources>
 </Application>
