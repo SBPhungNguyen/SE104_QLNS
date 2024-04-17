@@ -108,3 +108,10 @@ E:\Study\Year 2\Thực hành\HKII\NMCNPM\Đồ án\SE104_QLNS\SE104_QLNS\obj\Deb
 E:\Study\Year 2\Thực hành\HKII\NMCNPM\Đồ án\SE104_QLNS\SE104_QLNS\obj\Debug\SE104_QLNS.Properties.Resources.resources
 E:\Study\Year 2\Thực hành\HKII\NMCNPM\Đồ án\SE104_QLNS\SE104_QLNS\obj\Debug\SE104_QLNS.csproj.GenerateResource.cache
 E:\Study\Year 2\Thực hành\HKII\NMCNPM\Đồ án\SE104_QLNS\SE104_QLNS\obj\Debug\SE104_QLNS.csproj.CoreCompileInputs.cache
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\UserConfirmation.g.cs
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\App.baml
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\UserConfirmation.baml
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\SaveReceiptPDF.g.cs
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\SaveReceiptPDF.baml
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\SaveReceiptConfirmation.g.cs
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\SaveReceiptConfirmation.baml
