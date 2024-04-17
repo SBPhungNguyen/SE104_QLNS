@@ -252,5 +252,13 @@
   <ItemGroup>
     <Resource Include="Images\icon_calendar.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\icon_customer.png" />
+    <Resource Include="Images\icon_employee.png" />
+    <Resource Include="Images\icon_home.png" />
+    <Resource Include="Images\icon_receipt.png" />
+    <Resource Include="Images\icon_report.png" />
+    <Resource Include="Images\icon_shoppingcart.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

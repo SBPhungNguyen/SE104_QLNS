@@ -14,88 +14,75 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="50"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="4">
-                <!--Should one wanna see the panel, only need to switch the Visibility of each Canvas to "Visible"-->
+            <DockPanel x:Name="dpl_Header" Grid.Row="0" Background="#C2DECE">
+                <Label x:Name="lbl_AppName"
+                       Content="PHẦN MỀM QUẢN LÝ NHÀ SÁCH"
+                       FontSize="15"
+                       FontWeight="Black"
+                       Foreground="#154448"/>
 
-                <!--this is Main_Home panel-->
-                <Canvas Visibility="Hidden" Name="cvs_Books">
-                    <ScrollViewer Canvas.Left="5" Canvas.Top="6" HorizontalAlignment="Center" Height="461" VerticalAlignment="Top" Width="938"
-                              Visibility="Hidden">
-                        <WrapPanel Name="wpn_Books" Orientation="Horizontal">
-                            <!--Day la vi du, co the xoa-->
-                            <View:Uct_Books BookURL="/Images/BG_img.png" BookName="I don't know but yeah" 
-                                            BookNum="7000" BookPriceImport="100000" BookPriceExport="110000"
-                                            BookID="TT00001"
-                                            Icon="/Images/Img_Information.png"/>
-                            <View:Uct_Books BookURL="/Images/BG_img.png" BookName="I don't know but yeah" 
-                                            BookNum="7000" BookPriceImport="100000" BookPriceExport="110000"
-                                            BookID="TT00001"
-                                            Icon="/Images/Img_Information.png"/>
-                        </WrapPanel>
-                    </ScrollViewer>
-
-                    <DataGrid Name="dtg_Books" Visibility="Visible" ItemsSource="{Binding Books}" Style="{StaticResource DataGrid}" Width="930" Height="470" ColumnHeaderHeight="40" Margin="10,0,10,10">
-                        <DataGrid.Columns>
-                            <DataGridCheckBoxColumn Binding="{Binding IsChecked}" Width="Auto"/>
-                            <DataGridTextColumn Header="#" Binding="{Binding BookNum}" Width="0.5*" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Mã sách" Binding="{Binding BookID}" Width="*" IsReadOnly="True"/>
-                            <DataGridTemplateColumn Header="Ảnh" Width="Auto" IsReadOnly="True">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Image Source="{Binding BookURL}" Width="Auto" Height="Auto"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTextColumn Header="Sản phẩm" Binding="{Binding BookName}" Width="2*" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Tác giả" Binding="{Binding BookAuthor}" Width="*" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Giá nhập" Binding="{Binding BookPriceImport}" Width="*" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Giá bán" Binding="{Binding BookPriceExport}" Width="*" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Tồn" Binding="{Binding Amount}" Width="*" IsReadOnly="True"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-
-                </Canvas>
-
-                <!--this is ImportBook panel-->
-
-                <Canvas Name="cvs_ImportBook" 
-                    Visibility="Hidden">
-                    <Grid HorizontalAlignment="Left" Height="480" VerticalAlignment="Center" Width="950">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="650"/>
-                            <ColumnDefinition Width="300"/>
-                        </Grid.ColumnDefinitions>
+                <Button Name="btn_ExitApp"
+                        Content="X"
+                        Width="40" Height="30"
+                        Foreground="#154448"
+                        FontFamily="Tahoma"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        BorderThickness="0"
+                        Cursor="Hand" Click="btn_ExitApp_Click" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#154448"/>
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
 
 
-                        <Canvas Grid.Column="0" Visibility="Hidden">
-                            <ScrollViewer Height="484" Width="643" HorizontalAlignment="Left" VerticalAlignment="Center"
-                              HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                                <WrapPanel Orientation="Horizontal">
-                                    <View:Uct_Books BookURL="/Images/BG_img.png" BookName="I don't know but yeah" 
-                                            BookNum="7000" BookPriceImport="100000" BookPriceExport="110000"
-                                            BookID="TT00001"
-                                            Icon="/Images/Img_Information.png"/>
-                                    <View:Uct_Books BookURL="/Images/BG_img.png" BookName="I don't know but yeah" 
-                                            BookNum="7000" BookPriceImport="100000" BookPriceExport="110000"
-                                            BookID="TT00001"
-                                            Icon="/Images/Img_Information.png"/>
-                                    <View:Uct_Books BookURL="/Images/BG_img.png" BookName="I don't know but yeah" 
-                                            BookNum="7000" BookPriceImport="100000" BookPriceExport="110000"
-                                            BookID="TT00001"
-                                            Icon="/Images/Img_Information.png"/>
-                                </WrapPanel>
-                            </ScrollViewer>
-                        </Canvas>
+            </DockPanel>
 
-                        <!--this is DataGrid-->
-                        <Canvas Grid.Column="0" Visibility="Hidden">
-                            <StackPanel>
-                                <DataGrid Name="dtg_ImportBooks" ItemsSource="{Binding Books}" Style="{StaticResource DataGrid}" Width="630" Height="428" ColumnHeaderHeight="40" Margin="10,0,10,10">
+            <TabControl Name="tcl_Navigation" Grid.Row="1">
+                <!-- HOME -->
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal" Margin="5,0,5,0">
+                            <Image Source="/Images/icon_home.png" Width="40" Height="40"/>
+                            <TextBlock Text="Trang chủ" 
+                                       Foreground="#154448"
+                                       FontWeight="Bold"
+                                       VerticalAlignment="Center"
+                                       Padding="5,0,10,0"/>
+                        </StackPanel>
+                    </TabItem.Header>
+                    <StackPanel>
+                        <!--this is Main_Home panel-->
+                        <Canvas Visibility="Hidden" Name="cvs_Books">
+                            <Canvas Visibility="Hidden" Name="cvs_BooksGridList">
+                                <ScrollViewer Canvas.Left="5" Canvas.Top="6" HorizontalAlignment="Center" Height="461" VerticalAlignment="Top" Width="938"
+                                                Visibility="Hidden">
+                                    <WrapPanel Name="wpn_Books" Orientation="Horizontal">
+                                        <!--Day la vi du, co the xoa-->
+                                        <View:Uct_Books BookURL="/Images/BG_img.png" BookName="I don't know but yeah" 
+                    BookNum="7000" BookPriceImport="100000" BookPriceExport="110000"
+                    BookID="TT00001"
+                    Icon="/Images/Img_Information.png"/>
+                                        <View:Uct_Books BookURL="/Images/BG_img.png" BookName="I don't know but yeah" 
+                    BookNum="7000" BookPriceImport="100000" BookPriceExport="110000"
+                    BookID="TT00001"
+                    Icon="/Images/Img_Information.png"/>
+                                    </WrapPanel>
+                                </ScrollViewer>
+                            </Canvas>
+
+                            <Canvas Visibility="Visible" Name="cvs_BooksDataGridList">
+                                <DataGrid Name="dtg_Books" ItemsSource="{Binding Books}" Style="{StaticResource DataGrid}" Width="930" Height="470" ColumnHeaderHeight="40" Margin="10,0,10,10">
                                     <DataGrid.Columns>
                                         <DataGridCheckBoxColumn Binding="{Binding IsChecked}" Width="Auto"/>
                                         <DataGridTextColumn Header="#" Binding="{Binding BookNum}" Width="0.5*" IsReadOnly="True"/>
@@ -114,221 +101,368 @@
                                         <DataGridTextColumn Header="Tồn" Binding="{Binding Amount}" Width="*" IsReadOnly="True"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
-
-                                <Button x:Name="btn_AddNewBook" 
-                                        Style="{StaticResource LightGreenButton}"
-                                        Content="Thêm sách mới">
-                                </Button>
-                            </StackPanel>
+                            </Canvas>
                         </Canvas>
 
 
-                        <Canvas Grid.Column="1">
-                            <Border CornerRadius="15" Background="#BADFE7" Width="296" Height="476" HorizontalAlignment="Center" VerticalAlignment="Top">
-                                <Grid>
-                                    <TextBox Name="txt_ImportID"
-                                             Height="25" Width="260" Margin="17,58,19,393"
-                                             FontSize="14"
-                                             BorderThickness="0,0,0,1"
-                                             VerticalContentAlignment="Center"
-                                             Background="#BADFE7"/>
-                                    <TextBlock  Text="PHIẾU NHẬP SÁCH"
-                                                FontFamily="Tahoma" FontSize="23" FontWeight="Bold" 
-                                                Foreground="#154348"
-                                                Margin="29,15,28,431"/>
-                                    <TextBox Name="ImportDate" 
-                                             Height="25" Width="260" Margin="17,91,19,360"
-                                             FontSize="14"
-                                             BorderThickness="0,0,0,1"
-                                             VerticalContentAlignment="Center"
-                                             Background="#BADFE7"
-                                             Padding="0,0,30,0"/>
-                                    <Image x:Name="img_Calendar" Width="20" Height="20" Margin="256,91,20,365" Source="/Images/icon_calendar.png" Stretch="Fill" Cursor="Hand"/>
 
-                                    <ScrollViewer Name="svw_ImportPaper" Visibility="Visible"
-                                                  HorizontalAlignment="Center" Canvas.Top="123" VerticalAlignment="Top" Height="263" Width="268"
-                                                  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Margin="0,132,0,0">
-                                        <WrapPanel Name="wpn_ImportPaper" 
-                                                   Orientation="Vertical" 
-                                                   HorizontalAlignment="Center">
-                                            <View:Uct_BookImport BookName="I don't know what to write so yeah"
-                                                                 BookImportPrice="10000000"
-                                                                 BookQuantity="100000000"
-                                                                 BookURL="/Images/Chill Wallpaper On.png"/>
-                                            <View:Uct_BookImport BookName="I don't know what to write so yeah"
-                                                                 BookImportPrice="10000000"
-                                                                 BookQuantity="100000000"
-                                                                 BookURL="/Images/Chill Wallpaper On.png"/>
-                                            <View:Uct_BookImport BookName="I don't know what to write so yeah"
-                                                                 BookImportPrice="10000000"
-                                                                 BookQuantity="100000000"
-                                                                 BookURL="/Images/Chill Wallpaper On.png"/>
-                                        </WrapPanel>
-                                    </ScrollViewer>
-                                    <TextBlock Margin="15,400,189,51" Text="Tổng tiền:" FontSize="18" FontWeight="Bold"/>
-                                    <Label Name="lbl_SumImportMoney" 
-                                           Margin="113,396,16,45" 
-                                           Content="9000" 
-                                           FontSize="18" FontWeight="Bold" 
-                                           HorizontalContentAlignment="Right"/>
-
-                                    <Button Name="btn_ImportBooks"
-                                            Margin="0,431,4,2"
-                                            Content="Nhập"
-                                            Foreground="White"
-                                            FontFamily="Tahoma"
-                                            FontSize="16"
-                                            FontWeight="Bold"
-                                            Cursor="Hand" Click="btn_ImportBooks_Click">
-                                        <Button.Style>
-                                            <Style TargetType="Button">
-                                                <Setter Property="Background" Value=" #6FB3B8"/>
-                                                <Style.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="Background" Value="#56A399"/>
-
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Button.Style>
-                                        <Button.Template>
-                                            <ControlTemplate TargetType="Button">
-                                                <Border Width="250" Height="30"
-                                                        CornerRadius="15"
-                                                        Background="{TemplateBinding Background}"
-                                                        BorderThickness="1"
-                                                        BorderBrush="#3CB76D">
-                                                    <ContentPresenter VerticalAlignment="Center"
-                                                                      HorizontalAlignment="Center"/>
-                                                </Border>
-                                            </ControlTemplate>
-                                        </Button.Template>
-                                    </Button>
-                                </Grid>
-                            </Border>
-                        </Canvas>
-                    </Grid>
-                </Canvas>
-
-
-
-
-                <!--this is Customer panel-->
-
-                <Canvas Name="cvs_Customer" Visibility="Hidden">
-                    <ScrollViewer Canvas.Left="5" Canvas.Top="6" HorizontalAlignment="Center" Height="461" VerticalAlignment="Top" Width="938">
-                        <WrapPanel Name="wpn_Customer" Orientation="Horizontal">
-                            <View:Uct_Customer Img_Type="/Images/Img_Information.png" 
-                                               CustomerID="KH000001" 
-                                               CustomerName="Trieu Dinh Ly Tran" 
-                                               CustomerPhonenumber="0123456789"
-                                               CustomerSpending="20000"
-                                               CustomerDebt="10000"
-                                               Height="200" Width="180"/>
-                            <View:Uct_Customer Img_Type="/Images/Img_Information.png" 
-                                               CustomerID="KH000001" 
-                                               CustomerName="Trieu Dinh Ly Tran Le Nguyen" 
-                                               CustomerPhonenumber="0123456789"
-                                               CustomerSpending="20000"
-                                               CustomerDebt="10000"
-                                               Height="200" Width="180"/>
-                            <View:Uct_Customer Img_Type="/Images/Img_Information.png" 
-                                               CustomerID="KH000001" 
-                                               CustomerName="Trieu Dinh Ly Tran" 
-                                               CustomerPhonenumber="0123456789"
-                                               CustomerSpending="20000"
-                                               CustomerDebt="10000"
-                                               Height="200" Width="180"/>
-                        </WrapPanel>
-                    </ScrollViewer>
-                </Canvas>
-
-                <!--this is Employee panel-->
-
-                <Canvas Name="cvs_Employee" Visibility="Hidden">
-                    <ScrollViewer Canvas.Left="5" Canvas.Top="6" HorizontalAlignment="Center" Height="461" VerticalAlignment="Top" Width="938">
-                        <WrapPanel Name="wpn_Employee" Orientation="Horizontal">
-                            <View:Uct_Employee PicURL="/Images/Chill Wallpaper On.png"
-                                               Icon="/Images/Img_Information.png"
-                                               EmployeeID="NV000001"
-                                               EmployeeName="Trieu Dinh Ly Tran"
-                                               EmployeeOccupation="Thu Ngan"
-                                               EmployeePhonenumber="7894561230"
-                                               EmployeeTime="13h-18h"/>
-                            <View:Uct_Employee PicURL="/Images/Chill Wallpaper On.png"
-                                               Icon="/Images/Img_Information.png"
-                                               EmployeeID="NV000001"
-                                               EmployeeName="Trieu Dinh Ly Tran"
-                                               EmployeeOccupation="Thu Ngan"
-                                               EmployeePhonenumber="7894561230"
-                                               EmployeeTime="13h-18h"/>
-                            <View:Uct_Employee PicURL="/Images/Chill Wallpaper On.png"
-                                               Icon="/Images/Img_Information.png"
-                                               EmployeeID="NV000001"
-                                               EmployeeName="Trieu Dinh Ly Tran"
-                                               EmployeeOccupation="Thu Ngan"
-                                               EmployeePhonenumber="7894561230"
-                                               EmployeeTime="13h-18h"/>
-                        </WrapPanel>
-                    </ScrollViewer>
-                </Canvas>
-
-
-                <!--this is Report panel-->
-                <Canvas Name="cvs_Report" Visibility="Visible">
-                    <Canvas Name="cvs_AmountReport" Visibility="Visible">
-                        <StackPanel>
-                            <Grid>
+                        <!--this is ImportBook panel-->
+                        <Canvas Visibility="Visible" Name="cvs_ImportBooks">
+                            <Grid HorizontalAlignment="Left" 
+                                  VerticalAlignment="Center"
+                                  Height="480" 
+                                  Width="950">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.17*"></ColumnDefinition>
-                                    <ColumnDefinition Width="0.15*"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="650"/>
+                                    <ColumnDefinition Width="300"/>
                                 </Grid.ColumnDefinitions>
 
-                                <ComboBox x:Name="cbx_AmountReportMonth" 
+
+                                <Canvas Grid.Column="0" Visibility="Hidden">
+                                    <ScrollViewer Height="484" Width="643" 
+                                                  HorizontalAlignment="Left" 
+                                                  VerticalAlignment="Center"
+                                                  HorizontalScrollBarVisibility="Disabled" 
+                                                  VerticalScrollBarVisibility="Auto">
+                                        <WrapPanel Orientation="Horizontal">
+                                            <View:Uct_Books BookURL="/Images/BG_img.png" 
+                                                            BookName="I don't know but yeah" 
+                                                            BookNum="7000" BookPriceImport="100000" 
+                                                            BookPriceExport="110000"
+                                                            BookID="TT00001"
+                                                            Icon="/Images/Img_Information.png"/>
+                                            <View:Uct_Books BookURL="/Images/BG_img.png" BookName="I don't know but yeah" 
+                                                            BookNum="7000" BookPriceImport="100000" 
+                                                            BookPriceExport="110000"
+                                                            BookID="TT00001"
+                                                            Icon="/Images/Img_Information.png"/>
+                                            <View:Uct_Books BookURL="/Images/BG_img.png" 
+                                                            BookName="I don't know but yeah" 
+                                                            BookNum="7000" BookPriceImport="100000"
+                                                            BookPriceExport="110000"
+                                                            BookID="TT00001"
+                                                            Icon="/Images/Img_Information.png"/>
+                                        </WrapPanel>
+                                    </ScrollViewer>
+                                </Canvas>
+
+                                <!--this is DataGrid-->
+                                <Canvas Grid.Column="0" Visibility="Visible">
+                                    <StackPanel>
+                                        <DataGrid Name="dtg_ImportBooks" ItemsSource="{Binding Books}" Style="{StaticResource DataGrid}" Width="630" Height="428" ColumnHeaderHeight="40" Margin="10,0,10,10">
+                                            <DataGrid.Columns>
+                                                <DataGridCheckBoxColumn Binding="{Binding IsChecked}" Width="Auto"/>
+                                                <DataGridTextColumn Header="#" Binding="{Binding BookNum}" Width="0.5*" IsReadOnly="True"/>
+                                                <DataGridTextColumn Header="Mã sách" Binding="{Binding BookID}" Width="*" IsReadOnly="True"/>
+                                                <DataGridTemplateColumn Header="Ảnh" Width="Auto" IsReadOnly="True">
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <Image Source="{Binding BookURL}" Width="Auto" Height="Auto"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                                <DataGridTextColumn Header="Sản phẩm" Binding="{Binding BookName}" Width="2*" IsReadOnly="True"/>
+                                                <DataGridTextColumn Header="Tác giả" Binding="{Binding BookAuthor}" Width="*" IsReadOnly="True"/>
+                                                <DataGridTextColumn Header="Giá nhập" Binding="{Binding BookPriceImport}" Width="*" IsReadOnly="True"/>
+                                                <DataGridTextColumn Header="Giá bán" Binding="{Binding BookPriceExport}" Width="*" IsReadOnly="True"/>
+                                                <DataGridTextColumn Header="Tồn" Binding="{Binding Amount}" Width="*" IsReadOnly="True"/>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+
+                                        <Button x:Name="btn_AddNewBook" 
+                                                Style="{StaticResource LightGreenButton}"
+                                                Content="Thêm sách mới">
+                                        </Button>
+                                    </StackPanel>
+                                </Canvas>
+
+                                <!--this is Import List Panel-->
+                                <Canvas Grid.Column="1">
+                                    <Border CornerRadius="15" Background="#BADFE7" Width="296" Height="476" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                        <Grid>
+                                            <TextBox Name="txt_ImportID"
+                                                     Height="25" 
+                                                     Width="260" 
+                                                     Margin="17,58,19,393"
+                                                     FontSize="14"
+                                                     BorderThickness="0,0,0,1"
+                                                     VerticalContentAlignment="Center"
+                                                     Background="#BADFE7"/>
+                                            <TextBlock  Text="PHIẾU NHẬP SÁCH"
+                                                        FontFamily="Tahoma" 
+                                                        FontSize="23" 
+                                                        FontWeight="Bold" 
+                                                        Foreground="#154348"
+                                                        Margin="29,15,28,431"/>
+                                            <TextBox Name="ImportDate" 
+                                                     Height="25" 
+                                                     Width="260" 
+                                                     Margin="17,91,19,360"
+                                                     FontSize="14"
+                                                     BorderThickness="0,0,0,1"
+                                                     VerticalContentAlignment="Center"
+                                                     Background="#BADFE7"
+                                                     Padding="0,0,30,0"/>
+                                            <Image x:Name="img_Calendar" 
+                                                   Width="20" Height="20" 
+                                                   Margin="256,91,20,365" 
+                                                   Source="/Images/icon_calendar.png" 
+                                                   Stretch="Fill" 
+                                                   Cursor="Hand"/>
+                                            <ScrollViewer Name="svw_ImportPaper" Visibility="Visible"
+                                                          HorizontalAlignment="Center" 
+                                                          Canvas.Top="123" 
+                                                          VerticalAlignment="Top" 
+                                                          Height="263" 
+                                                          Width="268"
+                                                          HorizontalScrollBarVisibility="Disabled" 
+                                                          VerticalScrollBarVisibility="Auto" 
+                                                          Margin="0,132,0,0">
+                                                <WrapPanel Name="wpn_ImportPaper" 
+                                                           Orientation="Vertical" 
+                                                           HorizontalAlignment="Center">
+                                                    <View:Uct_BookImport BookName="I don't know what to write so yeah"
+                                                                         BookImportPrice="10000000"
+                                                                         BookQuantity="100000000"
+                                                                         BookURL="/Images/Chill Wallpaper On.png"/>
+                                                    <View:Uct_BookImport BookName="I don't know what to write so yeah"
+                                                                         BookImportPrice="10000000"
+                                                                         BookQuantity="100000000"
+                                                                         BookURL="/Images/Chill Wallpaper On.png"/>
+                                                    <View:Uct_BookImport BookName="I don't know what to write so yeah"
+                                                                         BookImportPrice="10000000"
+                                                                         BookQuantity="100000000"
+                                                                         BookURL="/Images/Chill Wallpaper On.png"/>
+                                                </WrapPanel>
+                                            </ScrollViewer>
+                                            <TextBlock Margin="15,400,189,51" Text="Tổng tiền:" FontSize="18" FontWeight="Bold"/>
+                                            <Label Name="lbl_SumImportMoney" 
+                                                   Margin="113,396,16,45" 
+                                                   Content="9000" 
+                                                   FontSize="18" FontWeight="Bold" 
+                                                   HorizontalContentAlignment="Right"/>
+                                            <Button Name="btn_ImportBooks"
+                                                    Margin="0,431,4,2"
+                                                    Content="Nhập"
+                                                    Foreground="White"
+                                                    FontFamily="Tahoma"
+                                                    FontSize="16"
+                                                    FontWeight="Bold"
+                                                    Cursor="Hand" Click="btn_ImportBooks_Click">
+                                                <Button.Style>
+                                                    <Style TargetType="Button">
+                                                        <Setter Property="Background" Value=" #6FB3B8"/>
+                                                        <Style.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="Background" Value="#56A399"/>
+
+                                                            </Trigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Button.Style>
+                                                <Button.Template>
+                                                    <ControlTemplate TargetType="Button">
+                                                        <Border Width="250" Height="30"
+                                                                CornerRadius="15"
+                                                                Background="{TemplateBinding Background}"
+                                                                BorderThickness="1"
+                                                                BorderBrush="#3CB76D">
+                                                            <ContentPresenter VerticalAlignment="Center"
+                                                                              HorizontalAlignment="Center"/>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Button.Template>
+                                            </Button>
+                                        </Grid>
+                                    </Border>
+                                </Canvas>
+                            </Grid>
+                        </Canvas>
+
+
+                    </StackPanel>
+                </TabItem>
+
+                <!-- SELL -->
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal" Margin="5,0,5,0">
+                            <Image Source="/Images/icon_shoppingcart.png" Width="40" Height="40"/>
+                            <TextBlock Text="Bán" 
+                                       Foreground="#154448"
+                                       FontWeight="Bold"
+                                       VerticalAlignment="Center"
+                                       Padding="5,0,10,0"/>
+                        </StackPanel>
+                    </TabItem.Header>
+                    <StackPanel>
+                        <TextBlock Text="Nội dung của Bán " FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </TabItem>
+
+                <!-- REPORT -->
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal" Margin="5,0,5,0">
+                            <Image Source="/Images/icon_report.png" Width="40" Height="40"/>
+                            <TextBlock Text="Báo cáo" 
+                        Foreground="#154448"
+                        FontWeight="Bold"
+                        VerticalAlignment="Center"
+                        Padding="5,0,10,0"/>
+                        </StackPanel>
+                    </TabItem.Header>
+                    <StackPanel>
+                        <Canvas Name="cvs_AmountReport" Visibility="Visible">
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.17*"></ColumnDefinition>
+                                        <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <ComboBox x:Name="cbx_AmountReportMonth" 
                                           Text="Tháng"
                                           Grid.Column="0"
                                           Margin="20, 10, 0, 10"
                                           
                                           Style="{StaticResource Comboxbox}" BorderThickness="0,0,0,2" BorderBrush="#154448"></ComboBox>
-                                <ComboBox x:Name="cbx_AmountReportYear" 
+                                    <ComboBox x:Name="cbx_AmountReportYear" 
                                           Grid.Column="1"
                                           Text="Năm"
                                           Margin="20, 10, 0, 10"
                                           Style="{StaticResource Comboxbox}" BorderThickness="0,0,0,2" BorderBrush="#154448"></ComboBox>
-                                <Label x:Name="lb_AmountReportTotalCustomer" 
+                                    <Label x:Name="lb_AmountReportTotalCustomer" 
                                        Content="Tổng: 100 sách"
                                        Grid.Column="2"
                                        Margin="50,0,0,0"
                                        VerticalAlignment="Center"
                                        FontSize="18"
                                        Foreground="#154448"></Label>
-                            </Grid>
-                            <DataGrid Name="dtg_AmountReport" ItemsSource="{Binding Books}" Style="{StaticResource DataGrid}" Width="930" Height="470" ColumnHeaderHeight="40" Margin="10,0,10,10">
-                                <DataGrid.Columns>
-                                    <DataGridCheckBoxColumn Binding="{Binding IsChecked}" Width="Auto"/>
-                                    <DataGridTextColumn Header="#" Binding="{Binding BookNum}" Width="0.5*" IsReadOnly="True"/>
-                                    <DataGridTextColumn Header="Mã sách" Binding="{Binding BookID}" Width="*" IsReadOnly="True"/>
-                                    <DataGridTemplateColumn Header="Ảnh" Width="Auto" IsReadOnly="True">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <Image Source="{Binding BookURL}" Width="Auto" Height="Auto"/>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                    <DataGridTextColumn Header="Sản phẩm" Binding="{Binding BookName}" Width="2*" IsReadOnly="True"/>
-                                    <DataGridTextColumn Header="Tồn đầu" Binding="{Binding BookStartAmount}" Width="*" IsReadOnly="True"/>
-                                    <DataGridTextColumn Header="Phát Sinh" Binding="{Binding BookImportAmount}" Width="*" IsReadOnly="True"/>
-                                    <DataGridTextColumn Header="Bán ra" Binding="{Binding BookSellAmount}" Width="*" IsReadOnly="True"/>
-                                    <DataGridTextColumn Header="Tồn cuối" Binding="{Binding BookEndAmount}" Width="*" IsReadOnly="True"/>
-                                </DataGrid.Columns>
-                            </DataGrid>
+                                </Grid>
+                                <DataGrid Name="dtg_AmountReport" ItemsSource="{Binding Books}" Style="{StaticResource DataGrid}" Width="930" Height="415" ColumnHeaderHeight="40" Margin="10,0,10,10">
+                                    <DataGrid.Columns>
+                                        <DataGridCheckBoxColumn Binding="{Binding IsChecked}"  Width="Auto"/>
+                                        <DataGridTextColumn Header="#" Binding="{Binding BookNum}" Width="0.5*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Mã sách" Binding="{Binding BookID}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTemplateColumn Header="Ảnh" Width="0.5*" IsReadOnly="True">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Image Source="{Binding BookURL}" Width="Auto" Height="Auto"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTextColumn Header="Sản phẩm" Binding="{Binding BookName}" Width="2*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Tồn đầu" Binding="{Binding BookStartAmount}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Phát Sinh" Binding="{Binding BookImportAmount}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Bán ra" Binding="{Binding BookSellAmount}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Tồn cuối" Binding="{Binding BookEndAmount}" Width="*" IsReadOnly="True"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                        </Canvas>
+                    </StackPanel>
+                </TabItem>
+
+                <!-- CUSTOMER -->
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal" Margin="5,0,5,0">
+                            <Image Source="/Images/icon_customer.png" Width="40" Height="40"/>
+                            <TextBlock Text="Khách hàng" 
+                        Foreground="#154448"
+                        FontWeight="Bold"
+                        VerticalAlignment="Center"
+                        Padding="5,0,10,0"/>
                         </StackPanel>
+                    </TabItem.Header>
+                    <StackPanel>
+                        <ScrollViewer Canvas.Left="5" Canvas.Top="6" HorizontalAlignment="Center" Height="461" VerticalAlignment="Top" Width="938">
+                            <WrapPanel Name="wpn_Customer" Orientation="Horizontal">
+                                <View:Uct_Customer Img_Type="/Images/Img_Information.png" 
+                           CustomerID="KH000001" 
+                           CustomerName="Trieu Dinh Ly Tran" 
+                           CustomerPhonenumber="0123456789"
+                           CustomerSpending="20000"
+                           CustomerDebt="10000"
+                           Height="200" Width="180"/>
+                                <View:Uct_Customer Img_Type="/Images/Img_Information.png" 
+                           CustomerID="KH000001" 
+                           CustomerName="Trieu Dinh Ly Tran Le Nguyen" 
+                           CustomerPhonenumber="0123456789"
+                           CustomerSpending="20000"
+                           CustomerDebt="10000"
+                           Height="200" Width="180"/>
+                                <View:Uct_Customer Img_Type="/Images/Img_Information.png" 
+                           CustomerID="KH000001" 
+                           CustomerName="Trieu Dinh Ly Tran" 
+                           CustomerPhonenumber="0123456789"
+                           CustomerSpending="20000"
+                           CustomerDebt="10000"
+                           Height="200" Width="180"/>
+                            </WrapPanel>
+                        </ScrollViewer>
+                    </StackPanel>
+                </TabItem>
 
-                    </Canvas>
-                </Canvas>
-
-            </Grid>
+                <!-- Debt receipt -->
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal" Margin="5,0,5,0">
+                            <Image Source="/Images/icon_receipt.png" Width="40" Height="40"/>
+                            <TextBlock Text="Phiếu thu" 
+                        Foreground="#154448"
+                        FontWeight="Bold"
+                        VerticalAlignment="Center"
+                        Padding="5,0,10,0"/>
+                        </StackPanel>
+                    </TabItem.Header>
+                    <StackPanel>
+                        <TextBlock Text="Nội dung của Phiếu thu" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </TabItem>
+                <!-- EMPLOYEE -->
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal" Margin="5,0,5,0">
+                            <Image Source="/Images/icon_employee.png" Width="40" Height="40"/>
+                            <TextBlock Text="Nhân viên" 
+                        Foreground="#154448"
+                        FontWeight="Bold"
+                        VerticalAlignment="Center"
+                        Padding="5,0,10,0"/>
+                        </StackPanel>
+                    </TabItem.Header>
+                    <StackPanel>
+                        <ScrollViewer Canvas.Left="5" Canvas.Top="6" HorizontalAlignment="Center" Height="461" VerticalAlignment="Top" Width="938">
+                            <WrapPanel Name="wpn_Employee" Orientation="Horizontal">
+                                <View:Uct_Employee PicURL="/Images/Chill Wallpaper On.png"
+                           Icon="/Images/Img_Information.png"
+                           EmployeeID="NV000001"
+                           EmployeeName="Trieu Dinh Ly Tran"
+                           EmployeeOccupation="Thu Ngan"
+                           EmployeePhonenumber="7894561230"
+                           EmployeeTime="13h-18h"/>
+                                <View:Uct_Employee PicURL="/Images/Chill Wallpaper On.png"
+                           Icon="/Images/Img_Information.png"
+                           EmployeeID="NV000001"
+                           EmployeeName="Trieu Dinh Ly Tran"
+                           EmployeeOccupation="Thu Ngan"
+                           EmployeePhonenumber="7894561230"
+                           EmployeeTime="13h-18h"/>
+                                <View:Uct_Employee PicURL="/Images/Chill Wallpaper On.png"
+                           Icon="/Images/Img_Information.png"
+                           EmployeeID="NV000001"
+                           EmployeeName="Trieu Dinh Ly Tran"
+                           EmployeeOccupation="Thu Ngan"
+                           EmployeePhonenumber="7894561230"
+                           EmployeeTime="13h-18h"/>
+                            </WrapPanel>
+                        </ScrollViewer>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
         </Grid>
     </Border>
 </Window>

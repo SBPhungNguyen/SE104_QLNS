@@ -53,5 +53,10 @@ namespace SE104_QLNS
         {
 
         }
+
+        private void btn_ExitApp_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
