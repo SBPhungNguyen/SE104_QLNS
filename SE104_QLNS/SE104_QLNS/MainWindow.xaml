@@ -61,9 +61,19 @@
                                        Padding="5,0,10,0"/>
                         </StackPanel>
                     </TabItem.Header>
-                    <StackPanel>
-                        <!--this is Main_Home panel-->
-                        <Canvas Visibility="Hidden" Name="cvs_Books">
+
+                    <!--this is Main_Home panel-->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <!--Sreach bar-->
+                        <!--switch to grid/datagrid button, import book button, delete book button,... above list-->
+
+                        <Canvas Grid.Row="2" Visibility="Visible" Name="cvs_Books">
                             <Canvas Visibility="Hidden" Name="cvs_BooksGridList">
                                 <ScrollViewer Canvas.Left="5" Canvas.Top="6" HorizontalAlignment="Center" Height="461" VerticalAlignment="Top" Width="938"
                                                 Visibility="Hidden">
@@ -81,7 +91,7 @@
                                 </ScrollViewer>
                             </Canvas>
 
-                            <Canvas Visibility="Visible" Name="cvs_BooksDataGridList">
+                            <Canvas  Grid.Row="1"  Visibility="Visible" Name="cvs_BooksDataGridList">
                                 <DataGrid Name="dtg_Books" ItemsSource="{Binding Books}" Style="{StaticResource DataGrid}" Width="930" Height="470" ColumnHeaderHeight="40" Margin="10,0,10,10">
                                     <DataGrid.Columns>
                                         <DataGridCheckBoxColumn Binding="{Binding IsChecked}" Width="Auto"/>
@@ -107,7 +117,7 @@
 
 
                         <!--this is ImportBook panel-->
-                        <Canvas Visibility="Visible" Name="cvs_ImportBooks">
+                        <Canvas Visibility="Hidden" Name="cvs_ImportBooks">
                             <Grid HorizontalAlignment="Left" 
                                   VerticalAlignment="Center"
                                   Height="480" 
@@ -280,7 +290,7 @@
                         </Canvas>
 
 
-                    </StackPanel>
+                    </Grid>
                 </TabItem>
 
                 <!-- SELL -->
@@ -295,8 +305,90 @@
                                        Padding="5,0,10,0"/>
                         </StackPanel>
                     </TabItem.Header>
-                    <StackPanel>
-                        <TextBlock Text="Nội dung của Bán " FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                    <!-- this is SELL panel-->
+                    <StackPanel Margin="0,10,0,10">
+                        <!-- this is SELL list-->
+                        <Border Background="#F5F5ED" 
+                                BorderBrush="Black" 
+                                BorderThickness="1,1,1,1" 
+                                CornerRadius="20,20,20,20" 
+                                Margin="5,0,5,5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40"></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <DataGrid Grid.Row="1" Name="dtg_SellList" 
+                                          ItemsSource="{Binding Books}" 
+                                          Style="{StaticResource DataGrid}" 
+                                          Width="900" 
+                                          Height="264" 
+                                          ColumnHeaderHeight="30" 
+                                          RowHeight="50"
+                                          Margin="10,0,10,10">
+                                    <DataGrid.Columns>
+                                        <DataGridCheckBoxColumn Binding="{Binding IsChecked}" Width="Auto"/>
+                                        <DataGridTextColumn Header="#" Binding="{Binding BookNum}" Width="0.5*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Mã sách" Binding="{Binding BookID}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTemplateColumn Header="Ảnh" Width="0.5*" IsReadOnly="True">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Image Source="{Binding BookURL}" Width="30" Height="70"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTextColumn Header="Sản phẩm" Binding="{Binding BookName}" Width="1.5*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Giá" Binding="{Binding BookPriceExport}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTemplateColumn Header="SL" Width="0.5*" IsReadOnly="False">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBox Text="{Binding BookSellAmount, FallbackValue=1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                                     Foreground="#154448"
+                                                     Width="60">
+                                                        <TextBox.Template>
+                                                            <ControlTemplate TargetType="{x:Type TextBox}">
+                                                                <Border CornerRadius="5"
+                                                                        Background="#D9D9D9"
+                                                                        BorderBrush="Black"
+                                                                        BorderThickness="{TemplateBinding BorderThickness}">
+                                                                    <ScrollViewer x:Name="PART_ContentHost"/>
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </TextBox.Template>
+                                                    </TextBox>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTextColumn Header="Tồn" Binding="{Binding BookRemainAmount}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Tổng" Binding="{Binding BookTotalSellPrice}" Width="*" IsReadOnly="True"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </Border>
+
+                        <!-- this is Customer infomation -->
+                        <StackPanel Orientation="Horizontal">
+                            <Border Background="#F5F5ED" 
+                                    BorderBrush="Black" 
+                                    CornerRadius="20,20,20,20" 
+                                    BorderThickness="1,1,1,1" 
+                                    Margin="5,10,5,0"
+                                    Height="220" Width="650">
+                            </Border>
+
+                            <!-- this is Payment infomation -->
+                            <Border Background="#F5F5ED" 
+                                    BorderBrush="Black" 
+                                    CornerRadius="20,20,20,20" 
+                                    BorderThickness="1,1,1,1" 
+                                    Margin="10,10,0,0"
+                                    Height="220" Width="270">
+
+                            </Border>
+                        </StackPanel>
+                        
                     </StackPanel>
                 </TabItem>
 
@@ -312,8 +404,21 @@
                         Padding="5,0,10,0"/>
                         </StackPanel>
                     </TabItem.Header>
-                    <StackPanel>
-                        <Canvas Name="cvs_AmountReport" Visibility="Visible">
+
+                    <!--this is Report panel-->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+
+                        <!--Sreach bar-->
+                        <!--switch reprot combo box, save as pdf button-->
+
+                        <!--this is Book Amount Report panel-->
+                        <Canvas Grid.Row="2" Name="cvs_AmountReport" Visibility="Visible">
                             <StackPanel>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -327,20 +432,25 @@
                                           Grid.Column="0"
                                           Margin="20, 10, 0, 10"
                                           
-                                          Style="{StaticResource Comboxbox}" BorderThickness="0,0,0,2" BorderBrush="#154448"></ComboBox>
+                                          Style="{StaticResource Comboxbox}" 
+                                          BorderThickness="0,0,0,2" 
+                                          BorderBrush="#154448"/>
                                     <ComboBox x:Name="cbx_AmountReportYear" 
                                           Grid.Column="1"
                                           Text="Năm"
                                           Margin="20, 10, 0, 10"
-                                          Style="{StaticResource Comboxbox}" BorderThickness="0,0,0,2" BorderBrush="#154448"></ComboBox>
-                                    <Label x:Name="lb_AmountReportTotalCustomer" 
+                                          Style="{StaticResource Comboxbox}" 
+                                          BorderThickness="0,0,0,2" 
+                                          BorderBrush="#154448"/>
+                                    <Label x:Name="lbl_AmountReportTotalBook" 
                                        Content="Tổng: 100 sách"
                                        Grid.Column="2"
                                        Margin="50,0,0,0"
                                        VerticalAlignment="Center"
                                        FontSize="18"
-                                       Foreground="#154448"></Label>
+                                       Foreground="#154448"/>
                                 </Grid>
+
                                 <DataGrid Name="dtg_AmountReport" ItemsSource="{Binding Books}" Style="{StaticResource DataGrid}" Width="930" Height="415" ColumnHeaderHeight="40" Margin="10,0,10,10">
                                     <DataGrid.Columns>
                                         <DataGridCheckBoxColumn Binding="{Binding IsChecked}"  Width="Auto"/>
@@ -354,15 +464,67 @@
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
                                         <DataGridTextColumn Header="Sản phẩm" Binding="{Binding BookName}" Width="2*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Header="Tồn đầu" Binding="{Binding BookStartAmount}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Tồn đầu" Binding="{Binding BookInitialAmount}" Width="*" IsReadOnly="True"/>
                                         <DataGridTextColumn Header="Phát Sinh" Binding="{Binding BookImportAmount}" Width="*" IsReadOnly="True"/>
                                         <DataGridTextColumn Header="Bán ra" Binding="{Binding BookSellAmount}" Width="*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Header="Tồn cuối" Binding="{Binding BookEndAmount}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Tồn cuối" Binding="{Binding BookFinalAmount}" Width="*" IsReadOnly="True"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+
+                            </StackPanel>
+                        </Canvas>
+
+                        
+                        <!--this is Customer Debt Report panel-->
+                        <Canvas Grid.Row="2" Name="cvs_CustomerDebtReport" Visibility="Hidden">
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.17*"></ColumnDefinition>
+                                        <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <ComboBox x:Name="cbx_CustomerDebtReportMonth" 
+                                              Text="Tháng"
+                                              Grid.Column="0"
+                                              Margin="20, 10, 0, 10"
+                                              Style="{StaticResource Comboxbox}" 
+                                              BorderThickness="0,0,0,2" 
+                                              BorderBrush="#154448"/>
+                                    <ComboBox x:Name="cbx_CustomerDebtReportYear" 
+                                              Grid.Column="1"
+                                              Text="Năm"
+                                              Margin="20, 10, 0, 10"
+                                              Style="{StaticResource Comboxbox}" 
+                                              BorderThickness="0,0,0,2" 
+                                              BorderBrush="#154448"/>
+                                    <Label x:Name="lbl_CustomerDebtReportTotalCustomer" 
+                                           Content="Tổng: 100 khách hàng"
+                                           Grid.Column="2"
+                                           Margin="50,0,0,0"
+                                           VerticalAlignment="Center"
+                                           FontSize="18"
+                                           Foreground="#154448"/>
+                                </Grid>
+
+
+                                <DataGrid Name="dtg_CustomerDebtReport" ItemsSource="{Binding Customer}" Style="{StaticResource DataGrid}" Width="930" Height="415" ColumnHeaderHeight="40" Margin="10,0,10,10">
+                                    <DataGrid.Columns>
+                                        <DataGridCheckBoxColumn Binding="{Binding IsChecked}"  Width="Auto"/>
+                                        <DataGridTextColumn Header="#" Binding="{Binding CustomerNum}" Width="0.5*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Mã khách hàng" Binding="{Binding CustomerID}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Tên khách hàng" Binding="{Binding CustomerName}" Width="2*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Nợ đầu" Binding="{Binding CustomerInitialDebt}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Phát Sinh" Binding="{Binding CustomerOccuredDebt}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Nợ thêm" Binding="{Binding CustomerAdditonalDebt}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Nợ cuối" Binding="{Binding CustomerFinalDebt}" Width="*" IsReadOnly="True"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </StackPanel>
                         </Canvas>
-                    </StackPanel>
+
+                    </Grid>
                 </TabItem>
 
                 <!-- CUSTOMER -->
@@ -377,8 +539,20 @@
                         Padding="5,0,10,0"/>
                         </StackPanel>
                     </TabItem.Header>
-                    <StackPanel>
-                        <ScrollViewer Canvas.Left="5" Canvas.Top="6" HorizontalAlignment="Center" Height="461" VerticalAlignment="Top" Width="938">
+
+
+                    <!--this is Customer panel-->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <!--Sreach bar-->
+                        <!--Buttons, list header,...-->
+
+                        <ScrollViewer Grid.Row="2" Canvas.Left="5" Canvas.Top="6" HorizontalAlignment="Center" Height="461" VerticalAlignment="Top" Width="938">
                             <WrapPanel Name="wpn_Customer" Orientation="Horizontal">
                                 <View:Uct_Customer Img_Type="/Images/Img_Information.png" 
                            CustomerID="KH000001" 
@@ -403,10 +577,11 @@
                            Height="200" Width="180"/>
                             </WrapPanel>
                         </ScrollViewer>
-                    </StackPanel>
+                    </Grid>
                 </TabItem>
 
-                <!-- Debt receipt -->
+
+                <!-- Customer Payment Receipt -->
                 <TabItem>
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal" Margin="5,0,5,0">
@@ -418,10 +593,67 @@
                         Padding="5,0,10,0"/>
                         </StackPanel>
                     </TabItem.Header>
-                    <StackPanel>
-                        <TextBlock Text="Nội dung của Phiếu thu" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </StackPanel>
+
+                    <!--this is Customer Payment Receipt panel-->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <!--Sreach bar-->
+                        <!--Buttons, list header,...-->
+
+                        <StackPanel Grid.Row="2">
+                            <Grid >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.17*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <ComboBox x:Name="cbx_CustomerPaymentReceiptMonth" 
+                                          Text="Tháng"
+                                          Grid.Column="0"
+                                          Margin="20, 10, 0, 10"                        
+                                          Style="{StaticResource Comboxbox}" 
+                                      BorderThickness="0,0,0,2" 
+                                      BorderBrush="#154448"/>
+                                <ComboBox x:Name="cbx_CustomerPaymentReceiptYear" 
+                                          Grid.Column="1"
+                                          Text="Năm"
+                                          Margin="20, 10, 0, 10"
+                                          Style="{StaticResource Comboxbox}" 
+                                      BorderThickness="0,0,0,2" 
+                                      BorderBrush="#154448"/>
+                                <Label x:Name="lbl_TotalPaymentReceipt" 
+                                       Content="Tổng: 100 phiếu"
+                                       Grid.Column="2"
+                                       Margin="50,0,0,0"
+                                       VerticalAlignment="Center"
+                                       FontSize="18"
+                                       Foreground="#154448"/>
+                            </Grid>
+
+                            <DataGrid Grid.Row="2" Name="dtg_CustomerPaymentReceipt" ItemsSource="{Binding Customer}" Style="{StaticResource DataGrid}" Width="930" Height="420" ColumnHeaderHeight="40" Margin="10,0,10,10">
+                                <DataGrid.Columns>
+                                    <DataGridCheckBoxColumn Binding="{Binding IsChecked}" Width="Auto"/>
+                                    <DataGridTextColumn Header="#" Binding="{Binding CustomerNum}" Width="0.3*" IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Mã khách hàng" Binding="{Binding CustomerID}" Width="*" IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Tên khách hàng" Binding="{Binding CustomerName}" Width="1.5*" IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="SĐT" Binding="{Binding CustomerInitialDebt}" Width="0.5*" IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Ngày thu" Binding="{Binding CustomerOccuredDebt}" Width="*" IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Số nợ trước thu" Binding="{Binding CustomerAdditonalDebt}" Width="*" IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Tiền thu" Binding="{Binding CustomerFinalDebt}" Width="*" IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Số nợ sau thu" Binding="{Binding CustomerFinalDebt}" Width="*" IsReadOnly="True"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </StackPanel>
+                    </Grid>
                 </TabItem>
+
+
                 <!-- EMPLOYEE -->
                 <TabItem>
                     <TabItem.Header>
@@ -434,8 +666,21 @@
                         Padding="5,0,10,0"/>
                         </StackPanel>
                     </TabItem.Header>
-                    <StackPanel>
-                        <ScrollViewer Canvas.Left="5" Canvas.Top="6" HorizontalAlignment="Center" Height="461" VerticalAlignment="Top" Width="938">
+
+
+                    <!--this is Customer panel-->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <!--Sreach bar-->
+                        <!--Buttons, list header,...-->
+
+
+                        <ScrollViewer Grid.Row="2" Canvas.Left="5" Canvas.Top="6" HorizontalAlignment="Center" Height="461" VerticalAlignment="Top" Width="938">
                             <WrapPanel Name="wpn_Employee" Orientation="Horizontal">
                                 <View:Uct_Employee PicURL="/Images/Chill Wallpaper On.png"
                            Icon="/Images/Img_Information.png"
@@ -460,7 +705,7 @@
                            EmployeeTime="13h-18h"/>
                             </WrapPanel>
                         </ScrollViewer>
-                    </StackPanel>
+                    </Grid>
                 </TabItem>
             </TabControl>
         </Grid>
