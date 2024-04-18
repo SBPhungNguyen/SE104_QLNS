@@ -313,13 +313,76 @@
                                 BorderBrush="Black" 
                                 BorderThickness="1,1,1,1" 
                                 CornerRadius="20,20,20,20" 
-                                Margin="5,0,5,5">
+                                Margin="5,0,5,5"
+                                Cursor="Arrow">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="40"></RowDefinition>
                                     <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
 
+                                <DockPanel>
+                                    <ComboBox x:Name="cbx_BookSreach"
+                                              Style="{StaticResource SreachComboxbox}"
+                                              IsEditable="True"
+                                              HorizontalAlignment="Left"
+                                              VerticalAlignment="Center"
+                                              Width="200"
+                                              Height="30"
+                                              Margin="17,0,10,0"
+                                              ItemsSource="{Binding Books}"
+                                              Text="{Binding SearchTextText}">
+                                        <ComboBox.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <VirtualizingStackPanel />
+                                            </ItemsPanelTemplate>
+                                        </ComboBox.ItemsPanel>
+                                    </ComboBox>
+
+
+                                    <Button x:Name="btn_DeleteBookFromSellList"
+                                            Height="30"
+                                            Width="30"
+                                            Margin="5, 0, 5, 0"
+                                            Cursor="Hand">
+                                        <Button.Content>
+                                            <Image Source="\Images\icon_trashcan.png"/>
+                                        </Button.Content>
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="Button">
+                                                            <Border x:Name="border"
+                                                                    CornerRadius="5" 
+                                                                    Background="Transparent"
+                                                                    Padding="5,5,5,5">
+                                                                <ContentPresenter HorizontalAlignment="Center" 
+                                                                                  VerticalAlignment="Center"/>
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter TargetName="border" Property="Background" Value="#C2DECE"/>
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+
+
+                                    <Label x:Name="lbl_BillDate"
+                                           Content="Ngày lập hóa đơn: 19/11/2023"
+                                           FontWeight="Bold"
+                                           HorizontalContentAlignment="Center"
+                                           VerticalContentAlignment="Center"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"
+                                           Margin="0,0,15,0"/>
+                                </DockPanel>
+                                
                                 <DataGrid Grid.Row="1" Name="dtg_SellList" 
                                           ItemsSource="{Binding Books}" 
                                           Style="{StaticResource DataGrid}" 
@@ -375,7 +438,9 @@
                                     CornerRadius="20,20,20,20" 
                                     BorderThickness="1,1,1,1" 
                                     Margin="5,10,5,0"
-                                    Height="220" Width="650">
+                                    Height="220" 
+                                    Width="650"
+                                    Cursor="Arrow">
                             </Border>
 
                             <!-- this is Payment infomation -->
@@ -384,7 +449,9 @@
                                     CornerRadius="20,20,20,20" 
                                     BorderThickness="1,1,1,1" 
                                     Margin="10,10,0,0"
-                                    Height="220" Width="270">
+                                    Height="220" 
+                                    Width="270"
+                                    Cursor="Arrow">
 
                             </Border>
                         </StackPanel>
@@ -431,15 +498,14 @@
                                           Text="Tháng"
                                           Grid.Column="0"
                                           Margin="20, 10, 0, 10"
-                                          
-                                          Style="{StaticResource Comboxbox}" 
+                                          Style="{StaticResource MonthYearComboxbox}" 
                                           BorderThickness="0,0,0,2" 
                                           BorderBrush="#154448"/>
                                     <ComboBox x:Name="cbx_AmountReportYear" 
                                           Grid.Column="1"
                                           Text="Năm"
                                           Margin="20, 10, 0, 10"
-                                          Style="{StaticResource Comboxbox}" 
+                                          Style="{StaticResource MonthYearComboxbox}" 
                                           BorderThickness="0,0,0,2" 
                                           BorderBrush="#154448"/>
                                     <Label x:Name="lbl_AmountReportTotalBook" 
@@ -489,14 +555,14 @@
                                               Text="Tháng"
                                               Grid.Column="0"
                                               Margin="20, 10, 0, 10"
-                                              Style="{StaticResource Comboxbox}" 
+                                              Style="{StaticResource MonthYearComboxbox}" 
                                               BorderThickness="0,0,0,2" 
                                               BorderBrush="#154448"/>
                                     <ComboBox x:Name="cbx_CustomerDebtReportYear" 
                                               Grid.Column="1"
                                               Text="Năm"
                                               Margin="20, 10, 0, 10"
-                                              Style="{StaticResource Comboxbox}" 
+                                              Style="{StaticResource MonthYearComboxbox}" 
                                               BorderThickness="0,0,0,2" 
                                               BorderBrush="#154448"/>
                                     <Label x:Name="lbl_CustomerDebtReportTotalCustomer" 
@@ -617,14 +683,14 @@
                                           Text="Tháng"
                                           Grid.Column="0"
                                           Margin="20, 10, 0, 10"                        
-                                          Style="{StaticResource Comboxbox}" 
+                                          Style="{StaticResource MonthYearComboxbox}" 
                                       BorderThickness="0,0,0,2" 
                                       BorderBrush="#154448"/>
                                 <ComboBox x:Name="cbx_CustomerPaymentReceiptYear" 
                                           Grid.Column="1"
                                           Text="Năm"
                                           Margin="20, 10, 0, 10"
-                                          Style="{StaticResource Comboxbox}" 
+                                          Style="{StaticResource MonthYearComboxbox}" 
                                       BorderThickness="0,0,0,2" 
                                       BorderBrush="#154448"/>
                                 <Label x:Name="lbl_TotalPaymentReceipt" 
