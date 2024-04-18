@@ -5,11 +5,149 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SE104_QLNS"
         mc:Ignorable="d"
-        Title="SignIn" Height="450" Width="720"
-        WindowStartupLocation="CenterScreen"
+        Title="SignIn"                         Background="Transparent"
+        AllowsTransparency="True"
         WindowStyle="None"
-        Background="Transparent" AllowsTransparency="True">
-    <Grid>
-        
-    </Grid>
+        WindowStartupLocation="CenterScreen"
+        Height="350" Width="300">
+    <Border Background="White" CornerRadius="15" BorderThickness="1" BorderBrush="Black">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="110"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row = "0">
+                <Border CornerRadius="15 15 0 0"
+                        Background="#C2EDCE">
+                    <Grid>
+                        <TextBlock Name="tbl_title" 
+                                   Text="Đăng nhập" 
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   Width="236"
+                                   HorizontalAlignment="Left"
+                                   FontFamily="Tahoma"
+                                   FontWeight="Bold"
+                                   Margin="10,0,0,0"
+                           />
+                        <Image Name="img_close" 
+                               Source="/Images/icon_close.png"
+                               Stretch="Fill"
+                               Width="20"
+                               Height="20"
+                              
+                               HorizontalAlignment="Left"
+                               Margin="268,6,0,4"/>
+                    </Grid>
+                </Border>
+            </Grid>
+            <Grid Grid.Row="1">
+                <TextBlock
+                        Text="ĐĂNG NHẬP" 
+                        VerticalAlignment="Center"
+                        FontSize="16"
+                        Width="103"
+                        HorizontalAlignment="Center"
+                        FontFamily="Tahoma"
+                        FontWeight="Bold"
+                        Foreground="#154448"
+                           />
+            </Grid>
+            <Grid Grid.Row="2">
+                <Border>
+                    <Border Name="bdr_BookImage" Width="100" Height="100" Margin="99,4,99,6" CornerRadius="10">
+                        <Border.Background>
+                            <ImageBrush x:Name="img_BookImage" Stretch="Fill" ImageSource="/Images/totoro.jpg"/>
+                        </Border.Background>
+                    </Border>
+                </Border>
+
+            </Grid>
+
+            <Grid Grid.Row="3">
+
+                <TextBlock Text="Username" 
+                        VerticalAlignment="Top"
+                        FontSize="16"
+                        Width="84"
+                        HorizontalAlignment="Left"
+                        FontFamily="Tahoma"
+                        FontWeight="Bold"
+                        Foreground="#154448" Margin="10,4,0,0"
+                           />
+                <TextBox Name="tb_username"
+                         BorderThickness="0,0,0,2"
+                             Height="25" Width="280"
+                         Padding="30,0,0,0"
+                             HorizontalAlignment="Center"
+                             FontFamily="Tahoma"
+                             FontSize="16"
+                             Margin="0,24,0,51"/>
+                <Image  x:Name="img_close_Copy" 
+                        Source="/Images/icon_useravatar.png"
+                        Stretch="Fill"
+                        Width="25"
+                        Height="25"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        Margin="11,22,0,0"/>
+
+                <TextBlock Text="Password" 
+                            FontSize="16"
+                            Width="84"
+                            FontFamily="Tahoma"
+                            FontWeight="Bold"
+                            Foreground="#154448" Margin="10,51,204,25"
+                            />
+                <TextBox Name="tb_password"
+                         Padding="30,0,0,0"
+                         Height="25" Width="280"
+                         HorizontalAlignment="Center"
+                         BorderThickness="0,0,0,2"
+                         FontFamily="Tahoma"
+                         FontSize="16"
+                         Margin="0,73,0,2"
+                        />
+                <Image x:Name="img_close_Copy1" 
+                    Source="/Images/icon_lock.png"
+                    Stretch="Fill"
+                    Width="25"
+                    Height="25"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Margin="10,71,0,0"/>
+            </Grid>
+
+            <Grid Grid.Row="4">
+                <Button Name="btn_Login" Height="35" 
+                        Content="Đăng nhập" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="0,14,0,18">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#154348"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Green"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="200" Height="30"
+                                                        CornerRadius="15"
+                                                        Background="{TemplateBinding Background}"
+                                                        BorderThickness="1"
+                                                        BorderBrush="#3CB76D">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                                      HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+        </Grid>
+    </Border>
 </Window>

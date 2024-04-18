@@ -68,6 +68,9 @@
     <Compile Include="CustomerInfo.xaml.cs">
       <DependentUpon>CustomerInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Decentralize.xaml.cs">
+      <DependentUpon>Decentralize.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EmployeeAdd.xaml.cs">
       <DependentUpon>EmployeeAdd.xaml</DependentUpon>
     </Compile>
@@ -80,6 +83,12 @@
     <Compile Include="EmployeeUpdate.xaml.cs">
       <DependentUpon>EmployeeUpdate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SaveReceiptConfirmation.xaml.cs">
+      <DependentUpon>SaveReceiptConfirmation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SaveReceiptPDF.xaml.cs">
+      <DependentUpon>SaveReceiptPDF.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SaveReceiptPopup.xaml.cs">
       <DependentUpon>SaveReceiptPopup.xaml</DependentUpon>
     </Compile>
@@ -88,6 +97,9 @@
     </Compile>
     <Compile Include="SignUp.xaml.cs">
       <DependentUpon>SignUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserConfirmation.xaml.cs">
+      <DependentUpon>UserConfirmation.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Uct_BookImport.xaml.cs">
       <DependentUpon>Uct_BookImport.xaml</DependentUpon>
@@ -114,6 +126,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomerInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Decentralize.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -145,6 +161,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="SaveReceiptConfirmation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SaveReceiptPDF.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SaveReceiptPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -154,6 +178,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SignUp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserConfirmation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -259,6 +287,9 @@
     <Resource Include="Images\icon_receipt.png" />
     <Resource Include="Images\icon_report.png" />
     <Resource Include="Images\icon_shoppingcart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\icon_lock.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
