@@ -512,7 +512,6 @@
                                               Width="200"
                                               Height="30"
                                               Margin="17,0,10,0"
-                                              ItemsSource="{Binding Books}"
                                               Text="{Binding SearchTextText}">
                                         <ComboBox.ItemsPanel>
                                             <ItemsPanelTemplate>
