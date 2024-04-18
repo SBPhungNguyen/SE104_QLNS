@@ -291,5 +291,23 @@
   <ItemGroup>
     <Resource Include="Images\icon_lock.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\icon_search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\icon_add_book.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\icon_pencil.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\icon_bin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\icon_grid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\icon_printPDF.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
