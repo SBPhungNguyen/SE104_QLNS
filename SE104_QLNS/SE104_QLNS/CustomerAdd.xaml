@@ -1,0 +1,123 @@
+﻿<Window x:Class="SE104_QLNS.CustomerAdd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SE104_QLNS"
+        mc:Ignorable="d"
+        Title="CustomerAdd"         Height="400" Width="750"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True" Background="Transparent">
+    <Border CornerRadius="10" Background="White" BorderBrush="Black" BorderThickness="1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Border CornerRadius="10,10,0,0" Background="#C2DECE"/>
+                <TextBlock Text="Thêm khách hàng"
+                           FontSize="18"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center" Margin="15,0,251,0"/>
+                <Image Source="/Images/icon_close.png" Width="23" Height="23" Stretch="Fill"  RenderTransformOrigin="1.864,0.792" Margin="718,3,7,4"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+
+                    <TextBlock Text="ID khách hàng" FontSize="20" FontFamily="Tahoma"
+                           Height="30" Width="200" Margin="30,15,144,323"/>
+                    <TextBox Name="txt_CustomerID" Height="35" FontFamily="Tahoma" FontWeight="Bold"
+                         BorderThickness="0,0,0,2" Margin="30,40,40,293"
+                             VerticalContentAlignment="Bottom" FontSize="20"
+                             Padding="35,0,0,0"/>
+                    <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_userID.png" Margin="34,47,315,296" RenderTransformOrigin="1.028,0.552"/>
+
+
+                    <ComboBox x:Name="cbx_Gender" 
+                              Text=""
+                              Height="30"        
+                              FontWeight="Bold"  
+                              Padding="35,0,0,0"
+                              Style="{StaticResource Comboxbox}" BorderThickness="0,0,0,2" BorderBrush="#154448" Margin="30,120,40,218"/>
+
+
+                    <TextBlock Text="Giới tính" FontSize="20" FontFamily="Tahoma"
+                        Height="30" Width="200" Margin="30,90,144,248"/>
+                    <TextBlock Text="Email" FontSize="20" FontFamily="Tahoma"
+                        Height="30" Width="200" Margin="30,159,144,179"/>
+                    <TextBox x:Name="txt_CustomerEmail" Height="35" FontFamily="Tahoma" FontWeight="Bold"
+                             Padding="35,0,0,0"
+                        BorderThickness="0,0,0,2" Margin="31,188,40,145"
+                        VerticalContentAlignment="Bottom" FontSize="20"/>
+                    <TextBlock Text="Địa chỉ" FontSize="20" FontFamily="Tahoma"
+                        Height="30" Width="200" Margin="30,231,144,107"/>
+                    <TextBox x:Name="txt_CustomerAddress" Height="35" FontFamily="Tahoma" FontWeight="Bold"
+                        BorderThickness="0,0,0,2" Margin="30,260,-346,73"
+                             Padding="35,0,0,0"
+                        VerticalContentAlignment="Bottom" FontSize="20"/>
+
+                    <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_gender.png" Margin="34,121,315,222" RenderTransformOrigin="1.028,0.552"/>
+                    <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_mail.png" Margin="34,194,315,149" RenderTransformOrigin="1.028,0.552"/>
+                    <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_location.png" Margin="34,266,315,77" RenderTransformOrigin="1.028,0.552"/>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <TextBlock Text="Tên khách hàng" FontSize="20" FontFamily="Tahoma"
+                           Height="30" Width="200" Margin="30,12,144,326"/>
+                    <TextBox x:Name="txt_CustomerName" Height="35" FontFamily="Tahoma" FontWeight="Bold"
+                         BorderThickness="0,0,0,2" Margin="30,41,30,292"
+                         VerticalContentAlignment="Bottom" FontSize="20"/>
+                    <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_useravatar.png" Margin="34,47,315,296" RenderTransformOrigin="1.028,0.552"/>
+                    <TextBlock Text="Ngày sinh" FontSize="20" FontFamily="Tahoma"
+                        Height="30" Width="200" Margin="30,87,144,251"/>
+                    <TextBox x:Name="txt_CustomeBirth" Height="35" FontFamily="Tahoma" FontWeight="Bold"
+                             Padding="35,0,35,0"
+                        BorderThickness="0,0,0,2" Margin="30,117,30,216"
+                        VerticalContentAlignment="Bottom" FontSize="20"/>
+                    <TextBlock Text="Số điện thoại" FontSize="20" FontFamily="Tahoma"
+                        Height="30" Width="200" Margin="30,158,144,180"/>
+                    <TextBox x:Name="txt_CustomerPhone" Height="35" FontFamily="Tahoma" FontWeight="Bold"
+                        BorderThickness="0,0,0,2" Margin="30,188,30,145"
+                             Padding="35,0,0,0"
+                        VerticalContentAlignment="Bottom" FontSize="20"/>
+
+                    <Button Name="btn_Delete" Height="35" 
+                        Content="Thêm khách hàng" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="-190,313,190,20">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#154348"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Green"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="300" Height="35"
+                                                        CornerRadius="15"
+                                                        Background="{TemplateBinding Background}"
+                                                        BorderThickness="1"
+                                                        BorderBrush="#3CB76D">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                                      HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_birthday.png" Margin="34,123,315,220" RenderTransformOrigin="1.028,0.552"/>
+                    <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_calendar.png" Margin="319,123,30,220" RenderTransformOrigin="1.028,0.552"/>
+                    <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_phone.png" Margin="34,193,315,150" RenderTransformOrigin="1.028,0.552"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
+
