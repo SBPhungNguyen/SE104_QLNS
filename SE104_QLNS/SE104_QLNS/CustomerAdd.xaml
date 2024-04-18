@@ -31,10 +31,10 @@
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
 
-                    <TextBlock Text="ID khách hàng" FontSize="20" FontFamily="Tahoma"
+                    <TextBlock Text="ID khách hàng" FontSize="20" FontFamily="Tahoma" Foreground="#154448" 
                            Height="30" Width="200" Margin="30,15,144,323"/>
-                    <TextBox Name="txt_CustomerID" Height="35" FontFamily="Tahoma" FontWeight="Bold"
-                         BorderThickness="0,0,0,2" Margin="30,40,40,293"
+                    <TextBox Name="txt_CustomerID" Height="35" FontFamily="Tahoma" FontWeight="Bold" Foreground="#154448" 
+                         BorderThickness="0,0,0,2" BorderBrush="#154448" Margin="30,40,40,293"
                              VerticalContentAlignment="Bottom" FontSize="20"
                              Padding="35,0,0,0"/>
                     <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_userID.png" Margin="34,47,315,296" RenderTransformOrigin="1.028,0.552"/>
@@ -42,24 +42,29 @@
 
                     <ComboBox x:Name="cbx_Gender" 
                               Text=""
-                              Height="30"        
+                              Height="30"    
+                              Width="265"
                               FontWeight="Bold"  
                               Padding="35,0,0,0"
-                              Style="{StaticResource Comboxbox}" BorderThickness="0,0,0,2" BorderBrush="#154448" Margin="30,120,40,218"/>
+                              Style="{StaticResource CustomerCombobox}" 
+                              BorderThickness="0,0,0,2" 
+                              BorderBrush="#154448" 
+                              Margin="30,120,40,218"
+                              HorizontalAlignment="Right"/>
 
 
-                    <TextBlock Text="Giới tính" FontSize="20" FontFamily="Tahoma"
+                    <TextBlock Text="Giới tính" FontSize="20" FontFamily="Tahoma" Foreground="#154448" 
                         Height="30" Width="200" Margin="30,90,144,248"/>
-                    <TextBlock Text="Email" FontSize="20" FontFamily="Tahoma"
+                    <TextBlock Text="Email" FontSize="20" FontFamily="Tahoma" Foreground="#154448" 
                         Height="30" Width="200" Margin="30,159,144,179"/>
-                    <TextBox x:Name="txt_CustomerEmail" Height="35" FontFamily="Tahoma" FontWeight="Bold"
+                    <TextBox x:Name="txt_CustomerEmail" Height="35" FontFamily="Tahoma" FontWeight="Bold" Foreground="#154448" 
                              Padding="35,0,0,0"
-                        BorderThickness="0,0,0,2" Margin="31,188,40,145"
+                        BorderThickness="0,0,0,2" BorderBrush="#154448"  Margin="31,188,40,145"
                         VerticalContentAlignment="Bottom" FontSize="20"/>
-                    <TextBlock Text="Địa chỉ" FontSize="20" FontFamily="Tahoma"
+                    <TextBlock Text="Địa chỉ" FontSize="20" FontFamily="Tahoma" Foreground="#154448" 
                         Height="30" Width="200" Margin="30,231,144,107"/>
-                    <TextBox x:Name="txt_CustomerAddress" Height="35" FontFamily="Tahoma" FontWeight="Bold"
-                        BorderThickness="0,0,0,2" Margin="30,260,-346,73"
+                    <TextBox x:Name="txt_CustomerAddress" Height="35" FontFamily="Tahoma" FontWeight="Bold" Foreground="#154448" 
+                        BorderThickness="0,0,0,2" BorderBrush="#154448"  Margin="30,260,-346,73"
                              Padding="35,0,0,0"
                         VerticalContentAlignment="Bottom" FontSize="20"/>
 
@@ -68,26 +73,26 @@
                     <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_location.png" Margin="34,266,315,77" RenderTransformOrigin="1.028,0.552"/>
                 </Grid>
                 <Grid Grid.Column="1">
-                    <TextBlock Text="Tên khách hàng" FontSize="20" FontFamily="Tahoma"
+                    <TextBlock Text="Tên khách hàng" FontSize="20" FontFamily="Tahoma" Foreground="#154448" 
                            Height="30" Width="200" Margin="30,12,144,326"/>
-                    <TextBox x:Name="txt_CustomerName" Height="35" FontFamily="Tahoma" FontWeight="Bold"
-                         BorderThickness="0,0,0,2" Margin="30,41,30,292"
+                    <TextBox x:Name="txt_CustomerName" Height="35" FontFamily="Tahoma" FontWeight="Bold" Foreground="#154448" 
+                         BorderThickness="0,0,0,2" BorderBrush="#154448" Margin="30,41,30,292"
                          VerticalContentAlignment="Bottom" FontSize="20"/>
                     <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_useravatar.png" Margin="34,47,315,296" RenderTransformOrigin="1.028,0.552"/>
-                    <TextBlock Text="Ngày sinh" FontSize="20" FontFamily="Tahoma"
+                    <TextBlock Text="Ngày sinh" FontSize="20" FontFamily="Tahoma" Foreground="#154448" 
                         Height="30" Width="200" Margin="30,87,144,251"/>
-                    <TextBox x:Name="txt_CustomeBirth" Height="35" FontFamily="Tahoma" FontWeight="Bold"
+                    <TextBox x:Name="txt_CustomeBirth" Height="35" FontFamily="Tahoma" FontWeight="Bold" Foreground="#154448" 
                              Padding="35,0,35,0"
-                        BorderThickness="0,0,0,2" Margin="30,117,30,216"
+                        BorderThickness="0,0,0,2" BorderBrush="#154448"  Margin="30,117,30,216"
                         VerticalContentAlignment="Bottom" FontSize="20"/>
-                    <TextBlock Text="Số điện thoại" FontSize="20" FontFamily="Tahoma"
+                    <TextBlock Text="Số điện thoại" FontSize="20" FontFamily="Tahoma" Foreground="#154448" 
                         Height="30" Width="200" Margin="30,158,144,180"/>
-                    <TextBox x:Name="txt_CustomerPhone" Height="35" FontFamily="Tahoma" FontWeight="Bold"
-                        BorderThickness="0,0,0,2" Margin="30,188,30,145"
+                    <TextBox x:Name="txt_CustomerPhone" Height="35" FontFamily="Tahoma" FontWeight="Bold" Foreground="#154448" 
+                        BorderThickness="0,0,0,2" BorderBrush="#154448" Margin="30,188,30,145"
                              Padding="35,0,0,0"
                         VerticalContentAlignment="Bottom" FontSize="20"/>
 
-                    <Button Name="btn_Delete" Height="35" 
+                    <Button Name="btn_AddCustomer" Height="35" 
                         Content="Thêm khách hàng" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="-190,313,190,20">
                         <Button.Style>
                             <Style TargetType="Button">
