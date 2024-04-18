@@ -119,10 +119,9 @@
 
                             <ContentPresenter HorizontalAlignment="Center" 
                                               VerticalAlignment="Center">
-                                
+
                             </ContentPresenter>
                         </Grid>
-
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -137,6 +136,43 @@
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#FF85D6A8"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
+        
+        <!--LightBlueButton-->
+        <Style x:Key="LightBlueButton" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Border Width="Auto" Height="Auto"
+                                    CornerRadius="15"
+                                    Background="{TemplateBinding Background}"
+                                    BorderThickness="1"
+                                    BorderBrush="Black">
+                            </Border>
+
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center">
+                            </ContentPresenter>
+                        </Grid>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Background" Value="#6FB3B8"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Cursor" Value="Hand"/>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#00B8C5"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -157,7 +193,7 @@
 
         
         <!--SreachComboxbox toogle button-->
-        <Style x:Key="ComboboxButtonStyle" TargetType="{x:Type ToggleButton}">
+        <Style x:Key="SreachComboboxButtonStyle" TargetType="{x:Type ToggleButton}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ToggleButton}">
@@ -174,7 +210,8 @@
         </Style>
 
         <!--SreachComboxbox textbox-->
-        <Style x:Key="ComboboxTextBoxStyle" TargetType="{x:Type TextBox}">
+        <Style x:Key="SreachComboboxTextBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Foreground" Value="#154448"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Template">
@@ -194,7 +231,7 @@
         </Style>
 
         <!--SreachComboxbox-->
-        <Style x:Key="SreachComboxbox" TargetType="ComboBox">
+        <Style x:Key="SreachCombobox" TargetType="ComboBox">
             <Setter Property="Background" Value="White"/>
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="FontStyle" Value="Normal"/>
@@ -215,12 +252,126 @@
                                 <ColumnDefinition MaxWidth="18"/>
                             </Grid.ColumnDefinitions>
                             <TextBox Name="PART_EditableTextBox"  
-                                     Style="{StaticResource ComboboxTextBoxStyle}"  
+                                     Style="{StaticResource SreachComboboxTextBoxStyle}"  
                                      Padding="5,0,0,0" 
                                      Height="{TemplateBinding Height}"/>
                             <ToggleButton Grid.Column="1" Margin="0"  
                                           Height="{TemplateBinding Height}"  
-                                          Style="{StaticResource ComboboxButtonStyle}"  
+                                          Style="{StaticResource SreachComboboxButtonStyle}"  
+                                          Focusable="False"  
+                                          IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"  
+                                          ClickMode="Press">
+                                <Path Grid.Column="1"  
+                                      HorizontalAlignment="Center"  
+                                      VerticalAlignment="Center"  
+                                      Data="M 0 0 L 4 4 L 8 0 Z" 
+                                      Fill="#154448" />
+                            </ToggleButton>
+                            <ContentPresenter Name="ContentSite"  
+                                              Content="{TemplateBinding SelectionBoxItem}"  
+                                              ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"  
+                                              ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"  
+                                              VerticalAlignment="Center"  
+                                              HorizontalAlignment="Left"  
+                                              Margin="5,0,0,0"/>
+                            <Popup Name="Popup"  
+                                   Placement="Bottom"  
+                                   IsOpen="{TemplateBinding IsDropDownOpen}"  
+                                   AllowsTransparency="True"  
+                                   Focusable="False"  
+                                   PopupAnimation="Slide">
+                                <Grid Name="DropDown"  
+                                      SnapsToDevicePixels="True"    
+                                      MinWidth="{TemplateBinding ActualWidth}" 
+                                      MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border x:Name="DropDownBorder"  
+                                            BorderThickness="1"  
+                                            CornerRadius="5"  
+                                            BorderBrush="Black"/>
+                                    <ScrollViewer Margin="4,6,4,6" 
+                                                  SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True" 
+                                                    KeyboardNavigation.DirectionalNavigation="Contained"/>
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>        
+        
+        
+        <!--CustomerComboxbox toogle button-->
+        <Style x:Key="CustomerComboboxButton" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Border Background="#D9D9D9"   
+                                x:Name="border"   
+                                CornerRadius="0,5,5,0" 
+                                BorderThickness="0,1,1,1"  
+                                BorderBrush="Black">
+                            <ContentPresenter/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--CustomerComboxbox textbox-->
+        <Style x:Key="CustomerComboboxTextBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="#D9D9D9"/>
+            <Setter Property="Foreground" Value="#154448"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <Border CornerRadius="5,0,0,5"  
+                                    BorderThickness="1,1,0,1"  
+                                    Background="{TemplateBinding Background}"  
+                                    BorderBrush="Black">
+                                <ScrollViewer x:Name="PART_ContentHost"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--CustomerComboxbox-->
+        <Style x:Key="CustomerCombobox" TargetType="ComboBox">
+            <Setter Property="Background" Value="#D9D9D9"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Width" Value="190"/>
+            <Setter Property="Background" Value="#D9D9D9"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontStyle" Value="Normal"/>
+            <Setter Property="Foreground" Value="#154448"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="IsEditable" Value="True"/>
+            <Setter Property="IsTextSearchEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBox}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition MaxWidth="18"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Name="PART_EditableTextBox"  
+                                     Style="{StaticResource CustomerComboboxTextBoxStyle}"  
+                                     Padding="5,0,0,0" 
+                                     Height="{TemplateBinding Height}"/>
+                            <ToggleButton Grid.Column="1" Margin="0"  
+                                          Height="{TemplateBinding Height}"  
+                                          Style="{StaticResource CustomerComboboxButton}"  
                                           Focusable="False"  
                                           IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"  
                                           ClickMode="Press">
@@ -263,8 +414,40 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
-        
+
+        <!--CustomerInfoTextBox-->
+        <Style x:Key="CustomerInfoTextBox" TargetType="TextBox">
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Width" Value="190"/>
+            <Setter Property="Background" Value="#D9D9D9"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontStyle" Value="Normal"/>
+            <Setter Property="Foreground" Value="#154448"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="Cursor" Value="IBeam"/>
+            <Setter Property="IsUndoEnabled" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <Border Width="Auto" Height="25"
+                                    CornerRadius="5"
+                                    Background="{TemplateBinding Background}"
+                                    BorderThickness="1"
+                                    BorderBrush="Black">
+                            </Border>
+
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="5,0,5,0"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
         <!--TabItem-->
         <Style TargetType="TabItem">
             <Setter Property="Cursor" Value="Hand"/>
