@@ -330,5 +330,15 @@
   <ItemGroup>
     <Resource Include="Images\icon_printPDF.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\icon_setting.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\icon_manager.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\icon_author.png" />
+    <Resource Include="Images\icon_genre.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
