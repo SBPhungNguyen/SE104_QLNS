@@ -3,15 +3,23 @@
   "WorkspaceRootPath": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|d:\\github\\se104_qlns\\se104_qlns\\se104_qlns\\decentralize.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|solutionrelative:se104_qlns\\decentralize.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\se104_qlns\\signin.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|solutionrelative:se104_qlns\\signin.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\se104_qlns\\userconfirmation.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|solutionrelative:se104_qlns\\userconfirmation.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|d:\\github\\se104_qlns\\se104_qlns\\se104_qlns\\savereceiptconfirmation.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|solutionrelative:se104_qlns\\savereceiptconfirmation.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|d:\\github\\se104_qlns\\se104_qlns\\se104_qlns\\userconfirmation.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|solutionrelative:se104_qlns\\userconfirmation.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|d:\\github\\se104_qlns\\se104_qlns\\se104_qlns\\employeeinfo.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\se104_qlns\\employeeinfo.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|solutionrelative:se104_qlns\\employeeinfo.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
@@ -83,10 +91,6 @@
       "RelativeMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|solutionrelative:se104_qlns\\view\\uct_employee.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\se104_qlns\\signin.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|solutionrelative:se104_qlns\\signin.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\se104_qlns\\signup.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{7AB5A079-A1C2-49F3-9AD1-EDEDE6E5B633}|SE104_QLNS\\SE104_QLNS.csproj|solutionrelative:se104_qlns\\signup.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
@@ -115,6 +119,42 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Decentralize.xaml",
+              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\Decentralize.xaml",
+              "RelativeDocumentMoniker": "SE104_QLNS\\Decentralize.xaml",
+              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\Decentralize.xaml",
+              "RelativeToolTip": "SE104_QLNS\\Decentralize.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-18T03:14:43.841Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UserConfirmation.xaml",
+              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\UserConfirmation.xaml",
+              "RelativeDocumentMoniker": "SE104_QLNS\\UserConfirmation.xaml",
+              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\UserConfirmation.xaml",
+              "RelativeToolTip": "SE104_QLNS\\UserConfirmation.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-17T17:52:33.712Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SignIn.xaml",
+              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\SignIn.xaml",
+              "RelativeDocumentMoniker": "SE104_QLNS\\SignIn.xaml",
+              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\SignIn.xaml",
+              "RelativeToolTip": "SE104_QLNS\\SignIn.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-03-18T13:33:05.728Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "SaveReceiptConfirmation.xaml",
               "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\SaveReceiptConfirmation.xaml",
               "RelativeDocumentMoniker": "SE104_QLNS\\SaveReceiptConfirmation.xaml",
@@ -126,193 +166,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UserConfirmation.xaml",
-              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\UserConfirmation.xaml",
-              "RelativeDocumentMoniker": "SE104_QLNS\\UserConfirmation.xaml",
-              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\UserConfirmation.xaml",
-              "RelativeToolTip": "SE104_QLNS\\UserConfirmation.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-17T17:52:33.712Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "EmployeeInfo.xaml",
-              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\EmployeeInfo.xaml",
-              "RelativeDocumentMoniker": "SE104_QLNS\\EmployeeInfo.xaml",
-              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\EmployeeInfo.xaml",
-              "RelativeToolTip": "SE104_QLNS\\EmployeeInfo.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-12T01:20:11.473Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "EmployeeUpdate.xaml",
-              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\EmployeeUpdate.xaml",
-              "RelativeDocumentMoniker": "SE104_QLNS\\EmployeeUpdate.xaml",
-              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\EmployeeUpdate.xaml",
-              "RelativeToolTip": "SE104_QLNS\\EmployeeUpdate.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-12T01:16:57.705Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "EmployeeDelete.xaml",
-              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\EmployeeDelete.xaml",
-              "RelativeDocumentMoniker": "SE104_QLNS\\EmployeeDelete.xaml",
-              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\EmployeeDelete.xaml",
-              "RelativeToolTip": "SE104_QLNS\\EmployeeDelete.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-12T01:15:15.439Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "EmployeeAdd.xaml",
-              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\EmployeeAdd.xaml",
-              "RelativeDocumentMoniker": "SE104_QLNS\\EmployeeAdd.xaml",
-              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\EmployeeAdd.xaml",
-              "RelativeToolTip": "SE104_QLNS\\EmployeeAdd.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-12T01:13:54.858Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "CustomerInfo.xaml",
-              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\CustomerInfo.xaml",
-              "RelativeDocumentMoniker": "SE104_QLNS\\CustomerInfo.xaml",
-              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\CustomerInfo.xaml",
-              "RelativeToolTip": "SE104_QLNS\\CustomerInfo.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-12T01:02:14.307Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "CustomerDelete.xaml",
-              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\CustomerDelete.xaml",
-              "RelativeDocumentMoniker": "SE104_QLNS\\CustomerDelete.xaml",
-              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\CustomerDelete.xaml",
-              "RelativeToolTip": "SE104_QLNS\\CustomerDelete.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-12T01:01:25.6Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "BookInfoPopup.xaml",
-              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\BookInfoPopup.xaml",
-              "RelativeDocumentMoniker": "SE104_QLNS\\BookInfoPopup.xaml",
-              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\BookInfoPopup.xaml",
-              "RelativeToolTip": "SE104_QLNS\\BookInfoPopup.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-12T01:00:22.015Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "BookDeletePopup.xaml",
-              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\BookDeletePopup.xaml",
-              "RelativeDocumentMoniker": "SE104_QLNS\\BookDeletePopup.xaml",
-              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\BookDeletePopup.xaml",
-              "RelativeToolTip": "SE104_QLNS\\BookDeletePopup.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-12T00:59:03.189Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "SE104_QLNS\\MainWindow.xaml",
-              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\MainWindow.xaml",
-              "RelativeToolTip": "SE104_QLNS\\MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-03-17T13:49:32.29Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Uct_Books.xaml",
-              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_Books.xaml",
-              "RelativeDocumentMoniker": "SE104_QLNS\\View\\Uct_Books.xaml",
-              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_Books.xaml",
-              "RelativeToolTip": "SE104_QLNS\\View\\Uct_Books.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-10T14:13:44.784Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Uct_BookImport.xaml",
-              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_BookImport.xaml",
-              "RelativeDocumentMoniker": "SE104_QLNS\\View\\Uct_BookImport.xaml",
-              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_BookImport.xaml",
-              "RelativeToolTip": "SE104_QLNS\\View\\Uct_BookImport.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-10T14:10:23.524Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "View\\Uct_BookImport.xaml.cs",
-              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_BookImport.xaml.cs",
-              "RelativeDocumentMoniker": "SE104_QLNS\\View\\Uct_BookImport.xaml.cs",
-              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_BookImport.xaml.cs",
-              "RelativeToolTip": "SE104_QLNS\\View\\Uct_BookImport.xaml.cs",
-              "ViewState": "AQIAABgAAAAAAAAAAAAswCUAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-12T00:51:30.377Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "SE104_QLNS\\MainWindow.xaml.cs",
-              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\MainWindow.xaml.cs",
-              "RelativeToolTip": "SE104_QLNS\\MainWindow.xaml.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAkwBoAAAA8AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-17T13:49:30.365Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "View\\Uct_Books.xaml.cs",
-              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_Books.xaml.cs",
-              "RelativeDocumentMoniker": "SE104_QLNS\\View\\Uct_Books.xaml.cs",
-              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_Books.xaml.cs",
-              "RelativeToolTip": "SE104_QLNS\\View\\Uct_Books.xaml.cs",
-              "ViewState": "AQIAAB0AAAAAAAAAAAAwwDYAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-12T00:52:20.691Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "View\\Uct_Customer.xaml.cs",
-              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_Customer.xaml.cs",
-              "RelativeDocumentMoniker": "SE104_QLNS\\View\\Uct_Customer.xaml.cs",
-              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_Customer.xaml.cs",
-              "RelativeToolTip": "SE104_QLNS\\View\\Uct_Customer.xaml.cs",
-              "ViewState": "AQIAABEAAAAAAAAAAAAkwCEAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-12T00:52:32.671Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 19,
               "Title": "Uct_Customer.xaml",
               "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_Customer.xaml",
               "RelativeDocumentMoniker": "SE104_QLNS\\View\\Uct_Customer.xaml",
@@ -323,7 +177,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 20,
               "Title": "View\\Uct_Employee.xaml.cs",
               "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_Employee.xaml.cs",
               "RelativeDocumentMoniker": "SE104_QLNS\\View\\Uct_Employee.xaml.cs",
@@ -335,7 +189,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 21,
               "Title": "Uct_Employee.xaml",
               "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_Employee.xaml",
               "RelativeDocumentMoniker": "SE104_QLNS\\View\\Uct_Employee.xaml",
@@ -346,7 +200,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "App.xaml",
               "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\App.xaml",
               "RelativeDocumentMoniker": "SE104_QLNS\\App.xaml",
@@ -358,7 +212,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 23,
               "Title": "SignUp.xaml.cs",
               "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\SignUp.xaml.cs",
               "RelativeDocumentMoniker": "SE104_QLNS\\SignUp.xaml.cs",
@@ -369,26 +223,198 @@
               "WhenOpened": "2024-03-18T13:34:45.249Z"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "SignIn.xaml",
-              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\SignIn.xaml",
-              "RelativeDocumentMoniker": "SE104_QLNS\\SignIn.xaml",
-              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\SignIn.xaml",
-              "RelativeToolTip": "SE104_QLNS\\SignIn.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-03-18T13:33:05.728Z"
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 4,
+              "Title": "EmployeeInfo.xaml",
+              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\EmployeeInfo.xaml",
+              "RelativeDocumentMoniker": "SE104_QLNS\\EmployeeInfo.xaml",
+              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\EmployeeInfo.xaml",
+              "RelativeToolTip": "SE104_QLNS\\EmployeeInfo.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-12T01:20:11.473Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "EmployeeUpdate.xaml",
+              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\EmployeeUpdate.xaml",
+              "RelativeDocumentMoniker": "SE104_QLNS\\EmployeeUpdate.xaml",
+              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\EmployeeUpdate.xaml",
+              "RelativeToolTip": "SE104_QLNS\\EmployeeUpdate.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-12T01:16:57.705Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "EmployeeDelete.xaml",
+              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\EmployeeDelete.xaml",
+              "RelativeDocumentMoniker": "SE104_QLNS\\EmployeeDelete.xaml",
+              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\EmployeeDelete.xaml",
+              "RelativeToolTip": "SE104_QLNS\\EmployeeDelete.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-12T01:15:15.439Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "EmployeeAdd.xaml",
+              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\EmployeeAdd.xaml",
+              "RelativeDocumentMoniker": "SE104_QLNS\\EmployeeAdd.xaml",
+              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\EmployeeAdd.xaml",
+              "RelativeToolTip": "SE104_QLNS\\EmployeeAdd.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-12T01:13:54.858Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "CustomerInfo.xaml",
+              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\CustomerInfo.xaml",
+              "RelativeDocumentMoniker": "SE104_QLNS\\CustomerInfo.xaml",
+              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\CustomerInfo.xaml",
+              "RelativeToolTip": "SE104_QLNS\\CustomerInfo.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-12T01:02:14.307Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "CustomerDelete.xaml",
+              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\CustomerDelete.xaml",
+              "RelativeDocumentMoniker": "SE104_QLNS\\CustomerDelete.xaml",
+              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\CustomerDelete.xaml",
+              "RelativeToolTip": "SE104_QLNS\\CustomerDelete.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-12T01:01:25.6Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "BookInfoPopup.xaml",
+              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\BookInfoPopup.xaml",
+              "RelativeDocumentMoniker": "SE104_QLNS\\BookInfoPopup.xaml",
+              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\BookInfoPopup.xaml",
+              "RelativeToolTip": "SE104_QLNS\\BookInfoPopup.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-12T01:00:22.015Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "BookDeletePopup.xaml",
+              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\BookDeletePopup.xaml",
+              "RelativeDocumentMoniker": "SE104_QLNS\\BookDeletePopup.xaml",
+              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\BookDeletePopup.xaml",
+              "RelativeToolTip": "SE104_QLNS\\BookDeletePopup.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-12T00:59:03.189Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "SE104_QLNS\\MainWindow.xaml",
+              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\MainWindow.xaml",
+              "RelativeToolTip": "SE104_QLNS\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-03-17T13:49:32.29Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Uct_Books.xaml",
+              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_Books.xaml",
+              "RelativeDocumentMoniker": "SE104_QLNS\\View\\Uct_Books.xaml",
+              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_Books.xaml",
+              "RelativeToolTip": "SE104_QLNS\\View\\Uct_Books.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-10T14:13:44.784Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Uct_BookImport.xaml",
+              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_BookImport.xaml",
+              "RelativeDocumentMoniker": "SE104_QLNS\\View\\Uct_BookImport.xaml",
+              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_BookImport.xaml",
+              "RelativeToolTip": "SE104_QLNS\\View\\Uct_BookImport.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-10T14:10:23.524Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "View\\Uct_BookImport.xaml.cs",
+              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_BookImport.xaml.cs",
+              "RelativeDocumentMoniker": "SE104_QLNS\\View\\Uct_BookImport.xaml.cs",
+              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_BookImport.xaml.cs",
+              "RelativeToolTip": "SE104_QLNS\\View\\Uct_BookImport.xaml.cs",
+              "ViewState": "AQIAABgAAAAAAAAAAAAswCUAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-12T00:51:30.377Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "SE104_QLNS\\MainWindow.xaml.cs",
+              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\MainWindow.xaml.cs",
+              "RelativeToolTip": "SE104_QLNS\\MainWindow.xaml.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAkwBoAAAA8AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-17T13:49:30.365Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "View\\Uct_Books.xaml.cs",
+              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_Books.xaml.cs",
+              "RelativeDocumentMoniker": "SE104_QLNS\\View\\Uct_Books.xaml.cs",
+              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_Books.xaml.cs",
+              "RelativeToolTip": "SE104_QLNS\\View\\Uct_Books.xaml.cs",
+              "ViewState": "AQIAAB0AAAAAAAAAAAAwwDYAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-12T00:52:20.691Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "View\\Uct_Customer.xaml.cs",
+              "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_Customer.xaml.cs",
+              "RelativeDocumentMoniker": "SE104_QLNS\\View\\Uct_Customer.xaml.cs",
+              "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\View\\Uct_Customer.xaml.cs",
+              "RelativeToolTip": "SE104_QLNS\\View\\Uct_Customer.xaml.cs",
+              "ViewState": "AQIAABEAAAAAAAAAAAAkwCEAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-12T00:52:32.671Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
               "Title": "SignUp.xaml",
               "DocumentMoniker": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\SignUp.xaml",
               "RelativeDocumentMoniker": "SE104_QLNS\\SignUp.xaml",
               "ToolTip": "D:\\GitHub\\SE104_QLNS\\SE104_QLNS\\SE104_QLNS\\SignUp.xaml",
               "RelativeToolTip": "SE104_QLNS\\SignUp.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-03-17T13:49:38.939Z"
+              "WhenOpened": "2024-03-17T13:49:38.939Z",
+              "EditorCaption": ""
             }
           ]
         }

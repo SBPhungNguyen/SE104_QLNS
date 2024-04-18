@@ -115,3 +115,5 @@ D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\SaveReceiptPDF.g.cs
 D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\SaveReceiptPDF.baml
 D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\SaveReceiptConfirmation.g.cs
 D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\SaveReceiptConfirmation.baml
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\Decentralize.g.cs
+D:\GitHub\SE104_QLNS\SE104_QLNS\SE104_QLNS\obj\Debug\Decentralize.baml
