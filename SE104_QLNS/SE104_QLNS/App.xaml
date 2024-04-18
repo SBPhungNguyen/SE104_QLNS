@@ -287,7 +287,8 @@
                                     <Border x:Name="DropDownBorder"  
                                             BorderThickness="1"  
                                             CornerRadius="5"  
-                                            BorderBrush="Black"/>
+                                            BorderBrush="Black"
+                                            Background="White"/>
                                     <ScrollViewer Margin="4,6,4,6" 
                                                   SnapsToDevicePixels="True">
                                         <StackPanel IsItemsHost="True" 
@@ -401,7 +402,8 @@
                                     <Border x:Name="DropDownBorder"  
                                             BorderThickness="1"  
                                             CornerRadius="5"  
-                                            BorderBrush="Black"/>
+                                            BorderBrush="Black"
+                                            Background="#D9D9D9"/>
                                     <ScrollViewer Margin="4,6,4,6" 
                                                   SnapsToDevicePixels="True">
                                         <StackPanel IsItemsHost="True" 
