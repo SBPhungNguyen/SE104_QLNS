@@ -16,21 +16,80 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <DockPanel x:Name="dpl_Header" Grid.Row="0" Background="#C2DECE">
+            <Grid x:Name="grd_Header" Grid.Row="0" Background="#C2DECE">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="17*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
                 <Label x:Name="lbl_AppName"
+                       Grid.Column="0"
                        Content="PHẦN MỀM QUẢN LÝ NHÀ SÁCH"
                        FontSize="15"
                        FontWeight="Black"
-                       Foreground="#154448"/>
+                       Foreground="#154448"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"/>
+
+                <Button Name="btn_Logout"
+                        Grid.Column="1"
+                        Width="40" 
+                        Height="30"
+                        BorderThickness="0"
+                        Cursor="Hand" 
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right">
+                    <Button.Content>
+                        <Image Source="/Images/icon_logout.png" Width="20" Height="20"/>
+                    </Button.Content>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#154448"/>
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                <Button Name="btn_MinimizeApp"
+                        Grid.Column="2"
+                        Width="40" 
+                        Height="30"
+                        BorderThickness="0"
+                        Cursor="Hand" 
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Left" Margin="7,0,0,0" Click="btn_MinimizeApp_Click">
+                    <Button.Content>
+                        <Image Source="/Images/icon_minimize.png" Width="20" Height="20"/>
+                    </Button.Content>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#154448"/>
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
 
                 <Button Name="btn_ExitApp"
-                        Width="40" Height="30"
-                        Foreground="#154448"
-                        FontFamily="Tahoma"
-                        FontSize="20"
-                        FontWeight="Bold"
+                        Grid.Column="3"
+                        Click="btn_ExitApp_Click"
+                         Width="40" 
+                        Height="30"
                         BorderThickness="0"
-                        Cursor="Hand" Click="btn_ExitApp_Click" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        Cursor="Hand" 
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right">
                     <Button.Content>
                         <Image Source="/Images/icon_close.png" Width="20" Height="20"/>
                     </Button.Content>
@@ -46,7 +105,7 @@
                         </Style>
                     </Button.Style>
                 </Button>
-            </DockPanel>
+            </Grid>
 
             <TabControl Name="tcl_Navigation" Grid.Row="1" BorderThickness="0">
                 <!-- HOME -->
@@ -58,7 +117,7 @@
                                        Foreground="#154448"
                                        FontWeight="Bold"
                                        VerticalAlignment="Center"
-                                       Padding="5,0,10,0"/>
+                                       Padding="0,0,10,0"/>
                         </StackPanel>
                     </TabItem.Header>
 
@@ -486,7 +545,7 @@
                                        Foreground="#154448"
                                        FontWeight="Bold"
                                        VerticalAlignment="Center"
-                                       Padding="5,0,10,0"/>
+                                       Padding="0,0,10,0"/>
                         </StackPanel>
                     </TabItem.Header>
 
@@ -904,7 +963,7 @@
                         Foreground="#154448"
                         FontWeight="Bold"
                         VerticalAlignment="Center"
-                        Padding="5,0,10,0"/>
+                        Padding="0,0,10,0"/>
                         </StackPanel>
                     </TabItem.Header>
 
@@ -917,7 +976,6 @@
                         </Grid.RowDefinitions>
 
 
-                        <!--Sreach bar-->
                         <!--Sreach bar-->
                         <Grid Grid.Row="0" Grid.ColumnSpan="2">
                             <Border Height="28" Width="100" CornerRadius="15,0,0,15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="345,2,499,2" >
@@ -939,7 +997,7 @@
                                 <ComboBox Style="{StaticResource MonthYearComboxbox}" Height="25" Margin="24,2,20,1"/>
                             </Border>
 
-                            <Button Name="btn_Delete" Height="30" 
+                            <Button Name="btn_SaveReportAsPDF" Height="30" 
                         Content="Lưu PDF" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="785,9,0,11">
                                 <Button.Style>
                                     <Style TargetType="Button">
@@ -1084,7 +1142,7 @@
                         Foreground="#154448"
                         FontWeight="Bold"
                         VerticalAlignment="Center"
-                        Padding="5,0,10,0"/>
+                        Padding="0,0,10,0"/>
                         </StackPanel>
                     </TabItem.Header>
 
@@ -1117,7 +1175,7 @@
                             </Border>
                         </Grid>
 
-                        <!--switch to grid/datagrid button, import book button, delete book button,... above list-->
+                        <!--add customer button, edit customer button, delete customer button,... -->
                         <Grid Grid.Row="1" Grid.ColumnSpan="3">
                             <Button Name="btn_CustomerAdd" Height="40" Width="100"
                                 FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="10,5,834,5">
@@ -1283,7 +1341,7 @@
                         Foreground="#154448"
                         FontWeight="Bold"
                         VerticalAlignment="Center"
-                        Padding="5,0,10,0"/>
+                        Padding="0,0,10,0"/>
                         </StackPanel>
                     </TabItem.Header>
 
@@ -1496,7 +1554,7 @@
                         Foreground="#154448"
                         FontWeight="Bold"
                         VerticalAlignment="Center"
-                        Padding="5,0,10,0"/>
+                        Padding="0,0,10,0"/>
                         </StackPanel>
                     </TabItem.Header>
 
@@ -1681,8 +1739,259 @@ FontFamily="Tahoma" Margin="785,16,66,2"/>
                             </WrapPanel>
                         </ScrollViewer>
                     </Grid>
-                </TabItem>       
-                
+                </TabItem>
+
+
+                <!-- GENRE,AUTHOR LIST -->
+                <TabItem>
+                    <TabItem.Header>
+                        <DockPanel Width="105" Margin="5,0,5,0">
+                            <Image Source="/Images/icon_edit_author_genre.png" Width="40" Height="40"/>
+                            <StackPanel>
+                                <TextBlock Text="Tác giả/" 
+                        Foreground="#154448"
+                        FontWeight="Bold"
+                        VerticalAlignment="Center"
+                        Padding="5,5,0,0"/>
+                                <TextBlock Text="Thể loại" 
+                        Foreground="#154448"
+                        FontWeight="Bold"
+                        VerticalAlignment="Center"
+                        Padding="5,0,0,5"/>
+                            </StackPanel>
+                        </DockPanel>
+                    </TabItem.Header>
+
+                    <!--this is GENRE,AUTHOR panel-->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+
+                        <!--Sreach bar-->
+                        <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                            <Border Height="28" Width="100" CornerRadius="15,0,0,15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="345,2,499,2" >
+                                <ComboBox Style="{StaticResource MonthYearComboxbox}" Height="24" Width="80" Margin="16,1,2,1"/>
+                            </Border>
+                            <Border Height="28" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,15,15,0" Margin="444,2,250,2">
+                                <Grid>
+                                    <TextBox x:Name="txt_AuthorGenreSearch" VerticalContentAlignment="Center" VerticalAlignment="Center"
+                             FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="193" Margin="5,0,0,0"/>
+                                    <Image Source="/Images/icon_search.png" Stretch="Fill" Height="20" Width="20" Cursor="Hand" Margin="212,4,16,2"/>
+
+                                </Grid>
+                            </Border>
+                        </Grid>
+
+
+                        <DockPanel Grid.Row="1">
+                            <Border Height="30" CornerRadius="15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="10,6,0,4">
+                                <ComboBox Style="{StaticResource MonthYearComboxbox}" Height="25" Width="150" Margin="24,2,20,1"/>
+                            </Border>
+
+                            <Button Name="btn_AddAuthorGenre"
+                                    Height="40"
+                                    Width="100"
+                                    FontFamily="Tahoma" 
+                                    FontSize="17" 
+                                    FontWeight="Bold"
+                                    Foreground="#154348" 
+                                    Cursor="Hand" 
+                                    Margin="10,5,0,5">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#C2DECE"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Width="100" Height="40"
+                                CornerRadius="10"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="0"
+                                BorderBrush="#3CB76D">
+                                            <Grid>
+                                                <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                                    <Image Source="/Images/icon_addcircle.png" 
+                                                           Margin="10,0,0,0"
+                                                           Stretch="Fill" 
+                                                           Height="25" 
+                                                           Width="25"/>
+                                                    <TextBlock Text="Thêm"
+                                                               Padding="5,0,0,0"
+                                                               HorizontalAlignment="Left"
+                                                               VerticalAlignment="Center"
+                                                               FontFamily="Tahoma"
+                                                               FontWeight="Bold"
+                                                               FontSize="16"  RenderTransformOrigin="0.151,0.392"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+
+                            <Button Name="btn_EditAuthorGenre"
+                                    Height="40"
+                                    Width="85"
+                                    FontFamily="Tahoma" 
+                                    FontSize="17"
+                                    FontWeight="Bold" 
+                                    Foreground="#154348" 
+                                    Cursor="Hand" 
+                                    Margin="10,5,0,5">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#C2DECE"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Width="100" Height="40"
+                                CornerRadius="10"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="0"
+                                BorderBrush="#3CB76D">
+                                            <Grid>
+                                                <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                                    <Image Source="/Images/icon_pencil.png" 
+                                                           Margin="10,0,0,0"
+                                                           Stretch="Fill" 
+                                                           Height="25"
+                                                           Width="25"/>
+                                                    <TextBlock Text="Sửa"
+                                                               Padding="5,0,0,0"
+                                                               HorizontalAlignment="Left"
+                                                               VerticalAlignment="Center"
+                                                               FontFamily="Tahoma"
+                                                               FontWeight="Bold"
+                                                               FontSize="16"  
+                                                               RenderTransformOrigin="0.151,0.392"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+
+                            <Button Name="btn_DeleteAuthorGenre" 
+                                    Height="40" 
+                                    Width="85"
+                                    FontFamily="Tahoma" 
+                                    FontSize="17" 
+                                    FontWeight="Bold"
+                                    Foreground="#154348"
+                                    Cursor="Hand" 
+                                    Margin="10,5,0,5">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#C2DECE"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Width="100" Height="40"
+                                CornerRadius="10"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="0"
+                                BorderBrush="#3CB76D">
+                                            <Grid>
+                                                <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                                    <Image Source="/Images/icon_trashcan.png" 
+                                                           Margin="10,0,0,0"
+                                                           Stretch="Fill" 
+                                                           Height="25" 
+                                                           Width="25"/>
+                                                    <TextBlock Text="Xóa"
+                                                               Padding="5,0,0,0"
+                                                               HorizontalAlignment="Left"
+                                                               VerticalAlignment="Center"
+                                                               FontFamily="Tahoma"
+                                                               FontWeight="Bold"
+                                                               FontSize="16"  
+                                                               RenderTransformOrigin="0.151,0.392"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+
+                            <Label x:Name="lbl_TotalAuthor" 
+                                      Content="Tổng: 100"
+                                      Grid.Column="2"
+                                   HorizontalAlignment="Right"
+                                      VerticalAlignment="Center"
+                                      FontSize="18"
+                                      Foreground="#154448"
+                                   Margin="0,0,15,0"/>
+                        </DockPanel>
+
+                        <!--this is AUTHOR list -->
+                        <Canvas Grid.Row="2" Name="cvs_AuthorList" Visibility="Visible">
+                            <DataGrid Name="dtg_AuthorList" ItemsSource="{Binding Author}" Style="{StaticResource DataGrid}" Width="930" Height="475" ColumnHeaderHeight="40" Margin="10,0,10,10">
+                                <DataGrid.Columns>
+                                    <DataGridCheckBoxColumn Binding="{Binding IsChecked}" Width="0.2*"/>
+                                    <DataGridTextColumn Header="#" Binding="{Binding AuthorNum}" Width="0.2*" IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Mã tác giả" Binding="{Binding AuthorID}" Width="*" IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Tên tác giả" Binding="{Binding AuthorName}" Width="3*" IsReadOnly="True"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Canvas>
+
+
+                        <!--this is Genre list-->
+                        <Canvas Grid.Row="2" Name="cvs_Genre" Visibility="Hidden">
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.17*"></ColumnDefinition>
+                                        <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label x:Name="lbl_TotalGenre" 
+                                           Content="Tổng: 100"
+                                           Grid.Column="2"
+                                           Margin="50,0,0,0"
+                                           VerticalAlignment="Center"
+                                           FontSize="18"
+                                           Foreground="#154448"/>
+                                </Grid>
+
+
+                                <DataGrid Name="dtg_GenreList" ItemsSource="{Binding Genre}" Style="{StaticResource DataGrid}" Width="930" Height="475" ColumnHeaderHeight="40" Margin="10,0,10,10">
+                                    <DataGrid.Columns>
+                                        <DataGridCheckBoxColumn Binding="{Binding IsChecked}"  Width="0.2*"/>
+                                        <DataGridTextColumn Header="#" Binding="{Binding GenreNum}" Width="0.2*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Mã thể loại" Binding="{Binding GenreID}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Tên thể loại" Binding="{Binding GenreName}" Width="3*" IsReadOnly="True"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                        </Canvas>
+
+                    </Grid>
+                </TabItem>
+
                 <!-- SETTING -->
                 <TabItem>
                     <TabItem.Header>
@@ -1692,7 +2001,7 @@ FontFamily="Tahoma" Margin="785,16,66,2"/>
                         Foreground="#154448"
                         FontWeight="Bold"
                         VerticalAlignment="Center"
-                        Padding="5,0,10,0"/>
+                        Padding="0,0,10,0"/>
                         </StackPanel>
                     </TabItem.Header>
 
@@ -1874,7 +2183,7 @@ FontFamily="Tahoma" Margin="785,16,66,2"/>
                                 </Grid>
                             </StackPanel>
                         </Border>
-                        
+
                         <!-- this is Permission Section -->
                         <Border Grid.Column="1"
                                 Grid.Row="0"
@@ -1916,7 +2225,7 @@ FontFamily="Tahoma" Margin="785,16,66,2"/>
                                             </DockPanel>
                                         </Button.Content>
                                     </Button>
-                                    
+
                                     <Button x:Name="btn_EditManagerPermissions"
                                             Style="{StaticResource SettingSectionButton}"
                                             Grid.Column="1"
@@ -1933,9 +2242,9 @@ FontFamily="Tahoma" Margin="785,16,66,2"/>
                                             </DockPanel>
                                         </Button.Content>
                                     </Button>
-                                    
-                                    
-                                    
+
+
+
                                 </Grid>
 
                             </StackPanel>
@@ -1952,15 +2261,16 @@ FontFamily="Tahoma" Margin="785,16,66,2"/>
 
                             <StackPanel>
                                 <Label Content="Chỉnh sửa quy định"
-                                       FontSize="25"
+                                       FontSize="30"
                                        FontWeight="Bold"
                                        Foreground="#154448"
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Center"
                                        HorizontalContentAlignment="Center"
-                                       VerticalContentAlignment="Center"/>
+                                       VerticalContentAlignment="Center"
+                                       Margin="0,5,0,0"/>
 
-                                <Grid>
+                                <Grid VerticalAlignment="Center" Margin="5, 40, 5, 0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
@@ -2008,7 +2318,7 @@ FontFamily="Tahoma" Margin="785,16,66,2"/>
                                     </StackPanel>
 
                                     <StackPanel Grid.Row="1" Grid.Column="1">
-                                    <TextBlock Text="Số tiền nợ tối đa:"
+                                        <TextBlock Text="Số tiền nợ tối đa:"
                                                Foreground="#154448" FontSize="20" Margin="10,0,0,0"/>
                                         <TextBox x:Name="tbx_CustomerMaximumDebt"
                                                  Style="{StaticResource CustomerInfoTextBox}"
@@ -2022,39 +2332,60 @@ FontFamily="Tahoma" Margin="785,16,66,2"/>
                                     <DockPanel Grid.Row="4" Grid.ColumnSpan="2" Margin="0,10,0,0">
                                         <TextBlock Text="Kiểm tra số tiền thu không vượt quá số tiền khách hàng đang nợ:"
                                                    Foreground="#154448" FontSize="20" Margin="10,0,0,0"/>
-                                        <ToggleButton x:Name="tbt_CheckMoneyReceivedFromCustomer" Content="Toggle Button" 
-                                                      HorizontalAlignment="Left" 
-                                                      VerticalAlignment="Center"
-                                                      Width="120" 
-                                                      Height="30" 
-                                                      Margin="10,0,0,0">
-                                            <ToggleButton.Template>
-                                                <ControlTemplate TargetType="ToggleButton">
+                                        <CheckBox x:Name="cbx_CheckMoneyReceivedFromCustomer"
+          HorizontalAlignment="Left" 
+          VerticalAlignment="Center"
+          Width="30" 
+          Height="30" 
+          Margin="10,0,0,0"
+          Cursor="Hand">
+                                            <CheckBox.Template>
+                                                <ControlTemplate TargetType="CheckBox">
                                                     <Border Background="{TemplateBinding Background}"
-                                                            BorderBrush="{TemplateBinding BorderBrush}"
-                                                            BorderThickness="{TemplateBinding BorderThickness}"
-                                                            CornerRadius="15">
-                                                        <ContentPresenter HorizontalAlignment="Center" 
-                                                                          VerticalAlignment="Center"/>
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="15">
+                                                        <Grid>
+                                                            <ContentPresenter HorizontalAlignment="Center" 
+                                      VerticalAlignment="Center"/>
+                                                            <Path x:Name="CheckMark"
+                          Stroke="#154448"
+                          StrokeThickness="2"
+                          Data="M 5,13 L 13,22 L 23,2"
+                          Visibility="Collapsed">
+                                                                <Path.RenderTransform>
+                                                                    <ScaleTransform ScaleX="0"/>
+                                                                </Path.RenderTransform>
+                                                                <Path.Triggers>
+                                                                    <EventTrigger RoutedEvent="Loaded">
+                                                                        <BeginStoryboard>
+                                                                            <Storyboard>
+                                                                                <DoubleAnimation Storyboard.TargetProperty="(Path.RenderTransform).(ScaleTransform.ScaleX)"
+                                                         From="0" To="1" Duration="0:0:0.3"
+                                                         AutoReverse="False"/>
+                                                                            </Storyboard>
+                                                                        </BeginStoryboard>
+                                                                    </EventTrigger>
+                                                                </Path.Triggers>
+                                                            </Path>
+                                                        </Grid>
                                                     </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsChecked" Value="True">
+                                                            <Setter TargetName="CheckMark" Property="Visibility" Value="Visible"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
                                                 </ControlTemplate>
-                                            </ToggleButton.Template>
-                                        </ToggleButton>
-
+                                            </CheckBox.Template>
+                                        </CheckBox>
                                     </DockPanel>
-                                    
-                                    
-
-
-                                    
-
                                 </Grid>
                             </StackPanel>
                         </Border>
                     </Grid>
-                </TabItem> 
+                </TabItem>
             </TabControl>
-                
+
         </Grid>
     </Border>
 </Window>
