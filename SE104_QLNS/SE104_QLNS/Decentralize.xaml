@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SE104_QLNS"
         mc:Ignorable="d"
         Title="Decentralize" 
-        Height="600" Width="450"
+Height="600" Width="450"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="True" Background="Transparent">
@@ -25,252 +25,318 @@
                                    FontSize="18"
                                    FontWeight="Bold"
                                    FontFamily="Taahoma"
-                                   Width="110" Margin="8,0,0,0"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Left"/>
+                                   Width="100" Margin="8,0,340,0"
+                                   VerticalAlignment="Center"/>
+
                     </Grid>
                 </Border>
             </Grid>
 
             <Grid Grid.Row="1">
-                <ScrollViewer Margin="0,-1,0,1">
-                    <Grid Height="684">
+                <ScrollViewer Margin="0,0,0,10">
+                    <Grid Height="906" Margin="0,0,0,0">
                         <TextBlock Text="Xem"
-                                   FontSize="25"
-                                   FontWeight="Bold"
-                                   FontFamily="Tahoma" 
-                                   Foreground="#154448"
-                                   Margin="189,22,0,627"
+                           FontSize="25"
+                           FontWeight="Bold"
+                           FontFamily="Tahoma" Margin="189,23,0,848"
                                    HorizontalAlignment="Left"
                            Height="35"/>
 
                         <TextBlock Text="Bán"
                                     FontSize="25"
-                                    FontFamily="Tahoma" 
-                                   Foreground="#154448"
-                                   Margin="60,63,198,591"
+                                    FontFamily="Tahoma" Margin="60,64,198,812"
                                     Height="30"/>
-                        <CheckBox Margin="345,66,56,588" Height="30" Width="30">
+                        <CheckBox Margin="345,65,56,811" Height="30" Width="30">
                             <CheckBox.LayoutTransform>
                                 <ScaleTransform ScaleX="2" ScaleY="2"/>
                             </CheckBox.LayoutTransform>
-                        </CheckBox>
 
+                        </CheckBox>
                         <TextBlock Text="Báo cáo"
-                            FontSize="25" Foreground="#154448"
-                            FontFamily="Tahoma" Margin="59,140,228,514"
+                            FontSize="25"
+                            FontFamily="Tahoma" Margin="59,149,228,727"
                             Height="30"/>
-                        <CheckBox Margin="346,144,55,510" Height="30" Width="30">
+                        <CheckBox Margin="346,149,55,727" Height="30" Width="30">
                             <CheckBox.LayoutTransform>
                                 <ScaleTransform ScaleX="2" ScaleY="2"/>
                             </CheckBox.LayoutTransform>
-                        </CheckBox>
 
+                        </CheckBox>
                         <TextBlock Text="Khách Hàng"
-                            FontSize="25" Foreground="#154448"
-                            FontFamily="Tahoma" Margin="60,180,218,474"
+                            FontSize="25"
+                            FontFamily="Tahoma" Margin="60,193,218,683"
                             Height="30"/>
-                        <CheckBox Margin="347,185,54,469" Height="30" Width="30">
+                        <CheckBox Margin="347,192,54,684" Height="30" Width="30">
                             <CheckBox.LayoutTransform>
                                 <ScaleTransform ScaleX="2" ScaleY="2"/>
                             </CheckBox.LayoutTransform>
-                        </CheckBox>
 
-                        <TextBlock Text="Nhân Viên" 
-                            FontSize="25" Foreground="#154448"
-                            FontFamily="Tahoma" Margin="60,222,229,432"
-                            Height="30"/>
-                        <CheckBox Margin="347,225,54,429" Height="30" Width="30">
-                            <CheckBox.LayoutTransform>
-                                <ScaleTransform ScaleX="2" ScaleY="2"/>
-                            </CheckBox.LayoutTransform>
                         </CheckBox>
-
-                        <TextBlock Text="Tác giả/Thể loại" 
-                            FontSize="25" Foreground="#154448"
-                            FontFamily="Tahoma" 
-                                   Margin="60,250,0,432"
+                        <TextBlock Text="Nhân Viên"
+                            FontSize="25"
+                            FontFamily="Tahoma" Margin="60,237,229,639"
                             Height="30"/>
-                        <CheckBox Margin="347,250,54,429" Height="30" Width="30">
+                        <CheckBox Margin="347,236,54,640" Height="30" Width="30">
                             <CheckBox.LayoutTransform>
                                 <ScaleTransform ScaleX="2" ScaleY="2"/>
                             </CheckBox.LayoutTransform>
+
                         </CheckBox>
 
                         <TextBlock Text="Thao Tác"
                            FontSize="25"
-                           FontWeight="Bold" Foreground="#154448"
+                           FontWeight="Bold"
                            HorizontalAlignment="Center"
                            FontFamily="Tahoma"
-                           Height="35" Margin="0,275,0,374"/>
-
+                           Height="35" Margin="0,336,0,535"/>
                         <TextBlock Text="Sách"
                             FontSize="22"
-                            FontWeight="Bold" Foreground="#154448"
-                            FontFamily="Tahoma" Margin="60,311,301,338"
+                            FontWeight="Bold"
+                            FontFamily="Tahoma" Margin="60,372,301,499"
                             Height="35"/>
-
                         <TextBlock Text="Phiếu thu"
-                            FontSize="25" Foreground="#154448"
-                            FontFamily="Tahoma" Margin="60,101,229,553"
+                            FontSize="25"
+                            FontFamily="Tahoma" Margin="60,108,229,768"
                             Height="30"/>
-                        <CheckBox Margin="346,104,55,550" Height="30" Width="30">
+                        <CheckBox Margin="346,109,55,767" Height="30" Width="30">
                             <CheckBox.LayoutTransform>
                                 <ScaleTransform ScaleX="2" ScaleY="2"/>
                             </CheckBox.LayoutTransform>
-                        </CheckBox>
 
-                        <TextBlock Text="Thêm" Margin="60,348,316,306" Height="30" FontSize="20" FontFamily="Tahoma" Foreground="#154448"/>
-                        <CheckBox Margin="116,346,285,308" Height="30" Width="30">
+                        </CheckBox>
+                        <TextBlock
+
+
+                    Text="Thêm" Margin="60,405,316,471" Height="30" FontSize="20" FontFamily="Tahoma"/>
+                        <CheckBox Margin="116,403,285,473" Height="30" Width="30">
                             <CheckBox.LayoutTransform>
                                 <ScaleTransform ScaleX="2" ScaleY="2"/>
                             </CheckBox.LayoutTransform>
-                        </CheckBox>
 
-                        <TextBlock Text="Xoá" Margin="187,349,191,305" Height="30" FontSize="20" FontFamily="Tahoma" Foreground="#154448"/>
-                        <CheckBox Margin="228,346,173,308" Width="30" Height="30">
+                        </CheckBox>
+                        <TextBlock Text="Xoá" Margin="187,406,191,470" Height="30" FontSize="20" FontFamily="Tahoma"/>
+                        <CheckBox Margin="228,403,173,473" Width="30" Height="30">
                             <CheckBox.LayoutTransform>
                                 <ScaleTransform ScaleX="2" ScaleY="2"/>
                             </CheckBox.LayoutTransform>
-                        </CheckBox>
 
-                        <TextBlock Text="Sửa" Margin="309,348,74,306" Height="30" FontSize="20" FontFamily="Tahoma" Foreground="#154448"/>
-                        <CheckBox Margin="351,346,50,308" Width="30" Height="30">
+                        </CheckBox>
+                        <TextBlock
+
+
+                            Text="Sửa" Margin="309,405,74,471" Height="30" FontSize="20" FontFamily="Tahoma"/>
+                        <CheckBox
+
+
+                            Margin="351,401,50,475" Width="30" Height="30">
                             <CheckBox.LayoutTransform>
                                 <ScaleTransform ScaleX="2" ScaleY="2"/>
                             </CheckBox.LayoutTransform>
-                        </CheckBox>
 
+                        </CheckBox>
                         <TextBlock Text="Phiếu Thu"
-                            FontSize="22" Foreground="#154448"
+                            FontSize="22"
                             FontWeight="Bold"
-                            FontFamily="Tahoma" Margin="60,395,230,254"
+                            FontFamily="Tahoma" Margin="60,444,230,427"
                             Height="35"/>
+                        <TextBlock
 
-                        <TextBlock Text="Thêm" Margin="60,432,316,222" Height="30" FontSize="20" FontFamily="Tahoma" Foreground="#154448"/>
-                        <CheckBox Margin="116,430,285,224" Height="30" Width="30">
+
+                            Text="Thêm" Margin="60,475,316,401" Height="30" FontSize="20" FontFamily="Tahoma"/>
+                        <CheckBox Margin="116,473,285,403" Height="30" Width="30">
                             <CheckBox.LayoutTransform>
                                 <ScaleTransform ScaleX="2" ScaleY="2"/>
                             </CheckBox.LayoutTransform>
-                        </CheckBox>
 
-                        <TextBlock Text="Xoá" Margin="187,433,191,221" Height="30" FontSize="20" FontFamily="Tahoma" Foreground="#154448"/>
-                        <CheckBox Margin="228,430,173,224" Width="30" Height="30">
+                        </CheckBox>
+                        <TextBlock Text="Xoá" Margin="187,474,191,402" Height="30" FontSize="20" FontFamily="Tahoma"/>
+                        <CheckBox Margin="228,473,173,403" Width="30" Height="30">
                             <CheckBox.LayoutTransform>
                                 <ScaleTransform ScaleX="2" ScaleY="2"/>
                             </CheckBox.LayoutTransform>
-                        </CheckBox>
 
+                        </CheckBox>
                         <TextBlock Text="Khách Hàng"
-                            FontSize="22" Foreground="#154448"
+                            FontSize="22"
                             FontWeight="Bold"
-                            FontFamily="Tahoma" Margin="60,479,230,170"
+                            FontFamily="Tahoma" Margin="60,516,230,355"
                             Height="35"/>
+                        <TextBlock
 
-                        <TextBlock Text="Thêm" Margin="60,516,316,138" Height="30" FontSize="20" FontFamily="Tahoma" Foreground="#154448"/>
-                        <CheckBox Margin="116,514,285,140" Height="30" Width="30">
+
+                            Text="Thêm" Margin="60,549,316,327" Height="30" FontSize="20" FontFamily="Tahoma"/>
+                        <CheckBox Margin="116,545,285,331" Height="30" Width="30">
                             <CheckBox.LayoutTransform>
                                 <ScaleTransform ScaleX="2" ScaleY="2"/>
                             </CheckBox.LayoutTransform>
-                        </CheckBox>
 
-                        <TextBlock Text="Xoá" Margin="187,517,191,137" Height="30" FontSize="20" FontFamily="Tahoma" Foreground="#154448"/>
-                        <CheckBox Margin="228,514,173,140" Width="30" Height="30">
+                        </CheckBox>
+                        <TextBlock Text="Xoá" Margin="187,548,191,328" Height="30" FontSize="20" FontFamily="Tahoma"/>
+                        <CheckBox Margin="228,545,173,331" Width="30" Height="30">
                             <CheckBox.LayoutTransform>
                                 <ScaleTransform ScaleX="2" ScaleY="2"/>
                             </CheckBox.LayoutTransform>
-                        </CheckBox>
 
-                        <TextBlock Text="Sửa" Margin="309,516,74,138" Height="30" FontSize="20" FontFamily="Tahoma" Foreground="#154448"/>
-                        <CheckBox Margin="351,514,50,140" Width="30" Height="30">
+                        </CheckBox>
+                        <TextBlock
+
+
+                            Text="Sửa" Margin="309,549,74,327" Height="30" FontSize="20" FontFamily="Tahoma"/>
+                        <CheckBox
+
+
+                            Margin="351,545,50,331" Width="30" Height="30">
                             <CheckBox.LayoutTransform>
                                 <ScaleTransform ScaleX="2" ScaleY="2"/>
                             </CheckBox.LayoutTransform>
-                        </CheckBox>
 
+                        </CheckBox>
                         <TextBlock Text="Nhân Viên"
                             FontSize="22"
-                            FontWeight="Bold" Foreground="#154448"
-                            FontFamily="Tahoma" Margin="60,564,230,85"
+                            FontWeight="Bold"
+                            FontFamily="Tahoma" Margin="60,587,230,284"
                             Height="35"/>
+                        <TextBlock
 
-                        <TextBlock Text="Thêm" Margin="60,601,316,53" Height="30" FontSize="20" FontFamily="Tahoma" Foreground="#154448"/>
-                        <CheckBox Margin="116,599,285,55" Height="30" Width="30">
+
+                            Text="Thêm" Margin="60,622,316,254" Height="30" FontSize="20" FontFamily="Tahoma"/>
+                        <CheckBox Margin="116,620,285,256" Height="30" Width="30">
                             <CheckBox.LayoutTransform>
                                 <ScaleTransform ScaleX="2" ScaleY="2"/>
                             </CheckBox.LayoutTransform>
-                        </CheckBox>
 
-                        <TextBlock Text="Xoá" Margin="187,602,191,52" Height="30" FontSize="20" FontFamily="Tahoma" Foreground="#154448"/>
-                        <CheckBox Margin="228,599,173,55" Width="30" Height="30">
+                        </CheckBox>
+                        <TextBlock Text="Xoá" Margin="187,621,191,255" Height="30" FontSize="20" FontFamily="Tahoma"/>
+                        <CheckBox Margin="230,618,171,258" Width="30" Height="30">
                             <CheckBox.LayoutTransform>
                                 <ScaleTransform ScaleX="2" ScaleY="2"/>
                             </CheckBox.LayoutTransform>
-                        </CheckBox>
 
-                        <TextBlock Text="Sửa" Margin="309,601,74,53" Height="30" FontSize="20" FontFamily="Tahoma" Foreground="#154448"/>
-                        <CheckBox Margin="351,599,50,55" Width="30" Height="30">
+                        </CheckBox>
+                        <TextBlock
+
+
+                            Text="Sửa" Margin="309,622,74,254" Height="30" FontSize="20" FontFamily="Tahoma"/>
+                        <CheckBox
+
+
+                            Margin="351,620,50,256" Width="30" Height="30">
                             <CheckBox.LayoutTransform>
                                 <ScaleTransform ScaleX="2" ScaleY="2"/>
                             </CheckBox.LayoutTransform>
-                        </CheckBox>
 
-                        <TextBlock Text="Tác giả"
+                        </CheckBox>
+                        <TextBlock Text="Tác Giả/ Thể Loại"
+                            FontSize="25"
+                            FontFamily="Tahoma" Margin="60,281,141,595"
+                            Height="30"/>
+                        <CheckBox Margin="347,280,54,596" Height="30" Width="30">
+                            <CheckBox.LayoutTransform>
+                                <ScaleTransform ScaleX="2" ScaleY="2"/>
+                            </CheckBox.LayoutTransform>
+
+                        </CheckBox>
+                        <TextBlock Text="Tác Giả"
                             FontSize="22"
-                            FontWeight="Bold" Foreground="#154448"
-                            FontFamily="Tahoma" Margin="60,564,230,85"
+                            FontWeight="Bold"
+                            FontFamily="Tahoma" Margin="60,657,230,214"
                             Height="35"/>
+                        <TextBlock
 
-                        <TextBlock Text="Thêm" Margin="60,601,316,53" Height="30" FontSize="20" FontFamily="Tahoma" Foreground="#154448"/>
-                        <CheckBox Margin="116,599,285,55" Height="30" Width="30">
+
+                            Text="Thêm" Margin="60,692,316,184" Height="30" FontSize="20" FontFamily="Tahoma"/>
+                        <CheckBox Margin="116,690,285,186" Height="30" Width="30">
                             <CheckBox.LayoutTransform>
                                 <ScaleTransform ScaleX="2" ScaleY="2"/>
                             </CheckBox.LayoutTransform>
-                        </CheckBox>
 
-                        <TextBlock Text="Xoá" Margin="187,602,191,52" Height="30" FontSize="20" FontFamily="Tahoma" Foreground="#154448"/>
-                        <CheckBox Margin="228,599,173,55" Width="30" Height="30">
+                        </CheckBox>
+                        <TextBlock Text="Xoá" Margin="187,691,191,185" Height="30" FontSize="20" FontFamily="Tahoma"/>
+                        <CheckBox Margin="230,688,171,188" Width="30" Height="30">
                             <CheckBox.LayoutTransform>
                                 <ScaleTransform ScaleX="2" ScaleY="2"/>
                             </CheckBox.LayoutTransform>
-                        </CheckBox>
 
-                        <TextBlock Text="Sửa" Margin="309,601,74,53" Height="30" FontSize="20" FontFamily="Tahoma" Foreground="#154448"/>
-                        <CheckBox Margin="351,599,50,55" Width="30" Height="30">
+                        </CheckBox>
+                        <TextBlock
+
+
+                            Text="Sửa" Margin="309,692,74,184" Height="30" FontSize="20" FontFamily="Tahoma"/>
+                        <CheckBox
+
+
+                            Margin="351,690,50,186" Width="30" Height="30">
                             <CheckBox.LayoutTransform>
                                 <ScaleTransform ScaleX="2" ScaleY="2"/>
                             </CheckBox.LayoutTransform>
-                        </CheckBox>
 
-                        <TextBlock Text="Thể loại"
+                        </CheckBox>
+                        <TextBlock Text="Thể Loại"
                             FontSize="22"
-                            FontWeight="Bold" Foreground="#154448"
-                            FontFamily="Tahoma" Margin="60,564,230,85"
+                            FontWeight="Bold"
+                            FontFamily="Tahoma" Margin="60,731,230,140"
                             Height="35"/>
+                        <TextBlock
 
-                        <TextBlock Text="Thêm" Margin="60,601,316,53" Height="30" FontSize="20" FontFamily="Tahoma" Foreground="#154448"/>
-                        <CheckBox Margin="116,599,285,55" Height="30" Width="30">
+
+                            Text="Thêm" Margin="60,766,316,110" Height="30" FontSize="20" FontFamily="Tahoma"/>
+                        <CheckBox Margin="116,764,285,112" Height="30" Width="30">
                             <CheckBox.LayoutTransform>
                                 <ScaleTransform ScaleX="2" ScaleY="2"/>
                             </CheckBox.LayoutTransform>
-                        </CheckBox>
 
-                        <TextBlock Text="Xoá" Margin="187,602,191,52" Height="30" FontSize="20" FontFamily="Tahoma" Foreground="#154448"/>
-                        <CheckBox Margin="228,599,173,55" Width="30" Height="30">
+                        </CheckBox>
+                        <TextBlock Text="Xoá" Margin="187,765,191,111" Height="30" FontSize="20" FontFamily="Tahoma"/>
+                        <CheckBox Margin="230,762,171,114" Width="30" Height="30">
                             <CheckBox.LayoutTransform>
                                 <ScaleTransform ScaleX="2" ScaleY="2"/>
                             </CheckBox.LayoutTransform>
-                        </CheckBox>
 
-                        <TextBlock Text="Sửa" Margin="309,601,74,53" Height="30" FontSize="20" FontFamily="Tahoma" Foreground="#154448"/>
-                        <CheckBox Margin="351,599,50,55" Width="30" Height="30">
+                        </CheckBox>
+                        <TextBlock
+
+
+                            Text="Sửa" Margin="309,766,74,110" Height="30" FontSize="20" FontFamily="Tahoma"/>
+                        <CheckBox
+
+
+                            Margin="351,764,50,112" Width="30" Height="30">
                             <CheckBox.LayoutTransform>
                                 <ScaleTransform ScaleX="2" ScaleY="2"/>
                             </CheckBox.LayoutTransform>
+
                         </CheckBox>
+                        <Button Name="btn_Apply" 
+                        Content="Áp dụng" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White"
+                                Height="50" Width="270" Margin="80,821,81,35">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="#154348"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Green"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Width="250" Height="35"
+                                                        CornerRadius="15"
+                                                        Background="{TemplateBinding Background}"
+                                                        BorderThickness="1"
+                                                        BorderBrush="#3CB76D">
+                                        <ContentPresenter VerticalAlignment="Center"
+                                                                      HorizontalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
                     </Grid>
+
                 </ScrollViewer>
             </Grid>
+
         </Grid>
     </Border>
 </Window>
