@@ -340,5 +340,12 @@
     <Resource Include="Images\icon_author.png" />
     <Resource Include="Images\icon_genre.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\icon_edit_author_genre.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\icon_logout.png" />
+    <Resource Include="Images\icon_minimize.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
