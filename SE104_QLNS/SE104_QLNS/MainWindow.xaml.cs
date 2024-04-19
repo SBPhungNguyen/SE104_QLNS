@@ -58,5 +58,10 @@ namespace SE104_QLNS
         {
             this.Close();
         }
+
+        private void btn_MinimizeApp_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
     }
 }
