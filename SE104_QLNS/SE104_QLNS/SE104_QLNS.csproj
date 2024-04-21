@@ -98,6 +98,9 @@
     <Compile Include="ReceiptAdd.xaml.cs">
       <DependentUpon>ReceiptAdd.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ReceiptDelete.xaml.cs">
+      <DependentUpon>ReceiptDelete.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ReceiptInfo.xaml.cs">
       <DependentUpon>ReceiptInfo.xaml</DependentUpon>
     </Compile>
@@ -196,6 +199,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ReceiptAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReceiptDelete.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
