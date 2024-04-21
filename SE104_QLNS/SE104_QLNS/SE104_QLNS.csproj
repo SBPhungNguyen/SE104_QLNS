@@ -251,9 +251,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Chill Vibes R Wallpaper.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\totoro.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -346,6 +343,9 @@
   <ItemGroup>
     <Resource Include="Images\icon_logout.png" />
     <Resource Include="Images\icon_minimize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Chill_Vibes_R_Wallpaper.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -23,24 +23,37 @@
                 <Border CornerRadius="15 15 0 0"
                         Background="#C2EDCE">
                     <Grid>
-                        <TextBlock Name="tbl_title" 
-                                   Text="Đăng nhập" 
+                        <TextBlock x:Name="tbl_title" 
                                    VerticalAlignment="Center"
                                    FontSize="14"
-                                   Width="236"
-                                   HorizontalAlignment="Left"
+                                   Width="278"
+                                   HorizontalAlignment="Center"
                                    FontFamily="Tahoma"
                                    FontWeight="Bold"
-                                   Margin="10,0,0,0"
-                           />
-                        <Image Name="img_close" 
-                               Source="/Images/icon_close.png"
-                               Stretch="Fill"
-                               Width="20"
-                               Height="20"
-                              
-                               HorizontalAlignment="Left"
-                               Margin="268,6,0,4"/>
+                           ><Run Language="vi-vn" Text=" "/><Run Text="Đăng nhập"/></TextBlock>
+                        <Button Name="btn_ExitApp"
+                                Click="btn_ExitApp_Click"
+                                 Width="30" 
+                                Height="30"
+                                BorderThickness="0"
+                                Cursor="Hand" 
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Left" Margin="258,0,0,0">
+                            <Button.Content>
+                                <Image Source="/Images/icon_close.png" Width="20" Height="20"/>
+                            </Button.Content>
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#154448"/>
+                                            <Setter Property="Foreground" Value="Black"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
                     </Grid>
                 </Border>
             </Grid>
@@ -123,7 +136,7 @@
 
             <Grid Grid.Row="4">
                 <Button Name="btn_Login" Height="35" 
-                        Content="Đăng nhập" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="0,14,0,18">
+                        Content="Đăng nhập" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="0,14,0,18" Click="btn_Login_Click">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="#154348"/>

@@ -23,5 +23,19 @@ namespace SE104_QLNS
         {
             InitializeComponent();
         }
+
+        private void btn_Login_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainwindow = new MainWindow();
+
+            mainwindow.Show();
+
+            this.Close();
+        }
+
+        private void btn_ExitApp_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

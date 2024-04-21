@@ -20,59 +20,82 @@
                 <TextBlock Text="Thông tin sách"
                        FontSize="18"
                        FontWeight="Bold"
-                       VerticalAlignment="Center" Margin="15,0,438,0"/>
-                <Image Source="/Images/icon_close.png" Width="23" Height="23" Stretch="Fill" Margin="569,3,8,4" RenderTransformOrigin="1.864,0.792"/>
+                       VerticalAlignment="Center" Margin="10,0,438,0"/>
+                <Button Name="btn_ExitApp"
+                     Width="30" 
+                    Height="30"
+                    BorderThickness="0"
+                    Cursor="Hand" 
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left" Margin="562,0,0,0" Click="btn_ExitApp_Click">
+                    <Button.Content>
+                        <Image Source="/Images/icon_close.png" Width="20" Height="20"/>
+                    </Button.Content>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#154448"/>
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
             </Grid>
             <Grid Grid.Row="1">
-                <Border Name="bdr_BookImage" Width="150" Height="200" Margin="47,74,401,94" CornerRadius="10">
-                    <Border.Background>
-                        <ImageBrush x:Name="img_BookImage" Stretch="Fill"/>
-                    </Border.Background>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="281*"/>
+                    <ColumnDefinition Width="18*"/>
+                </Grid.ColumnDefinitions>
+                <Border Name="bdr_BookImage" Width="150" Height="200" Margin="47,74,365,94" CornerRadius="10">
+                    <Image Name="img_BookImg" Stretch="Fill"/>
                 </Border>
-                <TextBlock Text="Thông tin sách" FontSize="23" FontWeight="Bold" FontFamily="Tahoma" Height="30" Margin="226,25,188,313"/>
+                <TextBlock Text="Thông tin sách" FontSize="23" FontWeight="Bold" FontFamily="Tahoma" Height="30" Margin="226,25,152,313"/>
                 <TextBlock Text="ID:" Height="30" Width="20" FontSize="18" 
-                           Margin="235,72,343,266"/>
+                           Margin="235,72,307,266"/>
                 <TextBlock Text="Tên Sách:" Height="30" FontSize="18" 
-                           Margin="235,108,281,230"/>
+                           Margin="235,108,245,230"/>
                 <TextBlock Text="Thể Loại:" Height="30" FontSize="18" 
-                           Margin="235,145,281,193"/>
+                           Margin="235,145,245,193"/>
                 <TextBlock Text="Tác giả:" Height="30" FontSize="18" 
-                           Margin="235,181,281,157"/>
+                           Margin="235,181,245,157"/>
                 <TextBlock Text="Giá nhập:" Height="30" FontSize="18" 
-                    Margin="235,219,281,119"/>
+                    Margin="235,219,245,119"/>
                 <TextBlock Text="Giá bán:" Height="30" FontSize="18" 
-                    Margin="235,256,281,82"/>
+                    Margin="235,256,245,82"/>
                 <TextBlock Text="Số lượng:" Height="30" FontSize="18" 
-                    Margin="235,293,281,45"/>
+                    Margin="235,293,245,45"/>
 
                 <TextBlock Name="tbl_BookID" Text="ID"
                            FontWeight="Bold"
                            Height="30" FontSize="18" 
-                           Margin="362,72,36,266"/>
+                           Margin="362,72,36,266" Grid.ColumnSpan="2"/>
                 <TextBlock Name="tbl_BookName" Text="Ten sach"
                            FontWeight="Bold"
                            Height="30" FontSize="18" 
-                           Margin="362,108,10,230"/>
+                           Margin="362,108,10,230" Grid.ColumnSpan="2"/>
                 <TextBlock Name="tbl_Gerne" 
                            FontWeight="Bold"
                            Text="Thể Loại:" Height="30" FontSize="18" 
-                           Margin="362,145,10,193"/>
+                           Margin="362,145,10,193" Grid.ColumnSpan="2"/>
                 <TextBlock Name="tbl_Author" 
                            FontWeight="Bold"
                            Text="Tác giả:" Height="30" FontSize="18" 
-                           Margin="362,181,10,157"/>
+                           Margin="362,181,10,157" Grid.ColumnSpan="2"/>
                 <TextBlock Name="tbl_ImportPrice" 
                            FontWeight="Bold"
                            Text="Giá nhập:" Height="30" FontSize="18" 
-                           Margin="362,219,10,119"/>
+                           Margin="362,219,10,119" Grid.ColumnSpan="2"/>
                 <TextBlock Name="tbl_ExportPrice"
                            FontWeight="Bold"
                            Text="Giá bán:" Height="30" FontSize="18" 
-                           Margin="362,256,10,82"/>
+                           Margin="362,256,10,82" Grid.ColumnSpan="2"/>
                 <TextBlock Name="tbl_Quantity"
                            FontWeight="Bold"
                            Text="Số lượng:" Height="30" FontSize="18" 
-                           Margin="362,293,10,45"/>
+                           Margin="362,293,10,45" Grid.ColumnSpan="2"/>
 
             </Grid>
         </Grid>

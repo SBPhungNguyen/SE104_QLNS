@@ -20,6 +20,7 @@ namespace SE104_QLNS.View
     /// </summary>
     public partial class Uct_Books : UserControl
     {
+        
         public Uct_Books()
         {
             InitializeComponent();
@@ -47,7 +48,9 @@ namespace SE104_QLNS.View
         { get; set; }
         public string Icon
         { get; set; }
-        public void LoadData(string BookCode, string BookName, string BookAuthor, string BookGenre, string URL, string NumOfBook, string PriceImport, string PriceExport, string Icon)
+        public string Amount
+        { get; set; }
+        public void LoadData(string BookCode, string BookName, string BookAuthor, string BookGenre, string URL, string NumOfBook, string PriceImport, string PriceExport, string Amount, string Icon)
         {
             this.BookID = BookCode;
             this.BookName = BookName;
@@ -58,6 +61,20 @@ namespace SE104_QLNS.View
             this.BookPriceImport = PriceImport;
             this.BookPriceExport = PriceExport;
             this.Icon = Icon;
+            this.Amount = Amount;
+
+        }
+
+        private void UserControl_Click(object sender, MouseButtonEventArgs e)
+        {
+            BookInfoPopup bookInfoPopup = new BookInfoPopup(this);
+            bookInfoPopup.Visibility = Visibility.Visible;
+            bookInfoPopup.Topmost = true;
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

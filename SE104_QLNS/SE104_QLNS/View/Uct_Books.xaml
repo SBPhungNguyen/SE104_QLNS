@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:SE104_QLNS.View"
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="250"
-             Margin="40,0,0,20">
+             Margin="40,0,0,20"
+             MouseLeftButtonDown="UserControl_Click">
 
     <UserControl.Template>
         <ControlTemplate TargetType="UserControl">
