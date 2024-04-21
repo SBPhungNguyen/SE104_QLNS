@@ -9,5 +9,157 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="True" Background="Transparent">
+    <Border CornerRadius="10" Background="White" BorderBrush="Black" BorderThickness="1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="70"/>
+            </Grid.RowDefinitions>
 
+            <Grid Grid.Row="0">
+                <Border CornerRadius="10,10,0,0" Background="#C2DECE"/>
+                <TextBlock Text="Sửa khách hàng"
+                           FontSize="18"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center" Margin="15,0,251,0"/>
+                <Image Source="/Images/icon_close.png" Width="23" Height="23" Stretch="Fill"  RenderTransformOrigin="1.864,0.792" Margin="718,3,7,4"/>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <TextBlock Text="Bạn có chắc muốn sửa khách hàng này?" 
+                           FontSize="25"
+                           FontWeight="Bold"
+                           FontFamily="Tahoma"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_userID.png" Margin="20,27,329,136" RenderTransformOrigin="1.028,0.552"/>
+                    <TextBlock Text="ID:" FontSize="16" Margin="55,31,290,134" />
+                    <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_mail.png" Margin="20,81,329,82" RenderTransformOrigin="1.028,0.552"/>
+                    <TextBlock Text="Email:" FontSize="16" Margin="55,86,272,79"/>
+                    <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_birthday.png" Margin="21,134,328,29" RenderTransformOrigin="1.028,0.552"/>
+                    <TextBlock Text="Ngày sinh:" FontSize="16" Margin="56,137,234,28"/>
+
+                    <TextBlock Name="tbl_CustomerID" Height="25" Margin="105,31,10,132" FontSize="16" Text="KH000001" FontWeight="Bold"/>
+                    <TextBox Name="txt_CustomerMail" BorderThickness="0,0,0,1" Margin="115,88,5,70" FontSize="14" Text="22521148@gm.uit.edu.vn" FontWeight="Bold" />
+                    <TextBox Name="txt_CustomerBirthday" BorderThickness="0,0,0,1" Height="25" Margin="155,140,10,23" FontSize="14" Text="22/02/2000" FontWeight="Bold" />
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_useravatar.png" Margin="20,27,329,136" RenderTransformOrigin="1.028,0.552"/>
+                    <TextBlock Text="Tên:" FontSize="16" Margin="55,31,290,134" />
+                    <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_phone.png" Margin="20,81,329,82" RenderTransformOrigin="1.028,0.552"/>
+                    <TextBlock Text="SĐT:" FontSize="16" Margin="55,86,272,79"/>
+                    <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_gender.png" Margin="21,134,328,29" RenderTransformOrigin="1.028,0.552"/>
+                    <TextBlock Text="Giới tính:" FontSize="16" Margin="56,137,234,28"/>
+
+                    <TextBox Name="txt_CustomerName" BorderThickness="0,0,0,1" Margin="155,30,10,133" FontSize="16" Text="Han Duong Tong Nguyen" TextWrapping="Wrap" FontWeight="Bold"/>
+                    <TextBox Name="txt_CustomerPhone" Margin="155,88,5,70" FontSize="14" Text="0123456789" FontWeight="Bold" BorderThickness="0,0,0,1"/>
+                    <TextBox Name="txt_CustomerGender" Height="25" Margin="155,140,10,23" FontSize="14" Text="Nu" FontWeight="Bold" BorderThickness="0,0,0,1"/>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="3">
+                <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_location.png" Margin="21,3,702,32"/>
+                <TextBlock Text="Địa chỉ:" FontSize="16" Margin="56,5,609,36"/>
+                <TextBox Name="txt_CustomerAddress"  BorderThickness="0,0,0,1"
+                           Text="hmm cha biet nua nhung toy can dong that dai de kiem tra"
+                           FontSize="15" Margin="120,1,18,31"
+                           TextWrapping="Wrap"
+                         
+                           FontWeight="Bold" />
+            </Grid>
+
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Image Height="25" Width="25" Source="/Images/icon_moneybag.png" Stretch="Fill" Margin="21,9,328,26"/>
+                    <TextBlock Text="Đã mua:" FontWeight="Bold" FontSize="16" Margin="58,12,249,24"/>
+                    <TextBlock Name="tbl_CustomerSpent" 
+                               Text="100,000,000đ" FontSize="16" Margin="155,12,20,22"
+                               FontWeight="Bold"/>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Image Height="25" Width="25" Source="/Images/icon_debt.png" Stretch="Fill" Margin="21,9,328,26"/>
+                    <TextBlock Text="Nợ:" FontWeight="Bold" FontSize="16" Margin="58,12,249,20"/>
+                    <TextBlock Name="tbl_CustomerDebt" 
+                               Text="100,000,000đ" FontSize="16" Margin="155,12,20,23"
+                               FontWeight="Bold"
+                               Foreground="Red"/>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Button Name="btn_Delete" Height="35" 
+                        Content="Sửa" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="0,5,0,30">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#154348"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Green"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="200" Height="30"
+                                                        CornerRadius="15"
+                                                        Background="{TemplateBinding Background}"
+                                                        BorderThickness="1"
+                                                        BorderBrush="#3CB76D">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                                      HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Button Name="btn_Back" Height="35"
+                        Content="Quay Lại" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="0,5,0,30">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#6FB3B8"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#56A399"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="200" Height="30"
+                                                        CornerRadius="15"
+                                                        Background="{TemplateBinding Background}"
+                                                        BorderThickness="1"
+                                                        BorderBrush="#3CB76D">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                                      HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Border>
 </Window>

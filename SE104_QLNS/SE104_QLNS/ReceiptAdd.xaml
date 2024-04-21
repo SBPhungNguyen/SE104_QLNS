@@ -21,45 +21,47 @@
             <Grid Grid.Row="0">
                 <Border Background="#C2DECE" CornerRadius="10,10,0,0"/>
                 <TextBlock Text="Thêm phiếu thu"
-                           FontSize="18"
-                           FontWeight="Bold"
-                           VerticalAlignment="Center" Margin="15,0,251,0"/>
+                       FontSize="18"
+                       FontWeight="Bold"
+                       VerticalAlignment="Center" Margin="15,0,251,0"/>
                 <Image Source="/Images/icon_close.png" Width="23" Height="23" Stretch="Fill"  RenderTransformOrigin="1.864,0.792" Margin="718,3,7,4"/>
             </Grid>
             <Grid Grid.Row="1">
                 <TextBlock Text="Phiếu thu" 
-                           FontSize="25"
-                           FontWeight="Bold"
-                           FontFamily="Tahoma"
-                           HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,9,0,0"/>
+                       FontSize="25"
+                       FontWeight="Bold"
+                       FontFamily="Tahoma"
+                       HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,9,0,0"/>
             </Grid>
 
             <Grid Grid.Row="2">
-                <TextBlock Text="Mã khách hàng:" FontSize="18" Foreground="#154448" Height="25" Margin="61,12,552,291" RenderTransformOrigin="0.184,-0.376"/>
-                <TextBlock Text="Tên:" FontSize="18" Height="25" Foreground="#154448" Margin="61,44,583,259" RenderTransformOrigin="0.184,-0.376" />
-                <TextBlock Text="SĐT:" FontSize="18" Height="25" Foreground="#154448" Margin="61,78,584,225" RenderTransformOrigin="0.184,-0.376"/>
-                <TextBlock Text="Email:" FontSize="18" Height="25" Foreground="#154448" Margin="61,110,567,193" RenderTransformOrigin="0.184,-0.376" />
-                <TextBlock Text="Địa chỉ:" FontSize="18" Height="25" Foreground="#154448" Margin="61,143,585,160" RenderTransformOrigin="0.184,-0.376"/>
-                <TextBlock Text="Số nợ thu trước:" FontSize="18" Foreground="#154448" Height="25" Margin="392,201,223,102" RenderTransformOrigin="0.184,-0.376"/>
-                <TextBlock Text="Tiền thu:" FontSize="18" Height="25" Foreground="#154448"  Margin="392,232,251,71" RenderTransformOrigin="0.184,-0.376" />
-                <TextBlock Text="Nợ sau khi thu:" FontSize="18"  Foreground="#154448" Height="25" Margin="392,272,225,31" RenderTransformOrigin="0.184,-0.376"/>
+                <TextBlock Text="Mã khách hàng:" FontSize="18" Height="25" Margin="61,12,552,291" RenderTransformOrigin="0.184,-0.376"/>
+                <TextBlock Text="Tên:" FontSize="18" Height="25" Margin="61,44,583,259" RenderTransformOrigin="0.184,-0.376" />
+                <TextBlock Text="SĐT:" FontSize="18" Height="25" Margin="61,78,584,225" RenderTransformOrigin="0.184,-0.376"/>
+                <TextBlock Text="Email:" FontSize="18" Height="25" Margin="61,110,567,193" RenderTransformOrigin="0.184,-0.376" />
+                <TextBlock Text="Địa chỉ:" FontSize="18" Height="25" Margin="61,143,585,160" RenderTransformOrigin="0.184,-0.376"/>
+                <TextBlock Text="Số nợ thu trước:" FontSize="18" Height="25" Margin="392,201,223,102" RenderTransformOrigin="0.184,-0.376"/>
+                <TextBlock Text="Tiền thu:" FontSize="18" Height="25" Margin="392,232,251,71" RenderTransformOrigin="0.184,-0.376" />
+                <TextBlock Text="Nợ sau khi thu:" FontSize="18" Height="25" Margin="392,272,225,31" RenderTransformOrigin="0.184,-0.376"/>
 
-                <ComboBox Name="tbl_CustomerID" Text="NV000001" Style="{StaticResource MonthYearComboxbox}" FontSize="18" Height="25" Margin="205,11,425,292" RenderTransformOrigin="0.184,-0.376"
-                         VerticalContentAlignment="Bottom"/>
-                <TextBlock Name="tbl_CustomerName" Text="Ninh Dương Lan Ngọc" FontSize="18" Foreground="#154448" Height="25" Margin="205,44,315,259" RenderTransformOrigin="0.184,-0.376"/>
-                <TextBlock Name="tbl_CustomerPhone" Text="SĐT" FontSize="18" Foreground="#154448" Height="25" Margin="205,78,380,225" RenderTransformOrigin="0.184,-0.376"/>
-                <TextBlock Name="tbl_CustomerEmail" Text="ImSoDesperate@gmail.com"  Foreground="#154448" FontSize="18" Height="25" Margin="205,110,166,193" RenderTransformOrigin="0.184,-0.376"/>
-                <TextBlock Name="tbl_CustomerAddress" Text="HEH I've always wondered that" FontSize="18"  Foreground="#154448"  Height="25" Margin="205,143,166,160" RenderTransformOrigin="0.184,-0.376"/>
-                <TextBlock Name="tbl_DebtBefore" Text="Địa chỉ:" FontSize="18"  Foreground="#154448"  Margin="552,201,21,100" RenderTransformOrigin="0.184,-0.376" TextWrapping="Wrap"/>
-                <TextBox Name="tbl_Paid" Text="Nhân viên" FontSize="18" Foreground="#154448" Height="25" Margin="552,232,21,71" RenderTransformOrigin="0.184,-0.376"
-                         BorderThickness="0,0,0,2" BorderBrush="#154448"/>
+                <TextBox Name="tbl_CustomerID" Text="NV000001" FontSize="18" Height="25" Margin="205,11,425,292" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"
+                     BorderThickness="0,0,0,1" VerticalContentAlignment="Bottom"/>
+                <TextBlock Name="tbl_CustomerName" Text="Ninh Dương Lan Ngọc" FontSize="18" Height="25" Margin="205,44,315,259" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"/>
+                <TextBlock Name="tbl_CustomerPhone" Text="SĐT" FontSize="18" Height="25" Margin="205,78,380,225" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"/>
+                <TextBlock Name="tbl_CustomerEmail" Text="ImSoDesperate@gmail.com" FontSize="18" Height="25" Margin="205,110,166,193" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"/>
+                <TextBlock Name="tbl_CustomerAddress" Text="HEH I've always wondered that" FontSize="18" Height="25" Margin="205,143,166,160" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"/>
+                <TextBlock Name="tbl_DebtBefore" Text="Địa chỉ:" FontSize="18" Margin="552,201,21,100" RenderTransformOrigin="0.184,-0.376" TextWrapping="Wrap" FontWeight="Bold"/>
+                <TextBox Name="tbl_Paid" Text="Nhân viên" FontSize="18" Height="25" Margin="552,232,21,71" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"
+                     BorderThickness="0,0,0,1"/>
                 <TextBlock Name="tbl_DebtAfter" Text="13h-18h" FontSize="18" Height="25" Margin="552,272,20,31" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"
-                         Foreground="Red"/>
+                     Foreground="Red"/>
+
+                <Rectangle Height="2" Margin="548,262,20,64" Fill="Green"/>
             </Grid>
 
             <Grid Grid.Row="3">
                 <Button Name="btn_Delete" 
-                        Content="Lưu và xuất PDF" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="228,-9,227,19">
+                    Content="Lưu và xuất PDF" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="228,-9,227,19">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="#154348"/>
@@ -73,12 +75,12 @@
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border Width="250" Height="35"
-                                                        CornerRadius="15"
-                                                        Background="{TemplateBinding Background}"
-                                                        BorderThickness="1"
-                                                        BorderBrush="#3CB76D">
+                                                    CornerRadius="15"
+                                                    Background="{TemplateBinding Background}"
+                                                    BorderThickness="1"
+                                                    BorderBrush="#3CB76D">
                                 <ContentPresenter VerticalAlignment="Center"
-                                                                      HorizontalAlignment="Center"/>
+                                                                  HorizontalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
                     </Button.Template>
