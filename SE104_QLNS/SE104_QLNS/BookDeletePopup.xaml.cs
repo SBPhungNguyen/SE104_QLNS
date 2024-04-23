@@ -20,6 +20,8 @@ namespace SE104_QLNS
     /// </summary>
     public partial class BookDeletePopup : Window
     {
+        public MainWindow parent;
+        public Uct_Books selectedbook;
         public bool IsClosing = false;
         public string BookURL
         {
@@ -29,7 +31,7 @@ namespace SE104_QLNS
         {
             InitializeComponent();
         }
-        public BookDeletePopup(Uct_Books book)
+        public BookDeletePopup(Uct_Books book, MainWindow mainWindow)
         {
             InitializeComponent();
             this.tbl_BookID.Text = book.BookID;
@@ -45,6 +47,8 @@ namespace SE104_QLNS
             bimage.UriSource = new Uri(BookURL, UriKind.Relative);
             bimage.EndInit();
             img_BookImg.Source = bimage;
+            parent = mainWindow;
+            selectedbook = book;
         }
 
         private void btn_Back_Click(object sender, RoutedEventArgs e)
@@ -55,6 +59,28 @@ namespace SE104_QLNS
 
         private void btn_Delete_Click(object sender, RoutedEventArgs e)
         {
+            foreach (Uct_Books book in parent.Books)
+            {
+                if(book.BookID==selectedbook.BookID)
+                {
+                    parent.Books.Remove(book);
+                    break;
+                }
+            }
+            WrapPanel bookPanel = (WrapPanel)parent.FindName("wpn_Books");
+            bookPanel.Children.Clear();
+            foreach (Uct_Books bookAdd in parent.Books)
+            {
+                Uct_Books placeholder = new Uct_Books(1, parent);
+                placeholder.BookID = bookAdd.BookID;
+                placeholder.BookURL = bookAdd.BookURL;
+                placeholder.BookName = bookAdd.BookName;
+                placeholder.BookPriceImport = bookAdd.BookPriceImport;
+                placeholder.Amount = bookAdd.Amount;
+                placeholder.BookStateURL = "/Images/icon_bin.png";
+                Uct_Books bookImport = placeholder;
+                bookPanel.Children.Add(bookImport);
+            }
             IsClosing = true;
             this.Close();
         }

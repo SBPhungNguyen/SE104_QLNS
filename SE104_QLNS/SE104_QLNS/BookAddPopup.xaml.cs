@@ -19,9 +19,38 @@ namespace SE104_QLNS
     /// </summary>
     public partial class BookAddPopup : Window
     {
+        public bool IsClosing = false;
         public BookAddPopup()
         {
             InitializeComponent();
+        }
+
+        private void btn_ExitApp_Click(object sender, RoutedEventArgs e)
+        {
+            IsClosing = true;
+            this.Close();
+        }
+        protected override void OnDeactivated(EventArgs e)
+        {
+            base.OnDeactivated(e);
+            if (IsClosing)
+            {
+                return;
+            }
+            IsClosing = true;
+            this.Close();
+        }
+
+        private void btn_Back_Click(object sender, RoutedEventArgs e)
+        {
+            IsClosing = true;
+            this.Close();
+        }
+
+        private void btn_Delete_Click(object sender, RoutedEventArgs e) 
+        {
+            IsClosing = true;
+            this.Close();
         }
     }
 }

@@ -20,13 +20,29 @@ namespace SE104_QLNS.View
     /// </summary>
     public partial class Uct_Books : UserControl
     {
-        
-        public Uct_Books()
+        public MainWindow parent;
+        public int state
+        { get; set; }
+        // 0 = default
+        // 1 = delete
+        // 2 = update
+    public Uct_Books()
         {
             InitializeComponent();
             this.DataContext = this;
         }
+        public Uct_Books(int state, MainWindow mainwindow)
+        {
+            InitializeComponent();
+            this.DataContext = this;
+            this.state = state;
+            parent = mainwindow;   
+        }
         public string BookURL
+        {
+            get; set;
+        }
+        public string BookStateURL
         {
             get; set;
         }
@@ -62,19 +78,28 @@ namespace SE104_QLNS.View
             this.BookPriceExport = PriceExport;
             this.Icon = Icon;
             this.Amount = Amount;
-
         }
 
-        private void UserControl_Click(object sender, MouseButtonEventArgs e)
+        private void btn_Button_Click(object sender, RoutedEventArgs e)
         {
-            BookInfoPopup bookInfoPopup = new BookInfoPopup(this);
-            bookInfoPopup.Visibility = Visibility.Visible;
-            bookInfoPopup.Topmost = true;
-        }
-
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-
+            if (state == 0)
+            {
+                BookInfoPopup bookInfoPopup = new BookInfoPopup(this);
+                bookInfoPopup.Visibility = Visibility.Visible;
+                bookInfoPopup.Topmost = true;
+            }
+            else if (state == 1)
+            {
+                BookDeletePopup bookInfoPopup = new BookDeletePopup(this, parent);
+                bookInfoPopup.Visibility = Visibility.Visible;
+                bookInfoPopup.Topmost = true;
+            }
+            else if (state == 2)
+            {
+                BookUpdatePopup bookInfoPopup = new BookUpdatePopup(this, parent);
+                bookInfoPopup.Visibility = Visibility.Visible;
+                bookInfoPopup.Topmost = true;
+            }
         }
     }
 }

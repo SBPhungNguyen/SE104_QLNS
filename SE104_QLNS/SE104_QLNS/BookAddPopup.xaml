@@ -21,7 +21,28 @@
                        FontSize="18"
                        FontWeight="Bold"
                        VerticalAlignment="Center" Margin="15,0,438,0"/>
-                <Image Source="/Images/icon_close.png" Width="23" Height="23" Stretch="Fill" Margin="569,3,8,4" RenderTransformOrigin="1.864,0.792"/>
+                <Button Name="btn_ExitApp"
+     Width="30" 
+    Height="30"
+    BorderThickness="0"
+    Cursor="Hand" 
+    VerticalAlignment="Center"
+    HorizontalAlignment="Left" Margin="562,0,0,0" Click="btn_ExitApp_Click">
+                    <Button.Content>
+                        <Image Source="/Images/icon_close.png" Width="30" Height="30"/>
+                    </Button.Content>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#154448"/>
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
             </Grid>
             <Grid Grid.Row="1">
 
@@ -75,7 +96,7 @@
                            Text="Số lượng:" Height="30" FontSize="18" 
                            Margin="362,269,10,69"/>
                 <Button Name="btn_Delete" Height="35" Margin="45,315,298,18"
-                        Content="Thêm Sách" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White">
+                        Content="Thêm Sách" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Click="btn_Delete_Click">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="#154348"/>
@@ -101,7 +122,7 @@
                 </Button>
 
                 <Button Name="btn_Back" Height="35" Margin="299,315,44,18"
-                        Content="Quay Lại" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White">
+                        Content="Quay Lại" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Click="btn_Back_Click">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="#6FB3B8"/>

@@ -6,8 +6,7 @@
              xmlns:local="clr-namespace:SE104_QLNS.View"
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="250"
-             Margin="40,0,0,20"
-             MouseLeftButtonDown="UserControl_Click">
+             Margin="40,0,0,20">
 
     <UserControl.Template>
         <ControlTemplate TargetType="UserControl">
@@ -19,12 +18,42 @@
                     <TextBlock Text="Lượng tồn:" Margin="99,66,68,65"/>
                     <TextBlock Text="Giá nhập:" Margin="99,90,68,41"/>
                     <TextBlock Text="Giá bán:" Margin="99,114,93,17"/>
-                    <Image Name="img_Icon" HorizontalAlignment="Left" Height="20" Margin="224,6,0,0" VerticalAlignment="Top" Width="20"
-                   Source="{Binding Icon}" Stretch="Fill"/>
                     <TextBlock Name="tbl_BookName" HorizontalAlignment="Left" Margin="127,42,0,0" Text="{Binding BookName}" VerticalAlignment="Top" Width="115"/>
                     <TextBlock Name="tbl_NumOfBook" HorizontalAlignment="Left" Margin="163,0,0,0" Text="{Binding BookNum}" VerticalAlignment="Center" Width="75"/>
                     <TextBlock Name="tbl_PriceIm" HorizontalAlignment="Left" Margin="163,91,0,0" Text="{Binding BookPriceImport}" VerticalAlignment="Top" Width="75"/>
                     <TextBlock Name="tbl_PriceEx" HorizontalAlignment="Left" Margin="163,114,0,0" Text="{Binding BookPriceExport}" VerticalAlignment="Top" Width="74"/>
+                    <Button Name="btn_Button" Height="30" Width="30" Margin="15,10,15,0" VerticalAlignment="Top" HorizontalAlignment="Right" Click="btn_Button_Click">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#C2DECE"/>
+                                        <Setter Property="BorderBrush" Value="#000000"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="30" Height="30"
+CornerRadius="10"
+Background="{TemplateBinding Background}"
+BorderBrush="{TemplateBinding BorderBrush}"
+BorderThickness="{TemplateBinding BorderThickness}">
+                                    <Grid>
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                            <Image Source="{Binding BookStateURL}" Margin="0,0,0,0" Stretch="Fill"/>
+
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
                 </Grid>
                 <Border.Style>
                     <Style TargetType="Border">
@@ -36,6 +65,7 @@
                         </Style.Triggers>
                     </Style>
                 </Border.Style>
+                
             </Border>
         </ControlTemplate>
     </UserControl.Template>

@@ -459,6 +459,7 @@
     <Resource Include="Images\Chill_Vibes_R_Wallpaper.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\icon_info.png" />
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
