@@ -18,7 +18,9 @@
                     <TextBlock Text="Số lượng:" Margin="82,61,96,-4"/>
                     <TextBlock Name="tbl_BookName" Text="{Binding BookName}" Margin="130,22,11,39"/>
                     <TextBlock Name="tbl_ImportPrice" Text="{Binding BookImportPrice}" Margin="157,42,11,20"/>
-                    <TextBlock Name="tbl_BookQuantity" Text="{Binding BookQuantity}" Margin="157,63,17,-2"/>
+                    <TextBlock>
+                         <TextBox Name="tbl_BookQuantity" Background="Transparent" BorderBrush="Transparent" Text="{Binding BookQuantity}" Margin="150,62,17,4" Width="40"/>
+                    </TextBlock>
                 </Grid>
                 <Border.Style>
                     <Style TargetType="Border">

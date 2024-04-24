@@ -501,40 +501,61 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                 </Grid.ColumnDefinitions>
 
 
-                                <Canvas Grid.Column="0" Visibility="Hidden">
+                                <Canvas Grid.Column="0" Visibility="Hidden" Name="cvs_ImportBooks_Grid">
                                     <ScrollViewer Height="484" Width="643" 
                                                   HorizontalAlignment="Left" 
                                                   VerticalAlignment="Center"
                                                   HorizontalScrollBarVisibility="Disabled" 
                                                   VerticalScrollBarVisibility="Auto">
-                                        <WrapPanel Name ="wp_Books" Orientation="Horizontal">
-                                            <View:Uct_Books BookURL="/Images/BG_img.png" 
-                                                            BookName="I don't know but yeah" 
-                                                            BookNum="7000" BookPriceImport="100000" 
-                                                            BookPriceExport="110000"
-                                                            BookID="TT00001"
-                                                            Icon="/Images/Img_Information.png"/>
-                                            <View:Uct_Books BookURL="/Images/BG_img.png" BookName="I don't know but yeah" 
-                                                            BookNum="7000" BookPriceImport="100000" 
-                                                            BookPriceExport="110000"
-                                                            BookID="TT00001"
-                                                            Icon="/Images/Img_Information.png"/>
-                                            <View:Uct_Books BookURL="/Images/BG_img.png" 
-                                                            BookName="I don't know but yeah" 
-                                                            BookNum="7000" BookPriceImport="100000"
-                                                            BookPriceExport="110000"
-                                                            BookID="TT00001"
-                                                            Icon="/Images/Img_Information.png"/>
+                                        <WrapPanel Name ="wp_Books" Orientation="Horizontal" Margin="0,0,0,10">
                                         </WrapPanel>
                                     </ScrollViewer>
                                 </Canvas>
 
                                 <!--this is DataGrid-->
-                                <Canvas Grid.Column="0" Visibility="Visible">
+                                <Canvas Grid.Column="0" Visibility="Hidden" Name ="cvs_ImportBooks_List">
                                     <StackPanel>
-                                        <DataGrid Name="dtg_ImportBooks" ItemsSource="{Binding Books}" Style="{StaticResource DataGrid}" Width="630" Height="428" ColumnHeaderHeight="40" Margin="10,0,10,10">
+                                        <DataGrid Name="dtg_ImportBooks" SelectionChanged="dtg_ImportBooks_SelectionChanged"
+                                                  ItemsSource="{Binding Books}" Style="{StaticResource DataGrid}" Width="630" Height="428" ColumnHeaderHeight="40" Margin="10,0,10,10">
                                             <DataGrid.Columns>
-                                                <DataGridCheckBoxColumn Binding="{Binding IsChecked}" Width="Auto"/>
+                                                <DataGridTemplateColumn Header="" Visibility="Visible">
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <Button Name="btn_AddBook" Height="40" Width="40" Margin="15,0,0,0" Click="btn_AddBook_Click_1">
+                                                                <Button.Style>
+                                                                    <Style TargetType="Button">
+                                                                        <Setter Property="Background" Value="Transparent"/>
+                                                                        <Setter Property="BorderThickness" Value="1"/>
+                                                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                                                        <Style.Triggers>
+                                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                                <Setter Property="Background" Value="#C2DECE"/>
+                                                                                <Setter Property="BorderBrush" Value="#000000"/>
+                                                                            </Trigger>
+                                                                        </Style.Triggers>
+                                                                    </Style>
+                                                                </Button.Style>
+                                                                <Button.Template>
+                                                                    <ControlTemplate TargetType="Button">
+                                                                        <Border Width="40" Height="40"
+CornerRadius="10"
+Background="{TemplateBinding Background}"
+BorderBrush="{TemplateBinding BorderBrush}"
+BorderThickness="{TemplateBinding BorderThickness}">
+                                                                            <Grid>
+                                                                                <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                                                                    <Image Source="/Images/icon_addcircle.png" Margin="6,0,0,0"
+        Stretch="Fill" Height="25" Width="25"/>
+
+                                                                                </StackPanel>
+                                                                            </Grid>
+                                                                        </Border>
+                                                                    </ControlTemplate>
+                                                                </Button.Template>
+                                                            </Button>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
                                                 <DataGridTextColumn Header="#" Binding="{Binding BookNum}" Width="0.5*" IsReadOnly="True"/>
                                                 <DataGridTextColumn Header="Mã sách" Binding="{Binding BookID}" Width="*" IsReadOnly="True"/>
                                                 <DataGridTemplateColumn Header="Ảnh" Width="Auto" IsReadOnly="True">
@@ -604,18 +625,6 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                                 <WrapPanel Name="wpn_ImportPaper" 
                                                            Orientation="Vertical" 
                                                            HorizontalAlignment="Center">
-                                                    <View:Uct_BookImport BookName="I don't know what to write so yeah"
-                                                                         BookImportPrice="10000000"
-                                                                         BookQuantity="100000000"
-                                                                         BookURL="/Images/Chill Wallpaper On.png"/>
-                                                    <View:Uct_BookImport BookName="I don't know what to write so yeah"
-                                                                         BookImportPrice="10000000"
-                                                                         BookQuantity="100000000"
-                                                                         BookURL="/Images/Chill Wallpaper On.png"/>
-                                                    <View:Uct_BookImport BookName="I don't know what to write so yeah"
-                                                                         BookImportPrice="10000000"
-                                                                         BookQuantity="100000000"
-                                                                         BookURL="/Images/Chill Wallpaper On.png"/>
                                                 </WrapPanel>
                                             </ScrollViewer>
                                             <TextBlock Margin="15,400,189,51" Text="Tổng tiền:" FontSize="18" FontWeight="Bold"/>
@@ -1307,7 +1316,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                         <!--add customer button, edit customer button, delete customer button,... -->
                         <Grid Grid.Row="1" Grid.ColumnSpan="3">
                             <Button Name="btn_CustomerAdd" Height="40" Width="100"
-                                FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="10,5,834,5">
+                                FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="10,5,834,5" Click="btn_CustomerAdd_Click">
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Setter Property="Background" Value="Transparent"/>
@@ -1344,7 +1353,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                             </Button>
 
                             <Button Name="btn_CustomerUpdate" Height="40" Width="100"
-                                FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="112,5,732,5">
+                                FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="112,5,732,5" Click="btn_CustomerUpdate_Click">
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Setter Property="Background" Value="Transparent"/>
@@ -1381,7 +1390,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                             </Button>
 
                             <Button Name="btn_CustomerDelete" Height="40" Width="100"
-                                FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="214,5,630,5">
+                                FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="214,5,630,5" Click="btn_CustomerDelete_Click">
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Setter Property="Background" Value="Transparent"/>
@@ -1434,27 +1443,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
 
                         <ScrollViewer Grid.Row="2" HorizontalAlignment="Left" Height="461" VerticalAlignment="Top" Width="938" Grid.ColumnSpan="3" Margin="3,0,0,0">
                             <WrapPanel Name="wpn_Customer" Orientation="Horizontal">
-                                <View:Uct_Customer Img_Type="/Images/Img_Information.png" 
-                           CustomerID="KH000001" 
-                           CustomerName="Trieu Dinh Ly Tran" 
-                           CustomerPhonenumber="0123456789"
-                           CustomerSpending="20000"
-                           CustomerDebt="10000"
-                           Height="200" Width="180"/>
-                                <View:Uct_Customer Img_Type="/Images/Img_Information.png" 
-                           CustomerID="KH000001" 
-                           CustomerName="Trieu Dinh Ly Tran Le Nguyen" 
-                           CustomerPhonenumber="0123456789"
-                           CustomerSpending="20000"
-                           CustomerDebt="10000"
-                           Height="200" Width="180"/>
-                                <View:Uct_Customer Img_Type="/Images/Img_Information.png" 
-                           CustomerID="KH000001" 
-                           CustomerName="Trieu Dinh Ly Tran" 
-                           CustomerPhonenumber="0123456789"
-                           CustomerSpending="20000"
-                           CustomerDebt="10000"
-                           Height="200" Width="180"/>
+                                
                             </WrapPanel>
                         </ScrollViewer>
                     </Grid>

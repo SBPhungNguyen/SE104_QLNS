@@ -100,6 +100,30 @@ namespace SE104_QLNS.View
                 bookInfoPopup.Visibility = Visibility.Visible;
                 bookInfoPopup.Topmost = true;
             }
+            else if (state==3)
+            {
+                bool isDuplicate = false;
+
+                foreach (Uct_BookImport child in parent.wpn_ImportPaper.Children.OfType<Uct_BookImport>())
+                {
+                    if (this.BookID == child.BookID)
+                    {
+                        isDuplicate = true;
+                        break;  // Exit the loop after finding the first duplicate
+                    }
+                }
+
+                if (!isDuplicate)
+                {
+                    Uct_BookImport bookimport = new Uct_BookImport();
+                    bookimport.BookID = this.BookID;
+                    bookimport.BookName = this.BookName;
+                    bookimport.BookImportPrice = this.BookPriceImport;
+                    bookimport.BookQuantity = "1";
+                    bookimport.BookURL = this.BookURL;
+                    parent.wpn_ImportPaper.Children.Add(bookimport);
+                }
+            }
         }
     }
 }

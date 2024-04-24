@@ -23,14 +23,17 @@ namespace SE104_QLNS
     public partial class MainWindow : Window
     {
         public ObservableCollection<Uct_Books> Books { get; set; } = new ObservableCollection<Uct_Books>();
+        public ObservableCollection<Uct_Customer> Customers { get; set; } = new ObservableCollection<Uct_Customer>();
 
         Uct_Books selectedbook = null;
         bool isDelete = false;
         bool isUpdate = false;
+        bool isList = true;
         public MainWindow()
         {
             InitializeComponent();
             DataContext = this;
+            //   LOAD BOOK CODE
             //Day la code mau (vi du ve load thong tin sach)
             Uct_Books book = new Uct_Books();
             book.LoadData("TT012321", "Alice in da WonderLand", "Tac Gia", "Tieu Thuyet", "/Images/Chill_Vibes_R_Wallpaper.png", "76", "10000", "110000", "100", "/Images/Img_Information.png");
@@ -45,6 +48,15 @@ namespace SE104_QLNS
             book = new Uct_Books();
             book.LoadData("TT012324", "Alice in da doanxem", "Tac Gia", "Tieu Thuyet", "/Images/Chill_Vibes_R_Wallpaper.png", "76", "10000", "110000", "100", "/Images/Img_Information.png");
             Books.Add(book);
+
+            //   LOAD CUSTOMER  CODE
+            Uct_Customer customer = new Uct_Customer();
+            customer.LoadData("KH000001", "Scott", "abc@gmail.com", "0987654321", "01/01/2001", "doanxem", "uit", "100", "2146139", "/Images/Img_user_icon.png");
+            Customers.Add(customer);
+            foreach (Uct_Customer child in Customers)
+            {
+                wpn_Customer.Children.Add(child);
+            }
         }
 
         //Khi nhan nut ImportBooks
@@ -63,115 +75,176 @@ namespace SE104_QLNS
         {
             this.WindowState = WindowState.Minimized;
         }
-    private void btn_AddBook_Click(object sender, RoutedEventArgs e) // Click on Them/Add Button
+        private void btn_AddBook_Click(object sender, RoutedEventArgs e) // Click on Them/Add Button
         {
-            if (cvs_ImportBooks.Visibility == Visibility.Hidden) //Swap from Default to Add
+            this.wpn_ImportPaper.Children.Clear();
+            if (isList) //ListView
             {
-                //set other hidden
-                cvs_BooksGridList.Visibility = Visibility.Hidden;
-                cvs_BooksDataGridList.Visibility = Visibility.Hidden;
+                if (cvs_ImportBooks.Visibility == Visibility.Hidden) //Swap from Default to Add
+                {
+                    //set other hidden
+                    cvs_BooksGridList.Visibility = Visibility.Hidden;
+                    cvs_BooksDataGridList.Visibility = Visibility.Hidden;
+                    cvs_ImportBooks_Grid.Visibility = Visibility.Hidden;
 
-                //set this visible
-                cvs_ImportBooks.Visibility = Visibility.Visible;
+                    //set this visible
+                    cvs_ImportBooks.Visibility = Visibility.Visible;
+                    cvs_ImportBooks_List.Visibility = Visibility.Visible;
 
-                dtg_ImportBooks.Items.Refresh();
+                    dtg_ImportBooks.Items.Refresh();
 
-                btn_AddBook.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
-                btn_SwitchView.Background = new SolidColorBrush(Colors.Transparent);
-                btn_DeleteBook.Background = new SolidColorBrush(Colors.Transparent);
-                btn_UpdateBook.Background = new SolidColorBrush(Colors.Transparent);
+                    btn_AddBook.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
+                    btn_DeleteBook.Background = new SolidColorBrush(Colors.Transparent);
+                    btn_UpdateBook.Background = new SolidColorBrush(Colors.Transparent);
 
-                dtg_Books.Columns[0].Visibility = Visibility.Hidden;
-                dtg_Books.Columns[1].Visibility = Visibility.Hidden;
+                    dtg_Books.Columns[0].Visibility = Visibility.Hidden;
+                    dtg_Books.Columns[1].Visibility = Visibility.Hidden;
+                }
+                else //Swap from Add to Default
+                {
+                    cvs_BooksDataGridList.Visibility = Visibility.Visible;
+
+                    cvs_ImportBooks.Visibility = Visibility.Hidden;
+                    cvs_ImportBooks_List.Visibility = Visibility.Hidden;
+
+                    dtg_Books.Items.Refresh();
+                    btn_AddBook.Background = new SolidColorBrush(Colors.Transparent);
+
+                }
             }
-            else //Swap from Add to Default
+            else //TableView
             {
-                cvs_BooksDataGridList.Visibility=Visibility.Visible;
-                cvs_ImportBooks.Visibility = Visibility.Hidden;
-                dtg_Books.Items.Refresh(); 
-                btn_AddBook.Background = new SolidColorBrush(Colors.Transparent);
+                if (cvs_ImportBooks.Visibility == Visibility.Hidden) //Swap from Default to Add
+                {
+                    //set other hidden
+                    cvs_BooksGridList.Visibility = Visibility.Hidden;
+                    cvs_BooksDataGridList.Visibility = Visibility.Hidden;
+                    cvs_ImportBooks_List.Visibility = Visibility.Hidden;
+
+                    //set this visible
+                    cvs_ImportBooks.Visibility = Visibility.Visible;
+                    cvs_ImportBooks_Grid.Visibility = Visibility.Visible;
+
+                    dtg_ImportBooks.Items.Refresh();
+
+                    WrapPanel bookPanel = (WrapPanel)this.FindName("wp_Books");
+                    bookPanel.Children.Clear();
+                    foreach (Uct_Books bookAdd in Books)
+                    {
+                        Uct_Books placeholder = new Uct_Books(3, this);
+                        placeholder.BookID = bookAdd.BookID;
+                        placeholder.BookURL = bookAdd.BookURL;
+                        placeholder.BookName = bookAdd.BookName;
+                        placeholder.BookPriceImport = bookAdd.BookPriceImport;
+                        placeholder.Amount = bookAdd.Amount;
+                        placeholder.BookStateURL = "/Images/icon_addcircle.png";
+                        Uct_Books bookImport = placeholder;
+                        bookPanel.Children.Add(bookImport);
+                    }
+
+                    btn_AddBook.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
+                    btn_DeleteBook.Background = new SolidColorBrush(Colors.Transparent);
+                    btn_UpdateBook.Background = new SolidColorBrush(Colors.Transparent);
+
+                    dtg_Books.Columns[0].Visibility = Visibility.Hidden;
+                    dtg_Books.Columns[1].Visibility = Visibility.Hidden;
+                }
+                else //Swap from Add to Default
+                {
+                    cvs_BooksGridList.Visibility = Visibility.Visible;
+
+                    cvs_ImportBooks.Visibility = Visibility.Hidden;
+                    cvs_ImportBooks_Grid.Visibility = Visibility.Hidden;
+
+                    dtg_Books.Items.Refresh();
+                    btn_AddBook.Background = new SolidColorBrush(Colors.Transparent);
+
+                }
             }
         }
         private void btn_SwitchView_Click(object sender, RoutedEventArgs e) //Switch between List and Table
         {
-            if (cvs_BooksDataGridList.Visibility == Visibility.Visible) //Swap From List (Default) to Table
+            if (cvs_ImportBooks.Visibility == Visibility.Hidden)
             {
-                //set other hidden
-                cvs_BooksDataGridList.Visibility = Visibility.Hidden;
-                cvs_ImportBooks.Visibility = Visibility.Hidden;
+                if (isList) //Swap From List (Default) to Table
+                {
+                    //set other hidden
+                    cvs_BooksDataGridList.Visibility = Visibility.Hidden;
+                    cvs_ImportBooks.Visibility = Visibility.Hidden;
 
-                //set this visible
-                cvs_BooksGridList.Visibility = Visibility.Visible;
+                    //set this visible
+                    cvs_BooksGridList.Visibility = Visibility.Visible;
 
-                //button color
-                btn_SwitchView.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
-                btn_DeleteBook.Background = new SolidColorBrush(Colors.Transparent);
-                btn_AddBook.Background = new SolidColorBrush(Colors.Transparent);
+                    //button color
+                    btn_SwitchView.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
+                    btn_DeleteBook.Background = new SolidColorBrush(Colors.Transparent);
+                    btn_AddBook.Background = new SolidColorBrush(Colors.Transparent);
 
-                WrapPanel bookPanel = (WrapPanel)this.FindName("wpn_Books");
-                bookPanel.Children.Clear();
-                int state;
-                if (!isDelete && !isUpdate)
-                {
-                    state = 0;
-                }
-                else if (isDelete)
-                {
-                    state = 1;
-                }
-                else if (isUpdate)
-                {
-                    state = 2;
-                }
-                else
-                {
-                    state = 0;
-                }
-                    foreach (Uct_Books bookAdd in Books)
-                {
-                    Uct_Books placeholder = new Uct_Books(state, this);
-                    placeholder.BookID = bookAdd.BookID;
-                    placeholder.BookURL = bookAdd.BookURL;
-                    placeholder.BookName = bookAdd.BookName;
-                    placeholder.BookPriceImport = bookAdd.BookPriceImport;
-                    placeholder.Amount = bookAdd.Amount;
-                    switch(state)
+                    WrapPanel bookPanel = (WrapPanel)this.FindName("wpn_Books");
+                    bookPanel.Children.Clear();
+                    int state;
+                    if (!isDelete && !isUpdate)
                     {
-                        case 0:
-                            placeholder.BookStateURL = "/Images/icon_info.png";
-                            break;
-                        case 1:
-                            placeholder.BookStateURL = "/Images/icon_bin.png";
-                            break;
-                        case 2:
-                            placeholder.BookStateURL = "/Images/icon_pencil.png";
-                            break;
+                        state = 0;
                     }
+                    else if (isDelete)
+                    {
+                        state = 1;
+                    }
+                    else if (isUpdate)
+                    {
+                        state = 2;
+                    }
+                    else
+                    {
+                        state = 0;
+                    }
+                    foreach (Uct_Books bookAdd in Books)
+                    {
+                        Uct_Books placeholder = new Uct_Books(state, this);
+                        placeholder.BookID = bookAdd.BookID;
+                        placeholder.BookURL = bookAdd.BookURL;
+                        placeholder.BookName = bookAdd.BookName;
+                        placeholder.BookPriceImport = bookAdd.BookPriceImport;
+                        placeholder.Amount = bookAdd.Amount;
+                        switch (state)
+                        {
+                            case 0:
+                                placeholder.BookStateURL = "/Images/icon_info.png";
+                                break;
+                            case 1:
+                                placeholder.BookStateURL = "/Images/icon_bin.png";
+                                break;
+                            case 2:
+                                placeholder.BookStateURL = "/Images/icon_pencil.png";
+                                break;
+                        }
 
-                    Uct_Books bookImport = placeholder;
-                    bookPanel.Children.Add(bookImport);
+                        Uct_Books bookImport = placeholder;
+                        bookPanel.Children.Add(bookImport);
+                        isList = false;
+                    }
                 }
+                else //Swap From Table To List (Default)
+                {
+                    cvs_BooksDataGridList.Visibility = Visibility.Visible;
 
+                    cvs_BooksGridList.Visibility = Visibility.Hidden;
+                    cvs_ImportBooks.Visibility = Visibility.Hidden;
+
+                    dtg_Books.Items.Refresh();
+                    btn_SwitchView.Background = new SolidColorBrush(Colors.Transparent);
+
+                    WrapPanel bookPanel = (WrapPanel)this.FindName("wpn_Books");
+                    bookPanel.Children.Clear();
+                    isList = true;
+                }
+                isUpdate = false;
+
+                isDelete = false;
+                dtg_Books.Columns[0].Visibility = Visibility.Hidden;
             }
-            else //Swap From Table To List (Default)
-            {
-                cvs_BooksDataGridList.Visibility = Visibility.Visible;
-
-                cvs_BooksGridList.Visibility = Visibility.Hidden;
-                cvs_ImportBooks.Visibility = Visibility.Hidden;
-
-                dtg_Books.Items.Refresh();
-                btn_SwitchView.Background = new SolidColorBrush(Colors.Transparent);
-
-                WrapPanel bookPanel = (WrapPanel)this.FindName("wpn_Books");
-                bookPanel.Children.Clear();
-            }
-            isUpdate = false;
-
-            isDelete = false;
-            dtg_Books.Columns[0].Visibility = Visibility.Hidden;
         }
-
         private void dtg_Books_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (isUpdate == true)
@@ -220,7 +293,7 @@ namespace SE104_QLNS
             }
             else //TableView
             {
-               
+
                 foreach (Uct_Books bookAdd in Books)
                 {
                     Uct_Books placeholder = new Uct_Books(1, this);
@@ -235,17 +308,15 @@ namespace SE104_QLNS
                 }
             }
         }
-
         private void btn_DeleteBook_Click2(object sender, RoutedEventArgs e) //DeleteBook for each Book
         {
             if (selectedbook == null)
                 return;
             BookDeletePopup bookdeletepopup = new BookDeletePopup(selectedbook, this);
-            bookdeletepopup.Show(); 
+            bookdeletepopup.Show();
             WrapPanel bookPanel = (WrapPanel)this.FindName("wpn_Books");
             bookPanel.Children.Clear();
         }
-
         private void btn_UpdateBook_Click(object sender, RoutedEventArgs e) //Click UpdateBook
         {
             if (cvs_ImportBooks.Visibility == Visibility.Visible)
@@ -294,7 +365,6 @@ namespace SE104_QLNS
                 isUpdate = true;
             }
         }
-
         private void btn_UpdateBook_Click2(object sender, RoutedEventArgs e)
         {
             if (selectedbook == null)
@@ -303,12 +373,57 @@ namespace SE104_QLNS
             bookupdatepopup.Show();
             selectedbook = null;
         }
-
         private void btn_AddNewBook_Click(object sender, RoutedEventArgs e)
         {
             BookAddPopup bookaddpopup = new BookAddPopup();
             bookaddpopup.Show();
         }
+        private void dtg_ImportBooks_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectedbook = (Uct_Books)dtg_ImportBooks.SelectedItem;
+        }
+        private void btn_AddBook_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (selectedbook == null)
+                return;
+            bool isDuplicate = false;
+
+            foreach (Uct_BookImport child in wpn_ImportPaper.Children.OfType<Uct_BookImport>())
+            {
+                if (selectedbook.BookID == child.BookID)
+                {
+                    isDuplicate = true;
+                    break;  // Exit the loop after finding the first duplicate
+                }
+            }
+
+            if (!isDuplicate)
+            {
+                Uct_BookImport bookimport = new Uct_BookImport();
+                bookimport.BookID = selectedbook.BookID;
+                bookimport.BookName = selectedbook.BookName;
+                bookimport.BookImportPrice = selectedbook.BookPriceImport;
+                bookimport.BookQuantity = "1";
+                bookimport.BookURL = selectedbook.BookURL;
+                this.wpn_ImportPaper.Children.Add(bookimport);
+            }
+        }
+        private void btn_CustomerAdd_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_CustomerUpdate_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_CustomerDelete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        
     }
-    }
+}
 
