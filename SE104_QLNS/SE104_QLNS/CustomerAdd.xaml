@@ -22,7 +22,28 @@
                            FontSize="18"
                            FontWeight="Bold"
                            VerticalAlignment="Center" Margin="15,0,251,0"/>
-                <Image Source="/Images/icon_close.png" Width="23" Height="23" Stretch="Fill"  RenderTransformOrigin="1.864,0.792" Margin="718,3,7,4"/>
+                <Button Name="btn_ExitApp"
+ Width="30" 
+Height="30"
+BorderThickness="0"
+Cursor="Hand" 
+VerticalAlignment="Center"
+HorizontalAlignment="Right" Margin="10,0,0,0" Click="btn_ExitApp_Click">
+                    <Button.Content>
+                        <Image Source="/Images/icon_close.png" Width="20" Height="20"/>
+                    </Button.Content>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#154448"/>
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
             </Grid>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -34,23 +55,29 @@
                     <TextBlock Text="ID khách hàng" FontSize="20" FontFamily="Tahoma" Foreground="#154448" 
                            Height="30" Width="200" Margin="30,15,144,323"/>
                     <TextBox Name="txt_CustomerID" Height="35" FontFamily="Tahoma" FontWeight="Bold" Foreground="#154448" 
-                         BorderThickness="0,0,0,2" BorderBrush="#154448" Margin="30,40,40,293"
+                         BorderThickness="0,0,0,2" BorderBrush="#154448" Margin="30,40,40,293" IsReadOnly="true"
                              VerticalContentAlignment="Bottom" FontSize="20"
                              Padding="35,0,0,0"/>
                     <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_userID.png" Margin="34,47,315,296" RenderTransformOrigin="1.028,0.552"/>
 
 
-                    <ComboBox x:Name="cbx_Gender" 
-                              Text=""
-                              Height="30"    
-                              Width="265"
-                              FontWeight="Bold"  
-                              Padding="35,0,0,0"
-                              Style="{StaticResource CustomerCombobox}" 
-                              BorderThickness="0,0,0,2" 
-                              BorderBrush="#154448" 
-                              Margin="30,120,40,218"
-                              HorizontalAlignment="Right"/>
+                    <ComboBox x:Name="cbx_Gender"
+          Text=""
+          Height="30"
+          Width="265"
+          FontWeight="Bold"
+          Padding="35,0,0,0"
+          Style="{StaticResource CustomerCombobox}"
+          BorderThickness="0,0,0,2"
+          BorderBrush="#154448"
+          Margin="30,120,40,218"
+          HorizontalAlignment="Right"
+          IsEditable="False">
+                        <ComboBoxItem>Nam</ComboBoxItem>
+                        <ComboBoxItem>Nữ</ComboBoxItem>
+                    </ComboBox>
+
+
 
 
                     <TextBlock Text="Giới tính" FontSize="20" FontFamily="Tahoma" Foreground="#154448" 
@@ -76,7 +103,7 @@
                     <TextBlock Text="Tên khách hàng" FontSize="20" FontFamily="Tahoma" Foreground="#154448" 
                            Height="30" Width="200" Margin="30,12,144,326"/>
                     <TextBox x:Name="txt_CustomerName" Height="35" FontFamily="Tahoma" FontWeight="Bold" Foreground="#154448" 
-                         BorderThickness="0,0,0,2" BorderBrush="#154448" Margin="30,41,30,292"
+                         BorderThickness="0,0,0,2" BorderBrush="#154448" Margin="64,41,30,292"
                          VerticalContentAlignment="Bottom" FontSize="20"/>
                     <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_useravatar.png" Margin="34,47,315,296" RenderTransformOrigin="1.028,0.552"/>
                     <TextBlock Text="Ngày sinh" FontSize="20" FontFamily="Tahoma" Foreground="#154448" 
@@ -93,7 +120,7 @@
                         VerticalContentAlignment="Bottom" FontSize="20"/>
 
                     <Button Name="btn_AddCustomer" Height="35" 
-                        Content="Thêm khách hàng" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="-190,313,190,20">
+                        Content="Thêm khách hàng" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="-190,313,190,20" Click="btn_AddCustomer_Click">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="#154348"/>

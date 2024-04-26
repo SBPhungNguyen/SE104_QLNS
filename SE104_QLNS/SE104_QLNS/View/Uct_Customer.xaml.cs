@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,10 @@ namespace SE104_QLNS.View
     /// </summary>
     public partial class Uct_Customer : UserControl
     {
+        Connection connect = new Connection();
+
+        public int state = 0;
+        public MainWindow parent;
         public string CustomerID { get; set; }
         public string CustomerName { get; set; }
         public string CustomerEmail { get; set; }
@@ -29,16 +34,39 @@ namespace SE104_QLNS.View
         public string CustomerAddress { get; set; }
         public string CustomerSpending { get; set; }
         public string CustomerDebt { get; set; }
-        public string Img_Type { get; set; }
+
+        public string Img_Type = "/Images/Img_user_icon.png";
         public Uct_Customer()
         {
             InitializeComponent();
             this.DataContext = this;
         }
-        public void LoadData(string customerID, string customerName, 
-            string customerEmail, string customerPhonenumber, string customerBirthday, 
-            string customerGender, string customerAddress, string customerSpending,
-            string customerDebt, string img_Type)
+        public Uct_Customer(MainWindow mainwindow)
+        {
+            InitializeComponent();
+            this.DataContext = this;
+            parent = mainwindow;
+        }
+
+        public void CustomerSetState(int state)
+        {
+            this.state = state;
+            switch (state)
+            {
+                case 0:
+                    Img_Type = "/Images/Img_user_icon.png";
+                    break;
+                case 1:
+                    Img_Type = "/Images/icon_pencil.png";
+                    break;
+                case 2:
+                    Img_Type = "/Images/icon_bin.png";
+                    break;
+            }
+        }
+        public void LoadData(string customerID, string customerName, string customerBirthday, string customerGender,
+            string customerPhonenumber, string customerAddress, string customerEmail,  string customerSpending,
+            string customerDebt)
         {
             CustomerID = customerID;
             CustomerName = customerName;
@@ -49,16 +77,32 @@ namespace SE104_QLNS.View
             CustomerAddress = customerAddress;
             CustomerSpending = customerSpending;
             CustomerDebt = customerDebt;
-            Img_Type = img_Type;
         }
 
         private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            CustomerInfo customer = new CustomerInfo(CustomerID, CustomerName, CustomerEmail, 
-                CustomerPhonenumber, CustomerBirthday, 
-               CustomerGender, CustomerAddress, CustomerSpending, CustomerDebt);
-            customer.Visibility = Visibility.Visible;
-            customer.Topmost = true;
+            string connectionString = connect.connection;
+
+            if (state == 0) //Default
+            {
+                CustomerInfo customer = new CustomerInfo(CustomerID, CustomerName, CustomerEmail,
+                    CustomerPhonenumber, CustomerBirthday,
+                   CustomerGender, CustomerAddress, CustomerSpending, CustomerDebt);
+                customer.Visibility = Visibility.Visible;
+                customer.Topmost = true;
+            }
+            else if ( state == 1) //Update
+            {
+                CustomerUpdate customer = new CustomerUpdate(this, parent);
+                customer.Visibility = Visibility.Visible;
+                customer.Topmost = true;
+            }
+            else //Delete
+            {
+                CustomerDelete customer = new CustomerDelete(this, parent);
+                customer.Visibility = Visibility.Visible;
+                customer.Topmost = true;
+            }
         }
     }
 }

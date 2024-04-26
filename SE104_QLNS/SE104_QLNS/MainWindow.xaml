@@ -508,6 +508,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                                   HorizontalScrollBarVisibility="Disabled" 
                                                   VerticalScrollBarVisibility="Auto">
                                         <WrapPanel Name ="wp_Books" Orientation="Horizontal" Margin="0,0,0,10">
+
                                         </WrapPanel>
                                     </ScrollViewer>
                                 </Canvas>
@@ -1197,7 +1198,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
 
                                 <DataGrid Name="dtg_AmountReport" ItemsSource="{Binding Books}" Style="{StaticResource DataGrid}" Width="930" Height="415" ColumnHeaderHeight="40" Margin="10,0,10,10">
                                     <DataGrid.Columns>
-                                        <DataGridCheckBoxColumn Binding="{Binding IsChecked}"  Width="Auto"/>
+                                        
                                         <DataGridTextColumn Header="#" Binding="{Binding BookNum}" Width="0.5*" IsReadOnly="True"/>
                                         <DataGridTextColumn Header="Mã sách" Binding="{Binding BookID}" Width="*" IsReadOnly="True"/>
                                         <DataGridTemplateColumn Header="Ảnh" Width="0.5*" IsReadOnly="True">
@@ -1316,7 +1317,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                         <!--add customer button, edit customer button, delete customer button,... -->
                         <Grid Grid.Row="1" Grid.ColumnSpan="3">
                             <Button Name="btn_CustomerAdd" Height="40" Width="100"
-                                FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="10,5,834,5" Click="btn_CustomerAdd_Click">
+                                FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="11,5,835,0" Click="btn_CustomerAdd_Click" VerticalAlignment="Top">
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Setter Property="Background" Value="Transparent"/>
@@ -1443,7 +1444,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
 
                         <ScrollViewer Grid.Row="2" HorizontalAlignment="Left" Height="461" VerticalAlignment="Top" Width="938" Grid.ColumnSpan="3" Margin="3,0,0,0">
                             <WrapPanel Name="wpn_Customer" Orientation="Horizontal">
-                                
+
                             </WrapPanel>
                         </ScrollViewer>
                     </Grid>
@@ -2448,50 +2449,16 @@ FontFamily="Tahoma" Margin="785,16,66,2"/>
                                         <TextBlock Text="Kiểm tra số tiền thu không vượt quá số tiền khách hàng đang nợ:"
                                                    Foreground="#154448" FontSize="20" Margin="10,0,0,0"/>
                                         <CheckBox x:Name="cbx_CheckMoneyReceivedFromCustomer"
-          HorizontalAlignment="Left" 
-          VerticalAlignment="Center"
-          Width="30" 
-          Height="30" 
-          Margin="10,0,0,0"
-          Cursor="Hand">
-                                            <CheckBox.Template>
-                                                <ControlTemplate TargetType="CheckBox">
-                                                    <Border Background="{TemplateBinding Background}"
-                    BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}"
-                    CornerRadius="15">
-                                                        <Grid>
-                                                            <ContentPresenter HorizontalAlignment="Center" 
-                                      VerticalAlignment="Center"/>
-                                                            <Path x:Name="CheckMark"
-                          Stroke="#154448"
-                          StrokeThickness="2"
-                          Data="M 5,13 L 13,22 L 23,2"
-                          Visibility="Collapsed">
-                                                                <Path.RenderTransform>
-                                                                    <ScaleTransform ScaleX="0"/>
-                                                                </Path.RenderTransform>
-                                                                <Path.Triggers>
-                                                                    <EventTrigger RoutedEvent="Loaded">
-                                                                        <BeginStoryboard>
-                                                                            <Storyboard>
-                                                                                <DoubleAnimation Storyboard.TargetProperty="(Path.RenderTransform).(ScaleTransform.ScaleX)"
-                                                         From="0" To="1" Duration="0:0:0.3"
-                                                         AutoReverse="False"/>
-                                                                            </Storyboard>
-                                                                        </BeginStoryboard>
-                                                                    </EventTrigger>
-                                                                </Path.Triggers>
-                                                            </Path>
-                                                        </Grid>
-                                                    </Border>
-                                                    <ControlTemplate.Triggers>
-                                                        <Trigger Property="IsChecked" Value="True">
-                                                            <Setter TargetName="CheckMark" Property="Visibility" Value="Visible"/>
-                                                        </Trigger>
-                                                    </ControlTemplate.Triggers>
-                                                </ControlTemplate>
-                                            </CheckBox.Template>
+                                                  HorizontalAlignment="Left"
+          Width="16" 
+          Height="16" 
+          Margin="15,0,0,0"
+          Cursor="Hand" Focusable="False">
+                                            <CheckBox.LayoutTransform>
+                                                <ScaleTransform ScaleX="2" ScaleY="2"/>
+                                            </CheckBox.LayoutTransform>
+
+
                                         </CheckBox>
                                     </DockPanel>
                                 </Grid>

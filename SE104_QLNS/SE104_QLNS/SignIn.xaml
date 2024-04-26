@@ -98,7 +98,7 @@
                              HorizontalAlignment="Center"
                              FontFamily="Tahoma"
                              FontSize="16"
-                             Margin="0,24,0,51"/>
+                             Margin="0,24,0,0" VerticalAlignment="Top"/>
                 <Image  x:Name="img_close_Copy" 
                         Source="/Images/icon_useravatar.png"
                         Stretch="Fill"
@@ -115,7 +115,7 @@
                             FontWeight="Bold"
                             Foreground="#154448" Margin="10,51,204,25"
                             />
-                <TextBox Name="tb_password"
+                <PasswordBox Name="tb_password"
                          Padding="30,0,0,0"
                          Height="25" Width="280"
                          HorizontalAlignment="Center"

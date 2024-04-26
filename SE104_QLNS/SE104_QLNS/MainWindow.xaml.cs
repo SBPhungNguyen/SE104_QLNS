@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,13 +26,19 @@ namespace SE104_QLNS
         public ObservableCollection<Uct_Books> Books { get; set; } = new ObservableCollection<Uct_Books>();
         public ObservableCollection<Uct_Customer> Customers { get; set; } = new ObservableCollection<Uct_Customer>();
 
+        Connection connect = new Connection();
+        
+
         Uct_Books selectedbook = null;
         bool isDelete = false;
         bool isUpdate = false;
         bool isList = true;
+        bool isCustomerUpdate = false;
+        bool isCustomerDelete = false;
         public MainWindow()
         {
             InitializeComponent();
+
             DataContext = this;
             //   LOAD BOOK CODE
             //Day la code mau (vi du ve load thong tin sach)
@@ -50,27 +57,116 @@ namespace SE104_QLNS
             Books.Add(book);
 
             //   LOAD CUSTOMER  CODE
-            Uct_Customer customer = new Uct_Customer();
-            customer.LoadData("KH000001", "Scott", "abc@gmail.com", "0987654321", "01/01/2001", "doanxem", "uit", "100", "2146139", "/Images/Img_user_icon.png");
-            Customers.Add(customer);
-            foreach (Uct_Customer child in Customers)
+            LoadCustomer(this, 0);
+        }
+        public string GetNextCustomerID(MainWindow mainwindow)
+        {
+            string connectionString = connect.connection;
+            string nextCustomerID = "KH000001"; // Initial value
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                wpn_Customer.Children.Add(child);
+                try
+                {
+                    connection.Open();
+
+                    // Use a transaction to ensure data consistency
+                    using (SqlTransaction transaction = connection.BeginTransaction())
+                    {
+                        // Get the maximum existing MaKH value
+                        string sqlQuery = "SELECT MAX(MaKH) AS LastMaKH FROM KHACHHANG";
+                        SqlCommand command = new SqlCommand(sqlQuery, connection, transaction);
+
+                        object lastMaKH = command.ExecuteScalar();
+
+                        // Check if any MaKH exists in the table
+                        if (lastMaKH != DBNull.Value)
+                        {
+                            int currentID = Convert.ToInt32(lastMaKH.ToString().Substring(2)); // Extract numeric part
+                            currentID++; // Increment for next ID
+                            nextCustomerID = "KH" + currentID.ToString("D6"); // Format with leading zeros
+                        }
+
+                        transaction.Commit(); // Commit the transaction if successful
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Notification noti = new Notification("Error", "Error generating customer ID: " + ex.Message);
+                    nextCustomerID = null; // Indicate error
+                }
             }
+
+            return nextCustomerID;
         }
 
+        public void LoadCustomer(MainWindow mainwindow, int state)
+        {
+            Customers = new ObservableCollection<Uct_Customer>();
+
+            //connect to database
+            string connectionString = connect.connection;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                mainwindow.Customers.Clear();
+                string MaKH = "", HoTenKH = "", SDT = "", DiaChi = "",
+                Email = "", SoTienNo = "", GioiTinh = "", NgaySinh = "", SoTienMua = "";
+
+                try
+                {
+                    connection.Open();
+                    string sqlQuery = "SELECT * FROM KHACHHANG";
+                    SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            MaKH = reader["MaKH"].ToString();
+                            HoTenKH = reader["HoTenKH"].ToString();
+                            SDT = reader["SDT"].ToString();
+                            DiaChi = reader["DiaChi"].ToString();
+                            Email = reader["Email"].ToString();
+                            SoTienNo = reader["SoTienNo"].ToString(); // Assuming numeric data type
+                            GioiTinh = reader["GioiTinh"].ToString();
+                            NgaySinh = reader["NgaySinh"].ToString(); // Assuming date/time data type
+                            SoTienMua = reader["SoTienMua"].ToString(); // Assuming numeric data type
+
+                            string gender;
+                            if (GioiTinh == "1")
+                                gender = "Nam";
+                            else
+                                gender = "Nữ";
+                            Uct_Customer customer = new Uct_Customer(this);
+                            customer.CustomerSetState(state);
+                            customer.LoadData(MaKH, HoTenKH, NgaySinh, gender, SDT, DiaChi, Email, SoTienMua, SoTienNo);
+                            mainwindow.Customers.Add(customer);
+                        }
+                    }
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    Notification noti = new Notification("Error","Error retrieving data: " + ex.Message);
+                }
+                wpn_Customer.Children.Clear();
+                foreach (Uct_Customer child in Customers)
+                {
+                    wpn_Customer.Children.Add(child);
+                }
+            }
+        }
         //Khi nhan nut ImportBooks
         private void btn_ImportBooks_Click(object sender, RoutedEventArgs e)
         {
 
         }
-
         private void btn_ExitApp_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
             Environment.Exit(0);
         }
-
         private void btn_MinimizeApp_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
@@ -410,17 +506,68 @@ namespace SE104_QLNS
         }
         private void btn_CustomerAdd_Click(object sender, RoutedEventArgs e)
         {
-
+            btn_CustomerUpdate.Background = new SolidColorBrush(Colors.Transparent);
+            isCustomerUpdate = false;
+            isCustomerDelete = false;
+            CustomerAdd customer = new CustomerAdd(this);
+            customer.Show();
         }
-
         private void btn_CustomerUpdate_Click(object sender, RoutedEventArgs e)
         {
-
+            isCustomerDelete = false;
+            if (!isCustomerUpdate) //Switch to Update
+            {
+                wpn_Customer.Children.Clear();
+                foreach (Uct_Customer child in Customers)
+                {
+                    child.CustomerSetState(1);
+                    wpn_Customer.Children.Add(child);
+                }
+                btn_CustomerUpdate.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
+                btn_CustomerDelete.Background = new SolidColorBrush(Colors.Transparent);
+                btn_CustomerAdd.Background = new SolidColorBrush(Colors.Transparent);
+                isCustomerUpdate = true;
+            }
+            else //Turn off update
+            {
+                isCustomerUpdate = false;
+                btn_CustomerUpdate.Background = new SolidColorBrush(Colors.Transparent);
+                wpn_Customer.Children.Clear();
+                foreach (Uct_Customer child in Customers)
+                {
+                    child.CustomerSetState(0);
+                   wpn_Customer.Children.Add(child);
+                }
+            }
         }
 
         private void btn_CustomerDelete_Click(object sender, RoutedEventArgs e)
         {
-
+            isCustomerUpdate = false;
+            if(!isCustomerDelete) //Swap to Delete
+            {
+                wpn_Customer.Children.Clear();
+                foreach (Uct_Customer child in Customers)
+                {
+                    child.CustomerSetState(2);
+                    wpn_Customer.Children.Add(child);
+                }
+                btn_CustomerDelete.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
+                btn_CustomerUpdate.Background = new SolidColorBrush(Colors.Transparent);
+                btn_CustomerAdd.Background = new SolidColorBrush(Colors.Transparent);
+                isCustomerDelete = true;
+            }
+            else //Turn off delete
+            {
+                isCustomerDelete = false;
+                btn_CustomerDelete.Background = new SolidColorBrush(Colors.Transparent);
+                wpn_Customer.Children.Clear();
+                foreach (Uct_Customer child in Customers)
+                {
+                    child.CustomerSetState(0);
+                    wpn_Customer.Children.Add(child);
+                }
+            }
         }
 
         

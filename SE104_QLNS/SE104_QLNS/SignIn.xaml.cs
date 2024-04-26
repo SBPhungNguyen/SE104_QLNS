@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,15 +23,65 @@ namespace SE104_QLNS
         public SignIn()
         {
             InitializeComponent();
+            tb_username.Text = "admin";
+            tb_password.Password = "admin";
         }
+        private void Login(string email, string password)
+        {
+            Connection connect = new Connection();
+            string connectionString = connect.connection;
 
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    string sqlQuery = "SELECT Email, MatKhau FROM NGUOIDUNG WHERE Email = @Email";
+                    SqlCommand command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@Email", email);
+
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        string dbEmail = reader["Email"].ToString();
+                        string dbPassword = reader["MatKhau"].ToString();
+
+                        if (password == dbPassword)
+                        {
+                            // Show login successful notification
+                            Notification notification = new Notification("Login Successful!", "Welcome to the application.");
+                            notification.Show();
+                            this.Close();
+                        }
+                        else
+                        {
+                            // Show incorrect password notification
+                            Notification notification = new Notification("Error", "Incorrect Password!");
+                            notification.Show();
+                        }
+                    }
+                    else
+                    {
+                        // Show username not found notification
+                        Notification notification = new Notification("Error", "Username not found!");
+                        notification.Show();
+                    }
+
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    Notification notification = new Notification("Error", "Error retrieving data: " + ex.Message);
+                    notification.Show();
+                }
+            }
+
+        }
         private void btn_Login_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainwindow = new MainWindow();
-
-            mainwindow.Show();
-
-            this.Close();
+            string email = tb_username.Text;
+            string password = tb_password.Password;
+            Login(email, password);
         }
 
         private void btn_ExitApp_Click(object sender, RoutedEventArgs e)
