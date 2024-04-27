@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SE104_QLNS"
         xmlns:View="clr-namespace:SE104_QLNS.View" x:Class="SE104_QLNS.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="650" Width="950"
+        Title="MainWindow" Height="650" Width="1000"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Background="Transparent" AllowsTransparency="True">
@@ -14,8 +14,7 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
-                <RowDefinition Height="9*"/>
-                <RowDefinition Height="146*"/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid x:Name="grd_Header" Grid.Row="0" Background="#C2DECE">
                 <Grid.ColumnDefinitions>
@@ -108,11 +107,11 @@
                 </Button>
             </Grid>
 
-            <TabControl Name="tcl_Navigation" Grid.Row="1" BorderThickness="0" Grid.RowSpan="2">
+            <TabControl Name="tcl_Navigation" Grid.Row="1" BorderThickness="0">
                 <!-- HOME -->
                 <TabItem>
                     <TabItem.Header>
-                        <StackPanel Orientation="Horizontal" Margin="5,0,5,0">
+                        <StackPanel Orientation="Horizontal" Margin="5,0,1,0">
                             <Image Source="/Images/icon_home.png" Width="40" Height="40"/>
                             <TextBlock Text="Trang chủ" 
                                        Foreground="#154448"
@@ -302,16 +301,12 @@
 
                             <TextBlock Text="Tổng: " FontSize="18"
                            FontFamily="Tahoma"
-                           Height="24" Width="50" Margin="731,20,163,6" Grid.Row="1"/>
+                           Height="24" Width="50" Margin="731,20,30,6" Grid.Row="1"/>
 
                             <Label Name="lbl_BookCount" FontSize="18"
                        Content="28283" FontWeight="Bold"
                        VerticalContentAlignment="Top" HorizontalContentAlignment="Right"
-                    FontFamily="Tahoma" Margin="785,16,66,2"/>
-                            <TextBlock Text="Sách " FontSize="18"
-                    FontFamily="Tahoma"
-                    Height="24" Margin="882,21,13,5"/>
-
+                    FontFamily="Tahoma" Margin="785,16,15,2"/>
                         </Grid>
 
                         <!--Gird Book List-->
@@ -320,7 +315,7 @@
 
                             <!--DataGird Book List-->
                             <Canvas  Grid.Row="1"  Visibility="Visible" Name="cvs_BooksDataGridList">
-                                <DataGrid Name="dtg_Books" ItemsSource="{Binding Books}" Style="{StaticResource DataGrid}" Width="930" Height="470" ColumnHeaderHeight="40" Margin="10,0,10,10" SelectionChanged="dtg_Books_SelectionChanged">
+                                <DataGrid Name="dtg_Books" ItemsSource="{Binding Books}" Style="{StaticResource DataGrid}" Width="975" Height="470" ColumnHeaderHeight="40" Margin="10,0,10,10" SelectionChanged="dtg_Books_SelectionChanged">
                                     <DataGrid.Columns >
                                         <!--<DataGridCheckBoxColumn Binding="{Binding IsChecked}" Width="Auto"/>-->
                                         <DataGridTemplateColumn Header="" Visibility="Hidden">
@@ -420,7 +415,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                             <!--Datagrid Book List Delete Version-->
                             <!--
                             <Canvas  Grid.Row="1"  Visibility="Hidden" Name="cvs_BooksDataGridListDelete">
-                                <DataGrid Name="dtg_BooksDelete" ItemsSource="{Binding Books}" Style="{StaticResource DataGrid}" Width="930" Height="470" ColumnHeaderHeight="40" Margin="10,0,10,10" SelectionChanged="dtg_BooksDelete_SelectionChanged">
+                                <DataGrid Name="dtg_BooksDelete" ItemsSource="{Binding Books}" Style="{StaticResource DataGrid}" Width="975" Height="470" ColumnHeaderHeight="40" Margin="10,0,10,10" SelectionChanged="dtg_BooksDelete_SelectionChanged">
                                     <DataGrid.Columns>
                                         <DataGridTemplateColumn Header="">
                                             <DataGridTemplateColumn.CellTemplate>
@@ -678,7 +673,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                 <!-- SELL -->
                 <TabItem>
                     <TabItem.Header>
-                        <StackPanel Orientation="Horizontal" Margin="5,0,5,0">
+                        <StackPanel Orientation="Horizontal" Margin="5,0,1,0">
                             <Image Source="/Images/icon_shoppingcart.png" Width="40" Height="40"/>
                             <TextBlock Text="Bán" 
                                        Foreground="#154448"
@@ -753,9 +748,19 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                         </Button.Style>
                                     </Button>
 
-
+                                    <Label Content="Danh sách sản phẩm"
+                                           FontSize="20"
+                                           FontWeight="Bold"
+                                           Foreground="#154448"
+                                           HorizontalContentAlignment="Center"
+                                           VerticalContentAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Margin="120,0,15,0"/>
+                                    
                                     <Label x:Name="lbl_BillDate"
                                            Content="Ngày lập hóa đơn: 19/11/2023"
+                                           Foreground="#154448"
                                            FontWeight="Bold"
                                            HorizontalContentAlignment="Center"
                                            VerticalContentAlignment="Center"
@@ -767,7 +772,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                 <DataGrid Grid.Row="1" Name="dtg_SellList" 
                                           ItemsSource="{Binding Books}" 
                                           Style="{StaticResource DataGrid}" 
-                                          Width="900" 
+                                          Width="960" 
                                           Height="240" 
                                           ColumnHeaderHeight="30" 
                                           RowHeight="50"
@@ -899,7 +904,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                                     Grid.Row="1"
                                                     CornerRadius="5"
                                                     Height="30" Width="190"
-                                                    Background="#D9D9D9"
+                                                    Background="White"
                                                     BorderBrush="Black"
                                                     BorderThickness="1">
 
@@ -910,12 +915,10 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                                     HorizontalAlignment="Center"
                                                     VerticalContentAlignment="Center" 
                                                     Foreground="#FF154448" 
-                                                    BorderThickness="0"
-                                                    Background="#D9D9D9"
-                                                    >
+                                                    BorderThickness="0">
                                                 <DatePicker.Resources>
                                                     <Style TargetType="{x:Type DatePickerTextBox}">
-                                                        <Setter Property="Background" Value="#D9D9D9"/>
+                                                        <Setter Property="Background" Value="White"/>
                                                         <Setter Property="Text" Value="Ngày sinh"/>
                                                         <Setter Property="FontSize" Value="14"/>
                                                     </Style>
@@ -1093,24 +1096,30 @@ BorderThickness="{TemplateBinding BorderThickness}">
                     </StackPanel>
                 </TabItem>
 
-                <!-- REPORT -->
+                <!-- BILL, Imported Book Receipt LIST -->
                 <TabItem>
                     <TabItem.Header>
-                        <StackPanel Orientation="Horizontal" Margin="5,0,5,0">
-                            <Image Source="/Images/icon_report.png" Width="40" Height="40"/>
-                            <TextBlock Text="Báo cáo" 
+                        <DockPanel Margin="5,0,1,0">
+                            <Image Source="/Images/icon_bill_import_book_receipt.png" Width="40" Height="40"/>
+                            <StackPanel>
+                                <TextBlock Text="Hóa đơn/" 
                         Foreground="#154448"
                         FontWeight="Bold"
                         VerticalAlignment="Center"
-                        Padding="0,0,10,0"/>
-                        </StackPanel>
+                        Padding="5,5,0,0"/>
+                                <TextBlock Text="Phiếu nhập" 
+                        Foreground="#154448"
+                        FontWeight="Bold"
+                        VerticalAlignment="Center"
+                        Padding="5,0,0,5"/>
+                            </StackPanel>
+                        </DockPanel>
                     </TabItem.Header>
-
-                    <!--this is Report panel-->
+ 
+                    <!--this is Bill, Imported Book Receipt panel-->
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="40"/>
-                            <RowDefinition Height="50"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
 
@@ -1122,338 +1131,192 @@ BorderThickness="{TemplateBinding BorderThickness}">
                             </Border>
                             <Border Height="28" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,15,15,0" Margin="444,2,250,2">
                                 <Grid>
-                                    <TextBox x:Name="txt_ReportSearch" VerticalContentAlignment="Center" VerticalAlignment="Center"
+                                    <TextBox x:Name="txt_BillImportBookReceiptSearch" VerticalContentAlignment="Center" VerticalAlignment="Center"
                              FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="193" Margin="5,0,0,0"/>
-                                    <Image Name="img_ReportSearch" Source="/Images/icon_search.png" Stretch="Fill" Height="20" Width="20" Cursor="Hand" Margin="212,4,16,2"/>
+                                    <Image Source="/Images/icon_search.png" Stretch="Fill" Height="20" Width="20" Cursor="Hand" Margin="212,4,16,2"/>
 
                                 </Grid>
                             </Border>
                         </Grid>
-                        <!--switch reprot combo box, save as pdf button-->
 
-                        <Grid Grid.Row="1">
-                            <Border Height="30" CornerRadius="15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="10,6,718,4">
-                                <ComboBox Style="{StaticResource MonthYearComboxbox}" Height="25" Margin="24,2,20,1"/>
-                            </Border>
+                        <Canvas Grid.Row="2" x:Name="cvs_Bill" Visibility="Hidden">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
 
-                            <Button Name="btn_SaveReportAsPDF" Height="30" 
-                        Content="Lưu PDF" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="785,9,0,11">
-                                <Button.Style>
-                                    <Style TargetType="Button">
-                                        <Setter Property="Background" Value="#154348"/>
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="#6FB3B8"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Button.Style>
-                                <Button.Template>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Width="150" Height="30"
-                                                        CornerRadius="15"
-                                                        Background="{TemplateBinding Background}"
-                                                        BorderThickness="1"
-                                                        BorderBrush="#3CB76D">
-                                            <ContentPresenter VerticalAlignment="Center"
-                                                                      HorizontalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Button.Template>
-                            </Button>
-                        </Grid>
+                                <DockPanel Grid.Row="0">
+                                    <Border Height="30" CornerRadius="15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="10,6,0,4">
+                                        <ComboBox Style="{StaticResource MonthYearComboxbox}" Height="25" Width="150" Margin="24,2,20,1"/>
+                                    </Border>
 
-                        <!--this is Book Amount Report panel-->
-                        <Canvas Grid.Row="2" Name="cvs_AmountReport" Visibility="Visible">
-                            <StackPanel>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="0.17*"></ColumnDefinition>
-                                        <ColumnDefinition Width="0.15*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
+                                    <Button Name="btn_DeleteBill" 
+                                    Height="40" 
+                                    Width="85"
+                                    FontFamily="Tahoma" 
+                                    FontSize="17" 
+                                    FontWeight="Bold"
+                                    Foreground="#154348"
+                                    Cursor="Hand" 
+                                    Margin="10,5,0,5">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="#C2DECE"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Width="100" Height="40"
+                                CornerRadius="10"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="0"
+                                BorderBrush="#3CB76D">
+                                                    <Grid>
+                                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                                            <Image Source="/Images/icon_trashcan.png" 
+                                                           Margin="10,0,0,0"
+                                                           Stretch="Fill" 
+                                                           Height="25" 
+                                                           Width="25"/>
+                                                            <TextBlock Text="Xóa"
+                                                               Padding="5,0,0,0"
+                                                               HorizontalAlignment="Left"
+                                                               VerticalAlignment="Center"
+                                                               FontFamily="Tahoma"
+                                                               FontWeight="Bold"
+                                                               FontSize="16"  
+                                                               RenderTransformOrigin="0.151,0.392"/>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
 
-                                    <ComboBox x:Name="cbx_AmountReportMonth" 
-                                          Text="Tháng"
-                                          Grid.Column="0"
-                                          Margin="20, 10, 0, 10"
-                                          Style="{StaticResource MonthYearComboxbox}" 
-                                          BorderThickness="0,0,0,2" 
-                                          BorderBrush="#154448"/>
-                                    <ComboBox x:Name="cbx_AmountReportYear" 
-                                          Grid.Column="1"
-                                          Text="Năm"
-                                          Margin="20, 10, 0, 10"
-                                          Style="{StaticResource MonthYearComboxbox}" 
-                                          BorderThickness="0,0,0,2" 
-                                          BorderBrush="#154448"/>
-                                    <Label x:Name="lbl_AmountReportTotalBook" 
-                                       Content="Tổng: 100 sách"
-                                       Grid.Column="2"
-                                       Margin="50,0,0,0"
-                                       VerticalAlignment="Center"
-                                       FontSize="18"
-                                       Foreground="#154448"/>
-                                </Grid>
+                                    <Label x:Name="lbl_TotalBill" 
+                                      Content="Tổng: 100"
+                                      Grid.Column="2"
+                                   HorizontalAlignment="Right"
+                                      VerticalAlignment="Center"
+                                      FontSize="18"
+                                      Foreground="#154448"
+                                   Margin="0,0,15,0"/>
+                                </DockPanel>
 
-                                <DataGrid Name="dtg_AmountReport" ItemsSource="{Binding Books}" Style="{StaticResource DataGrid}" Width="930" Height="415" ColumnHeaderHeight="40" Margin="10,0,10,10">
+                                <!--this is BILL list -->
+                                <DataGrid Name="dtg_BillList" Grid.Row="1" ItemsSource="{Binding Bills}" Style="{StaticResource DataGrid}" Width="975" Height="475" ColumnHeaderHeight="40" Margin="10,0,10,10">
                                     <DataGrid.Columns>
-                                        
-                                        <DataGridTextColumn Header="#" Binding="{Binding BookNum}" Width="0.5*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Header="Mã sách" Binding="{Binding BookID}" Width="*" IsReadOnly="True"/>
-                                        <DataGridTemplateColumn Header="Ảnh" Width="0.5*" IsReadOnly="True">
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <Image Source="{Binding BookURL}" Width="Auto" Height="Auto"/>
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>
-                                        <DataGridTextColumn Header="Sản phẩm" Binding="{Binding BookName}" Width="2*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Header="Tồn đầu" Binding="{Binding BookInitialAmount}" Width="*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Header="Phát Sinh" Binding="{Binding BookImportAmount}" Width="*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Header="Bán ra" Binding="{Binding BookSellAmount}" Width="*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Header="Tồn cuối" Binding="{Binding BookFinalAmount}" Width="*" IsReadOnly="True"/>
+                                        <DataGridCheckBoxColumn Binding="{Binding IsChecked}" Width="0.2*"/>
+                                        <DataGridTextColumn Header="#" Binding="{Binding BillNum}" Width="0.2*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Mã hóa đơn" Binding="{Binding BillID}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Tên khách hàng" Binding="{Binding CustomerID}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Ngày lập" Binding="{Binding Date}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Tổng tiền" Binding="{Binding Total}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Số tiền trả" Binding="{Binding Payed}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Còn lại" Binding="{Binding Debt}" Width="*" IsReadOnly="True"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
 
-                            </StackPanel>
+                            </Grid>
                         </Canvas>
 
 
-                        <!--this is Customer Debt Report panel-->
-                        <Canvas Grid.Row="2" Name="cvs_CustomerDebtReport" Visibility="Hidden">
-                            <StackPanel>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="0.17*"></ColumnDefinition>
-                                        <ColumnDefinition Width="0.15*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
+                        <Canvas Grid.Row="2" x:Name="cvs_ImportBookReceipt" Visibility="Visible">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
 
-                                    <ComboBox x:Name="cbx_CustomerDebtReportMonth" 
-                                              Text="Tháng"
-                                              Grid.Column="0"
-                                              Margin="20, 10, 0, 10"
-                                              Style="{StaticResource MonthYearComboxbox}" 
-                                              BorderThickness="0,0,0,2" 
-                                              BorderBrush="#154448"/>
-                                    <ComboBox x:Name="cbx_CustomerDebtReportYear" 
-                                              Grid.Column="1"
-                                              Text="Năm"
-                                              Margin="20, 10, 0, 10"
-                                              Style="{StaticResource MonthYearComboxbox}" 
-                                              BorderThickness="0,0,0,2" 
-                                              BorderBrush="#154448"/>
-                                    <Label x:Name="lbl_CustomerDebtReportTotalCustomer" 
-                                           Content="Tổng: 100 khách hàng"
-                                           Grid.Column="2"
-                                           Margin="50,0,0,0"
-                                           VerticalAlignment="Center"
-                                           FontSize="18"
-                                           Foreground="#154448"/>
-                                </Grid>
+                                <DockPanel Grid.Row="0">
+                                    <Border Height="30" CornerRadius="15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="10,6,0,4">
+                                        <ComboBox Style="{StaticResource MonthYearComboxbox}" Height="25" Width="150" Margin="24,2,20,1"/>
+                                    </Border>
 
+                                    <Button Name="btn_ImportBookReceipt" 
+                                    Height="40" 
+                                    Width="85"
+                                    FontFamily="Tahoma" 
+                                    FontSize="17" 
+                                    FontWeight="Bold"
+                                    Foreground="#154348"
+                                    Cursor="Hand" 
+                                    Margin="10,5,0,5">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="#C2DECE"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Width="100" Height="40"
+                                CornerRadius="10"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="0"
+                                BorderBrush="#3CB76D">
+                                                    <Grid>
+                                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                                            <Image Source="/Images/icon_trashcan.png" 
+                                                           Margin="10,0,0,0"
+                                                           Stretch="Fill" 
+                                                           Height="25" 
+                                                           Width="25"/>
+                                                            <TextBlock Text="Xóa"
+                                                               Padding="5,0,0,0"
+                                                               HorizontalAlignment="Left"
+                                                               VerticalAlignment="Center"
+                                                               FontFamily="Tahoma"
+                                                               FontWeight="Bold"
+                                                               FontSize="16"  
+                                                               RenderTransformOrigin="0.151,0.392"/>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
 
-                                <DataGrid Name="dtg_CustomerDebtReport" ItemsSource="{Binding Customer}" Style="{StaticResource DataGrid}" Width="930" Height="415" ColumnHeaderHeight="40" Margin="10,0,10,10">
+                                    <Label x:Name="lbl_TotalImportBookReceipt" 
+                                      Content="Tổng: 100"
+                                      Grid.Column="2"
+                                   HorizontalAlignment="Right"
+                                      VerticalAlignment="Center"
+                                      FontSize="18"
+                                      Foreground="#154448"
+                                   Margin="0,0,15,0"/>
+                                </DockPanel>
+
+                                <!--this is _Imported Book Receipt list -->
+                                <DataGrid Name="dtg_ImportBookReceiptList" Grid.Row="1" ItemsSource="{Binding ImportBookReceipts}" Style="{StaticResource DataGrid}" Width="975" Height="475" ColumnHeaderHeight="40" Margin="10,0,10,10">
                                     <DataGrid.Columns>
-                                        <DataGridCheckBoxColumn Binding="{Binding IsChecked}"  Width="Auto"/>
-                                        <DataGridTextColumn Header="#" Binding="{Binding CustomerNum}" Width="0.5*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Header="Mã khách hàng" Binding="{Binding CustomerID}" Width="*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Header="Tên khách hàng" Binding="{Binding CustomerName}" Width="2*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Header="Nợ đầu" Binding="{Binding CustomerInitialDebt}" Width="*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Header="Phát Sinh" Binding="{Binding CustomerOccuredDebt}" Width="*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Header="Nợ thêm" Binding="{Binding CustomerAdditonalDebt}" Width="*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Header="Nợ cuối" Binding="{Binding CustomerFinalDebt}" Width="*" IsReadOnly="True"/>
+                                        <DataGridCheckBoxColumn Binding="{Binding IsChecked}" Width="0.2*"/>
+                                        <DataGridTextColumn Header="#" Binding="{Binding ImportBookReceiptNum}" Width="0.2*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Mã phiếu nhập" Binding="{Binding ImportBookReceiptID}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Ngày nhập" Binding="{Binding Date}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Tổng tiền" Binding="{Binding Total}" Width="*" IsReadOnly="True"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
-                            </StackPanel>
+                            </Grid>
                         </Canvas>
-
                     </Grid>
                 </TabItem>
 
-                <!-- CUSTOMER -->
-                <TabItem>
-                    <TabItem.Header>
-                        <StackPanel Orientation="Horizontal" Margin="5,0,5,0">
-                            <Image Source="/Images/icon_customer.png" Width="40" Height="40"/>
-                            <TextBlock Text="Khách hàng" 
-                        Foreground="#154448"
-                        FontWeight="Bold"
-                        VerticalAlignment="Center"
-                        Padding="0,0,10,0"/>
-                        </StackPanel>
-                    </TabItem.Header>
-
-
-                    <!--this is Customer panel-->
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="65*"/>
-                            <ColumnDefinition Width="87*"/>
-                            <ColumnDefinition Width="84*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="40"/>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-
-                        <!--Sreach bar-->
-                        <Grid Grid.Row="0" Grid.ColumnSpan="3">
-                            <Border Height="28" Width="100" CornerRadius="15,0,0,15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="345,2,499,2" >
-                                <ComboBox Style="{StaticResource MonthYearComboxbox}" Height="24" Width="80" Margin="16,1,2,1"/>
-                            </Border>
-                            <Border Height="28" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,15,15,0" Margin="444,2,250,2">
-                                <Grid>
-                                    <TextBox x:Name="txt_CustomerSearch" VerticalContentAlignment="Center" VerticalAlignment="Center"
-                             FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="193" Margin="5,0,0,0"/>
-                                    <Image Name="img_CustomerSearch" Source="/Images/icon_search.png" Stretch="Fill" Height="20" Width="20" Cursor="Hand" Margin="212,4,16,2"/>
-
-                                </Grid>
-                            </Border>
-                        </Grid>
-
-                        <!--add customer button, edit customer button, delete customer button,... -->
-                        <Grid Grid.Row="1" Grid.ColumnSpan="3">
-                            <Button Name="btn_CustomerAdd" Height="40" Width="100"
-                                FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="11,5,835,0" Click="btn_CustomerAdd_Click" VerticalAlignment="Top">
-                                <Button.Style>
-                                    <Style TargetType="Button">
-                                        <Setter Property="Background" Value="Transparent"/>
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="#C2DECE"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Button.Style>
-                                <Button.Template>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Width="100" Height="40"
-                                                        CornerRadius="10"
-                                                        Background="{TemplateBinding Background}"
-                                                        BorderThickness="0"
-                                                        BorderBrush="#3CB76D">
-                                            <Grid>
-                                                <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
-                                                    <Image Source="/Images/icon_add_book.png" Margin="10,0,0,0"
-                                        Stretch="Fill" Height="25" Width="25"/>
-                                                    <TextBlock Text="Thêm"
-                                                   Padding="5,0,0,0"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Center"
-                                        FontFamily="Tahoma"
-                                        FontWeight="Bold"
-                                        FontSize="16"  RenderTransformOrigin="0.151,0.392"/>
-                                                </StackPanel>
-                                            </Grid>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Button.Template>
-                            </Button>
-
-                            <Button Name="btn_CustomerUpdate" Height="40" Width="100"
-                                FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="112,5,732,5" Click="btn_CustomerUpdate_Click">
-                                <Button.Style>
-                                    <Style TargetType="Button">
-                                        <Setter Property="Background" Value="Transparent"/>
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="#C2DECE"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Button.Style>
-                                <Button.Template>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Width="100" Height="40"
-                                                        CornerRadius="10"
-                                                        Background="{TemplateBinding Background}"
-                                                        BorderThickness="0"
-                                                        BorderBrush="#3CB76D">
-                                            <Grid>
-                                                <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
-                                                    <Image Source="/Images/icon_pencil.png" Margin="15,0,0,0"
-                                        Stretch="Fill" Height="25" Width="25"/>
-                                                    <TextBlock Text="Sửa"
-                                                   Padding="7,0,0,0"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Center"
-                                        FontFamily="Tahoma"
-                                        FontWeight="Bold"
-                                        FontSize="16"  RenderTransformOrigin="0.151,0.392"/>
-                                                </StackPanel>
-                                            </Grid>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Button.Template>
-                            </Button>
-
-                            <Button Name="btn_CustomerDelete" Height="40" Width="100"
-                                FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="214,5,630,5" Click="btn_CustomerDelete_Click">
-                                <Button.Style>
-                                    <Style TargetType="Button">
-                                        <Setter Property="Background" Value="Transparent"/>
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="#C2DECE"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Button.Style>
-                                <Button.Template>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Width="100" Height="40"
-                                                        CornerRadius="10"
-                                                        Background="{TemplateBinding Background}"
-                                                        BorderThickness="0"
-                                                        BorderBrush="#3CB76D">
-                                            <Grid>
-                                                <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
-                                                    <Image Source="/Images/icon_bin.png" Margin="15,0,0,0"
-                                        Stretch="Fill" Height="25" Width="25"/>
-                                                    <TextBlock Text="Xoá"
-                                                   Padding="10,0,0,0"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Center"
-                                        FontFamily="Tahoma"
-                                        FontWeight="Bold"
-                                        FontSize="16"  RenderTransformOrigin="0.151,0.392"/>
-                                                </StackPanel>
-                                            </Grid>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Button.Template>
-                            </Button>
-
-                            <TextBlock FontSize="30" Text="Khách hàng" FontWeight="Bold" FontFamily="Tahoma"
-                                       VerticalAlignment="Top"
-                           Height="54" Margin="424,0,324,0"/>
-
-                            <TextBlock Text="Tổng: " FontSize="18"
-                           FontFamily="Tahoma"
-                           Height="24" Width="50" Margin="731,20,163,6" Grid.Row="1"/>
-
-                            <Label Name="lbl_CustomerCount" FontSize="18"
-                       Content="28283" FontWeight="Bold"
-                       VerticalContentAlignment="Top" HorizontalContentAlignment="Right"
-                    FontFamily="Tahoma" Margin="785,16,66,2"/>
-
-                        </Grid>
-
-                        <ScrollViewer Grid.Row="2" HorizontalAlignment="Left" Height="461" VerticalAlignment="Top" Width="938" Grid.ColumnSpan="3" Margin="3,0,0,0">
-                            <WrapPanel Name="wpn_Customer" Orientation="Horizontal">
-
-                            </WrapPanel>
-                        </ScrollViewer>
-                    </Grid>
-                </TabItem>
 
                 <!-- Customer Payment Receipt -->
                 <TabItem>
                     <TabItem.Header>
-                        <StackPanel Orientation="Horizontal" Margin="5,0,5,0">
+                        <StackPanel Orientation="Horizontal" Margin="5,0,1,0">
                             <Image Source="/Images/icon_receipt.png" Width="40" Height="40"/>
                             <TextBlock Text="Phiếu thu" 
                         Foreground="#154448"
@@ -1637,15 +1500,16 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                       BorderThickness="0,0,0,2" 
                                       BorderBrush="#154448"/>
                                 <Label x:Name="lbl_TotalPaymentReceipt" 
-                                       Content="Tổng: 100 phiếu"
+                                       Content="Tổng: 100"
                                        Grid.Column="2"
-                                       Margin="50,0,0,0"
+                                       Margin="50,0,15,0"
+                                       HorizontalAlignment="Right"
                                        VerticalAlignment="Center"
                                        FontSize="18"
                                        Foreground="#154448"/>
                             </Grid>
 
-                            <DataGrid Grid.Row="2" Name="dtg_CustomerPaymentReceipt" ItemsSource="{Binding Customer}" Style="{StaticResource DataGrid}" Width="930" Height="420" ColumnHeaderHeight="40" Margin="10,0,10,10">
+                            <DataGrid Grid.Row="2" Name="dtg_CustomerPaymentReceipt" ItemsSource="{Binding Customer}" Style="{StaticResource DataGrid}" Width="975" Height="420" ColumnHeaderHeight="40" Margin="10,0,10,10">
                                 <DataGrid.Columns>
                                     <DataGridCheckBoxColumn Binding="{Binding IsChecked}" Width="Auto"/>
                                     <DataGridTextColumn Header="#" Binding="{Binding CustomerNum}" Width="0.3*" IsReadOnly="True"/>
@@ -1662,10 +1526,771 @@ BorderThickness="{TemplateBinding BorderThickness}">
                     </Grid>
                 </TabItem>
 
+                <!-- REPORT -->
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Images/icon_report.png" Width="40" Height="40"/>
+                            <TextBlock Text="Báo cáo" 
+                        Foreground="#154448"
+                        FontWeight="Bold"
+                        VerticalAlignment="Center"
+                        Padding="0,0,10,0"/>
+                        </StackPanel>
+                    </TabItem.Header>
+
+                    <!--this is Report panel-->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+
+                        <!--Sreach bar-->
+                        <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                            <Border Height="28" Width="100" CornerRadius="15,0,0,15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="345,2,499,2" >
+                                <ComboBox Style="{StaticResource MonthYearComboxbox}" Height="24" Width="80" Margin="16,1,2,1"/>
+                            </Border>
+                            <Border Height="28" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,15,15,0" Margin="444,2,250,2">
+                                <Grid>
+                                    <TextBox x:Name="txt_ReportSearch" VerticalContentAlignment="Center" VerticalAlignment="Center"
+                             FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="193" Margin="5,0,0,0"/>
+                                    <Image Name="img_ReportSearch" Source="/Images/icon_search.png" Stretch="Fill" Height="20" Width="20" Cursor="Hand" Margin="212,4,16,2"/>
+
+                                </Grid>
+                            </Border>
+                        </Grid>
+                        <!--switch reprot combo box, save as pdf button-->
+
+                        <Grid Grid.Row="1">
+                            <Border Height="30" CornerRadius="15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="10,6,718,4">
+                                <ComboBox Style="{StaticResource MonthYearComboxbox}" Height="25" Margin="24,2,20,1"/>
+                            </Border>
+
+                            <Button Name="btn_SaveReportAsPDF" Height="30" 
+                        Content="Lưu PDF" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="785,9,0,11">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Background" Value="#154348"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#6FB3B8"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Width="150" Height="30"
+                                                        CornerRadius="15"
+                                                        Background="{TemplateBinding Background}"
+                                                        BorderThickness="1"
+                                                        BorderBrush="#3CB76D">
+                                            <ContentPresenter VerticalAlignment="Center"
+                                                                      HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </Grid>
+
+                        <!--this is Book Amount Report panel-->
+                        <Canvas Grid.Row="2" Name="cvs_AmountReport" Visibility="Visible">
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.17*"></ColumnDefinition>
+                                        <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <ComboBox x:Name="cbx_AmountReportMonth" 
+                                          Text="Tháng"
+                                          Grid.Column="0"
+                                          Margin="20, 10, 0, 10"
+                                          Style="{StaticResource MonthYearComboxbox}" 
+                                          BorderThickness="0,0,0,2" 
+                                          BorderBrush="#154448"/>
+                                    <ComboBox x:Name="cbx_AmountReportYear" 
+                                          Grid.Column="1"
+                                          Text="Năm"
+                                          Margin="20, 10, 0, 10"
+                                          Style="{StaticResource MonthYearComboxbox}" 
+                                          BorderThickness="0,0,0,2" 
+                                          BorderBrush="#154448"/>
+                                    <Label x:Name="lbl_AmountReportTotalBook" 
+                                       Content="Tổng: 100"
+                                       Grid.Column="2"
+                                       Margin="50,0,15,0"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Right"
+                                       FontSize="18"
+                                       Foreground="#154448"/>
+                                </Grid>
+
+                                <DataGrid Name="dtg_AmountReport" ItemsSource="{Binding Books}" Style="{StaticResource DataGrid}" Width="975" Height="415" ColumnHeaderHeight="40" Margin="10,0,10,10">
+                                    <DataGrid.Columns>
+                                        
+                                        <DataGridTextColumn Header="#" Binding="{Binding BookNum}" Width="0.5*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Mã sách" Binding="{Binding BookID}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTemplateColumn Header="Ảnh" Width="0.5*" IsReadOnly="True">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Image Source="{Binding BookURL}" Width="Auto" Height="Auto"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTextColumn Header="Sản phẩm" Binding="{Binding BookName}" Width="2*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Tồn đầu" Binding="{Binding BookInitialAmount}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Phát Sinh" Binding="{Binding BookImportAmount}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Bán ra" Binding="{Binding BookSellAmount}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Tồn cuối" Binding="{Binding BookFinalAmount}" Width="*" IsReadOnly="True"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+
+                            </StackPanel>
+                        </Canvas>
+
+
+                        <!--this is Customer Debt Report panel-->
+                        <Canvas Grid.Row="2" Name="cvs_CustomerDebtReport" Visibility="Hidden">
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.17*"></ColumnDefinition>
+                                        <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <ComboBox x:Name="cbx_CustomerDebtReportMonth" 
+                                              Text="Tháng"
+                                              Grid.Column="0"
+                                              Margin="20, 10, 0, 10"
+                                              Style="{StaticResource MonthYearComboxbox}" 
+                                              BorderThickness="0,0,0,2" 
+                                              BorderBrush="#154448"/>
+                                    <ComboBox x:Name="cbx_CustomerDebtReportYear" 
+                                              Grid.Column="1"
+                                              Text="Năm"
+                                              Margin="20, 10, 0, 10"
+                                              Style="{StaticResource MonthYearComboxbox}" 
+                                              BorderThickness="0,0,0,2" 
+                                              BorderBrush="#154448"/>
+                                    <Label x:Name="lbl_CustomerDebtReportTotalCustomer" 
+                                           Content="Tổng: 100 khách hàng"
+                                           Grid.Column="2"
+                                           Margin="50,0,0,0"
+                                           VerticalAlignment="Center"
+                                           FontSize="18"
+                                           Foreground="#154448"/>
+                                </Grid>
+
+
+                                <DataGrid Name="dtg_CustomerDebtReport" ItemsSource="{Binding Customer}" Style="{StaticResource DataGrid}" Width="975" Height="415" ColumnHeaderHeight="40" Margin="10,0,10,10">
+                                    <DataGrid.Columns>
+                                        <DataGridCheckBoxColumn Binding="{Binding IsChecked}"  Width="Auto"/>
+                                        <DataGridTextColumn Header="#" Binding="{Binding CustomerNum}" Width="0.5*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Mã khách hàng" Binding="{Binding CustomerID}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Tên khách hàng" Binding="{Binding CustomerName}" Width="2*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Nợ đầu" Binding="{Binding CustomerInitialDebt}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Phát Sinh" Binding="{Binding CustomerOccuredDebt}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Nợ thêm" Binding="{Binding CustomerAdditonalDebt}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Nợ cuối" Binding="{Binding CustomerFinalDebt}" Width="*" IsReadOnly="True"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                        </Canvas>
+
+                    </Grid>
+                </TabItem>
+
+                <!-- CUSTOMER -->
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Images/icon_customer.png" Width="40" Height="40"/>
+                            <TextBlock Text="Khách hàng" 
+                        Foreground="#154448"
+                        FontWeight="Bold"
+                        VerticalAlignment="Center"
+                        Padding="0,0,10,0"/>
+                        </StackPanel>
+                    </TabItem.Header>
+
+
+                    <!--this is Customer panel-->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="65*"/>
+                            <ColumnDefinition Width="87*"/>
+                            <ColumnDefinition Width="84*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <!--Sreach bar-->
+                        <Grid Grid.Row="0" Grid.ColumnSpan="3">
+                            <Border Height="28" Width="100" CornerRadius="15,0,0,15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="345,2,499,2" >
+                                <ComboBox Style="{StaticResource MonthYearComboxbox}" Height="24" Width="80" Margin="16,1,2,1"/>
+                            </Border>
+                            <Border Height="28" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,15,15,0" Margin="444,2,250,2">
+                                <Grid>
+                                    <TextBox x:Name="txt_CustomerSearch" VerticalContentAlignment="Center" VerticalAlignment="Center"
+                             FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="193" Margin="5,0,0,0"/>
+                                    <Image Name="img_CustomerSearch" Source="/Images/icon_search.png" Stretch="Fill" Height="20" Width="20" Cursor="Hand" Margin="212,4,16,2"/>
+
+                                </Grid>
+                            </Border>
+                        </Grid>
+
+                        <!--add customer button, edit customer button, delete customer button,... -->
+                        <Grid Grid.Row="1" Grid.ColumnSpan="3">
+                            <Button Name="btn_CustomerAdd" Height="40" Width="100"
+                                FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="11,5,835,0" Click="btn_CustomerAdd_Click" VerticalAlignment="Top">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#C2DECE"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Width="100" Height="40"
+                                                        CornerRadius="10"
+                                                        Background="{TemplateBinding Background}"
+                                                        BorderThickness="0"
+                                                        BorderBrush="#3CB76D">
+                                            <Grid>
+                                                <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                                    <Image Source="/Images/icon_add_book.png" Margin="10,0,0,0"
+                                        Stretch="Fill" Height="25" Width="25"/>
+                                                    <TextBlock Text="Thêm"
+                                                   Padding="5,0,0,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        FontFamily="Tahoma"
+                                        FontWeight="Bold"
+                                        FontSize="16"  RenderTransformOrigin="0.151,0.392"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+
+                            <Button Name="btn_CustomerUpdate" Height="40" Width="100"
+                                FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="112,5,732,5" Click="btn_CustomerUpdate_Click">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#C2DECE"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Width="100" Height="40"
+                                                        CornerRadius="10"
+                                                        Background="{TemplateBinding Background}"
+                                                        BorderThickness="0"
+                                                        BorderBrush="#3CB76D">
+                                            <Grid>
+                                                <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                                    <Image Source="/Images/icon_pencil.png" Margin="15,0,0,0"
+                                        Stretch="Fill" Height="25" Width="25"/>
+                                                    <TextBlock Text="Sửa"
+                                                   Padding="7,0,0,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        FontFamily="Tahoma"
+                                        FontWeight="Bold"
+                                        FontSize="16"  RenderTransformOrigin="0.151,0.392"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+
+                            <Button Name="btn_CustomerDelete" Height="40" Width="100"
+                                FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="214,5,630,5" Click="btn_CustomerDelete_Click">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#C2DECE"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Width="100" Height="40"
+                                                        CornerRadius="10"
+                                                        Background="{TemplateBinding Background}"
+                                                        BorderThickness="0"
+                                                        BorderBrush="#3CB76D">
+                                            <Grid>
+                                                <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                                    <Image Source="/Images/icon_bin.png" Margin="15,0,0,0"
+                                        Stretch="Fill" Height="25" Width="25"/>
+                                                    <TextBlock Text="Xoá"
+                                                   Padding="10,0,0,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        FontFamily="Tahoma"
+                                        FontWeight="Bold"
+                                        FontSize="16"  RenderTransformOrigin="0.151,0.392"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+
+                            <TextBlock FontSize="30" Text="Khách hàng" FontWeight="Bold" FontFamily="Tahoma"
+                                       VerticalAlignment="Top"
+                           Height="54" Margin="424,0,324,0"/>
+
+                            <Label Name="lbl_CustomerCount" FontSize="18"
+                       Content="Tổng: 100"
+                       VerticalContentAlignment="Top" HorizontalContentAlignment="Right"
+                    FontFamily="Tahoma" Margin="890,16,15,2"/>
+
+                        </Grid>
+
+                        <ScrollViewer Grid.Row="2" HorizontalAlignment="Left" Height="461" VerticalAlignment="Top" Width="938" Grid.ColumnSpan="3" Margin="3,0,0,0">
+                            <WrapPanel Name="wpn_Customer" Orientation="Horizontal">
+
+                            </WrapPanel>
+                        </ScrollViewer>
+                    </Grid>
+                </TabItem>
+
+
+                <!-- GENRE,AUTHOR LIST -->
+                <TabItem>
+                    <TabItem.Header>
+                        <DockPanel Width="105">
+                            <Image Source="/Images/icon_edit_author_genre.png" Width="40" Height="40"/>
+                            <StackPanel>
+                                <TextBlock Text="Tác giả/" 
+                        Foreground="#154448"
+                        FontWeight="Bold"
+                        VerticalAlignment="Center"
+                        Padding="5,5,0,0"/>
+                                <TextBlock Text="Thể loại" 
+                        Foreground="#154448"
+                        FontWeight="Bold"
+                        VerticalAlignment="Center"
+                        Padding="5,0,0,5"/>
+                            </StackPanel>
+                        </DockPanel>
+                    </TabItem.Header>
+
+                    <!--this is GENRE,AUTHOR panel-->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+
+                        <!--Sreach bar-->
+                        <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                            <Border Height="28" Width="100" CornerRadius="15,0,0,15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="345,2,499,2" >
+                                <ComboBox Style="{StaticResource MonthYearComboxbox}" Height="24" Width="80" Margin="16,1,2,1"/>
+                            </Border>
+                            <Border Height="28" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,15,15,0" Margin="444,2,250,2">
+                                <Grid>
+                                    <TextBox x:Name="txt_AuthorGenreSearch" VerticalContentAlignment="Center" VerticalAlignment="Center"
+                             FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="193" Margin="5,0,0,0"/>
+                                    <Image Source="/Images/icon_search.png" Stretch="Fill" Height="20" Width="20" Cursor="Hand" Margin="212,4,16,2"/>
+
+                                </Grid>
+                            </Border>
+                        </Grid>
+
+                        <Canvas Grid.Row="2" x:Name="cvs_Author" Visibility="Visible">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <DockPanel Grid.Row="0">
+                                    <Border Height="30" CornerRadius="15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="10,6,0,4">
+                                        <ComboBox Style="{StaticResource MonthYearComboxbox}" Height="25" Width="150" Margin="24,2,20,1"/>
+                                    </Border>
+
+                                    <Button Name="btn_AddAuthor"
+         Height="40"
+         Width="100"
+         FontFamily="Tahoma" 
+         FontSize="17" 
+         FontWeight="Bold"
+         Foreground="#154348" 
+         Cursor="Hand" 
+         Margin="10,5,0,5">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="#C2DECE"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Width="100" Height="40"
+     CornerRadius="10"
+     Background="{TemplateBinding Background}"
+     BorderThickness="0"
+     BorderBrush="#3CB76D">
+                                                    <Grid>
+                                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                                            <Image Source="/Images/icon_addcircle.png" 
+                                Margin="10,0,0,0"
+                                Stretch="Fill" 
+                                Height="25" 
+                                Width="25"/>
+                                                            <TextBlock Text="Thêm"
+                                    Padding="5,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontFamily="Tahoma"
+                                    FontWeight="Bold"
+                                    FontSize="16"  RenderTransformOrigin="0.151,0.392"/>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+
+                                    <Button Name="btn_EditAuthor"
+         Height="40"
+         Width="85"
+         FontFamily="Tahoma" 
+         FontSize="17"
+         FontWeight="Bold" 
+         Foreground="#154348" 
+         Cursor="Hand" 
+         Margin="10,5,0,5">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="#C2DECE"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Width="100" Height="40"
+     CornerRadius="10"
+     Background="{TemplateBinding Background}"
+     BorderThickness="0"
+     BorderBrush="#3CB76D">
+                                                    <Grid>
+                                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                                            <Image Source="/Images/icon_pencil.png" 
+                                Margin="10,0,0,0"
+                                Stretch="Fill" 
+                                Height="25"
+                                Width="25"/>
+                                                            <TextBlock Text="Sửa"
+                                    Padding="5,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontFamily="Tahoma"
+                                    FontWeight="Bold"
+                                    FontSize="16"  
+                                    RenderTransformOrigin="0.151,0.392"/>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+
+                                    <Button Name="btn_DeleteAuthor" 
+         Height="40" 
+         Width="85"
+         FontFamily="Tahoma" 
+         FontSize="17" 
+         FontWeight="Bold"
+         Foreground="#154348"
+         Cursor="Hand" 
+         Margin="10,5,0,5">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="#C2DECE"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Width="100" Height="40"
+     CornerRadius="10"
+     Background="{TemplateBinding Background}"
+     BorderThickness="0"
+     BorderBrush="#3CB76D">
+                                                    <Grid>
+                                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                                            <Image Source="/Images/icon_trashcan.png" 
+                                Margin="10,0,0,0"
+                                Stretch="Fill" 
+                                Height="25" 
+                                Width="25"/>
+                                                            <TextBlock Text="Xóa"
+                                    Padding="5,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontFamily="Tahoma"
+                                    FontWeight="Bold"
+                                    FontSize="16"  
+                                    RenderTransformOrigin="0.151,0.392"/>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+
+                                    <Label x:Name="lbl_TotalAuthor" 
+           Content="Tổng: 100"
+           Grid.Column="2"
+        HorizontalAlignment="Right"
+           VerticalAlignment="Center"
+           FontSize="18"
+           Foreground="#154448"
+        Margin="0,0,15,0"/>
+                                </DockPanel>
+
+                                <!--this is Author list -->
+                                <DataGrid Name="dtg_AuthorList" Grid.Row="1" ItemsSource="{Binding Author}" Style="{StaticResource DataGrid}" Width="975" Height="475" ColumnHeaderHeight="40" Margin="10,0,10,10">
+                                    <DataGrid.Columns>
+                                        <DataGridCheckBoxColumn Binding="{Binding IsChecked}" Width="0.2*"/>
+                                        <DataGridTextColumn Header="#" Binding="{Binding AuthorNum}" Width="0.2*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Mã tác giả" Binding="{Binding AuthorID}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Tên tác giả" Binding="{Binding AuthorName}" Width="3*" IsReadOnly="True"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </Canvas>
+
+
+                        <Canvas Grid.Row="2" x:Name="cvs_Genre" Visibility="Hidden">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <DockPanel Grid.Row="0">
+                                    <Border Height="30" CornerRadius="15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="10,6,0,4">
+                                        <ComboBox Style="{StaticResource MonthYearComboxbox}" Height="25" Width="150" Margin="24,2,20,1"/>
+                                    </Border>
+
+                                    <Border Height="30" CornerRadius="15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="10,6,0,4">
+                                        <ComboBox Style="{StaticResource MonthYearComboxbox}" Height="25" Width="150" Margin="24,2,20,1"/>
+                                    </Border>
+
+                                    <Button Name="btn_AddGenre"
+         Height="40"
+         Width="100"
+         FontFamily="Tahoma" 
+         FontSize="17" 
+         FontWeight="Bold"
+         Foreground="#154348" 
+         Cursor="Hand" 
+         Margin="10,5,0,5">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="#C2DECE"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Width="100" Height="40"
+     CornerRadius="10"
+     Background="{TemplateBinding Background}"
+     BorderThickness="0"
+     BorderBrush="#3CB76D">
+                                                    <Grid>
+                                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                                            <Image Source="/Images/icon_addcircle.png" 
+                                Margin="10,0,0,0"
+                                Stretch="Fill" 
+                                Height="25" 
+                                Width="25"/>
+                                                            <TextBlock Text="Thêm"
+                                    Padding="5,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontFamily="Tahoma"
+                                    FontWeight="Bold"
+                                    FontSize="16"  RenderTransformOrigin="0.151,0.392"/>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+
+                                    <Button Name="btn_EditGenre"
+                                            Height="40"
+                                            Width="85"
+         FontFamily="Tahoma" 
+         FontSize="17"
+         FontWeight="Bold" 
+         Foreground="#154348" 
+         Cursor="Hand" 
+         Margin="10,5,0,5">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="#C2DECE"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Width="100" Height="40"
+     CornerRadius="10"
+     Background="{TemplateBinding Background}"
+     BorderThickness="0"
+     BorderBrush="#3CB76D">
+                                                    <Grid>
+                                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                                            <Image Source="/Images/icon_pencil.png" 
+                                Margin="10,0,0,0"
+                                Stretch="Fill" 
+                                Height="25"
+                                Width="25"/>
+                                                            <TextBlock Text="Sửa"
+                                    Padding="5,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontFamily="Tahoma"
+                                    FontWeight="Bold"
+                                    FontSize="16"  
+                                    RenderTransformOrigin="0.151,0.392"/>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+
+                                    <Button Name="btn_DeleteGenre" 
+         Height="40" 
+         Width="85"
+         FontFamily="Tahoma" 
+         FontSize="17" 
+         FontWeight="Bold"
+         Foreground="#154348"
+         Cursor="Hand" 
+         Margin="10,5,0,5">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="#C2DECE"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Width="100" Height="40"
+     CornerRadius="10"
+     Background="{TemplateBinding Background}"
+     BorderThickness="0"
+     BorderBrush="#3CB76D">
+                                                    <Grid>
+                                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                                            <Image Source="/Images/icon_trashcan.png" 
+                                Margin="10,0,0,0"
+                                Stretch="Fill" 
+                                Height="25" 
+                                Width="25"/>
+                                                            <TextBlock Text="Xóa"
+                                    Padding="5,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontFamily="Tahoma"
+                                    FontWeight="Bold"
+                                    FontSize="16"  
+                                    RenderTransformOrigin="0.151,0.392"/>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+
+                                    <Label x:Name="lbl_TotalGenre" 
+           Content="Tổng: 100"
+           Grid.Column="2"
+        HorizontalAlignment="Right"
+           VerticalAlignment="Center"
+           FontSize="18"
+           Foreground="#154448"
+        Margin="0,0,15,0"/>
+                                </DockPanel>
+
+                                <!--this is Genre list-->
+                                <DataGrid Name="dtg_GenreList" Grid.Row="1" ItemsSource="{Binding Genre}" Style="{StaticResource DataGrid}" Width="975" Height="475" ColumnHeaderHeight="40" Margin="10,0,10,10">
+                                    <DataGrid.Columns>
+                                        <DataGridCheckBoxColumn Binding="{Binding IsChecked}"  Width="0.2*"/>
+                                        <DataGridTextColumn Header="#" Binding="{Binding GenreNum}" Width="0.2*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Mã thể loại" Binding="{Binding GenreID}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Tên thể loại" Binding="{Binding GenreName}" Width="3*" IsReadOnly="True"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </Canvas>
+
+                    </Grid>
+                </TabItem>
+                
+                
                 <!-- EMPLOYEE -->
                 <TabItem>
                     <TabItem.Header>
-                        <StackPanel Orientation="Horizontal" Margin="5,0,5,0">
+                        <StackPanel Orientation="Horizontal">
                             <Image Source="/Images/icon_employee.png" Width="40" Height="40"/>
                             <TextBlock Text="Nhân viên" 
                         Foreground="#154448"
@@ -1818,14 +2443,11 @@ BorderThickness="{TemplateBinding BorderThickness}">
                    VerticalAlignment="Top"
        Height="54" Margin="424,0,324,0"/>
 
-                            <TextBlock Text="Tổng: " FontSize="18"
-       FontFamily="Tahoma"
-       Height="24" Width="50" Margin="731,20,163,6" Grid.Row="1"/>
 
                             <Label Name="lbl_EmployeeCount" FontSize="18"
-   Content="28283" FontWeight="Bold"
+   Content="Tổng: 100"
    VerticalContentAlignment="Top" HorizontalContentAlignment="Right"
-FontFamily="Tahoma" Margin="785,16,66,2"/>
+FontFamily="Tahoma" Margin="890,16,15,2"/>
 
                         </Grid>
 
@@ -1858,260 +2480,11 @@ FontFamily="Tahoma" Margin="785,16,66,2"/>
                     </Grid>
                 </TabItem>
 
-                <!-- GENRE,AUTHOR LIST -->
-                <TabItem>
-                    <TabItem.Header>
-                        <DockPanel Width="105" Margin="5,0,5,0">
-                            <Image Source="/Images/icon_edit_author_genre.png" Width="40" Height="40"/>
-                            <StackPanel>
-                                <TextBlock Text="Tác giả/" 
-                        Foreground="#154448"
-                        FontWeight="Bold"
-                        VerticalAlignment="Center"
-                        Padding="5,5,0,0"/>
-                                <TextBlock Text="Thể loại" 
-                        Foreground="#154448"
-                        FontWeight="Bold"
-                        VerticalAlignment="Center"
-                        Padding="5,0,0,5"/>
-                            </StackPanel>
-                        </DockPanel>
-                    </TabItem.Header>
-
-                    <!--this is GENRE,AUTHOR panel-->
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="40"/>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-
-
-                        <!--Sreach bar-->
-                        <Grid Grid.Row="0" Grid.ColumnSpan="2">
-                            <Border Height="28" Width="100" CornerRadius="15,0,0,15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="345,2,499,2" >
-                                <ComboBox Style="{StaticResource MonthYearComboxbox}" Height="24" Width="80" Margin="16,1,2,1"/>
-                            </Border>
-                            <Border Height="28" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,15,15,0" Margin="444,2,250,2">
-                                <Grid>
-                                    <TextBox x:Name="txt_AuthorGenreSearch" VerticalContentAlignment="Center" VerticalAlignment="Center"
-                             FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="193" Margin="5,0,0,0"/>
-                                    <Image Source="/Images/icon_search.png" Stretch="Fill" Height="20" Width="20" Cursor="Hand" Margin="212,4,16,2"/>
-
-                                </Grid>
-                            </Border>
-                        </Grid>
-
-
-                        <DockPanel Grid.Row="1">
-                            <Border Height="30" CornerRadius="15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="10,6,0,4">
-                                <ComboBox Style="{StaticResource MonthYearComboxbox}" Height="25" Width="150" Margin="24,2,20,1"/>
-                            </Border>
-
-                            <Button Name="btn_AddAuthorGenre"
-                                    Height="40"
-                                    Width="100"
-                                    FontFamily="Tahoma" 
-                                    FontSize="17" 
-                                    FontWeight="Bold"
-                                    Foreground="#154348" 
-                                    Cursor="Hand" 
-                                    Margin="10,5,0,5">
-                                <Button.Style>
-                                    <Style TargetType="Button">
-                                        <Setter Property="Background" Value="Transparent"/>
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="#C2DECE"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Button.Style>
-                                <Button.Template>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Width="100" Height="40"
-                                CornerRadius="10"
-                                Background="{TemplateBinding Background}"
-                                BorderThickness="0"
-                                BorderBrush="#3CB76D">
-                                            <Grid>
-                                                <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
-                                                    <Image Source="/Images/icon_addcircle.png" 
-                                                           Margin="10,0,0,0"
-                                                           Stretch="Fill" 
-                                                           Height="25" 
-                                                           Width="25"/>
-                                                    <TextBlock Text="Thêm"
-                                                               Padding="5,0,0,0"
-                                                               HorizontalAlignment="Left"
-                                                               VerticalAlignment="Center"
-                                                               FontFamily="Tahoma"
-                                                               FontWeight="Bold"
-                                                               FontSize="16"  RenderTransformOrigin="0.151,0.392"/>
-                                                </StackPanel>
-                                            </Grid>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Button.Template>
-                            </Button>
-
-                            <Button Name="btn_EditAuthorGenre"
-                                    Height="40"
-                                    Width="85"
-                                    FontFamily="Tahoma" 
-                                    FontSize="17"
-                                    FontWeight="Bold" 
-                                    Foreground="#154348" 
-                                    Cursor="Hand" 
-                                    Margin="10,5,0,5">
-                                <Button.Style>
-                                    <Style TargetType="Button">
-                                        <Setter Property="Background" Value="Transparent"/>
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="#C2DECE"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Button.Style>
-                                <Button.Template>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Width="100" Height="40"
-                                CornerRadius="10"
-                                Background="{TemplateBinding Background}"
-                                BorderThickness="0"
-                                BorderBrush="#3CB76D">
-                                            <Grid>
-                                                <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
-                                                    <Image Source="/Images/icon_pencil.png" 
-                                                           Margin="10,0,0,0"
-                                                           Stretch="Fill" 
-                                                           Height="25"
-                                                           Width="25"/>
-                                                    <TextBlock Text="Sửa"
-                                                               Padding="5,0,0,0"
-                                                               HorizontalAlignment="Left"
-                                                               VerticalAlignment="Center"
-                                                               FontFamily="Tahoma"
-                                                               FontWeight="Bold"
-                                                               FontSize="16"  
-                                                               RenderTransformOrigin="0.151,0.392"/>
-                                                </StackPanel>
-                                            </Grid>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Button.Template>
-                            </Button>
-
-                            <Button Name="btn_DeleteAuthorGenre" 
-                                    Height="40" 
-                                    Width="85"
-                                    FontFamily="Tahoma" 
-                                    FontSize="17" 
-                                    FontWeight="Bold"
-                                    Foreground="#154348"
-                                    Cursor="Hand" 
-                                    Margin="10,5,0,5">
-                                <Button.Style>
-                                    <Style TargetType="Button">
-                                        <Setter Property="Background" Value="Transparent"/>
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="#C2DECE"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Button.Style>
-                                <Button.Template>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Width="100" Height="40"
-                                CornerRadius="10"
-                                Background="{TemplateBinding Background}"
-                                BorderThickness="0"
-                                BorderBrush="#3CB76D">
-                                            <Grid>
-                                                <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
-                                                    <Image Source="/Images/icon_trashcan.png" 
-                                                           Margin="10,0,0,0"
-                                                           Stretch="Fill" 
-                                                           Height="25" 
-                                                           Width="25"/>
-                                                    <TextBlock Text="Xóa"
-                                                               Padding="5,0,0,0"
-                                                               HorizontalAlignment="Left"
-                                                               VerticalAlignment="Center"
-                                                               FontFamily="Tahoma"
-                                                               FontWeight="Bold"
-                                                               FontSize="16"  
-                                                               RenderTransformOrigin="0.151,0.392"/>
-                                                </StackPanel>
-                                            </Grid>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Button.Template>
-                            </Button>
-
-                            <Label x:Name="lbl_TotalAuthor" 
-                                      Content="Tổng: 100"
-                                      Grid.Column="2"
-                                   HorizontalAlignment="Right"
-                                      VerticalAlignment="Center"
-                                      FontSize="18"
-                                      Foreground="#154448"
-                                   Margin="0,0,15,0"/>
-                        </DockPanel>
-
-                        <!--this is AUTHOR list -->
-                        <Canvas Grid.Row="2" Name="cvs_AuthorList" Visibility="Visible">
-                            <DataGrid Name="dtg_AuthorList" ItemsSource="{Binding Author}" Style="{StaticResource DataGrid}" Width="930" Height="475" ColumnHeaderHeight="40" Margin="10,0,10,10">
-                                <DataGrid.Columns>
-                                    <DataGridCheckBoxColumn Binding="{Binding IsChecked}" Width="0.2*"/>
-                                    <DataGridTextColumn Header="#" Binding="{Binding AuthorNum}" Width="0.2*" IsReadOnly="True"/>
-                                    <DataGridTextColumn Header="Mã tác giả" Binding="{Binding AuthorID}" Width="*" IsReadOnly="True"/>
-                                    <DataGridTextColumn Header="Tên tác giả" Binding="{Binding AuthorName}" Width="3*" IsReadOnly="True"/>
-                                </DataGrid.Columns>
-                            </DataGrid>
-                        </Canvas>
-
-
-                        <!--this is Genre list-->
-                        <Canvas Grid.Row="2" Name="cvs_Genre" Visibility="Hidden">
-                            <StackPanel>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="0.17*"></ColumnDefinition>
-                                        <ColumnDefinition Width="0.15*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-
-                                    <Label x:Name="lbl_TotalGenre" 
-                                           Content="Tổng: 100"
-                                           Grid.Column="2"
-                                           Margin="50,0,0,0"
-                                           VerticalAlignment="Center"
-                                           FontSize="18"
-                                           Foreground="#154448"/>
-                                </Grid>
-
-
-                                <DataGrid Name="dtg_GenreList" ItemsSource="{Binding Genre}" Style="{StaticResource DataGrid}" Width="930" Height="475" ColumnHeaderHeight="40" Margin="10,0,10,10">
-                                    <DataGrid.Columns>
-                                        <DataGridCheckBoxColumn Binding="{Binding IsChecked}"  Width="0.2*"/>
-                                        <DataGridTextColumn Header="#" Binding="{Binding GenreNum}" Width="0.2*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Header="Mã thể loại" Binding="{Binding GenreID}" Width="*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Header="Tên thể loại" Binding="{Binding GenreName}" Width="3*" IsReadOnly="True"/>
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                            </StackPanel>
-                        </Canvas>
-
-                    </Grid>
-                </TabItem>
 
                 <!-- SETTING -->
                 <TabItem>
                     <TabItem.Header>
-                        <StackPanel Orientation="Horizontal" Margin="5,0,5,0">
+                        <StackPanel Orientation="Horizontal">
                             <Image Source="/Images/icon_setting.png" Width="40" Height="40"/>
                             <TextBlock Text="Cài đặt" 
                         Foreground="#154448"
@@ -2163,7 +2536,7 @@ FontFamily="Tahoma" Margin="785,16,66,2"/>
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
 
-                                    <Button x:Name="btn_AddCustomer"
+                                    <Button x:Name="btn_AddCustomerFromSettingSection"
                                             Grid.Column="0" 
                                             Grid.Row="0"
                                             Style="{StaticResource SettingSectionButton}"
@@ -2184,7 +2557,7 @@ FontFamily="Tahoma" Margin="785,16,66,2"/>
                                         </Button.Content>
                                     </Button>
 
-                                    <Button x:Name="btn_AddEmployee"
+                                    <Button x:Name="btn_AddEmployeeFromSettingSection"
                                             Style="{StaticResource SettingSectionButton}"
                                             Grid.Column="1"
                                             Grid.Row="0"
@@ -2204,7 +2577,7 @@ FontFamily="Tahoma" Margin="785,16,66,2"/>
                                         </Button.Content>
                                     </Button>
 
-                                    <Button x:Name="btn_AddManager"
+                                    <Button x:Name="btn_AddManagerFromSettingSection"
                                             Style="{StaticResource SettingSectionButton}"
                                             Grid.Column="2"
                                             Grid.Row="0"
@@ -2224,7 +2597,7 @@ FontFamily="Tahoma" Margin="785,16,66,2"/>
                                         </Button.Content>
                                     </Button>
 
-                                    <Button x:Name="btn_AddGenre"
+                                    <Button x:Name="btn_AddGenreFromSettingSection"
                                             Style="{StaticResource SettingSectionButton}"
                                             Grid.Column="0"
                                             Grid.Row="1"
@@ -2249,7 +2622,7 @@ FontFamily="Tahoma" Margin="785,16,66,2"/>
                                     </Button>
 
 
-                                    <Button x:Name="btn_AddAuthor"
+                                    <Button x:Name="btn_AddAuthorFromSettingSection"
                                             Style="{StaticResource SettingSectionButton}"
                                             Grid.Column="1"
                                             Grid.Row="1"

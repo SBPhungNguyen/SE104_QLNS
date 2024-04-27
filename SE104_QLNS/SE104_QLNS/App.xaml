@@ -308,7 +308,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ToggleButton}">
-                        <Border Background="#D9D9D9"   
+                        <Border Background="White"   
                                 x:Name="border"   
                                 CornerRadius="0,5,5,0" 
                                 BorderThickness="0,1,1,1"  
@@ -322,7 +322,7 @@
 
         <!--CustomerComboxbox textbox-->
         <Style x:Key="CustomerComboboxTextBoxStyle" TargetType="{x:Type TextBox}">
-            <Setter Property="Background" Value="#D9D9D9"/>
+            <Setter Property="Background" Value="White"/>
             <Setter Property="Foreground" Value="#154448"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -344,10 +344,9 @@
 
         <!--CustomerComboxbox-->
         <Style x:Key="CustomerCombobox" TargetType="ComboBox">
-            <Setter Property="Background" Value="#D9D9D9"/>
+            <Setter Property="Background" Value="White"/>
             <Setter Property="Height" Value="30"/>
             <Setter Property="Width" Value="190"/>
-            <Setter Property="Background" Value="#D9D9D9"/>
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="FontStyle" Value="Normal"/>
             <Setter Property="Foreground" Value="#154448"/>
@@ -403,7 +402,7 @@
                                             BorderThickness="1"  
                                             CornerRadius="5"  
                                             BorderBrush="Black"
-                                            Background="#D9D9D9"/>
+                                            Background="White"/>
                                     <ScrollViewer Margin="4,6,4,6" 
                                                   SnapsToDevicePixels="True">
                                         <StackPanel IsItemsHost="True" 
@@ -421,7 +420,7 @@
         <Style x:Key="CustomerInfoTextBox" TargetType="TextBox">
             <Setter Property="Height" Value="30"/>
             <Setter Property="Width" Value="190"/>
-            <Setter Property="Background" Value="#D9D9D9"/>
+            <Setter Property="Background" Value="White"/>
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="FontStyle" Value="Normal"/>
             <Setter Property="Foreground" Value="#154448"/>
@@ -478,6 +477,7 @@
         <!--TabItem-->
         <Style TargetType="TabItem">
             <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Width" Value="Auto"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TabItem">

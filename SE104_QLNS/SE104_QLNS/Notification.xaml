@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SE104_QLNS"
         mc:Ignorable="d"
-        Title="Notification"         Height="200" Width="600"
+        Title="Notification"         
+        Height="200" 
+        Width="600"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="True" Background="Transparent">

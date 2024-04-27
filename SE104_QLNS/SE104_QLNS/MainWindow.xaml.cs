@@ -569,8 +569,6 @@ namespace SE104_QLNS
                 }
             }
         }
-
-        
     }
 }
 
