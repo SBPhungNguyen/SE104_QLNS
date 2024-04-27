@@ -1,11 +1,13 @@
-﻿<Window x:Class="SE104_QLNS.ReceiptInfo"
+﻿<Window x:Class="SE104_QLNS.ImportedBookReceiptInfo"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SE104_QLNS"
         mc:Ignorable="d"
-        Title="ReceiptInfo" Height="450" Width="750"
+        Title="ImportedBookReceiptInfo"       
+        Height="700" 
+        Width="750"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="True" Background="Transparent">
@@ -20,7 +22,7 @@
 
             <Grid Grid.Row="0">
                 <Border Background="#C2DECE" CornerRadius="10,10,0,0"/>
-                <TextBlock Text="Chi tiết phiếu thu"
+                <TextBlock Text="Chi tiết phiếu nhập"
                            Foreground="#154448"
                            FontSize="18"
                            FontWeight="Bold"
@@ -28,17 +30,17 @@
                 <Image Source="/Images/icon_close.png" Width="23" Height="23" Stretch="Fill"  RenderTransformOrigin="1.864,0.792" Margin="718,3,7,4"/>
             </Grid>
             <Grid Grid.Row="1">
-                <TextBlock x:Name="ReceiptID"
+                <TextBlock x:Name="ImportedBookReceiptID"
                            Foreground="#154448"
-                    Text="Phiếu thu PT000001" 
+                    Text="Phiếu nhập PN000001" 
                            FontSize="25"
                            FontWeight="Bold"
                            FontFamily="Tahoma"
                            HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,9,0,0"/>
             </Grid>
 
-            <StackPanel Grid.Row="2" Margin="50,10,50,0" Height="280" VerticalAlignment="Top">
-                <Grid>
+            <StackPanel Grid.Row="2" Margin="25,10,25,0" Height="540" VerticalAlignment="Top">
+                <Grid Width="500">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -51,45 +53,45 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    
-                    <TextBlock Text="Ngày thu:" Grid.Column="0" Grid.Row="0" Foreground="#154448" FontSize="18" Height="25"/>
-                    <TextBlock Text="Mã khách hàng:" Grid.Column="0" Grid.Row="1" Foreground="#154448" FontSize="18" Height="25"/>
-                    <TextBlock Text="Tên:" Grid.Column="0" Grid.Row="2"  FontSize="18" Foreground="#154448" Height="25" />
-                    <TextBlock Text="SĐT:" Grid.Column="0" Grid.Row="3"  FontSize="18" Foreground="#154448" Height="25" />
-                    <TextBlock Text="Email:" Grid.Column="0" Grid.Row="4" FontSize="18" Foreground="#154448" Height="25"/>
-                    <TextBlock Text="Địa chỉ:" Grid.Column="0" Grid.Row="5" FontSize="18" Foreground="#154448" Height="25" />
+
+                    <TextBlock Text="Ngày lập:" Grid.Column="0" Grid.Row="0" Foreground="#154448" FontSize="18" Height="25"/>
+                    <TextBlock Text="Tổng tiền" Grid.Column="0" Grid.Row="1" Foreground="#154448" FontSize="18" Height="25"/>
+                    <TextBlock Text="Số lượng:" Grid.Column="0" Grid.Row="2"  FontSize="18" Foreground="#154448" Height="25" />
 
                     <TextBlock Name="tbl_Date"  Grid.Column="1" Grid.Row="0" Text="19/11/2023" Foreground="#154448" FontSize="18" Height="25" FontWeight="Bold"/>
                     <TextBlock Name="tbl_CustomerID"  Grid.Column="1" Grid.Row="1" Text="NV000001" Foreground="#154448" FontSize="18" Height="25" FontWeight="Bold"/>
                     <TextBlock Name="tbl_CustomerName" Grid.Column="1" Grid.Row="2" Text="Ninh Dương Lan Ngọc" Foreground="#154448" FontSize="18" Height="25" FontWeight="Bold"/>
-                    <TextBlock Name="tbl_CustomerPhone" Grid.Column="1" Grid.Row="3" Text="SĐT" FontSize="18" Foreground="#154448" Height="25" FontWeight="Bold"/>
-                    <TextBlock Name="tbl_CustomerEmail" Grid.Column="1" Grid.Row="4" Text="ImSoDesperate@gmail.com" Foreground="#154448" FontSize="18" Height="25" FontWeight="Bold"/>
-                    <TextBlock Name="tbl_CustomerAddress" Grid.Column="1" Grid.Row="5" Text="HEH I've always wondered that" Foreground="#154448" FontSize="18" Height="25" FontWeight="Bold"/>
                 </Grid>
 
+                
 
-                <Grid VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="325" Margin="0, 40, 0, 0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
+                <Label Content="Danh sách sản phẩm"
+                       FontFamily="Tahoma"
+                       FontSize="20"
+                       Foreground="#154448"
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center"
+                       Margin="0,10,0,5"/>
 
-                    <TextBlock Text="Số nợ thu trước:" Grid.Column="0" Grid.Row="0" Foreground="#154448" FontSize="18" Height="25" />
-                    <TextBlock Text="Tiền thu:" Grid.Column="0" Grid.Row="1" FontSize="18" Foreground="#154448" Height="25" />
-                    <TextBlock Text="Nợ sau khi thu:" Grid.Column="0" Grid.Row="2" FontSize="18" Foreground="#154448" Height="25" />
+                <DataGrid  Name="dtg_BillDetail" ItemsSource="{Binding Books}" Style="{StaticResource DataGrid}" Height="415" Margin="0,5,0,0">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="#" Binding="{Binding BookNum}" Width="0.5*" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Mã sách" Binding="{Binding BookID}" Width="*" IsReadOnly="True"/>
+                        <DataGridTemplateColumn Header="Ảnh" Width="Auto" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding BookURL}" Width="Auto" Height="Auto"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Sản phẩm" Binding="{Binding BookName}" Width="2*" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Số lượng" Binding="{Binding Amount}" Width="*" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Giá nhập" Binding="{Binding BookPriceImport}" Width="*" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Giá bán" Binding="{Binding BookPriceExport}" Width="*" IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                </DataGrid>
 
-                    <TextBlock Name="tbl_DebtBefore" Text="Địa chỉ:" Grid.Column="1" Grid.Row="0" Foreground="#154448" FontSize="18" TextWrapping="Wrap" FontWeight="Bold"/>
-                    <TextBlock Name="tbl_Paid" Text="Nhân viên"  Grid.Column="1" Grid.Row="1" Foreground="#154448" FontSize="18" Height="25" FontWeight="Bold"/>
-                    <TextBlock Name="tbl_DebtAfter"  Text="13h-18h"  Grid.Column="1" Grid.Row="2" Foreground="#154448" FontSize="18" Height="25" FontWeight="Bold"/>
-                </Grid>
             </StackPanel>
-
-
 
 
             <Grid Grid.Row="3">

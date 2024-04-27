@@ -83,6 +83,9 @@
     <Compile Include="AuthorAddAskPopup.xaml.cs">
       <DependentUpon>AuthorAddAskPopup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BillInfo.xaml.cs">
+      <DependentUpon>BillInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BookAddPopup.xaml.cs">
       <DependentUpon>BookAddPopup.xaml</DependentUpon>
     </Compile>
@@ -97,6 +100,9 @@
     </Compile>
     <Compile Include="GenreAddAskPopup.xaml.cs">
       <DependentUpon>GenreAddAskPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImportedBookReceiptInfo.xaml.cs">
+      <DependentUpon>ImportedBookReceiptInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="SaveReceiptPopup.xaml.cs">
       <DependentUpon>SaveReceiptPopup.xaml</DependentUpon>
@@ -235,6 +241,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="BillInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="BookAddPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -288,6 +298,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GenreAddAskPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ImportedBookReceiptInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
