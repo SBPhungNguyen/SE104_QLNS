@@ -80,6 +80,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AuthorAddAskPopup.xaml.cs">
+      <DependentUpon>AuthorAddAskPopup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BookAddPopup.xaml.cs">
       <DependentUpon>BookAddPopup.xaml</DependentUpon>
     </Compile>
@@ -91,6 +94,12 @@
     </Compile>
     <Compile Include="BookUpdatePopup.xaml.cs">
       <DependentUpon>BookUpdatePopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GenreAddAskPopup.xaml.cs">
+      <DependentUpon>GenreAddAskPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SaveReceiptPopup.xaml.cs">
+      <DependentUpon>SaveReceiptPopup.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Connection.cs" />
     <Compile Include="CustomerAdd.xaml.cs">
@@ -201,9 +210,6 @@
     <Compile Include="SaveReceiptPDF.xaml.cs">
       <DependentUpon>SaveReceiptPDF.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SaveReceiptPopup.xaml.cs">
-      <DependentUpon>SaveReceiptPopup.xaml</DependentUpon>
-    </Compile>
     <Compile Include="SignIn.xaml.cs">
       <DependentUpon>SignIn.xaml</DependentUpon>
     </Compile>
@@ -225,6 +231,10 @@
     <Compile Include="View\Uct_Employee.xaml.cs">
       <DependentUpon>Uct_Employee.xaml</DependentUpon>
     </Compile>
+    <Page Include="AuthorAddAskPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="BookAddPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -274,6 +284,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EmployeeUpdate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GenreAddAskPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -476,6 +490,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\icon_info.png" />
+    <Resource Include="Images\icon_bill_import_book_receipt.png" />
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
