@@ -1,6 +1,10 @@
-﻿using SE104_QLNS.View;
+﻿using Microsoft.Win32;
+using SE104_QLNS.View;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SE104_QLNS
 {
@@ -36,20 +41,58 @@ namespace SE104_QLNS
             InitializeComponent();
             this.tbl_BookID.Text = book.BookID;
             this.txt_BookName.Text = book.BookName;
-            this.cbx_TheLoai.Text = book.BookGenre;
-            this.tbl_Author.Text = book.BookAuthor;
-            this.txt_ImportPrice.Text = book.BookPriceImport;
-            this.txt_ExportPrice.Text = book.BookPriceExport;
+            this.cbx_Genre.Text = book.BookGenre;
+            this.cbx_Author.Text = book.BookAuthor;
+            this.txt_ImportPrice.Text = book.BookPriceImport.Replace(",0000", "");
+            this.txt_ExportPrice.Text = book.BookPriceExport.Replace(",0000", "");
             this.txt_Quantity.Text = book.Amount;
             this.BookURL = book.BookURL;
+            txt_Distribute.Text = book.BookDistribution;
+            txt_DistributeYear.Text = book.BookDistributionYear;
             BitmapImage bimage = new BitmapImage();
             bimage.BeginInit();
-            bimage.UriSource = new Uri(BookURL, UriKind.Relative);
+            bimage.UriSource = new Uri(BookURL, UriKind.RelativeOrAbsolute);
             bimage.EndInit();
             img_BookImg.Source = bimage;
             this.parent = mainwindow;
             this.selectedbook = book;
+            LoadGenres();
+            LoadAuthors();
         }
+
+        public void CreateImage(string url)
+        {
+            BitmapImage bimage = new BitmapImage();
+            bimage.BeginInit();
+            bimage.UriSource = new Uri(url, UriKind.RelativeOrAbsolute);
+            bimage.EndInit();
+            img_BookImg.Source = bimage;
+        }
+        private void btn_BookImage_Click(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                try
+                {
+
+                    OpenFileDialog openFileDialog = new OpenFileDialog();
+                    openFileDialog.Filter = "Image files (*.png;*.jpg)|*.png;*.jpg|All files (*.*)|*.*";
+                    if (openFileDialog.ShowDialog() == true)
+                    {
+                        string selectedImagePath = openFileDialog.FileName;
+                        BookURL = selectedImagePath;
+                        CreateImage(BookURL);
+                        //Notification noti = new Notification("Updated", BookURL); .Replace("\\","/")
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Notification noti = new Notification("Error", "Error opening file: " + ex.Message);
+                }
+            });
+        }
+
         private void btn_Back_Click(object sender, RoutedEventArgs e)
         {
             IsClosing = true;
@@ -58,50 +101,151 @@ namespace SE104_QLNS
 
         private void btn_ExitApp_Click(object sender, RoutedEventArgs e)
         {
+
             IsClosing = true;
             this.Close();
         }
-        protected override void OnDeactivated(EventArgs e)
+        
+        private void LoadAuthors()
         {
-            base.OnDeactivated(e);
-            if (IsClosing)
+            cbx_Author.Items.Clear(); // Clear existing items
+
+            Connection connect = new Connection();
+            string connectionString = connect.connection;
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                return;
+                try
+                {
+                    connection.Open();
+                    string sqlQuery = "SELECT TenTacGia, MaTacGia FROM TACGIA";
+                    SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        string authorName = reader["TenTacGia"].ToString();
+                        cbx_Author.Items.Add(authorName); // Add author name to ComboBox
+                    }
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    Notification noti = new Notification("Error", "Error retrieving authors: " + ex.Message);
+                }
             }
-            IsClosing = true;
-            this.Close();
+        }
+        private void LoadGenres()
+        {
+            cbx_Genre.Items.Clear(); // Clear existing items
+
+            Connection connect = new Connection();
+            string connectionString = connect.connection;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    string sqlQuery = "SELECT TenTheLoai, MaTheLoai FROM THELOAI";
+                    SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        string genres = reader["TenTheLoai"].ToString();
+                        cbx_Genre.Items.Add(genres);
+                    }
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    Notification noti = new Notification("Error", "Error retrieving genres: " + ex.Message);
+                }
+            }
         }
 
         private void btn_Update_Click(object sender, RoutedEventArgs e)
         {
-            foreach (Uct_Books book in parent.Books)
+            Connection connect = new Connection();
+            string connectionString = connect.connection;
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                if (book.BookID == selectedbook.BookID)
+                try
                 {
-                    parent.Books.Remove(book);
-                    break;
+                    connection.Open();
+
+                    //Get BookTitile Code
+                    string sqlQuery = "SELECT MaDauSach FROM SACH WHERE MaSach = @MaSach";
+                    SqlCommand command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@MaSach", tbl_BookID.Text);
+                    SqlDataReader reader = command.ExecuteReader();
+                    reader.Read();
+                    string BookTitleID = reader["MaDauSach"].ToString();
+                    reader.Close();
+
+                    //Get Genre Code
+                    sqlQuery = "SELECT TOP 1 MaTheLoai FROM THELOAI WHERE TenTheLoai = @TenTheLoai";
+                    command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@TenTheLoai", cbx_Genre.Text);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    string BookGenreID = reader["MaTheLoai"].ToString();
+                    reader.Close();
+
+                    //Get Author Code
+                    sqlQuery = "SELECT TOP 1 MaTacGia FROM TACGIA WHERE TenTacGia = @TenTacGia";
+                    command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@TenTacGia", cbx_Author.Text);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    string AuthorID = reader["MaTacGia"].ToString();
+                    reader.Close();
+
+                    //Update Name and Genre
+                    sqlQuery = "UPDATE DAUSACH SET TenDauSach = @TenDauSach, MaTheLoai = @MaTheLoai WHERE MaDauSach = @MaDauSach";
+                    command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@TenDauSach", txt_BookName.Text);
+                    command.Parameters.AddWithValue("@MaTheLoai", BookGenreID);
+                    command.Parameters.AddWithValue("@MaDauSach", BookTitleID);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
+
+                    //Update Author
+                    sqlQuery = "UPDATE CT_TACGIA SET MaTacGia = @MaTacGia WHERE MaDauSach = @MaDauSach";
+                    command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@MaTacGia", AuthorID);
+                    command.Parameters.AddWithValue("@MaDauSach", BookTitleID);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
+
+                    //Update the Rest
+                    sqlQuery = "UPDATE SACH SET NXB = @NXB, NamXB = @NamXB, HinhAnhSach = @HinhAnhSach, " +
+                        "SoLuongTon = @SoLuongTon, DonGiaNhap = @DonGiaNhap, DonGiaBan = @DonGiaBan WHERE MaSach = @MaSach";
+
+                    command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@NXB", txt_Distribute.Text); 
+                    command.Parameters.AddWithValue("@NamXB", txt_DistributeYear.Text);
+                    command.Parameters.AddWithValue("@HinhAnhSach", BookURL);
+                    command.Parameters.AddWithValue("@SoLuongTon", txt_Quantity.Text);
+                    command.Parameters.AddWithValue("@DonGiaNhap", txt_ImportPrice.Text);
+                    command.Parameters.AddWithValue("@DonGiaBan", txt_ExportPrice.Text);
+                    command.Parameters.AddWithValue("@MaSach", tbl_BookID.Text);
+
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
+
                 }
+                catch (Exception ex)
+                {
+                    Notification noti = new Notification("Error", "Error Updating Book: " + ex.Message);
+                }
+                parent.LoadBook(parent, 0);
+                IsClosing = true;
+                this.Close();
             }
-            selectedbook.LoadData(tbl_BookID.Text, txt_BookName.Text, tbl_Author.Text, cbx_TheLoai.Text, BookURL, selectedbook.BookNum, txt_ImportPrice.Text, txt_ExportPrice.Text, txt_Quantity.Text, selectedbook.Icon);
-            parent.Books.Add(selectedbook);
-            WrapPanel bookPanel = (WrapPanel)parent.FindName("wpn_Books");
-            bookPanel.Children.Clear();
-            foreach (Uct_Books bookAdd in parent.Books)
-            {
-                Uct_Books placeholder = new Uct_Books(1, parent);
-                placeholder.BookID = bookAdd.BookID;
-                placeholder.BookURL = bookAdd.BookURL;
-                placeholder.BookName = bookAdd.BookName;
-                placeholder.BookPriceImport = bookAdd.BookPriceImport;
-                placeholder.Amount = bookAdd.Amount;
-                placeholder.BookStateURL = "/Images/icon_bin.png";
-                Uct_Books bookImport = placeholder;
-                bookPanel.Children.Add(bookImport);
-            }
-            IsClosing = true;
-            this.Close();
-            IsClosing = true;
-            this.Close();
+
         }
     }
 }

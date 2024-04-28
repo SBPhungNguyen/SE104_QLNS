@@ -38,26 +38,147 @@ namespace SE104_QLNS
         public MainWindow()
         {
             InitializeComponent();
-
             DataContext = this;
-            //   LOAD BOOK CODE
-            //Day la code mau (vi du ve load thong tin sach)
-            Uct_Books book = new Uct_Books();
-            book.LoadData("TT012321", "Alice in da WonderLand", "Tac Gia", "Tieu Thuyet", "/Images/Chill_Vibes_R_Wallpaper.png", "76", "10000", "110000", "100", "/Images/Img_Information.png");
-            //wpn_Books.Children.Add(book);
-            Books.Add(book);
-            book = new Uct_Books();
-            book.LoadData("TT012322", "Alice in da hell", "Tac Gia", "Tieu Thuyet", "/Images/Chill_Vibes_R_Wallpaper.png", "76", "10000", "110000", "100", "/Images/Img_Information.png");
-            Books.Add(book);
-            book = new Uct_Books();
-            book.LoadData("TT012323", "Alice in da AAAAAA", "Tac Gia", "Tieu Thuyet", "/Images/Chill_Vibes_R_Wallpaper.png", "76", "10000", "110000", "100", "/Images/Img_Information.png");
-            Books.Add(book);
-            book = new Uct_Books();
-            book.LoadData("TT012324", "Alice in da doanxem", "Tac Gia", "Tieu Thuyet", "/Images/Chill_Vibes_R_Wallpaper.png", "76", "10000", "110000", "100", "/Images/Img_Information.png");
-            Books.Add(book);
-
-            //   LOAD CUSTOMER  CODE
+            // LOAD BOOK CODE
+            LoadBook(this, 0);
+            // LOAD CUSTOMER  CODE
             LoadCustomer(this, 0);
+        }
+        public string GetNextBookTitleID(MainWindow mainwindow)
+        {
+            string connectionString = connect.connection;
+            string nextBookID = "DS000001"; // Initial value
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    // Use a transaction to ensure data consistency
+                    using (SqlTransaction transaction = connection.BeginTransaction())
+                    {
+                        string sqlQuery = "SELECT MAX(MaDauSach) AS LastMaDauSach FROM DAUSACH";
+                        SqlCommand command = new SqlCommand(sqlQuery, connection, transaction);
+
+                        object LastMaDauSach = command.ExecuteScalar();
+
+                        if (LastMaDauSach != DBNull.Value)
+                        {
+                            int currentID = Convert.ToInt32(LastMaDauSach.ToString().Substring(2)); // Extract numeric part
+                            currentID++; // Increment for next ID
+                            nextBookID = "DS" + currentID.ToString("D6"); // Format with leading zeros
+                        }
+
+                        transaction.Commit(); // Commit the transaction if successful
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Notification noti = new Notification("Error", "Error generating BookTitle ID: " + ex.Message);
+                    nextBookID = null; // Indicate error
+                }
+            }
+
+            return nextBookID;
+        }
+        public string GetNextBookID(MainWindow mainwindow)
+        {
+            string connectionString = connect.connection;
+            string nextBookID = "SA000001"; // Initial value
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    // Use a transaction to ensure data consistency
+                    using (SqlTransaction transaction = connection.BeginTransaction())
+                    {
+                        string sqlQuery = "SELECT MAX(MaSach) AS LastMaSach FROM SACH";
+                        SqlCommand command = new SqlCommand(sqlQuery, connection, transaction);
+
+                        object lastMaSach = command.ExecuteScalar();
+
+                        if (lastMaSach != DBNull.Value)
+                        {
+                            int currentID = Convert.ToInt32(lastMaSach.ToString().Substring(2)); // Extract numeric part
+                            currentID++; // Increment for next ID
+                            nextBookID = "SA" + currentID.ToString("D6"); // Format with leading zeros
+                        }
+
+                        transaction.Commit(); // Commit the transaction if successful
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Notification noti = new Notification("Error", "Error generating Book ID: " + ex.Message);
+                    nextBookID = null; // Indicate error
+                }
+            }
+
+            return nextBookID;
+        }
+        public void LoadBook(MainWindow mainwindow, int state)
+        {
+            //connect to database
+            mainwindow.Books.Clear();
+            string connectionString = connect.connection;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+               
+                string MaSach = "", TacGia="", TheLoai="", TenDauSach = "", NXB = "", NamXB = "",
+                HinhAnhSach = "", SoLuongTon = "", DonGiaNhap = "", DonGiaBan = "";
+
+                try
+                {
+                    connection.Open();
+                    string sqlQuery = "SELECT DISTINCT SACH.*, DAUSACH.*, TACGIA.*, THELOAI.* FROM SACH " +
+                        "LEFT JOIN DAUSACH ON SACH.MADAUSACH = DAUSACH.MADAUSACH " +
+                        "LEFT JOIN CT_TACGIA ON CT_TACGIA.MADAUSACH = DAUSACH.MADAUSACH " +
+                        "LEFT JOIN TACGIA ON CT_TACGIA.MATACGIA = TACGIA.MATACGIA " +
+                        "LEFT JOIN THELOAI ON THELOAI.MATHELOAI = DAUSACH.MATHELOAI ";
+                    SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+                    int order = 1;
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            MaSach = reader["MaSach"].ToString();
+                            TenDauSach = reader["TenDauSach"].ToString();
+                            TacGia = reader["TenTacGia"].ToString();
+                            TheLoai = reader["TenTheLoai"].ToString();
+                            NXB = reader["NXB"].ToString();
+                            NamXB = reader["NamXB"].ToString();
+                            HinhAnhSach = reader["HinhAnhSach"].ToString();
+                            SoLuongTon = reader["SoLuongTon"].ToString(); // Assuming numeric data type
+                            DonGiaNhap = reader["DonGiaNhap"].ToString().Replace(",0000", "");
+                            DonGiaBan = reader["DonGiaBan"].ToString().Replace(",0000", ""); // Assuming date/time data type
+                            
+                            Uct_Books book = new Uct_Books(0, this);
+                            book.BookSetState(state);
+                            book.LoadData(MaSach, TenDauSach, TacGia, NXB, NamXB, TheLoai, HinhAnhSach, order.ToString(), DonGiaNhap, DonGiaBan, SoLuongTon);
+                            mainwindow.Books.Add(book);
+                            order++;
+                        }
+                    }
+                    mainwindow.dtg_Books.Items.Refresh();
+                    mainwindow.dtg_ImportBooks.Items.Refresh();
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    Notification noti = new Notification("Error", "Error retrieving data: " + ex.Message);
+                }
+                mainwindow.wpn_Books.Children.Clear();
+                foreach (Uct_Books child in Books)
+                {
+                    mainwindow.wpn_Books.Children.Add(child);
+                }
+            }
         }
         public string GetNextCustomerID(MainWindow mainwindow)
         {
@@ -99,7 +220,6 @@ namespace SE104_QLNS
 
             return nextCustomerID;
         }
-
         public void LoadCustomer(MainWindow mainwindow, int state)
         {
             Customers = new ObservableCollection<Uct_Customer>();
@@ -173,7 +293,7 @@ namespace SE104_QLNS
         }
         private void btn_AddBook_Click(object sender, RoutedEventArgs e) // Click on Them/Add Button
         {
-            this.wpn_ImportPaper.Children.Clear();
+            wpn_ImportPaper.Children.Clear();
             if (isList) //ListView
             {
                 if (cvs_ImportBooks.Visibility == Visibility.Hidden) //Swap from Default to Add
@@ -223,21 +343,13 @@ namespace SE104_QLNS
 
                     dtg_ImportBooks.Items.Refresh();
 
-                    WrapPanel bookPanel = (WrapPanel)this.FindName("wp_Books");
-                    bookPanel.Children.Clear();
-                    foreach (Uct_Books bookAdd in Books)
+                    this.LoadBook(this, 3);
+                    wpn_Books.Children.Clear();
+                    wpn_ImportBooks.Children.Clear();
+                    foreach (Uct_Books child in Books)
                     {
-                        Uct_Books placeholder = new Uct_Books(3, this);
-                        placeholder.BookID = bookAdd.BookID;
-                        placeholder.BookURL = bookAdd.BookURL;
-                        placeholder.BookName = bookAdd.BookName;
-                        placeholder.BookPriceImport = bookAdd.BookPriceImport;
-                        placeholder.Amount = bookAdd.Amount;
-                        placeholder.BookStateURL = "/Images/icon_addcircle.png";
-                        Uct_Books bookImport = placeholder;
-                        bookPanel.Children.Add(bookImport);
+                        wpn_ImportBooks.Children.Add(child);
                     }
-
                     btn_AddBook.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
                     btn_DeleteBook.Background = new SolidColorBrush(Colors.Transparent);
                     btn_UpdateBook.Background = new SolidColorBrush(Colors.Transparent);
@@ -251,11 +363,37 @@ namespace SE104_QLNS
 
                     cvs_ImportBooks.Visibility = Visibility.Hidden;
                     cvs_ImportBooks_Grid.Visibility = Visibility.Hidden;
-
+                    this.LoadBook(this, 0);
                     dtg_Books.Items.Refresh();
                     btn_AddBook.Background = new SolidColorBrush(Colors.Transparent);
 
                 }
+            }
+        }
+        private void btn_AddBook_Click_2(object sender, RoutedEventArgs e)
+        {
+            if (selectedbook == null)
+                return;
+            bool isDuplicate = false;
+
+            foreach (Uct_BookImport child in wpn_ImportPaper.Children.OfType<Uct_BookImport>())
+            {
+                if (selectedbook.BookID == child.BookID)
+                {
+                    isDuplicate = true;
+                    break;  // Exit the loop after finding the first duplicate
+                }
+            }
+
+            if (!isDuplicate)
+            {
+                Uct_BookImport bookimport = new Uct_BookImport();
+                bookimport.BookID = selectedbook.BookID;
+                bookimport.BookName = selectedbook.BookName;
+                bookimport.BookImportPrice = selectedbook.BookPriceImport;
+                bookimport.BookQuantity = "1";
+                bookimport.BookURL = selectedbook.BookURL;
+                this.wpn_ImportPaper.Children.Add(bookimport);
             }
         }
         private void btn_SwitchView_Click(object sender, RoutedEventArgs e) //Switch between List and Table
@@ -276,50 +414,17 @@ namespace SE104_QLNS
                     btn_DeleteBook.Background = new SolidColorBrush(Colors.Transparent);
                     btn_AddBook.Background = new SolidColorBrush(Colors.Transparent);
 
-                    WrapPanel bookPanel = (WrapPanel)this.FindName("wpn_Books");
-                    bookPanel.Children.Clear();
                     int state;
                     if (!isDelete && !isUpdate)
-                    {
                         state = 0;
-                    }
                     else if (isDelete)
-                    {
                         state = 1;
-                    }
                     else if (isUpdate)
-                    {
                         state = 2;
-                    }
                     else
-                    {
                         state = 0;
-                    }
-                    foreach (Uct_Books bookAdd in Books)
-                    {
-                        Uct_Books placeholder = new Uct_Books(state, this);
-                        placeholder.BookID = bookAdd.BookID;
-                        placeholder.BookURL = bookAdd.BookURL;
-                        placeholder.BookName = bookAdd.BookName;
-                        placeholder.BookPriceImport = bookAdd.BookPriceImport;
-                        placeholder.Amount = bookAdd.Amount;
-                        switch (state)
-                        {
-                            case 0:
-                                placeholder.BookStateURL = "/Images/icon_info.png";
-                                break;
-                            case 1:
-                                placeholder.BookStateURL = "/Images/icon_bin.png";
-                                break;
-                            case 2:
-                                placeholder.BookStateURL = "/Images/icon_pencil.png";
-                                break;
-                        }
-
-                        Uct_Books bookImport = placeholder;
-                        bookPanel.Children.Add(bookImport);
-                        isList = false;
-                    }
+                    LoadBook(this, state);
+                    isList = false;
                 }
                 else //Swap From Table To List (Default)
                 {
@@ -331,37 +436,28 @@ namespace SE104_QLNS
                     dtg_Books.Items.Refresh();
                     btn_SwitchView.Background = new SolidColorBrush(Colors.Transparent);
 
-                    WrapPanel bookPanel = (WrapPanel)this.FindName("wpn_Books");
-                    bookPanel.Children.Clear();
+                    int state;
+                    if (!isDelete && !isUpdate)
+                        state = 0;
+                    else if (isDelete)
+                        state = 1;
+                    else if (isUpdate)
+                        state = 2;
+                    else
+                        state = 0;
+                    LoadBook(this, state);
+                    
                     isList = true;
                 }
-                isUpdate = false;
-
-                isDelete = false;
-                dtg_Books.Columns[0].Visibility = Visibility.Hidden;
             }
         }
         private void dtg_Books_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (isUpdate == true)
-            {
-                selectedbook = (Uct_Books)dtg_Books.SelectedItem;
-            }
-            else if (isDelete == true)
-            {
-                selectedbook = (Uct_Books)dtg_Books.SelectedItem;
-            }
-            else
-            {
-                selectedbook = (Uct_Books)dtg_Books.SelectedItem;
-                BookInfoPopup bookInfoPopup = new BookInfoPopup(selectedbook);
-                bookInfoPopup.Show();
-            }
+            selectedbook = (Uct_Books)dtg_Books.SelectedItem;
         }
         private void btn_DeleteBook_Click(object sender, RoutedEventArgs e) //Click DeleteBook
         {
-            WrapPanel bookPanel = (WrapPanel)this.FindName("wpn_Books");
-            bookPanel.Children.Clear();
+            wpn_Books.Children.Clear();
             if (cvs_ImportBooks.Visibility == Visibility.Visible)
                 return;
             if (cvs_BooksDataGridList.Visibility == Visibility.Visible) //List View
@@ -382,25 +478,24 @@ namespace SE104_QLNS
                     btn_DeleteBook.Background = new SolidColorBrush(Colors.Transparent);
                     isDelete = false;
                 }
-                btn_AddBook.Background = new SolidColorBrush(Colors.Transparent);
-                btn_UpdateBook.Background = new SolidColorBrush(Colors.Transparent);
-                isDelete = true;
-                isUpdate = false;
             }
-            else //TableView
+            else if (cvs_BooksGridList.Visibility == Visibility.Visible)//TableView
             {
-
-                foreach (Uct_Books bookAdd in Books)
+                if (!isDelete)
                 {
-                    Uct_Books placeholder = new Uct_Books(1, this);
-                    placeholder.BookID = bookAdd.BookID;
-                    placeholder.BookURL = bookAdd.BookURL;
-                    placeholder.BookName = bookAdd.BookName;
-                    placeholder.BookPriceImport = bookAdd.BookPriceImport;
-                    placeholder.Amount = bookAdd.Amount;
-                    placeholder.BookStateURL = "/Images/icon_bin.png";
-                    Uct_Books bookImport = placeholder;
-                    bookPanel.Children.Add(bookImport);
+                    LoadBook(this, 1);
+                    btn_DeleteBook.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
+                    btn_AddBook.Background = new SolidColorBrush(Colors.Transparent);
+                    btn_UpdateBook.Background = new SolidColorBrush(Colors.Transparent);
+                    isDelete = true;
+                    isUpdate = false;
+                }
+                else
+                {
+                    LoadBook(this, 0);
+                    dtg_Books.Columns[0].Visibility = Visibility.Hidden;
+                    btn_DeleteBook.Background = new SolidColorBrush(Colors.Transparent);
+                    isDelete = false;
                 }
             }
         }
@@ -410,8 +505,7 @@ namespace SE104_QLNS
                 return;
             BookDeletePopup bookdeletepopup = new BookDeletePopup(selectedbook, this);
             bookdeletepopup.Show();
-            WrapPanel bookPanel = (WrapPanel)this.FindName("wpn_Books");
-            bookPanel.Children.Clear();
+            wpn_Books.Children.Clear();
         }
         private void btn_UpdateBook_Click(object sender, RoutedEventArgs e) //Click UpdateBook
         {
@@ -438,27 +532,23 @@ namespace SE104_QLNS
                 }
 
             }
-            else //TableView
+            else if (cvs_BooksGridList.Visibility == Visibility.Visible)//TableView
             {
-                WrapPanel bookPanel = (WrapPanel)this.FindName("wpn_Books");
-                bookPanel.Children.Clear();
-                foreach (Uct_Books bookAdd in Books)
+                if (!isUpdate)
                 {
-                    Uct_Books placeholder = new Uct_Books(2, this);
-                    placeholder.BookID = bookAdd.BookID;
-                    placeholder.BookURL = bookAdd.BookURL;
-                    placeholder.BookName = bookAdd.BookName;
-                    placeholder.BookPriceImport = bookAdd.BookPriceImport;
-                    placeholder.Amount = bookAdd.Amount;
-                    placeholder.BookStateURL = "/Images/icon_pencil.png";
-                    Uct_Books bookImport = placeholder;
-                    bookPanel.Children.Add(bookImport);
+                    LoadBook(this, 2);
+                    btn_UpdateBook.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
+                    btn_DeleteBook.Background = new SolidColorBrush(Colors.Transparent);
+                    btn_AddBook.Background = new SolidColorBrush(Colors.Transparent);
+                    isDelete = false;
+                    isUpdate = true;
                 }
-                btn_UpdateBook.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
-                btn_DeleteBook.Background = new SolidColorBrush(Colors.Transparent);
-                btn_AddBook.Background = new SolidColorBrush(Colors.Transparent);
-                isDelete = false;
-                isUpdate = true;
+                else
+                {
+                    LoadBook(this, 0);
+                    btn_UpdateBook.Background = new SolidColorBrush(Colors.Transparent);
+                    isUpdate = false;
+                }
             }
         }
         private void btn_UpdateBook_Click2(object sender, RoutedEventArgs e)
@@ -467,43 +557,17 @@ namespace SE104_QLNS
                 return;
             BookUpdatePopup bookupdatepopup = new BookUpdatePopup(selectedbook, this);
             bookupdatepopup.Show();
-            selectedbook = null;
         }
         private void btn_AddNewBook_Click(object sender, RoutedEventArgs e)
         {
-            BookAddPopup bookaddpopup = new BookAddPopup();
+            BookAddPopup bookaddpopup = new BookAddPopup(this);
             bookaddpopup.Show();
         }
         private void dtg_ImportBooks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedbook = (Uct_Books)dtg_ImportBooks.SelectedItem;
         }
-        private void btn_AddBook_Click_1(object sender, RoutedEventArgs e)
-        {
-            if (selectedbook == null)
-                return;
-            bool isDuplicate = false;
-
-            foreach (Uct_BookImport child in wpn_ImportPaper.Children.OfType<Uct_BookImport>())
-            {
-                if (selectedbook.BookID == child.BookID)
-                {
-                    isDuplicate = true;
-                    break;  // Exit the loop after finding the first duplicate
-                }
-            }
-
-            if (!isDuplicate)
-            {
-                Uct_BookImport bookimport = new Uct_BookImport();
-                bookimport.BookID = selectedbook.BookID;
-                bookimport.BookName = selectedbook.BookName;
-                bookimport.BookImportPrice = selectedbook.BookPriceImport;
-                bookimport.BookQuantity = "1";
-                bookimport.BookURL = selectedbook.BookURL;
-                this.wpn_ImportPaper.Children.Add(bookimport);
-            }
-        }
+        
         private void btn_CustomerAdd_Click(object sender, RoutedEventArgs e)
         {
             btn_CustomerUpdate.Background = new SolidColorBrush(Colors.Transparent);
@@ -567,6 +631,15 @@ namespace SE104_QLNS
                     child.CustomerSetState(0);
                     wpn_Customer.Children.Add(child);
                 }
+            }
+        }
+
+        private void cvs_BooksDataGridList_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!isUpdate && !isDelete)
+            {
+                BookInfoPopup bookInfoPopup = new BookInfoPopup(selectedbook);
+                bookInfoPopup.Show();
             }
         }
     }

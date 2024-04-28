@@ -1,6 +1,7 @@
 ﻿using SE104_QLNS.View;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,10 +42,12 @@ namespace SE104_QLNS
             this.tbl_ImportPrice.Text = book.BookPriceImport;
             this.tbl_ExportPrice.Text = book.BookPriceExport;
             this.tbl_Quantity.Text = book.Amount;
+            this.txt_Distribute.Text = book.BookDistribution;
+            this.txt_DistributeYear.Text = book.BookDistributionYear;
             this.BookURL = book.BookURL;
             BitmapImage bimage = new BitmapImage();
             bimage.BeginInit();
-            bimage.UriSource = new Uri(BookURL, UriKind.Relative);
+            bimage.UriSource = new Uri(BookURL, UriKind.RelativeOrAbsolute);
             bimage.EndInit();
             img_BookImg.Source = bimage;
             parent = mainWindow;
@@ -59,30 +62,56 @@ namespace SE104_QLNS
 
         private void btn_Delete_Click(object sender, RoutedEventArgs e)
         {
-            foreach (Uct_Books book in parent.Books)
+            Connection connect = new Connection();
+            string connectionString = connect.connection;
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                if(book.BookID==selectedbook.BookID)
+                try
                 {
-                    parent.Books.Remove(book);
-                    break;
+                    connection.Open();
+
+                    //Get BookTitile Code
+                    string sqlQuery = "SELECT MaDauSach FROM SACH WHERE MaSach = @MaSach";
+                    SqlCommand command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@MaSach", tbl_BookID.Text);
+                    SqlDataReader reader = command.ExecuteReader();
+                    reader.Read();
+                    string BookTitleID = reader["MaDauSach"].ToString();
+                    reader.Close();
+
+                    //Delete from Author Details
+                    sqlQuery = "DELETE FROM CT_TACGIA WHERE MaDauSach = @MaDauSach";
+                    command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@MaDauSach", BookTitleID);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
+
+                    //Delete The Book
+                    sqlQuery = "DELETE FROM SACH WHERE MaSach = @MaSach";
+
+                    command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@MaSach", tbl_BookID.Text);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
+
+                    //Delete Book Title
+                    sqlQuery = "DELETE FROM DAUSACH WHERE MaDauSach = @MaDauSach";
+                    command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@MaDauSach", BookTitleID);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
                 }
+                catch (Exception ex)
+                {
+                    Notification noti = new Notification("Error", "Error Updating Book: " + ex.Message);
+                }
+                parent.LoadBook(parent, 0);
+                IsClosing = true;
+                this.Close();
             }
-            WrapPanel bookPanel = (WrapPanel)parent.FindName("wpn_Books");
-            bookPanel.Children.Clear();
-            foreach (Uct_Books bookAdd in parent.Books)
-            {
-                Uct_Books placeholder = new Uct_Books(1, parent);
-                placeholder.BookID = bookAdd.BookID;
-                placeholder.BookURL = bookAdd.BookURL;
-                placeholder.BookName = bookAdd.BookName;
-                placeholder.BookPriceImport = bookAdd.BookPriceImport;
-                placeholder.Amount = bookAdd.Amount;
-                placeholder.BookStateURL = "/Images/icon_bin.png";
-                Uct_Books bookImport = placeholder;
-                bookPanel.Children.Add(bookImport);
-            }
-            IsClosing = true;
-            this.Close();
         }
 
         private void btn_ExitApp_Click(object sender, RoutedEventArgs e)

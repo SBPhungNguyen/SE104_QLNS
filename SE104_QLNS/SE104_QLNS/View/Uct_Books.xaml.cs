@@ -38,6 +38,25 @@ namespace SE104_QLNS.View
             this.state = state;
             parent = mainwindow;   
         }
+        public void BookSetState(int state)
+        {
+            this.state = state;
+            switch (state)
+            {
+                case 0: //Popup Info
+                    BookStateURL = "/Images/icon_info.png";
+                    break;
+                case 1: //Delete
+                    BookStateURL = "/Images/icon_bin.png";
+                    break;
+                case 2: //Update
+                    BookStateURL = "/Images/icon_pencil.png";
+                    break;
+                case 3: //Add
+                    BookStateURL = "/Images/icon_addcircle.png";
+                    break;
+            }
+        }
         public string BookURL
         {
             get; set;
@@ -51,6 +70,10 @@ namespace SE104_QLNS.View
         public string BookAuthor
         { get; set; }        
         public string BookGenre
+        { get; set; }
+        public string BookDistribution
+        { get; set; }
+        public string BookDistributionYear
         { get; set; }
         public string BookNum
         {
@@ -66,17 +89,18 @@ namespace SE104_QLNS.View
         { get; set; }
         public string Amount
         { get; set; }
-        public void LoadData(string BookCode, string BookName, string BookAuthor, string BookGenre, string URL, string NumOfBook, string PriceImport, string PriceExport, string Amount, string Icon)
+        public void LoadData(string BookCode, string BookName, string BookAuthor, string BookDistribution, string BookDistributionYear, string BookGenre, string URL, string NumOfBook, string PriceImport, string PriceExport, string Amount)
         {
             this.BookID = BookCode;
             this.BookName = BookName;
             this.BookAuthor = BookAuthor;
             this.BookGenre = BookGenre;
+            this.BookDistribution = BookDistribution;
+            this.BookDistributionYear = BookDistributionYear;
             this.BookURL = URL;
             BookNum = NumOfBook;
             this.BookPriceImport = PriceImport;
             this.BookPriceExport = PriceExport;
-            this.Icon = Icon;
             this.Amount = Amount;
         }
 

@@ -42,9 +42,11 @@ namespace SE104_QLNS
             this.tbl_ExportPrice.Text = book.BookPriceExport;
             this.tbl_Quantity.Text = book.Amount;
             this.BookURL = book.BookURL;
+            this.txt_Distribute.Text = book.BookDistribution;
+            this.txt_DistributeYear.Text = book.BookDistributionYear;
             BitmapImage bimage = new BitmapImage();
             bimage.BeginInit();
-            bimage.UriSource = new Uri(BookURL, UriKind.Relative);
+            bimage.UriSource = new Uri(BookURL, UriKind.RelativeOrAbsolute);
             bimage.EndInit();
             img_BookImg.Source = bimage;
         }

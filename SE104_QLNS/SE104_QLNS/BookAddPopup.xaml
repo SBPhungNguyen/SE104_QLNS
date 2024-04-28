@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SE104_QLNS"
         mc:Ignorable="d"
-        Title="BookAddPopup" Height="400" Width="600"
+        Title="BookAddPopup" Height="500" Width="600"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="True" Background="Transparent">
@@ -46,57 +46,70 @@
             </Grid>
             <Grid Grid.Row="1">
 
-                <Border Width="150" Height="200" Margin="47,54,401,114" CornerRadius="10">
-                    <Border.Background>
-                        <ImageBrush x:Name="img_BookImage" Stretch="None" ImageSource="/Images/icon_addcircle.png"/>
-                    </Border.Background>
+                <Border Width="150" Height="200" Margin="47,66,401,202" CornerRadius="10">
+                    <Image x:Name="img_BookImage" Stretch="Fill"/>
+                    
                 </Border>
-                <TextBlock Text="Thêm sách" 
-                           FontSize="23" FontWeight="Bold" FontFamily="Tahoma" Margin="235,12,200,323"/>
+                <Button Name="btn_BookImage" Width="150" Height="200" Margin="47,66,401,202" Opacity="0.0" BorderThickness="0" Click="btn_BookImage_Click"/>
+                <TextBlock Text="Thông tin sách" 
+                           FontSize="23" FontWeight="Bold" FontFamily="Tahoma" Margin="197,12,200,323"/>
                 <TextBlock Text="ID:" Height="30" Width="20" FontSize="18" 
-                            Margin="235,48,343,290"/>
+                            Margin="235,60,343,378"/>
                 <TextBlock Text="Tên Sách:" Height="30" FontSize="18" 
-                            Margin="235,84,281,254"/>
+                            Margin="235,96,281,342"/>
                 <TextBlock Text="Thể Loại:" Height="30" FontSize="18" 
-                            Margin="235,121,281,217"/>
+                            Margin="235,133,281,305"/>
                 <TextBlock Text="Tác giả:" Height="30" FontSize="18" 
-                            Margin="235,157,281,181"/>
-                <TextBlock Text="Giá nhập:" Height="30" FontSize="18" 
-                            Margin="235,195,281,143"/>
-                <TextBlock Text="Giá bán:" Height="30" FontSize="18" 
-                            Margin="235,232,281,106"/>
+                            Margin="235,169,281,269"/>
+                <TextBlock Text="Nhà XB:" Height="30" FontSize="18" 
+                            Margin="235,207,281,231"/>
+                <TextBlock Text="Năm XB:" Height="30" FontSize="18" 
+                            Margin="235,244,281,194"/>
+                <TextBlock Text="Giá Nhập:" Height="30" FontSize="18" 
+                            Margin="235,281,281,157"/>
+                <TextBlock Text="Giá Bán:" Height="30" FontSize="18" 
+                            Margin="235,318,281,120"/>
                 <TextBlock Text="Số lượng:" Height="30" FontSize="18" 
-                            Margin="235,269,281,69"/>
+            Margin="235,356,281,82"/>
 
                 <TextBox Name="txt_BookID" Text="ID" FontWeight="Bold"
                          BorderThickness="0,0,0,1"
                            Height="30" FontSize="18" 
-                           Margin="362,48,10,290"/>
-                <TextBox Name="txt_BookName" Text="Ten sach" FontWeight="Bold"
+                           Margin="362,60,10,378"/>
+                <TextBox Name="txt_BookName" FontWeight="Bold"
                          BorderThickness="0,0,0,1"
                            Height="30" FontSize="18" 
-                           Margin="362,84,10,254"/>
-                <ComboBox Name="cbx_TheLoai" Height="30" Margin="365,123,10,215"
+                           Margin="362,96,10,342"/>
+                <ComboBox Name="cbx_Genre" Height="30" Margin="363,135,12,303"
                           BorderThickness="0,0,0,1" FontWeight="Bold"
                           Style="{StaticResource MonthYearComboxbox}"/>
-                <TextBox Name="tbl_Author" FontWeight="Bold"
+                <ComboBox Name="cbx_Author" FontWeight="Bold"
                          BorderThickness="0,0,0,1"
-                           Text="Tác giả:" Height="30" FontSize="18" 
-                           Margin="362,157,10,181"/>
-                <TextBox Name="txt_ImportPrice" FontWeight="Bold"
+                           Height="30" FontSize="18" 
+                           Margin="362,169,10,269"
+                          Style="{StaticResource MonthYearComboxbox}" SelectionChanged="cbx_Author_SelectionChanged"/>
+                <TextBox Name="txt_Distribute" FontWeight="Bold"
                            BorderThickness="0,0,0,1"
-                           Text="Giá nhập:" Height="30" FontSize="18" 
-                           Margin="362,195,10,143"/>
+                            Height="30" FontSize="18" 
+                           Margin="362,207,10,231"/>
+                <TextBox Name="txt_DistributeYear" FontWeight="Bold"
+                         BorderThickness="0,0,0,1"
+                           Height="30" FontSize="18" 
+                           Margin="362,244,10,194"/>
+                <TextBox Name="txt_ImportPrice" FontWeight="Bold"
+                         BorderThickness="0,0,0,1"
+                           Height="30" FontSize="18" 
+                           Margin="362,281,10,157"/>
                 <TextBox Name="txt_ExportPrice" FontWeight="Bold"
-                         BorderThickness="0,0,0,1"
-                           Text="Giá bán:" Height="30" FontSize="18" 
-                           Margin="362,232,10,106"/>
+         BorderThickness="0,0,0,1"
+           Height="30" FontSize="18" 
+           Margin="362,318,10,120"/>
                 <TextBox Name="txt_Quantity" FontWeight="Bold"
-                         BorderThickness="0,0,0,1"
-                           Text="Số lượng:" Height="30" FontSize="18" 
-                           Margin="362,269,10,69"/>
-                <Button Name="btn_Delete" Height="35" Margin="45,315,298,18"
-                        Content="Thêm Sách" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Click="btn_Delete_Click">
+         BorderThickness="0,0,0,1"
+           Height="30" FontSize="18" 
+           Margin="362,356,10,82"/>
+                <Button Name="btn_Add" Height="35" Margin="45,410,298,23"
+                        Content="Thêm Sách" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Click="btn_Add_Click">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="#154348"/>
@@ -121,7 +134,7 @@
                     </Button.Template>
                 </Button>
 
-                <Button Name="btn_Back" Height="35" Margin="299,315,44,18"
+                <Button Name="btn_Back" Height="35" Margin="299,410,44,23"
                         Content="Quay Lại" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Click="btn_Back_Click">
                     <Button.Style>
                         <Style TargetType="Button">

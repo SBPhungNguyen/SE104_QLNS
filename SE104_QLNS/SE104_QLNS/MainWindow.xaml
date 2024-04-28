@@ -314,7 +314,7 @@
 
 
                             <!--DataGird Book List-->
-                            <Canvas  Grid.Row="1"  Visibility="Visible" Name="cvs_BooksDataGridList">
+                            <Canvas  Grid.Row="1"  Visibility="Visible" Name="cvs_BooksDataGridList" MouseLeftButtonDown="cvs_BooksDataGridList_MouseLeftButtonDown">
                                 <DataGrid Name="dtg_Books" ItemsSource="{Binding Books}" Style="{StaticResource DataGrid}" Width="975" Height="470" ColumnHeaderHeight="40" Margin="10,0,10,10" SelectionChanged="dtg_Books_SelectionChanged">
                                     <DataGrid.Columns >
                                         <!--<DataGridCheckBoxColumn Binding="{Binding IsChecked}" Width="Auto"/>-->
@@ -412,66 +412,6 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                 </DataGrid>
                             </Canvas>
 
-                            <!--Datagrid Book List Delete Version-->
-                            <!--
-                            <Canvas  Grid.Row="1"  Visibility="Hidden" Name="cvs_BooksDataGridListDelete">
-                                <DataGrid Name="dtg_BooksDelete" ItemsSource="{Binding Books}" Style="{StaticResource DataGrid}" Width="975" Height="470" ColumnHeaderHeight="40" Margin="10,0,10,10" SelectionChanged="dtg_BooksDelete_SelectionChanged">
-                                    <DataGrid.Columns>
-                                        <DataGridTemplateColumn Header="">
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <Button Name="btn_DeleteBook" Height="40" Width="40" Margin="15,0,0,0" Click="btn_DeleteBook_Click2">
-                                                        <Button.Style>
-                                                            <Style TargetType="Button">
-                                                                <Setter Property="Background" Value="Transparent"/>
-                                                                <Setter Property="BorderThickness" Value="1"/>
-                                                                <Setter Property="BorderBrush" Value="Transparent"/>
-                                                                <Style.Triggers>
-                                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                                        <Setter Property="Background" Value="#C2DECE"/>
-                                                                        <Setter Property="BorderBrush" Value="#000000"/>
-                                                                    </Trigger>
-                                                                </Style.Triggers>
-                                                            </Style>
-                                                        </Button.Style>
-                                                        <Button.Template>
-                                                            <ControlTemplate TargetType="Button">
-                                                                <Border Width="40" Height="40"
-                                                                    CornerRadius="10"
-                                                                    Background="{TemplateBinding Background}"
-                                                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                                                    BorderThickness="{TemplateBinding BorderThickness}">
-                                                                    <Grid>
-                                                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
-                                                                            <Image Source="/Images/icon_bin.png" Margin="6,0,0,0"
-                                                                            Stretch="Fill" Height="25" Width="25"/>
-                                                                           
-                                                                        </StackPanel>
-                                                                    </Grid>
-                                                                </Border>
-                                                            </ControlTemplate>
-                                                        </Button.Template>
-                                                    </Button>
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>
-                                        <DataGridTextColumn Header="#" Binding="{Binding BookNum}" Width="0.5*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Header="Mã sách" Binding="{Binding BookID}" Width="*" IsReadOnly="True"/>
-                                        <DataGridTemplateColumn Header="Ảnh" Width="Auto" IsReadOnly="True">
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <Image Source="{Binding BookURL}" Width="Auto" Height="Auto"/>
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>
-                                        <DataGridTextColumn Header="Sản phẩm" Binding="{Binding BookName}" Width="2*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Header="Tác giả" Binding="{Binding BookAuthor}" Width="*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Header="Giá nhập" Binding="{Binding BookPriceImport}" Width="*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Header="Giá bán" Binding="{Binding BookPriceExport}" Width="*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Header="Tồn" Binding="{Binding Amount}" Width="*" IsReadOnly="True"/>
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                            </Canvas>-->
                             <!--Datagrid Table Version-->
                             <Canvas Visibility="Hidden" Name="cvs_BooksGridList">
                                 <ScrollViewer Name="sv_BooksGridLists" Canvas.Left="5" Canvas.Top="6" HorizontalAlignment="Center" Height="461" VerticalAlignment="Top" Width="938"
@@ -481,8 +421,6 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                 </ScrollViewer>
                             </Canvas>
                         </Canvas>
-
-
 
                         <!--this is ImportBook panel-->
                         <Canvas Grid.Row="2" Visibility="Hidden" Name="cvs_ImportBooks">
@@ -501,11 +439,11 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                                   HorizontalAlignment="Left" 
                                                   VerticalAlignment="Center"
                                                   HorizontalScrollBarVisibility="Disabled" 
-                                                  VerticalScrollBarVisibility="Auto">
-                                        <WrapPanel Name ="wp_Books" Orientation="Horizontal" Margin="0,0,0,10">
-
+                                                  VerticalScrollBarVisibility="Auto" Margin="5,5,5,5">
+                                        <WrapPanel Name ="wpn_ImportBooks" Orientation="Horizontal" Margin="0,0,0,10">
                                         </WrapPanel>
                                     </ScrollViewer>
+                                    <Button x:Name="btn_AddNewBook2" Click="btn_AddNewBook_Click" Style="{StaticResource LightGreenButton}" Content="Thêm sách mới" VerticalAlignment="Bottom" HorizontalAlignment="Left" Canvas.Left="10" Canvas.Top="440"/>
                                 </Canvas>
 
                                 <!--this is DataGrid-->
@@ -517,7 +455,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                                 <DataGridTemplateColumn Header="" Visibility="Visible">
                                                     <DataGridTemplateColumn.CellTemplate>
                                                         <DataTemplate>
-                                                            <Button Name="btn_AddBook" Height="40" Width="40" Margin="15,0,0,0" Click="btn_AddBook_Click_1">
+                                                            <Button Name="btn_AddBook" Height="40" Width="40" Margin="15,0,0,0" Click="btn_AddBook_Click_2">
                                                                 <Button.Style>
                                                                     <Style TargetType="Button">
                                                                         <Setter Property="Background" Value="Transparent"/>
@@ -1632,7 +1570,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
 
                                 <DataGrid Name="dtg_AmountReport" ItemsSource="{Binding Books}" Style="{StaticResource DataGrid}" Width="975" Height="415" ColumnHeaderHeight="40" Margin="10,0,10,10">
                                     <DataGrid.Columns>
-                                        
+
                                         <DataGridTextColumn Header="#" Binding="{Binding BookNum}" Width="0.5*" IsReadOnly="True"/>
                                         <DataGridTextColumn Header="Mã sách" Binding="{Binding BookID}" Width="*" IsReadOnly="True"/>
                                         <DataGridTemplateColumn Header="Ảnh" Width="0.5*" IsReadOnly="True">

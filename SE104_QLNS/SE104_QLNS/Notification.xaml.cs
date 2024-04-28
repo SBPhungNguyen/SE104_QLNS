@@ -34,7 +34,7 @@ namespace SE104_QLNS
             NotificationTitle.Text = title;
             NotificationInfo.Text = info;
             Size textSize = NotificationInfo.DesiredSize;
-            ActualInfoHeight = textSize.Height + 60;  // Add some padding
+            ActualInfoHeight = textSize.Height + 100;  // Add some padding
 
             // Update window height based on ActualInfoHeight
             this.Height = ActualInfoHeight + 200;  // Add height of top row and some padding

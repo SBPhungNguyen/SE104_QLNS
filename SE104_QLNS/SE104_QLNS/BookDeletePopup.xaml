@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SE104_QLNS"
         mc:Ignorable="d"
-        Title="BookDeletePopup" Height="400" Width="600"
+        Title="BookDeletePopup" Height="500" Width="600"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="True" Background="Transparent">
@@ -27,7 +27,7 @@
                     BorderThickness="0"
                     Cursor="Hand" 
                     VerticalAlignment="Center"
-                    HorizontalAlignment="Left" Margin="562,0,0,0" Click="btn_ExitApp_Click">    
+                    HorizontalAlignment="Left" Margin="562,0,0,0" Click="btn_ExitApp_Click">
                     <Button.Content>
                         <Image Source="/Images/icon_close.png" Width="20" Height="20"/>
                     </Button.Content>
@@ -47,47 +47,58 @@
             <Grid Grid.Row="1">
 
                 <Border Width="150" Height="200" Margin="47,54,401,114" CornerRadius="10">
-                    <Image Name="img_BookImg" Stretch="Fill"/>
+                    <Image Name="img_BookImg" Stretch="Fill" Margin="0,-35,0,35"/>
                 </Border>
                 <TextBlock Text="Xoá sách này khỏi danh sách sách?" 
                            FontSize="23" FontWeight="Bold" FontFamily="Tahoma" Margin="104,11,70,323"/>
                 <TextBlock Text="ID:" Height="30" Width="20" FontSize="18" 
-                            Margin="235,48,343,290"/>
+                            Margin="235,60,343,378"/>
                 <TextBlock Text="Tên Sách:" Height="30" FontSize="18" 
-                            Margin="235,84,281,254"/>
+                            Margin="235,96,281,342"/>
                 <TextBlock Text="Thể Loại:" Height="30" FontSize="18" 
-                            Margin="235,121,281,217"/>
+                            Margin="235,133,281,305"/>
                 <TextBlock Text="Tác giả:" Height="30" FontSize="18" 
-                            Margin="235,157,281,181"/>
+                            Margin="235,169,281,269"/>
                 <TextBlock Text="Giá nhập:" Height="30" FontSize="18" 
-                            Margin="235,195,281,143"/>
+                            Margin="235,279,281,159"/>
                 <TextBlock Text="Giá bán:" Height="30" FontSize="18" 
-                            Margin="235,232,281,106"/>
+                            Margin="235,316,281,122"/>
                 <TextBlock Text="Số lượng:" Height="30" FontSize="18" 
-                            Margin="235,269,281,69"/>
-
+                            Margin="235,353,281,85"/>
+                <TextBlock Text="Nhà XB:" Height="30" FontSize="18" 
+            Margin="234,206,282,232"/>
+                <TextBlock Text="Năm XB:" Height="30" FontSize="18" 
+            Margin="234,243,282,195"/>
+                <TextBox Name="txt_Distribute" FontWeight="Bold"
+           BorderThickness="0,0,0,0"
+            Height="30" FontSize="18" 
+           Margin="362,206,10,232"/>
+                <TextBox Name="txt_DistributeYear" FontWeight="Bold"
+         BorderThickness="0,0,0,0"
+           Height="30" FontSize="18" 
+           Margin="361,242,11,196"/>
                 <TextBlock Name="tbl_BookID" Text="ID" FontWeight="Bold"
                            Height="30" FontSize="18" 
-                           Margin="362,48,32,290"/>
+                           Margin="362,60,32,378"/>
                 <TextBlock Name="tbl_BookName" Text="Ten sach" FontWeight="Bold"
                            Height="30" FontSize="18" 
-                           Margin="362,84,10,254"/>
+                           Margin="362,96,10,342"/>
                 <TextBlock Name="tbl_Gerne" FontWeight="Bold"
                            Text="Thể Loại:" Height="30" FontSize="18" 
-                           Margin="362,121,10,217"/>
+                           Margin="362,133,10,305"/>
                 <TextBlock Name="tbl_Author" FontWeight="Bold"
                            Text="Tác giả:" Height="30" FontSize="18" 
-                           Margin="362,157,10,181"/>
+                           Margin="362,169,10,269"/>
                 <TextBlock Name="tbl_ImportPrice" FontWeight="Bold"
                            Text="Giá nhập:" Height="30" FontSize="18" 
-                           Margin="362,195,10,143"/>
+                           Margin="362,279,10,159"/>
                 <TextBlock Name="tbl_ExportPrice" FontWeight="Bold"
                            Text="Giá bán:" Height="30" FontSize="18" 
-                           Margin="362,232,10,106"/>
+                           Margin="362,316,10,122"/>
                 <TextBlock Name="tbl_Quantity" FontWeight="Bold"
                            Text="Số lượng:" Height="30" FontSize="18" 
-                           Margin="362,269,10,69"/>
-                <Button Name="btn_Delete" Height="35" Margin="45,315,298,18"
+                           Margin="362,353,10,85"/>
+                <Button Name="btn_Delete" Height="35" Margin="45,404,298,29"
                         Content="Xoá Sách" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Click="btn_Delete_Click">
                     <Button.Style>
                         <Style TargetType="Button">
@@ -113,7 +124,7 @@
                     </Button.Template>
                 </Button>
 
-                <Button Name="btn_Back" Height="35" Margin="299,315,44,18"
+                <Button Name="btn_Back" Height="35" Margin="299,404,44,29"
                         Content="Quay Lại" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Click="btn_Back_Click">
                     <Button.Style>
                         <Style TargetType="Button">
