@@ -100,27 +100,31 @@ HorizontalAlignment="Right" Margin="10,0,0,0" Click="btn_ExitApp_Click">
                     <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_location.png" Margin="34,266,315,77" RenderTransformOrigin="1.028,0.552"/>
                 </Grid>
                 <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="185*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
                     <TextBlock Text="Tên khách hàng" FontSize="20" FontFamily="Tahoma" Foreground="#154448" 
-                           Height="30" Width="200" Margin="30,12,144,326"/>
+                           Height="30" Width="200" Margin="30,12,140,326"/>
                     <TextBox x:Name="txt_CustomerName" Height="35" FontFamily="Tahoma" FontWeight="Bold" Foreground="#154448" 
-                         BorderThickness="0,0,0,2" BorderBrush="#154448" Margin="64,41,30,292"
+                         BorderThickness="0,0,0,2" BorderBrush="#154448" Margin="64,41,26,292"
                          VerticalContentAlignment="Bottom" FontSize="20"/>
-                    <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_useravatar.png" Margin="34,47,315,296" RenderTransformOrigin="1.028,0.552"/>
+                    <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_useravatar.png" Margin="34,47,311,296" RenderTransformOrigin="1.028,0.552"/>
                     <TextBlock Text="Ngày sinh" FontSize="20" FontFamily="Tahoma" Foreground="#154448" 
-                        Height="30" Width="200" Margin="30,87,144,251"/>
+                        Height="30" Width="200" Margin="30,87,140,251"/>
                     <TextBox x:Name="txt_CustomeBirth" Height="35" FontFamily="Tahoma" FontWeight="Bold" Foreground="#154448" 
                              Padding="35,0,35,0"
-                        BorderThickness="0,0,0,2" BorderBrush="#154448"  Margin="30,117,30,216"
+                        BorderThickness="0,0,0,2" BorderBrush="#154448"  Margin="30,117,26,216"
                         VerticalContentAlignment="Bottom" FontSize="20"/>
                     <TextBlock Text="Số điện thoại" FontSize="20" FontFamily="Tahoma" Foreground="#154448" 
-                        Height="30" Width="200" Margin="30,158,144,180"/>
+                        Height="30" Width="200" Margin="30,158,140,180"/>
                     <TextBox x:Name="txt_CustomerPhone" Height="35" FontFamily="Tahoma" FontWeight="Bold" Foreground="#154448" 
-                        BorderThickness="0,0,0,2" BorderBrush="#154448" Margin="30,188,30,145"
+                        BorderThickness="0,0,0,2" BorderBrush="#154448" Margin="30,188,26,145"
                              Padding="35,0,0,0"
                         VerticalContentAlignment="Bottom" FontSize="20"/>
 
                     <Button Name="btn_AddCustomer" Height="35" 
-                        Content="Thêm khách hàng" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="-190,313,190,20" Click="btn_AddCustomer_Click">
+                        Content="Thêm khách hàng" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="-190,313,186,20" Click="btn_AddCustomer_Click">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="#154348"/>
@@ -144,9 +148,9 @@ HorizontalAlignment="Right" Margin="10,0,0,0" Click="btn_ExitApp_Click">
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_birthday.png" Margin="34,123,315,220" RenderTransformOrigin="1.028,0.552"/>
-                    <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_calendar.png" Margin="319,123,30,220" RenderTransformOrigin="1.028,0.552"/>
-                    <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_phone.png" Margin="34,193,315,150" RenderTransformOrigin="1.028,0.552"/>
+                    <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_birthday.png" Margin="34,123,311,220" RenderTransformOrigin="1.028,0.552"/>
+                    <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_calendar.png" Margin="319,123,26,220" RenderTransformOrigin="1.028,0.552"/>
+                    <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_phone.png" Margin="34,193,311,150" RenderTransformOrigin="1.028,0.552"/>
                 </Grid>
             </Grid>
         </Grid>

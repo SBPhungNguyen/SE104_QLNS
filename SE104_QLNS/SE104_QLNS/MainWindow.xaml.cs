@@ -1,9 +1,11 @@
-﻿using SE104_QLNS.View;
+﻿using SE104_QLNS;
+using SE104_QLNS.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,6 +28,8 @@ namespace SE104_QLNS
         public ObservableCollection<Uct_Books> Books { get; set; } = new ObservableCollection<Uct_Books>();
         public ObservableCollection<Uct_Customer> Customers { get; set; } = new ObservableCollection<Uct_Customer>();
 
+        public ObservableCollection<Uct_Employee> Employees { get; set; } = new ObservableCollection<Uct_Employee>();
+
         Connection connect = new Connection();
         
 
@@ -43,6 +47,7 @@ namespace SE104_QLNS
             LoadBook(this, 0);
             // LOAD CUSTOMER  CODE
             LoadCustomer(this, 0);
+            LoadEmployee(this, 0);
         }
         public string GetNextBookTitleID(MainWindow mainwindow)
         {
@@ -642,6 +647,108 @@ namespace SE104_QLNS
                 bookInfoPopup.Show();
             }
         }
+
+        public string GetNextEmployeeID(MainWindow mainwindow)
+        {
+            string connectionString = connect.connection;
+            string nextEmployeeID = "NV000001"; // Initial value
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    // Use a transaction to ensure data consistency
+                    using (SqlTransaction transaction = connection.BeginTransaction())
+                    {
+                        // Get the maximum existing MaKH value
+                        string sqlQuery = "SELECT MAX(MaNV) AS LastMaNV FROM NGUOIDUNG";
+                        SqlCommand command = new SqlCommand(sqlQuery, connection, transaction);
+
+                        object lastMaNV = command.ExecuteScalar();
+
+                        // Check if any MaNV exists in the table
+                        if (lastMaNV != DBNull.Value)
+                        {
+                            int currentID = Convert.ToInt32(lastMaNV.ToString().Substring(2)); // Extract numeric part
+                            currentID++; // Increment for next ID
+                            nextEmployeeID = "NV" + currentID.ToString("D6"); // Format with leading zeros
+                        }
+
+                        transaction.Commit(); // Commit the transaction if successful
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Notification noti = new Notification("Error", "Error generating employee ID: " + ex.Message);
+                    nextEmployeeID = null; // Indicate error
+                }
+            }
+
+            return nextEmployeeID;
+        }
+        public void LoadEmployee(MainWindow mainwindow, int state)
+        {
+            Employees = new ObservableCollection<Uct_Employee>();
+
+            //connect to database
+            string connectionString = connect.connection;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                mainwindow.Customers.Clear();
+                string MaNV = "", HoTenNV = "", SDT = "", Email = "", DiaChi = "",
+                    GioiTinh = "", NgaySinh = "", CCCD = "", ViTri = "", Ca = "", TenTK = "", MatKhau = "";
+
+                try
+                {
+                    connection.Open();
+                    string sqlQuery = "SELECT * FROM NGUOIDUNG";
+                    SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            MaNV = reader["MaNV"].ToString();
+                            HoTenNV = reader["HoTenNV"].ToString();
+                            SDT = reader["SDT"].ToString();
+                            Email = reader["Email"].ToString();
+                            DiaChi = reader["DiaChi"].ToString();
+                            GioiTinh = reader["GioiTinh"].ToString();
+                            NgaySinh = reader["NgaySinh"].ToString(); // Assuming date/time data type
+                            CCCD = reader["CCCD"].ToString();
+                            ViTri = reader["ViTri"].ToString();
+                            Ca = reader["Ca"].ToString();
+                            TenTK = reader["TenTK"].ToString();
+                            MatKhau = reader["MatKhau"].ToString();
+                            string gender;
+                            if (GioiTinh == "1")
+                                gender = "Nam";
+                            else
+                                gender = "Nữ";
+                            Uct_Employee employee = new Uct_Employee(this);
+                            employee.EmployeeSetState(state);
+                            employee.LoadData(MaNV, HoTenNV, NgaySinh, gender, CCCD, SDT, DiaChi, ViTri, Ca, TenTK, MatKhau);
+                            mainwindow.Employees.Add(employee);
+                        }
+                    }
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    Notification noti = new Notification("Error", "Error retrieving data: " + ex.Message);
+                }
+                wpn_Employee.Children.Clear();
+                foreach (Uct_Employee child in Employees)
+                {
+                    wpn_Customer.Children.Add(child);
+                }
+            }
+        }
+
+
     }
 }
 

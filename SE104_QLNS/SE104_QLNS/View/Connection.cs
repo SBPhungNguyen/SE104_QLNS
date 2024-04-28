@@ -9,7 +9,7 @@ namespace SE104_QLNS
 {
     internal class Connection
     {
-        public string connection = @"Server=f;Database=QLNS;Trusted_Connection=Yes;";
+        public string connection = @"Server=DESKTOP-EPI23U4;Database=QLNS;Trusted_Connection=Yes;";
         public Connection()
         { 
         }
