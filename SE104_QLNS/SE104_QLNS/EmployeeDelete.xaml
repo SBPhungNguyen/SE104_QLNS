@@ -24,7 +24,28 @@
                            FontSize="18"
                            FontWeight="Bold"
                            VerticalAlignment="Center" Margin="15,0,251,0"/>
-                <Image Source="/Images/icon_close.png" Width="23" Height="23" Stretch="Fill"  RenderTransformOrigin="1.864,0.792" Margin="718,3,7,4"/>
+                <Button Name="btn_ExitApp"
+ Width="30" 
+Height="30"
+BorderThickness="0"
+Cursor="Hand" 
+VerticalAlignment="Center"
+HorizontalAlignment="Right" Margin="10,0,0,0" Click="btn_ExitApp_Click">
+                    <Button.Content>
+                        <Image Source="/Images/icon_close.png" Width="20" Height="20"/>
+                    </Button.Content>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#154448"/>
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
             </Grid>
             <Grid Grid.Row="1">
                 <TextBlock Text="Bạn có chắc muốn xoá nhân viên này?" 
@@ -67,7 +88,7 @@
                     <ColumnDefinition Width="193*"/>
                 </Grid.ColumnDefinitions>
                 <Button Name="btn_Delete" Height="35" 
-                        Content="Xoá" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="100,-15,0,30" HorizontalAlignment="Left" Width="210">
+                        Content="Xoá" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="100,-15,0,30" HorizontalAlignment="Left" Width="210" Click="btn_Delete_Click">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="#154348"/>
@@ -95,7 +116,7 @@
                 <Button Name="btn_Back" Height="35"
                         Content="Quay Lại" FontFamily="Tahoma" 
                         FontSize="17" FontWeight="Bold" Foreground="White" 
-                        Margin="438,-15,100,30" Grid.ColumnSpan="2">
+                        Margin="438,-15,100,30" Grid.ColumnSpan="2" Click="btn_Back_Click">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="#6FB3B8"/>

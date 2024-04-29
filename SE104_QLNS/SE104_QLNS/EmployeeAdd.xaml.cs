@@ -33,7 +33,7 @@ namespace SE104_QLNS
             txt_EmployeeID.Text = mainwindow.GetNextEmployeeID(mainwindow);
         }
 
-        private void btn_AddEmployee_Click(object sender, RoutedEventArgs e)
+        private void btn_EmployeeAdd_Click(object sender, RoutedEventArgs e)
         {
             Connection connect = new Connection();
             string connectionString = connect.connection;
@@ -43,9 +43,10 @@ namespace SE104_QLNS
                 {
                     connection.Open();
                     string sqlQuery = $"INSERT INTO NGUOIDUNG (MANV, HoTenNV, SDT, NgaySinh, GioiTinh, DiaChi, CCCD, ViTri, Ca, TenTK, MatKhau) " +
-                      $"VALUES (@MaKH, @HoTenKH, @SDT, @NgaySinh, @GioiTinh, @DiaChi, @SoTienNo, @SoTienMua)";
+                      $"VALUES (@MaNV, @HoTenNV, @SDT, @NgaySinh, @GioiTinh, @DiaChi, @CCCD, @ViTri, @Ca, @TenTK, @MatKhau)";
                     SqlCommand command = new SqlCommand(sqlQuery, connection);
                     command.Parameters.AddWithValue("@MaNV", txt_EmployeeID.Text);
+                    
                     command.Parameters.AddWithValue("@HoTenNV", txt_EmployeeName.Text);
                     command.Parameters.AddWithValue("@SDT", txt_EmployeePhone.Text);
                     command.Parameters.AddWithValue("@NgaySinh", txt_EmployeeBirthday.Text);
@@ -58,6 +59,8 @@ namespace SE104_QLNS
                     command.Parameters.AddWithValue("@DiaChi", txt_EmployeeAddress.Text);
                     command.Parameters.AddWithValue("@CCCD", txt_EmployeeCard.Text);
                     command.Parameters.AddWithValue("@ViTri", txt_EmployeeOccupation.Text);
+                   
+                    
                     command.Parameters.AddWithValue("@Ca", txt_EmployeeShift.Text);
                     command.Parameters.AddWithValue("@TenTK", txt_EmployeeTK.Text);
                     command.Parameters.AddWithValue("@MatKhau", txt_EmployeePass.Text);

@@ -44,7 +44,7 @@ namespace SE104_QLNS.View
         { get; set; }
         public string EmployeeOccupation
         { get; set; }
-        public string EmployeeTime
+        public string EmployeeShift
         { get; set; }
         public string EmployeeTK
         { get; set; }
@@ -82,9 +82,10 @@ namespace SE104_QLNS.View
             }
         }
         public void LoadData(string employeeID, string employeeName, string employeeBirthday, string employeeGender, string employeeCard,
-            string employeePhonenumber, string employeeAddress, string employeeOccupation, string employeeTime, string employeeTK, string employeePass )
+            string employeePhonenumber, string employeeAddress, string employeeOccupation, string employeeShift, string employeeTK, string employeePass )
         {
             EmployeeID = employeeID;
+           
             EmployeeName = employeeName;
             EmployeeGender = employeeGender;
             EmployeeBirthday = employeeBirthday;
@@ -92,7 +93,7 @@ namespace SE104_QLNS.View
             EmployeePhonenumber = employeePhonenumber;            
             EmployeeAddress = employeeAddress;
             EmployeeOccupation = employeeOccupation;
-            EmployeeTime = employeeTime;
+            EmployeeShift = employeeShift;
             EmployeeTK = employeeTK;
             EmployeePass = employeePass;
         }
@@ -104,11 +105,24 @@ namespace SE104_QLNS.View
             {
                 EmployeeInfo employee = new EmployeeInfo(EmployeeID, EmployeeName,
                     EmployeePhonenumber, EmployeeBirthday, EmployeeGender, EmployeeCard, 
-                    EmployeeAddress, EmployeeOccupation, EmployeeTime, EmployeeTK, EmployeePass);
+                    EmployeeAddress, EmployeeOccupation, EmployeeShift, EmployeeTK, EmployeePass);
+                employee.Visibility = Visibility.Visible;
+                employee.Topmost = true;
+
+            }
+            else if (state == 1) //Update
+            {
+                EmployeeUpdate employee = new EmployeeUpdate(this, parent);
                 employee.Visibility = Visibility.Visible;
                 employee.Topmost = true;
             }
-           
+            else //Delete
+            {
+                EmployeeDelete employee = new EmployeeDelete(this, parent);
+                employee.Visibility = Visibility.Visible;
+                employee.Topmost = true;
+            }
+
         }
 
     }

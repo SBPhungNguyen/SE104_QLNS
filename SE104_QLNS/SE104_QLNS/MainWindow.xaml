@@ -2267,7 +2267,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                         <!--switch to grid/datagrid button, import book button, delete book button,... above list-->
                         <Grid Grid.Row="1" Grid.ColumnSpan="2">
                             <Button Name="btn_EmployeeAdd" Height="40" Width="100"
-            FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="10,5,834,5">
+            FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="10,5,834,5" Click="btn_EmployeeAdd_Click">
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Setter Property="Background" Value="Transparent"/>
@@ -2304,7 +2304,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                             </Button>
 
                             <Button Name="btn_EmployeeUpdate" Height="40" Width="100"
-            FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="112,5,732,5">
+            FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="112,5,732,5" Click="btn_EmployeeUpdate_Click">
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Setter Property="Background" Value="Transparent"/>
@@ -2341,7 +2341,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                             </Button>
 
                             <Button Name="btn_EmployeeDelete" Height="40" Width="100"
-            FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="214,5,630,5">
+            FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="214,5,630,5" Click="btn_EmployeeDelete_Click">
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Setter Property="Background" Value="Transparent"/>
@@ -2398,21 +2398,21 @@ FontFamily="Tahoma" Margin="890,16,15,2"/>
                            EmployeeName="Trieu Dinh Ly Tran"
                            EmployeeOccupation="Thu Ngan"
                            EmployeePhonenumber="7894561230"
-                           EmployeeTime="13h-18h"/>
+                           EmployeeShift="13h-18h"/>
                                 <View:Uct_Employee PicURL="/Images/Chill Wallpaper On.png"
                            Icon="/Images/Img_Information.png"
                            EmployeeID="NV000001"
                            EmployeeName="Trieu Dinh Ly Tran"
                            EmployeeOccupation="Thu Ngan"
                            EmployeePhonenumber="7894561230"
-                           EmployeeTime="13h-18h"/>
+                           EmployeeShift="13h-18h"/>
                                 <View:Uct_Employee PicURL="/Images/Chill Wallpaper On.png"
                            Icon="/Images/Img_Information.png"
                            EmployeeID="NV000001"
                            EmployeeName="Trieu Dinh Ly Tran"
                            EmployeeOccupation="Thu Ngan"
                            EmployeePhonenumber="7894561230"
-                           EmployeeTime="13h-18h"/>
+                           EmployeeShift="13h-18h"/>
                             </WrapPanel>
                         </ScrollViewer>
                     </Grid>

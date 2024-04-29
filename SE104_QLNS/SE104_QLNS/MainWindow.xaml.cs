@@ -39,6 +39,8 @@ namespace SE104_QLNS
         bool isList = true;
         bool isCustomerUpdate = false;
         bool isCustomerDelete = false;
+        bool isEmployeeUpdate = false;
+        bool isEmployeeDelete = false;
         public MainWindow()
         {
             InitializeComponent();
@@ -747,7 +749,71 @@ namespace SE104_QLNS
                 }
             }
         }
+        private void btn_EmployeeAdd_Click(object sender, RoutedEventArgs e)
+        {
+            btn_EmployeeUpdate.Background = new SolidColorBrush(Colors.Transparent);
+            isEmployeeUpdate = false;
+            isEmployeeDelete = false;
+            EmployeeAdd employee = new EmployeeAdd(this);
+            employee.Show();
+        }
+        private void btn_EmployeeUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            isEmployeeDelete = false;
+            if (!isEmployeeUpdate) //Switch to Update
+            {
+                wpn_Employee.Children.Clear();
+                foreach (Uct_Employee child in Employees)
+                {
+                    child.EmployeeSetState(1);
+                    wpn_Employee.Children.Add(child);
+                }
+                btn_EmployeeUpdate.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
+                btn_EmployeeDelete.Background = new SolidColorBrush(Colors.Transparent);
+                btn_EmployeeAdd.Background = new SolidColorBrush(Colors.Transparent);
+                isEmployeeUpdate = true;
+            }
+            else //Turn off update
+            {
+                isEmployeeUpdate = false;
+                btn_EmployeeUpdate.Background = new SolidColorBrush(Colors.Transparent);
+                wpn_Employee.Children.Clear();
+                foreach (Uct_Employee child in Employees)
+                {
+                    child.EmployeeSetState(0);
+                    wpn_Employee.Children.Add(child);
+                }
+            }
+        }
 
+        private void btn_EmployeeDelete_Click(object sender, RoutedEventArgs e)
+        {
+            isEmployeeUpdate = false;
+            if (!isEmployeeDelete) //Swap to Delete
+            {
+                wpn_Employee.Children.Clear();
+                foreach (Uct_Employee child in Employees)
+                {
+                    child.EmployeeSetState(2);
+                    wpn_Employee.Children.Add(child);
+                }
+                btn_EmployeeDelete.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
+                btn_EmployeeUpdate.Background = new SolidColorBrush(Colors.Transparent);
+                btn_EmployeeAdd.Background = new SolidColorBrush(Colors.Transparent);
+                isEmployeeDelete = true;
+            }
+            else //Turn off delete
+            {
+                isEmployeeDelete = false;
+                btn_EmployeeDelete.Background = new SolidColorBrush(Colors.Transparent);
+                wpn_Employee.Children.Clear();
+                foreach (Uct_Employee child in Employees)
+                {
+                    child.EmployeeSetState(0);
+                    wpn_Employee.Children.Add(child);
+                }
+            }
+        }
 
     }
 }
