@@ -225,6 +225,9 @@
     <Compile Include="UserConfirmation.xaml.cs">
       <DependentUpon>UserConfirmation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Uct_Author.xaml.cs">
+      <DependentUpon>Uct_Author.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Uct_BookImport.xaml.cs">
       <DependentUpon>Uct_BookImport.xaml</DependentUpon>
     </Compile>
@@ -350,6 +353,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserConfirmation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Uct_Author.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -30,6 +30,7 @@ namespace SE104_QLNS
         public ObservableCollection<Uct_Customer> Customers { get; set; } = new ObservableCollection<Uct_Customer>();
 
         public ObservableCollection<Uct_Employee> Employees { get; set; } = new ObservableCollection<Uct_Employee>();
+        public ObservableCollection<Uct_Author> Authors { get; set; } = new ObservableCollection<Uct_Author>();
 
         public ObservableCollection<ImportedBookReceiptInfo> ImportBookReceipts { get; set; } = new ObservableCollection<ImportedBookReceiptInfo>();
         Connection connect = new Connection();
@@ -58,6 +59,7 @@ namespace SE104_QLNS
             LoadCustomer(this, 0);
             LoadEmployee(this, 0);
             LoadImportPaper(this, 0);
+            LoadAuthor(this, 0);
 
         }
 
@@ -1087,8 +1089,94 @@ namespace SE104_QLNS
                 }
             }
         }
+        public string GetNextAuthorID(MainWindow mainwindow)
+        {
+            string connectionString = connect.connection;
+            string nextAuthorID = "TG000001"; // Initial value
 
-        
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    // Use a transaction to ensure data consistency
+                    using (SqlTransaction transaction = connection.BeginTransaction())
+                    {
+                        // Get the maximum existing MaKH value
+                        string sqlQuery = "SELECT MAX(MaTG) AS LastMaTG FROM TACGIA";
+                        SqlCommand command = new SqlCommand(sqlQuery, connection, transaction);
+
+                        object lastMaTG = command.ExecuteScalar();
+
+                        // Check if any MaTG exists in the table
+                        if (lastMaTG != DBNull.Value)
+                        {
+                            int currentID = Convert.ToInt32(lastMaTG.ToString().Substring(2)); // Extract numeric part
+                            currentID++; // Increment for next ID
+                            nextAuthorID = "TG" + currentID.ToString("D6"); // Format with leading zeros
+                        }
+
+                        transaction.Commit(); // Commit the transaction if successful
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Notification noti = new Notification("Error", "Error generating author ID: " + ex.Message);
+                    nextAuthorID = null; // Indicate error
+                }
+            }
+
+            return nextAuthorID;
+        }
+        public void LoadAuthor(MainWindow mainwindow, int state)
+        {
+            Authors = new ObservableCollection<Uct_Author>();
+
+            //connect to database
+            string connectionString = connect.connection;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                mainwindow.Authors.Clear();
+                string MaTG = "", TenTG = ""; ;
+
+                try
+                {
+                    connection.Open();
+                    string sqlQuery = "SELECT * FROM TACGIA";
+                    SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            MaTG = reader["MaTG"].ToString();
+                            TenTG = reader["TenTG"].ToString();
+
+                            Uct_Author author = new Uct_Author(this);
+                            author.AuthorSetState(state);
+                            author.LoadData(MaTG, TenTG);
+                            mainwindow.Authors.Add(author);
+                        }
+                    }
+                    mainwindow.dtg_AuthorList.Items.Refresh();
+                    mainwindow.dtg_GenreList.Items.Refresh();
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    Notification noti = new Notification("Error", "Error retrieving data: " + ex.Message);
+                }
+                wpn_Author.Children.Clear();
+                foreach (Uct_Employee child in Employees)
+                {
+                    child.EmployeeSetState(0);
+                    wpn_Author.Children.Add(child);
+                }
+            }
+        }
+
     }
 }
 
