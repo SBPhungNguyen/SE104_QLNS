@@ -27,16 +27,39 @@
                            FontSize="18"
                            FontWeight="Bold"
                            VerticalAlignment="Center" Margin="15,0,251,0"/>
-                <Image Source="/Images/icon_close.png" Width="23" Height="23" Stretch="Fill"  RenderTransformOrigin="1.864,0.792" Margin="718,3,7,4"/>
+                <Button Name="btn_ExitApp"
+        Grid.Column="3"
+        Click="btn_ExitApp_Click"
+         Width="40" 
+        Height="30"
+        BorderThickness="0"
+        Cursor="Hand" 
+        VerticalAlignment="Center"
+        HorizontalAlignment="Right">
+                    <Button.Content>
+                        <Image Source="/Images/icon_close.png" Width="20" Height="20"/>
+                    </Button.Content>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#154448"/>
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
             </Grid>
             <Grid Grid.Row="1">
                 <TextBlock x:Name="ImportedBookReceiptID"
                            Foreground="#154448"
-                    Text="Phiếu nhập PN000001" 
+                    Text="Phiếu nhập " 
                            FontSize="25"
                            FontWeight="Bold"
                            FontFamily="Tahoma"
-                           HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,9,0,0"/>
+                           HorizontalAlignment="Center" Margin="0,9,0,1"/>
             </Grid>
 
             <StackPanel Grid.Row="2" Margin="25,10,25,0" Height="540" VerticalAlignment="Top">
@@ -58,12 +81,12 @@
                     <TextBlock Text="Tổng tiền" Grid.Column="0" Grid.Row="1" Foreground="#154448" FontSize="18" Height="25"/>
                     <TextBlock Text="Số lượng:" Grid.Column="0" Grid.Row="2"  FontSize="18" Foreground="#154448" Height="25" />
 
-                    <TextBlock Name="tbl_Date"  Grid.Column="1" Grid.Row="0" Text="19/11/2023" Foreground="#154448" FontSize="18" Height="25" FontWeight="Bold"/>
-                    <TextBlock Name="tbl_CustomerID"  Grid.Column="1" Grid.Row="1" Text="NV000001" Foreground="#154448" FontSize="18" Height="25" FontWeight="Bold"/>
-                    <TextBlock Name="tbl_CustomerName" Grid.Column="1" Grid.Row="2" Text="Ninh Dương Lan Ngọc" Foreground="#154448" FontSize="18" Height="25" FontWeight="Bold"/>
+                    <TextBlock Name="tbl_Date"  Grid.Column="1" Grid.Row="0"  Foreground="#154448" FontSize="18" Height="25" FontWeight="Bold"/>
+                    <TextBlock Name="tbl_MoneySum"  Grid.Column="1" Grid.Row="1"  Foreground="#154448" FontSize="18" Height="25" FontWeight="Bold"/>
+                    <TextBlock Name="tbl_Amount" Grid.Column="1" Grid.Row="2" Foreground="#154448" FontSize="18" Height="25" FontWeight="Bold"/>
                 </Grid>
 
-                
+
 
                 <Label Content="Danh sách sản phẩm"
                        FontFamily="Tahoma"
@@ -73,21 +96,19 @@
                        HorizontalAlignment="Center"
                        Margin="0,10,0,5"/>
 
-                <DataGrid  Name="dtg_BillDetail" ItemsSource="{Binding Books}" Style="{StaticResource DataGrid}" Height="415" Margin="0,5,0,0">
+                <DataGrid  Name="dtg_BillDetail" ItemsSource="{Binding ImportInfo}" Style="{StaticResource DataGrid}" Height="415" Margin="0,5,0,0">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="#" Binding="{Binding BookNum}" Width="0.5*" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Mã sách" Binding="{Binding BookID}" Width="*" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Mã sách" Binding="{Binding ImportBookID}" Width="*" IsReadOnly="True"/>
                         <DataGridTemplateColumn Header="Ảnh" Width="Auto" IsReadOnly="True">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Source="{Binding BookURL}" Width="Auto" Height="Auto"/>
+                                    <Image Source="{Binding ImportBookURL}" Width="Auto" Height="Auto"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="Sản phẩm" Binding="{Binding BookName}" Width="2*" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Số lượng" Binding="{Binding Amount}" Width="*" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Giá nhập" Binding="{Binding BookPriceImport}" Width="*" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Giá bán" Binding="{Binding BookPriceExport}" Width="*" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Số lượng nhập" Binding="{Binding ImportNum}" Width="*" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Giá nhập" Binding="{Binding ImportPrice}" Width="*" IsReadOnly="True"/>
                     </DataGrid.Columns>
                 </DataGrid>
 
@@ -96,7 +117,7 @@
 
             <Grid Grid.Row="3">
                 <Button Name="btn_Ok" 
-                        Content="OK" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="228,-9,227,19">
+                        Content="OK" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="228,-9,227,19" Click="btn_Ok_Click">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="#154348"/>
@@ -116,6 +137,56 @@
                                                         BorderBrush="#3CB76D">
                                 <ContentPresenter VerticalAlignment="Center"
                                                                       HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Name="btn_DeleteOk" 
+        Content="Xóa" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="81,-9,374,19" Click="btn_DeleteOk_Click">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#154348"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Green"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="250" Height="35"
+                                        CornerRadius="15"
+                                        Background="{TemplateBinding Background}"
+                                        BorderThickness="1"
+                                        BorderBrush="#3CB76D">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Name="btn_DeleteCancel" 
+Content="Quay Lại" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="374,-9,81,19" Click="btn_DeleteCancel_Click">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#154348"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Green"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="250" Height="35"
+                                CornerRadius="15"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="1"
+                                BorderBrush="#3CB76D">
+                                <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
                     </Button.Template>

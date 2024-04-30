@@ -149,9 +149,7 @@ namespace SE104_QLNS
                 }
             }
 
-            parent.LoadCustomer(parent, 0);
-            IsClosing = true;
-            this.Close();
+            parent.LoadBook(parent, 0);
             IsClosing = true;
             this.Close();
         }

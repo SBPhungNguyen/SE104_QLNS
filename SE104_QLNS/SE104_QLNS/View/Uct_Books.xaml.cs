@@ -98,7 +98,7 @@ namespace SE104_QLNS.View
             this.BookDistribution = BookDistribution;
             this.BookDistributionYear = BookDistributionYear;
             this.BookURL = URL;
-            BookNum = NumOfBook;
+            this.BookNum = NumOfBook;
             this.BookPriceImport = PriceImport;
             this.BookPriceExport = PriceExport;
             this.Amount = Amount;

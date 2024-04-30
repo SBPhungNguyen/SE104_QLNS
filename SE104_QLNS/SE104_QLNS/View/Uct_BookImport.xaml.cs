@@ -20,6 +20,7 @@ namespace SE104_QLNS.View
     /// </summary>
     public partial class Uct_BookImport : UserControl
     {
+        public MainWindow parent;
         public string BookID
         { get; set; }
         public string BookName
@@ -34,7 +35,24 @@ namespace SE104_QLNS.View
         {
             InitializeComponent();
             this.DataContext = this;
+        }
+        public Uct_BookImport(MainWindow mainwindow)
+        {
+            InitializeComponent();
+            this.DataContext = this;
+            parent = mainwindow;
+        }
 
+        private void Remove_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (Uct_BookImport child in parent.wpn_ImportPaper.Children.OfType<Uct_BookImport>())
+            {
+                if (this == child)
+                {
+                    parent.wpn_ImportPaper.Children.Remove(this);
+                    break;
+                }
+            }
         }
     }
 }

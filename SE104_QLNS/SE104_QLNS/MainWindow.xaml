@@ -9,7 +9,8 @@
         Title="MainWindow" Height="650" Width="1000"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        Background="Transparent" AllowsTransparency="True">
+        Background="Transparent" AllowsTransparency="True"
+    >
     <Border Background="White" CornerRadius="15">
         <Grid>
             <Grid.RowDefinitions>
@@ -123,6 +124,12 @@
 
                     <!--this is Main_Home panel-->
                     <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="89*"/>
+                            <ColumnDefinition Width="48*"/>
+                            <ColumnDefinition Width="38*"/>
+                            <ColumnDefinition Width="323*"/>
+                        </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="40"/>
                             <RowDefinition Height="50"/>
@@ -130,7 +137,7 @@
                         </Grid.RowDefinitions>
 
                         <!--Sreach bar-->
-                        <Grid Grid.Row="0">
+                        <Grid Grid.Row="0" Grid.ColumnSpan="4">
 
 
                             <Border Height="28" Width="100" CornerRadius="15,0,0,15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="345,2,499,2" >
@@ -184,7 +191,7 @@
                         </Grid>
 
                         <!--switch to grid/datagrid button, import book button, delete book button,... above list-->
-                        <Grid Grid.Row="1">
+                        <Grid Grid.Row="1" Grid.ColumnSpan="4">
                             <Button Name="btn_AddBook" Height="40" Width="100"
                                 FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="10,5,834,5" Click="btn_AddBook_Click">
                                 <Button.Style>
@@ -310,14 +317,13 @@
                         </Grid>
 
                         <!--Gird Book List-->
-                        <Canvas Grid.Row="2" Visibility="Visible" Name="cvs_Books">
+                        <Canvas Grid.Row="2" Visibility="Visible" Name="cvs_Books" Grid.ColumnSpan="4">
 
 
                             <!--DataGird Book List-->
                             <Canvas  Grid.Row="1"  Visibility="Visible" Name="cvs_BooksDataGridList" MouseLeftButtonDown="cvs_BooksDataGridList_MouseLeftButtonDown">
                                 <DataGrid Name="dtg_Books" ItemsSource="{Binding Books}" Style="{StaticResource DataGrid}" Width="975" Height="470" ColumnHeaderHeight="40" Margin="10,0,10,10" SelectionChanged="dtg_Books_SelectionChanged">
                                     <DataGrid.Columns >
-                                        <!--<DataGridCheckBoxColumn Binding="{Binding IsChecked}" Width="Auto"/>-->
                                         <DataGridTemplateColumn Header="" Visibility="Hidden">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
@@ -423,7 +429,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                         </Canvas>
 
                         <!--this is ImportBook panel-->
-                        <Canvas Grid.Row="2" Visibility="Hidden" Name="cvs_ImportBooks">
+                        <Canvas Grid.Row="2" Visibility="Hidden" Name="cvs_ImportBooks" Grid.ColumnSpan="4">
                             <Grid HorizontalAlignment="Left" 
                                   VerticalAlignment="Center"
                                   Height="480" 
@@ -695,7 +701,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                            HorizontalAlignment="Center"
                                            VerticalAlignment="Center"
                                            Margin="120,0,15,0"/>
-                                    
+
                                     <Label x:Name="lbl_BillDate"
                                            Content="Ngày lập hóa đơn: 19/11/2023"
                                            Foreground="#154448"
@@ -1053,7 +1059,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                             </StackPanel>
                         </DockPanel>
                     </TabItem.Header>
- 
+
                     <!--this is Bill, Imported Book Receipt panel-->
                     <Grid>
                         <Grid.RowDefinitions>
@@ -1177,7 +1183,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                         <ComboBox Style="{StaticResource MonthYearComboxbox}" Height="25" Width="150" Margin="24,2,20,1"/>
                                     </Border>
 
-                                    <Button Name="btn_ImportBookReceipt" 
+                                    <Button Name="btn_ImportBookReceiptDelete" 
                                     Height="40" 
                                     Width="85"
                                     FontFamily="Tahoma" 
@@ -1185,7 +1191,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                     FontWeight="Bold"
                                     Foreground="#154348"
                                     Cursor="Hand" 
-                                    Margin="10,5,0,5">
+                                    Margin="10,5,0,5" Click="btn_ImportBookReceiptDelete_Click">
                                         <Button.Style>
                                             <Style TargetType="Button">
                                                 <Setter Property="Background" Value="Transparent"/>
@@ -1236,9 +1242,48 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                 </DockPanel>
 
                                 <!--this is _Imported Book Receipt list -->
-                                <DataGrid Name="dtg_ImportBookReceiptList" Grid.Row="1" ItemsSource="{Binding ImportBookReceipts}" Style="{StaticResource DataGrid}" Width="975" Height="475" ColumnHeaderHeight="40" Margin="10,0,10,10">
+                                <DataGrid Name="dtg_ImportBookReceiptList" Grid.Row="1" ItemsSource="{Binding ImportBookReceipts}" 
+                                          MouseLeftButtonDown="ViewImportBook_MouseLeftButtonDown" SelectionChanged="dtg_ImportBookReceiptList_SelectionChanged"
+                                          Style="{StaticResource DataGrid}" Width="975" Height="475" ColumnHeaderHeight="40" Margin="10,0,10,10">
                                     <DataGrid.Columns>
-                                        <DataGridCheckBoxColumn Binding="{Binding IsChecked}" Width="0.2*"/>
+                                        <DataGridTemplateColumn Header="" Visibility="Hidden">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button Name="btn_DeleteImportBook" Height="40" Width="40" Margin="15,0,0,0" Click="btn_DeleteImportBook_Click">
+                                                        <Button.Style>
+                                                            <Style TargetType="Button">
+                                                                <Setter Property="Background" Value="Transparent"/>
+                                                                <Setter Property="BorderThickness" Value="1"/>
+                                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                                <Style.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter Property="Background" Value="#C2DECE"/>
+                                                                        <Setter Property="BorderBrush" Value="#000000"/>
+                                                                    </Trigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Button.Style>
+                                                        <Button.Template>
+                                                            <ControlTemplate TargetType="Button">
+                                                                <Border Width="40" Height="40"
+CornerRadius="10"
+Background="{TemplateBinding Background}"
+BorderBrush="{TemplateBinding BorderBrush}"
+BorderThickness="{TemplateBinding BorderThickness}">
+                                                                    <Grid>
+                                                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                                                            <Image Source="/Images/icon_bin.png" Margin="6,0,0,0"
+        Stretch="Fill" Height="25" Width="25"/>
+
+                                                                        </StackPanel>
+                                                                    </Grid>
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Button.Template>
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
                                         <DataGridTextColumn Header="#" Binding="{Binding ImportBookReceiptNum}" Width="0.2*" IsReadOnly="True"/>
                                         <DataGridTextColumn Header="Mã phiếu nhập" Binding="{Binding ImportBookReceiptID}" Width="*" IsReadOnly="True"/>
                                         <DataGridTextColumn Header="Ngày nhập" Binding="{Binding Date}" Width="*" IsReadOnly="True"/>
@@ -2223,8 +2268,8 @@ BorderThickness="{TemplateBinding BorderThickness}">
 
                     </Grid>
                 </TabItem>
-                
-                
+
+
                 <!-- EMPLOYEE -->
                 <TabItem>
                     <TabItem.Header>

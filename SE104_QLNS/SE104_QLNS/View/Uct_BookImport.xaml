@@ -12,7 +12,6 @@
             <Border CornerRadius="10">
                 <Grid>
                     <Image Name="Img_BookImg" Source="{Binding BookURL}" Stretch="Fill" Width="52" Height="70" Margin="14,5,194,5"/>
-                    <Image Source="/Images/icon_trashcan.png" Stretch="Fill" Margin="212,2,3,58" Width="18" Height="18"/>
                     <TextBlock Text="Tên: " Margin="82,22,106,30"/>
                     <TextBlock Text="Giá nhập:" Margin="82,42,91,10"/>
                     <TextBlock Text="Số lượng:" Margin="82,61,96,-4"/>
@@ -21,6 +20,9 @@
                     <TextBlock>
                          <TextBox Name="tbl_BookQuantity" Background="Transparent" BorderBrush="Transparent" Text="{Binding BookQuantity}" Margin="150,62,17,4" Width="40"/>
                     </TextBlock>
+                    <Button Name="Remove" Margin="206,3,4,52" Width="25" Height="25" Background="#C2DECE" BorderThickness="1" BorderBrush="#6FB3B8" Click="Remove_Click">
+                        <Image Source="/Images/icon_trashcan.png" Stretch="Fill"/>
+                    </Button>
                 </Grid>
                 <Border.Style>
                     <Style TargetType="Border">
