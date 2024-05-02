@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
 namespace SE104_QLNS
 {
     /// <summary>
@@ -87,13 +88,14 @@ namespace SE104_QLNS
             if(state==0)
             {
                 BillIDName.Text = "Hóa đơn ";
-                btn_Delete.Visibility = Visibility = Visibility.Hidden;
-                btn_Cancel.Visibility = Visibility = Visibility.Hidden;
+                btn_Delete.Visibility = Visibility.Hidden;
+                btn_Cancel.Visibility = Visibility.Hidden;
             }
             else
             {
                 BillIDName.Text = "Bạn có chắc muốn xóa Hóa đơn ";
-                btn_Ok.Visibility = Visibility = Visibility.Hidden;
+                btn_SaveAsPDF.Visibility = Visibility.Hidden;
+                btn_Ok.Visibility= Visibility.Hidden;
             }
         }
         public void LoadData(int BillNum, string billID, string creationDate, string customerID, string customerName, string customerPhoneNumber, 
@@ -179,12 +181,12 @@ namespace SE104_QLNS
 
         private void btn_ExitApp_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            this.Hide();
         }
 
         private void btn_Ok_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            this.Hide();
         }
 
         private void btn_Delete_Click(object sender, RoutedEventArgs e)
@@ -217,8 +219,13 @@ namespace SE104_QLNS
                     Notification noti = new Notification("Error", "Error: " + ex.Message);
                 }
                 parent.LoadExportPaper(parent, 1);
-                this.Close();
+                this.Hide();
             }
+        }
+
+        private void btn_SaveAsPDF_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

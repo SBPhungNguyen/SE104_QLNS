@@ -74,7 +74,7 @@ namespace SE104_QLNS
             LoadExportPaper(this, 0);
             txb_BillDate.Text = DateTime.Now.ToString();
             LoadAuthor(this, 0);
-
+            Cbx_SearchBook.SelectedIndex = 0;
         }
 
         //Miscellaneous
@@ -979,6 +979,7 @@ namespace SE104_QLNS
                 if (Cbx_SearchBook.Text == "Tất Cả" || (Cbx_SearchBook.Text == null))
                 {
                     var filteredItems = Books.Where(book =>
+                    book.BookID.ToLower().Contains(txt_Search.Text.ToLower())||
                         book.BookName.ToLower().Contains(txt_Search.Text.ToLower()) ||
                         book.BookGenre.ToLower().Contains(txt_Search.Text.ToLower()) ||
                         book.BookAuthor.ToLower().Contains(txt_Search.Text.ToLower())
@@ -1009,9 +1010,74 @@ namespace SE104_QLNS
             }
             else
             {
-
-            }
+                if (string.IsNullOrEmpty(txt_Search.Text))
+                {
+                    foreach (Uct_Books child in wpn_Books.Children)
+                    {
+                            child.Visibility = Visibility.Visible;
+                    }
+                }
+                if (Cbx_SearchBook.Text == "Tất Cả" || (Cbx_SearchBook.Text == null))
+                {
+                    foreach(Uct_Books child in wpn_Books.Children)
+                    {
+                        if (child.BookName.Contains(txt_Search.Text)
+                            || child.BookAuthor.Contains(txt_Search.Text)
+                            ||child.BookID.Contains(txt_Search.Text)
+                            || child.BookGenre.Contains(txt_Search.Text))
+                        {
+                            child.Visibility = Visibility.Visible;
+                        }
+                        else
+                        {
+                            child.Visibility = Visibility.Collapsed;
+                        }
+                    }
+                }
+                else if (Cbx_SearchBook.Text == "Tên Sách")
+                {
+                    foreach (Uct_Books child in wpn_Books.Children)
+                    {
+                        if (child.BookName.Contains(txt_Search.Text))
+                        {
+                            child.Visibility = Visibility.Visible;
+                        }
+                        else
+                        {
+                            child.Visibility = Visibility.Collapsed;
+                        }
+                    }
+                }
+                else if (Cbx_SearchBook.Text == "Thể Loại")
+                {
+                    foreach (Uct_Books child in wpn_Books.Children)
+                    {
+                        if (child.BookGenre.Contains(txt_Search.Text))
+                        {
+                            child.Visibility = Visibility.Visible;
+                        }
+                        else
+                        {
+                            child.Visibility = Visibility.Collapsed;
+                        }
+                    }
+                }
+                else if (Cbx_SearchBook.Text == "Tác Giả")
+                {
+                    foreach (Uct_Books child in wpn_Books.Children)
+                    {
+                        if (child.BookAuthor.Contains(txt_Search.Text))
+                        {
+                            child.Visibility = Visibility.Visible;
+                        }
+                        else
+                        {
+                            child.Visibility = Visibility.Collapsed;
+                        }
+                    }
+                }
         }
+    }
 
             //Add Book To ImportPanel
         private void btn_AddBook_Click(object sender, RoutedEventArgs e) // Click on Them/Add Button
@@ -1649,7 +1715,33 @@ namespace SE104_QLNS
                 }
             }
         }
+        private void txt_CustomerSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            foreach (Uct_Customer child in wpn_Customer.Children)
+            {
+                if (child is Uct_Customer)
+                {
+                    if (child.CustomerName.Contains(txt_CustomerSearch.Text)|| child.CustomerPhonenumber.Contains(txt_CustomerSearch.Text))
+                    {
+                        child.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        child.Visibility = Visibility.Collapsed;
+                    }
+                }
+            }
+        }
 
+        private void CustomerSearchComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CustomerSearchComboBox.Text= CustomerSearchComboBox.SelectedItem.ToString();
+        }
+
+        private void btn_SaveBillAsPDF_Click(object sender, RoutedEventArgs e)
+        {
+            Bills[Bills.Count - 1].Show();
+        }
     }
 }
 

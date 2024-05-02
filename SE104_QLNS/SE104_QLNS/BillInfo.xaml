@@ -143,8 +143,12 @@
 
 
             <Grid Grid.Row="3">
-                <Button Name="btn_Ok" 
-                        Content="OK" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="228,-9,227,19" Click="btn_Ok_Click">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="283*"/>
+                    <ColumnDefinition Width="91*"/>
+                </Grid.ColumnDefinitions>
+                <Button Name="btn_Ok"  
+                        Content="OK" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="82,-9,191,19" Click="btn_Ok_Click">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="#154348"/>
@@ -168,8 +172,35 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
+
+                <Button x:Name="btn_SaveAsPDF"  Click="btn_SaveAsPDF_Click"
+     Content="Hủy" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="390,-9,64,19" Grid.ColumnSpan="2">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="#154348"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Green"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Width="250" Height="35"
+                 CornerRadius="15"
+                 Background="{TemplateBinding Background}"
+                 BorderThickness="1"
+                 BorderBrush="#3CB76D">
+                                <ContentPresenter VerticalAlignment="Center"
+                     HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
                 <Button x:Name="btn_Cancel" 
-                    Content="Hủy" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="390,-9,64,19">
+                    Content="Hủy" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="390,-9,64,19" Grid.ColumnSpan="2">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Background" Value="#154348"/>
@@ -194,7 +225,7 @@
                     </Button.Template>
                 </Button>
                 <Button x:Name="btn_Delete" 
-                    Content="Xóa" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="82,-9,374,19" Click="btn_Delete_Click">
+                    Content="Xóa" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="82,-9,192,19" Click="btn_Delete_Click">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Background" Value="#154348"/>
