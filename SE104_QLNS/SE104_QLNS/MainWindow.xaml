@@ -141,12 +141,18 @@
 
 
                             <Border Height="28" Width="100" CornerRadius="15,0,0,15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="345,2,499,2" >
-                                <ComboBox Style="{StaticResource MonthYearComboxbox}" Height="24" Width="80" Margin="16,1,2,1"/>
+                                <ComboBox Name="Cbx_SearchBook" Style="{StaticResource MonthYearComboxbox}" Height="24" Width="80" Margin="16,1,2,1" FontSize="13">
+                                    <ComboBoxItem>Tất Cả</ComboBoxItem>
+                                    <ComboBoxItem>Tên Sách</ComboBoxItem>
+                                    <ComboBoxItem>Thể Loại</ComboBoxItem>
+                                    <ComboBoxItem>Tác Giả</ComboBoxItem>
+                                </ComboBox>
+
                             </Border>
                             <Border Height="28" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,15,15,0" Margin="444,2,250,2">
                                 <Grid>
-                                    <TextBox x:Name="txt_Search" VerticalContentAlignment="Center" VerticalAlignment="Center"
-                             FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="193" Margin="5,0,0,0"/>
+                                    <TextBox x:Name="txt_Search" VerticalContentAlignment="Center" VerticalAlignment="Bottom" TextChanged="txt_Search_TextChanged"
+                             FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="172" Margin="26,0,0,2"/>
                                     <Image Name="img_HomeSearch" Source="/Images/icon_search.png" Stretch="Fill" Height="20" Width="20" Cursor="Hand" Margin="212,4,16,2"/>
 
                                 </Grid>
@@ -311,7 +317,7 @@
                            Height="24" Width="50" Margin="731,20,30,6" Grid.Row="1"/>
 
                             <Label Name="lbl_BookCount" FontSize="18"
-                       Content="28283" FontWeight="Bold"
+                       Content="0" FontWeight="Bold"
                        VerticalContentAlignment="Top" HorizontalContentAlignment="Right"
                     FontFamily="Tahoma" Margin="785,16,15,2"/>
                         </Grid>
@@ -643,15 +649,14 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                 </Grid.RowDefinitions>
 
                                 <DockPanel>
-                                    <ComboBox x:Name="cbx_BookSreach"
+                                    <ComboBox x:Name="cbx_BookSearch"
                                               Style="{StaticResource SreachCombobox}"
                                               IsEditable="True"
-                                              HorizontalAlignment="Left"
-                                              VerticalAlignment="Center"
-                                              Width="200"
+                                              Width="287"
                                               Height="30"
                                               Margin="17,0,10,0"
-                                              Text="{Binding SearchTextText}">
+                                              IsTextSearchEnabled="True"
+                                              ItemsSource="{Binding BookSearchItemsOriginal}" SelectionChanged="cbx_BookSearch_SelectionChanged">
                                         <ComboBox.ItemsPanel>
                                             <ItemsPanelTemplate>
                                                 <VirtualizingStackPanel/>
@@ -662,7 +667,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
 
                                     <Button x:Name="btn_DeleteBookFromSellList"
                                             Height="30"
-                                            Width="30"
+                                            Width="30" Click="btn_DeleteBookFromSellList_Click"
                                             Margin="5, 0, 5, 0"
                                             Cursor="Hand">
                                         <Button.Content>
@@ -700,29 +705,80 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                            VerticalContentAlignment="Center"
                                            HorizontalAlignment="Center"
                                            VerticalAlignment="Center"
-                                           Margin="120,0,15,0"/>
+                                           Margin="10,0,15,0"/>
 
                                     <Label x:Name="lbl_BillDate"
-                                           Content="Ngày lập hóa đơn: 19/11/2023"
+                                           Content="Ngày lập hóa đơn:  "
                                            Foreground="#154448"
                                            FontWeight="Bold"
                                            HorizontalContentAlignment="Center"
                                            VerticalContentAlignment="Center"
                                            HorizontalAlignment="Right"
                                            VerticalAlignment="Center"
-                                           Margin="0,0,15,0"/>
+                                           Margin="100,0,15,0"/>
+
+                                    <TextBox x:Name="txb_BillDate"
+       Text="22/22/2222"
+       Foreground="#154448"
+       FontWeight="Bold"
+       HorizontalContentAlignment="Center"
+       VerticalContentAlignment="Center"
+                                             IsReadOnly="true"
+                                             Background="Transparent"
+                                             BorderThickness="0,0,0,0" 
+                                             
+                                             BorderBrush="#154448"
+       Margin="0,0,15,0" Width="155"/>
+
                                 </DockPanel>
 
                                 <DataGrid Grid.Row="1" Name="dtg_SellList" 
-                                          ItemsSource="{Binding Books}" 
+                                          ItemsSource="{Binding BooksSell}" 
                                           Style="{StaticResource DataGrid}" 
                                           Width="960" 
+                                          CurrentCellChanged="dtg_SellList_CurrentCellChanged"
                                           Height="240" 
                                           ColumnHeaderHeight="30" 
                                           RowHeight="50"
-                                          Margin="10,0,10,10">
+                                          Margin="10,0,10,10" SelectionChanged="dtg_SellList_SelectionChanged">
                                     <DataGrid.Columns>
-                                        <DataGridCheckBoxColumn Binding="{Binding IsChecked}" Width="Auto"/>
+                                        <DataGridTemplateColumn Header="" Width="60">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button Name="btn_DeleteBookFromSell" Height="40" Width="40" Margin="0,0,0,0" Click="btn_DeleteBookFromSell_Click">
+                                                        <Button.Style>
+                                                            <Style TargetType="Button">
+                                                                <Setter Property="Background" Value="Transparent"/>
+                                                                <Setter Property="BorderThickness" Value="1"/>
+                                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                                <Style.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter Property="Background" Value="#C2DECE"/>
+                                                                        <Setter Property="BorderBrush" Value="#000000"/>
+                                                                    </Trigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Button.Style>
+                                                        <Button.Template>
+                                                            <ControlTemplate TargetType="Button">
+                                                                <Border Width="40" Height="40"
+                                                                    CornerRadius="10"
+                                                                        Background="{TemplateBinding Background}"
+                                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                                        BorderThickness="{TemplateBinding BorderThickness}">
+                                                                    <Grid>
+                                                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                                                            <Image Source="/Images/icon_bin.png" Margin="6,0,0,0"
+                                                                                Stretch="Fill" Height="25" Width="25"/>
+                                                                        </StackPanel>
+                                                                    </Grid>
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Button.Template>
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
                                         <DataGridTextColumn Header="#" Binding="{Binding BookNum}" Width="0.5*" IsReadOnly="True"/>
                                         <DataGridTextColumn Header="Mã sách" Binding="{Binding BookID}" Width="*" IsReadOnly="True"/>
                                         <DataGridTemplateColumn Header="Ảnh" Width="0.5*" IsReadOnly="True">
@@ -754,7 +810,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
-                                        <DataGridTextColumn Header="Tồn" Binding="{Binding BookRemainAmount}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Tồn" Binding="{Binding Amount}" Width="*" IsReadOnly="True"/>
                                         <DataGridTextColumn Header="Tổng" Binding="{Binding BookTotalSellPrice}" Width="*" IsReadOnly="True"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
@@ -813,8 +869,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                                   HorizontalAlignment="Center"
                                                   VerticalAlignment="Center"
                                                   Margin="10,10,10,10"
-                                                  ItemsSource="{Binding Customers}"
-                                                  Text="ID khách hàng">
+                                                  SelectionChanged="cbx_CustomerID_SelectionChanged">
                                             <ComboBox.ItemsPanel>
                                                 <ItemsPanelTemplate>
                                                     <VirtualizingStackPanel/>
@@ -852,22 +907,17 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                                     BorderBrush="Black"
                                                     BorderThickness="1">
 
-                                            <DatePicker x:Name="dpt_CustomerDateOfBirth"
+                                            <TextBox x:Name="txt_CustomerDateOfBirth"
                                                     Height="30"
-                                                    Width="180"
+                                                    Width="190"
+                                                    Style="{StaticResource CustomerInfoTextBox}"
+                                                    Text="Ngày Sinh"
                                                     VerticalAlignment="Center" 
                                                     HorizontalAlignment="Center"
                                                     VerticalContentAlignment="Center" 
                                                     Foreground="#FF154448" 
                                                     BorderThickness="0">
-                                                <DatePicker.Resources>
-                                                    <Style TargetType="{x:Type DatePickerTextBox}">
-                                                        <Setter Property="Background" Value="White"/>
-                                                        <Setter Property="Text" Value="Ngày sinh"/>
-                                                        <Setter Property="FontSize" Value="14"/>
-                                                    </Style>
-                                                </DatePicker.Resources>
-                                            </DatePicker>
+                                            </TextBox>
                                         </Border>
 
 
@@ -890,7 +940,6 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                                 <x:Array Type="{x:Type sys:String}" xmlns:sys="clr-namespace:System;assembly=mscorlib">
                                                     <sys:String>Nam</sys:String>
                                                     <sys:String>Nữ</sys:String>
-                                                    <sys:String>Khác</sys:String>
                                                 </x:Array>
                                             </ComboBox.ItemsSource>
                                         </ComboBox>
@@ -907,8 +956,8 @@ BorderThickness="{TemplateBinding BorderThickness}">
 
                                         <!-- SaveNewCustomerInfomation Button -->
 
-                                        <Button x:Name="btn_SaveNewCustomerInfomation"
-                                                Content="Lưu khách hàng"
+                                        <Button x:Name="btn_SaveNewCustomerInfomation" Visibility="Hidden"
+                                                Content="Lưu khách hàng" Click="btn_SaveNewCustomerInfomation_Click"
                                                 Grid.Column="2"
                                                 Grid.Row="2"
                                                 Style="{StaticResource LightBlueButton}"
@@ -978,7 +1027,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                                    FontWeight="Bold"
                                                    Margin="10"/>
 
-                                        <TextBlock Text="100,000,000"
+                                        <TextBlock Name="txt_ReceiptPrice"
                                                    Grid.Column="1"
                                                    Grid.Row="0"
                                                    Foreground="#47B802"
@@ -987,7 +1036,6 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                                    HorizontalAlignment="Right"/>
 
                                         <TextBox x:Name="txb_CustomerPayment"
-                                                 Text="50,000"
                                                  Grid.Column="1"
                                                  Grid.Row="1"
                                                  Foreground="#154448"
@@ -995,11 +1043,11 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                                  FontWeight="Bold"
                                                  Margin="10"
                                                  Background="Transparent"
-                                                 BorderThickness="0,0,0,2"
+                                                 BorderThickness="0,0,0,2" TextChanged="txb_CustomerPayment_TextChanged"
                                                  BorderBrush="#154448"
                                                  HorizontalContentAlignment="Right"/>
 
-                                        <TextBlock Text="99,950,000"
+                                        <TextBlock Name="txb_MoneyOwe"
                                                    Grid.Column="1"
                                                    Grid.Row="2"
                                                    Foreground="#D70000"
@@ -1022,7 +1070,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                             FontSize="14"
                                             Width="255"
                                             Height="30"
-                                            Margin="5">
+                                            Margin="5" Click="btn_SaveBillToDatabase_Click">
                                         <Button.Style>
                                             <Style TargetType="Button" BasedOn="{StaticResource LightBlueButton}">
                                                 <Setter Property="Background" Value="#154448" />
@@ -1092,7 +1140,10 @@ BorderThickness="{TemplateBinding BorderThickness}">
 
                                 <DockPanel Grid.Row="0">
                                     <Border Height="30" CornerRadius="15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="10,6,0,4">
-                                        <ComboBox Style="{StaticResource MonthYearComboxbox}" Height="25" Width="150" Margin="24,2,20,1"/>
+                                        <ComboBox Name="SwapExportImport" Style="{StaticResource MonthYearComboxbox}" FontSize="13" Height="25" Width="150" Margin="24,2,20,1" SelectionChanged="SwapExportImport_SelectionChanged" VerticalAlignment="Top">
+                                            
+                                            <ComboBoxItem>Phiếu Nhập</ComboBoxItem>
+                                        </ComboBox>
                                     </Border>
 
                                     <Button Name="btn_DeleteBill" 
@@ -1103,7 +1154,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                     FontWeight="Bold"
                                     Foreground="#154348"
                                     Cursor="Hand" 
-                                    Margin="10,5,0,5">
+                                    Margin="10,5,0,5" Click="btn_DeleteBill_Click">
                                         <Button.Style>
                                             <Style TargetType="Button">
                                                 <Setter Property="Background" Value="Transparent"/>
@@ -1144,7 +1195,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                     </Button>
 
                                     <Label x:Name="lbl_TotalBill" 
-                                      Content="Tổng: 100"
+                                      Content=""
                                       Grid.Column="2"
                                    HorizontalAlignment="Right"
                                       VerticalAlignment="Center"
@@ -1154,16 +1205,55 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                 </DockPanel>
 
                                 <!--this is BILL list -->
-                                <DataGrid Name="dtg_BillList" Grid.Row="1" ItemsSource="{Binding Bills}" Style="{StaticResource DataGrid}" Width="975" Height="475" ColumnHeaderHeight="40" Margin="10,0,10,10">
+                                <DataGrid Name="dtg_BillList" Grid.Row="1" MouseLeftButtonDown="dtg_BillList_MouseLeftButtonDown"
+                                          ItemsSource="{Binding Bills}" SelectionChanged="dtg_BillList_SelectionChanged"
+                                          Style="{StaticResource DataGrid}" Width="975" Height="475" ColumnHeaderHeight="40" Margin="10,0,10,10">
                                     <DataGrid.Columns>
-                                        <DataGridCheckBoxColumn Binding="{Binding IsChecked}" Width="0.2*"/>
+                                        <DataGridTemplateColumn Header="" Visibility="Hidden" Width="0.5*">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button Name="btn_DeleteExportBook" Height="40" Width="40" Margin="15,0,0,0" Click="btn_DeleteExportBook_Click">
+                                                        <Button.Style>
+                                                            <Style TargetType="Button">
+                                                                <Setter Property="Background" Value="Transparent"/>
+                                                                <Setter Property="BorderThickness" Value="1"/>
+                                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                                <Style.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter Property="Background" Value="#C2DECE"/>
+                                                                        <Setter Property="BorderBrush" Value="#000000"/>
+                                                                    </Trigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Button.Style>
+                                                        <Button.Template>
+                                                            <ControlTemplate TargetType="Button">
+                                                                <Border Width="40" Height="40"
+CornerRadius="10"
+Background="{TemplateBinding Background}"
+BorderBrush="{TemplateBinding BorderBrush}"
+BorderThickness="{TemplateBinding BorderThickness}">
+                                                                    <Grid>
+                                                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                                                            <Image Source="/Images/icon_bin.png" Margin="6,0,0,0"
+        Stretch="Fill" Height="25" Width="25"/>
+
+                                                                        </StackPanel>
+                                                                    </Grid>
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Button.Template>
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
                                         <DataGridTextColumn Header="#" Binding="{Binding BillNum}" Width="0.2*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Header="Mã hóa đơn" Binding="{Binding BillID}" Width="*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Header="Tên khách hàng" Binding="{Binding CustomerID}" Width="*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Header="Ngày lập" Binding="{Binding Date}" Width="*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Header="Tổng tiền" Binding="{Binding Total}" Width="*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Header="Số tiền trả" Binding="{Binding Payed}" Width="*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Header="Còn lại" Binding="{Binding Debt}" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Mã hóa đơn" Binding="{Binding BillID}"  Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Tên khách hàng" Binding="{Binding CustomerName}"  Width="2*"  IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Ngày lập" Binding="{Binding CreationDate}"  Width="*"  IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Tổng tiền" Binding="{Binding BillTotal}"   Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Số tiền trả" Binding="{Binding BillPaid}"   Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Còn lại" Binding="{Binding BillRemaining}"  Width="*"  IsReadOnly="True"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
 
@@ -1180,11 +1270,13 @@ BorderThickness="{TemplateBinding BorderThickness}">
 
                                 <DockPanel Grid.Row="0">
                                     <Border Height="30" CornerRadius="15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="10,6,0,4">
-                                        <ComboBox Style="{StaticResource MonthYearComboxbox}" Height="25" Width="150" Margin="24,2,20,1"/>
+                                        <ComboBox Name="SelectImportExport" Style="{StaticResource MonthYearComboxbox}" FontSize="13" SelectionChanged="SelectImportExport_SelectionChanged"
+                                                  Height="25" Width="150" Margin="24,2,20,1" >
+                                            <ComboBoxItem>Hoá Đơn</ComboBoxItem>
+                                        </ComboBox>
                                     </Border>
 
                                     <Button Name="btn_ImportBookReceiptDelete" 
-                                    Height="40" 
                                     Width="85"
                                     FontFamily="Tahoma" 
                                     FontSize="17" 
@@ -2135,10 +2227,8 @@ BorderBrush="#3CB76D">
                                 </DockPanel>
 
                                 <!--this is Author list -->
-                                <DataGrid Name="dtg_AuthorList" Grid.Row="1" ItemsSource="{Binding Author}" Style="{StaticResource DataGrid}" Width="975" Height="475" ColumnHeaderHeight="40" Margin="10,0,10,10">
+                                <DataGrid Name="dtg_AuthorList" Grid.Row="1" ItemsSource="{Binding Authors}" Style="{StaticResource DataGrid}" Width="975" Height="475" ColumnHeaderHeight="40" Margin="10,0,10,10">
                                     <DataGrid.Columns>
-                                        <DataGridCheckBoxColumn Binding="{Binding IsChecked}" Width="0.2*"/>
-                                        <DataGridTextColumn Header="#" Binding="{Binding AuthorNum}" Width="0.2*" IsReadOnly="True"/>
                                         <DataGridTextColumn Header="Mã tác giả" Binding="{Binding AuthorID}" Width="*" IsReadOnly="True"/>
                                         <DataGridTextColumn Header="Tên tác giả" Binding="{Binding AuthorName}" Width="3*" IsReadOnly="True"/>
                                     </DataGrid.Columns>

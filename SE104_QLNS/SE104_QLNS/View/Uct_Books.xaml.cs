@@ -57,6 +57,7 @@ namespace SE104_QLNS.View
                     break;
             }
         }
+        public int BookSellAmount {  get; set; }
         public string BookURL
         {
             get; set;
@@ -86,6 +87,8 @@ namespace SE104_QLNS.View
         public string BookID
         { get; set; }
         public string Icon
+        { get; set; }
+        public int BookTotalSellPrice
         { get; set; }
         public string Amount
         { get; set; }

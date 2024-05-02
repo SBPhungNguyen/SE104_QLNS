@@ -27,23 +27,47 @@
                            FontSize="18"
                            FontWeight="Bold"
                            VerticalAlignment="Center" Margin="15,0,251,0"/>
-                <Image Source="/Images/icon_close.png" Width="23" Height="23" Stretch="Fill"  RenderTransformOrigin="1.864,0.792" Margin="718,3,7,4"/>
+                <Button Name="btn_ExitApp"
+        Grid.Column="3"
+        Click="btn_ExitApp_Click"
+         Width="40" 
+        Height="30"
+        BorderThickness="0"
+        Cursor="Hand" 
+        VerticalAlignment="Center"
+        HorizontalAlignment="Right">
+                    <Button.Content>
+                        <Image Source="/Images/icon_close.png" Width="20" Height="20"/>
+                    </Button.Content>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#154448"/>
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
             </Grid>
             <Grid Grid.Row="1">
-                <TextBlock x:Name="BillID"
+                <TextBlock x:Name="BillIDName"
                            Foreground="#154448"
-                    Text="Hóa đơn HD000001" 
+                    Text="Hóa đơn " 
                            FontSize="25"
                            FontWeight="Bold"
                            FontFamily="Tahoma"
-                           HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,9,0,0"/>
+                           HorizontalAlignment="Center" Margin="0,9,0,1"/>
             </Grid>
 
             <StackPanel Grid.Row="2" Margin="25,10,25,0" Height="540" VerticalAlignment="Top">
                 <Grid Width="500">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="125*"/>
+                        <ColumnDefinition Width="27*"/>
+                        <ColumnDefinition Width="98*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -61,12 +85,12 @@
                     <TextBlock Text="Email:" Grid.Column="0" Grid.Row="4" FontSize="18" Foreground="#154448" Height="25"/>
                     <TextBlock Text="Địa chỉ:" Grid.Column="0" Grid.Row="5" FontSize="18" Foreground="#154448" Height="25" />
 
-                    <TextBlock Name="tbl_Date"  Grid.Column="1" Grid.Row="0" Text="19/11/2023" Foreground="#154448" FontSize="18" Height="25" FontWeight="Bold"/>
-                    <TextBlock Name="tbl_CustomerID"  Grid.Column="1" Grid.Row="1" Text="NV000001" Foreground="#154448" FontSize="18" Height="25" FontWeight="Bold"/>
-                    <TextBlock Name="tbl_CustomerName" Grid.Column="1" Grid.Row="2" Text="Ninh Dương Lan Ngọc" Foreground="#154448" FontSize="18" Height="25" FontWeight="Bold"/>
-                    <TextBlock Name="tbl_CustomerPhone" Grid.Column="1" Grid.Row="3" Text="SĐT" FontSize="18" Foreground="#154448" Height="25" FontWeight="Bold"/>
-                    <TextBlock Name="tbl_CustomerEmail" Grid.Column="1" Grid.Row="4" Text="ImSoDesperate@gmail.com" Foreground="#154448" FontSize="18" Height="25" FontWeight="Bold"/>
-                    <TextBlock Name="tbl_CustomerAddress" Grid.Column="1" Grid.Row="5" Text="HEH I've always wondered that" Foreground="#154448" FontSize="18" Height="25" FontWeight="Bold"/>
+                    <TextBlock Name="tbl_Date"   Grid.Column="1" Grid.Row="0" Text="19/11/2023" Foreground="#154448" FontSize="18" Height="25" FontWeight="Bold" Grid.ColumnSpan="2"/>
+                    <TextBlock Name="tbl_CustomerID"  Grid.Column="1" Grid.Row="1" Text="NV000001" Foreground="#154448" FontSize="18" Height="25" FontWeight="Bold" Grid.ColumnSpan="2"/>
+                    <TextBlock Name="tbl_CustomerName" Grid.Column="1" Grid.Row="2" Text="Ninh Dương Lan Ngọc" Foreground="#154448" FontSize="18" Height="25" FontWeight="Bold" Grid.ColumnSpan="2"/>
+                    <TextBlock Name="tbl_CustomerPhone" Grid.Column="1" Grid.Row="3" Text="SĐT" FontSize="18" Foreground="#154448" Height="25" FontWeight="Bold" Grid.ColumnSpan="2"/>
+                    <TextBlock Name="tbl_CustomerEmail" Grid.Column="1" Grid.Row="4" Text="ImSoDesperate@gmail.com" Foreground="#154448" FontSize="18" Height="25" FontWeight="Bold" Grid.ColumnSpan="2"/>
+                    <TextBlock Name="tbl_CustomerAddress" Grid.Column="1" Grid.Row="5" Text="HEH I've always wondered that" Foreground="#154448" FontSize="18" Height="25" FontWeight="Bold" Grid.ColumnSpan="2"/>
                 </Grid>
 
                 <Grid VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="325" Margin="0, 20, 0, 0">
@@ -97,21 +121,21 @@
                        HorizontalAlignment="Center"
                        Margin="0,10,0,5"/>
 
-                <DataGrid  Name="dtg_BillDetail" ItemsSource="{Binding Books}" Style="{StaticResource DataGrid}" Height="245" Margin="0,5,0,0">
+                <DataGrid  Name="dtg_BillDetail" ItemsSource="{Binding bills}" Style="{StaticResource DataGrid}" Height="245" Margin="0,5,0,0">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="#" Binding="{Binding BookNum}" Width="0.5*" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Mã sách" Binding="{Binding BookID}" Width="*" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Mã sách" Binding="{Binding ExportBookID}" Width="*" IsReadOnly="True"/>
                         <DataGridTemplateColumn Header="Ảnh" Width="Auto" IsReadOnly="True">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Source="{Binding BookURL}" Width="Auto" Height="Auto"/>
+                                    <Image Source="{Binding ExportBookURL}" Width="Auto" Height="Auto"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="Sản phẩm" Binding="{Binding BookName}" Width="2*" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Số lượng" Binding="{Binding BookPriceImport}" Width="*" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Giá bán" Binding="{Binding BookPriceExport}" Width="*" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Tổng" Binding="{Binding Amount}" Width="*" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Sản phẩm" Binding="{Binding ExportedBookName}" Width="2*" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Số lượng" Binding="{Binding ExportedBookAmount}" Width="*" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Giá bán" Binding="{Binding ExportedBookPrice}" Width="*" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Tổng" Binding="{Binding ExportedBookTotal}" Width="*" IsReadOnly="True"/>
                     </DataGrid.Columns>
                 </DataGrid>
 
@@ -120,7 +144,7 @@
 
             <Grid Grid.Row="3">
                 <Button Name="btn_Ok" 
-                        Content="OK" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="228,-9,227,19">
+                        Content="OK" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="228,-9,227,19" Click="btn_Ok_Click">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="#154348"/>
@@ -140,6 +164,56 @@
                                                         BorderBrush="#3CB76D">
                                 <ContentPresenter VerticalAlignment="Center"
                                                                       HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button x:Name="btn_Cancel" 
+                    Content="Hủy" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="390,-9,64,19">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="#154348"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Green"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Width="250" Height="35"
+                                CornerRadius="15"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="1"
+                                BorderBrush="#3CB76D">
+                                <ContentPresenter VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button x:Name="btn_Delete" 
+                    Content="Xóa" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="82,-9,374,19" Click="btn_Delete_Click">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="#154348"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Green"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Width="250" Height="35"
+                                CornerRadius="15"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="1"
+                                BorderBrush="#3CB76D">
+                                <ContentPresenter VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
                     </Button.Template>

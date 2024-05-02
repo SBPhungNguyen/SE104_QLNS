@@ -4,9 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,8 +18,10 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SE104_QLNS
 {
@@ -27,22 +31,30 @@ namespace SE104_QLNS
     public partial class MainWindow : Window
     {
         public ObservableCollection<Uct_Books> Books { get; set; } = new ObservableCollection<Uct_Books>();
+        public ObservableCollection<Uct_Books> BooksSell { get; set; } = new ObservableCollection<Uct_Books>();
+        public ObservableCollection<string> BookSearchItemsOriginal { get; set; } = new ObservableCollection<string>();
+        public ObservableCollection<string> BookSearchItemsSearched { get; set; } = new ObservableCollection<string>();
+        public ObservableCollection<Uct_Books> FilteredBooks { get; set; } = new ObservableCollection<Uct_Books>();
         public ObservableCollection<Uct_Customer> Customers { get; set; } = new ObservableCollection<Uct_Customer>();
-
         public ObservableCollection<Uct_Employee> Employees { get; set; } = new ObservableCollection<Uct_Employee>();
         public ObservableCollection<Uct_Author> Authors { get; set; } = new ObservableCollection<Uct_Author>();
 
         public ObservableCollection<ImportedBookReceiptInfo> ImportBookReceipts { get; set; } = new ObservableCollection<ImportedBookReceiptInfo>();
+        public ObservableCollection<BillInfo> Bills { get; set; } = new ObservableCollection<BillInfo>();
+
         Connection connect = new Connection();
 
 
         Uct_Books selectedbook = null;
         ImportedBookReceiptInfo selectedimportreceipt = null;
+        BillInfo selectedbillinfo = null;
+
         bool isBookDelete = false;
         bool isBookUpdate = false;
         bool isBookList = true;
 
         bool isImportPaperDelete = false;
+        bool isExportPaperDelete = false;
 
         bool isCustomerUpdate = false;
         bool isCustomerDelete = false;
@@ -59,6 +71,8 @@ namespace SE104_QLNS
             LoadCustomer(this, 0);
             LoadEmployee(this, 0);
             LoadImportPaper(this, 0);
+            LoadExportPaper(this, 0);
+            txb_BillDate.Text = DateTime.Now.ToString();
             LoadAuthor(this, 0);
 
         }
@@ -228,6 +242,43 @@ namespace SE104_QLNS
             }
             return nextImportPaperID;
         }
+        public string GetNextExportPaperID(MainWindow mainwindow)
+        {
+            string connectionString = connect.connection;
+            string nextExportPaperID = "HD000001"; // Initial value
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    // Use a transaction to ensure data consistency
+                    using (SqlTransaction transaction = connection.BeginTransaction())
+                    {
+                        string sqlQuery = "SELECT MAX(MaHD) AS LastMaHD FROM HOADON";
+                        SqlCommand command = new SqlCommand(sqlQuery, connection, transaction);
+
+                        object LastMaHD = command.ExecuteScalar();
+
+                        if (LastMaHD != DBNull.Value)
+                        {
+                            int currentID = Convert.ToInt32(LastMaHD.ToString().Substring(2)); // Extract numeric part
+                            currentID++; // Increment for next ID
+                            nextExportPaperID = "HD" + currentID.ToString("D6"); // Format with leading zeros
+                        }
+
+                        transaction.Commit(); // Commit the transaction if successful
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Notification noti = new Notification("Error", "Error generating customer ID: " + ex.Message);
+                    nextExportPaperID = null; // Indicate error
+                }
+            }
+            return nextExportPaperID;
+        }
         public string GetNextEmployeeID(MainWindow mainwindow)
         {
             string connectionString = connect.connection;
@@ -273,6 +324,7 @@ namespace SE104_QLNS
         public void LoadBook(MainWindow mainwindow, int state)
         {
             //connect to database
+            int bookcount = 0;
             mainwindow.Books.Clear();
             string connectionString = connect.connection;
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -312,8 +364,11 @@ namespace SE104_QLNS
                             book.BookSetState(state);
                             book.LoadData(MaSach, TenDauSach, TacGia, NXB, NamXB, TheLoai, HinhAnhSach, order.ToString(), DonGiaNhap, DonGiaBan, SoLuongTon);
                             mainwindow.Books.Add(book);
+                            BookSearchItemsOriginal.Add(TenDauSach + " - " + MaSach);
                             order++;
+                            bookcount += Convert.ToInt32(SoLuongTon);
                         }
+                        lbl_BookCount.Content = bookcount.ToString();
                     }
                     mainwindow.dtg_Books.Items.Refresh();
                     mainwindow.dtg_ImportBooks.Items.Refresh();
@@ -350,6 +405,7 @@ namespace SE104_QLNS
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 mainwindow.Customers.Clear();
+                cbx_CustomerID.Items.Clear();
                 string MaKH = "", HoTenKH = "", SDT = "", DiaChi = "",
                 Email = "", SoTienNo = "", GioiTinh = "", NgaySinh = "", SoTienMua = "";
 
@@ -369,10 +425,10 @@ namespace SE104_QLNS
                             SDT = reader["SDT"].ToString();
                             DiaChi = reader["DiaChi"].ToString();
                             Email = reader["Email"].ToString();
-                            SoTienNo = reader["SoTienNo"].ToString(); // Assuming numeric data type
+                            SoTienNo = reader["SoTienNo"].ToString().Replace(",0000", ""); // Assuming numeric data type
                             GioiTinh = reader["GioiTinh"].ToString();
                             NgaySinh = reader["NgaySinh"].ToString(); // Assuming date/time data type
-                            SoTienMua = reader["SoTienMua"].ToString(); // Assuming numeric data type
+                            SoTienMua = reader["SoTienMua"].ToString().Replace(",0000",""); // Assuming numeric data type
 
                             string gender;
                             if (GioiTinh == "1")
@@ -383,9 +439,12 @@ namespace SE104_QLNS
                             customer.CustomerSetState(state);
                             customer.LoadData(MaKH, HoTenKH, NgaySinh, gender, SDT, DiaChi, Email, SoTienMua, SoTienNo);
                             mainwindow.Customers.Add(customer);
+
+                            cbx_CustomerID.Items.Add(MaKH);
                         }
                     }
                     reader.Close();
+                    cbx_CustomerID.Items.Add("Thêm mới");
                 }
                 catch (Exception ex)
                 {
@@ -431,6 +490,63 @@ namespace SE104_QLNS
                         }
                     }
                     mainwindow.dtg_ImportBookReceiptList.Items.Refresh();
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    Notification noti = new Notification("Error", "Error retrieving data: " + ex.Message);
+                }
+            }
+        }
+        public void LoadExportPaper(MainWindow mainwindow, int state)
+        {
+            mainwindow.Bills.Clear();
+            string connectionString = connect.connection;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string billID="", creationDate = "",
+                    customerID = "", customerName = "",
+                    customerPhoneNumber = "", customerEmail = "",
+                    customerAddress = "", billTotal = "",
+                    billPaid = "", billRemaining = "";
+
+                try
+                {
+                    connection.Open();
+                    string sqlQuery = "SELECT DISTINCT * FROM HOADON JOIN KHACHHANG ON HOADON.MAKH=KHACHHANG.MAKH";
+                    SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+                    int order = 1;
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            billID = reader["MaHD"].ToString();
+                            customerID= reader["MaKh"].ToString();
+
+                            creationDate = reader["NgayLap"].ToString();
+
+                            customerID = reader["MaKh"].ToString();
+                            customerName = reader["HoTenKH"].ToString();
+
+                            customerPhoneNumber = reader["SDT"].ToString();
+                            customerEmail = reader["Email"].ToString();
+                            customerAddress = reader["DiaChi"].ToString();
+
+                            billTotal = reader["TongTien"].ToString().Replace(",0000", "");
+                            billPaid = reader["SoTienTra"].ToString().Replace(",0000", "");
+                            billRemaining = reader["ConLai"].ToString().Replace(",0000", "");
+
+                            BillInfo bill = new BillInfo(this, state);
+                            bill.SetState(state);
+                            bill.LoadData(order, billID, creationDate,customerID,customerName,customerPhoneNumber,
+                                customerEmail,customerAddress,billTotal,billPaid,billRemaining);
+                            mainwindow.Bills.Add(bill);
+                            order++;
+                        }
+                    }
+                    mainwindow.dtg_BillList.Items.Refresh();
                     reader.Close();
                 }
                 catch (Exception ex)
@@ -499,21 +615,274 @@ namespace SE104_QLNS
             }
         }
 
-        //Import Tab
+
+        // Sell
+        
+        private void btn_DeleteBookFromSellList_Click(object sender, RoutedEventArgs e)
+        {
+            BooksSell = new ObservableCollection<Uct_Books>();
+            cbx_BookSearch.Text = null;
+        }
+        private void cbx_BookSearch_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            cbx_BookSearch.Text= cbx_BookSearch.SelectedItem.ToString();
+            foreach(Uct_Books book in Books)
+            {
+                if (book.BookID == cbx_BookSearch.Text.Substring(Math.Max(0, cbx_BookSearch.Text.Length - 8)))
+                {
+                    foreach (Uct_Books book2 in BooksSell)
+                        if (book2 == book)
+                            return;
+                        BooksSell.Add(book);
+                }
+            }
+        }
+        private void dtg_SellList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectedbook = (Uct_Books)dtg_SellList.SelectedItem;
+        }
+        private void btn_DeleteBookFromSell_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedbook != null)
+                BooksSell.Remove(selectedbook);
+        }
+        private void cbx_CustomerID_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(cbx_CustomerID.SelectedItem!=null)
+            cbx_CustomerID.Text = cbx_CustomerID.SelectedItem.ToString();
+            if (cbx_CustomerID.Text == "Thêm mới")
+            {
+                tbl_CustomerName.IsReadOnly = false;
+                tbl_CustomerPhoneNumber.IsReadOnly = false;
+                tbl_CustomerDetailAdress.IsReadOnly = false;
+                tbl_CustomerEmail.IsReadOnly = false;
+                txt_CustomerDateOfBirth.IsReadOnly = false;
+                cbx_CustomerGender.IsReadOnly = false;
+
+                btn_SaveNewCustomerInfomation.Visibility = Visibility.Visible;
+                tbl_CustomerName.Text = "Tên khách hàng";
+                tbl_CustomerPhoneNumber.Text = "Số điện thoại";
+                tbl_CustomerDetailAdress.Text = "Địa chỉ";
+                tbl_CustomerEmail.Text = "Email";
+                txt_CustomerDateOfBirth.Text = "Ngày Sinh";
+                cbx_CustomerGender.Text = "Giới Tính";
+            }
+            else
+            {
+                btn_SaveNewCustomerInfomation.Visibility = Visibility.Hidden;
+                tbl_CustomerName.IsReadOnly = true;
+                tbl_CustomerPhoneNumber.IsReadOnly = true;
+                tbl_CustomerDetailAdress.IsReadOnly = true;
+                tbl_CustomerEmail.IsReadOnly = true;
+                txt_CustomerDateOfBirth.IsReadOnly = true;
+                cbx_CustomerGender.IsReadOnly = true;
+
+                string connectionString = connect.connection;
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    try
+                    {
+                        connection.Open();
+                        string sqlQuery = "SELECT * FROM KHACHHANG WHERE MaKH=@MaKH";
+                        SqlCommand command = new SqlCommand(sqlQuery, connection);
+                        command.Parameters.AddWithValue("@MaKH", cbx_CustomerID.Text);
+                        SqlDataReader reader = command.ExecuteReader();
+                        if (reader.HasRows)
+                        {
+                            reader.Read();
+
+                            tbl_CustomerName.Text = reader["HoTenKH"].ToString();
+                            tbl_CustomerPhoneNumber.Text = reader["SDT"].ToString();
+                            tbl_CustomerDetailAdress.Text = reader["DiaChi"].ToString();
+                            tbl_CustomerEmail.Text = reader["Email"].ToString();
+                            string GioiTinh = reader["GioiTinh"].ToString();
+                            txt_CustomerDateOfBirth.Text = reader["NgaySinh"].ToString(); // Assuming date/time data type
+
+                            if (GioiTinh == "1")
+                                cbx_CustomerGender.Text = "Nam";
+                            else
+                                cbx_CustomerGender.Text = "Nữ";
+                            reader.Close();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Notification noti = new Notification("Error", "Error retrieving data: " + ex.Message);
+                    }
+                }
+            }
+        }
+        private void btn_SaveNewCustomerInfomation_Click(object sender, RoutedEventArgs e)
+        {
+            string MaKH = GetNextCustomerID(this);
+            Connection connect = new Connection();
+            string connectionString = connect.connection;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    string sqlQuery = $"INSERT INTO KHACHHANG (MAKH, HoTenKH, Email, SDT, NgaySinh, GioiTinh, DiaChi, SoTienNo, SoTienMua) " +
+                      $"VALUES (@MaKH, @HoTenKH, @Email, @SDT, @NgaySinh, @GioiTinh, @DiaChi, @SoTienNo, @SoTienMua)";
+                    SqlCommand command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@MaKH", MaKH);
+                    command.Parameters.AddWithValue("@HoTenKH", tbl_CustomerName.Text);
+                    command.Parameters.AddWithValue("@Email", tbl_CustomerEmail.Text);
+                    command.Parameters.AddWithValue("@SDT", tbl_CustomerPhoneNumber.Text);
+                    command.Parameters.AddWithValue("@NgaySinh", txt_CustomerDateOfBirth.Text);
+                    string gender;
+                    if (cbx_CustomerGender.Text == "Nam")
+                        gender = "1";
+                    else
+                        gender = "0";
+                    command.Parameters.AddWithValue("@GioiTinh", gender);
+                    command.Parameters.AddWithValue("@DiaChi", tbl_CustomerDetailAdress.Text);
+                    command.Parameters.AddWithValue("@SoTienNo", "0");
+                    command.Parameters.AddWithValue("@SoTienMua", "0");
+
+                    SqlDataReader reader = command.ExecuteReader();
+                }
+                catch (Exception ex)
+                {
+                    Notification noti = new Notification("Error", "Error retrieving data: " + ex.Message);
+                }
+            }
+            LoadCustomer(this, 0);
+        }
+        private void dtg_SellList_CurrentCellChanged(object sender, EventArgs e)
+        {
+            int money = 0;
+            foreach (Uct_Books book in BooksSell)
+            {
+                book.BookTotalSellPrice = Convert.ToInt32(book.BookPriceExport.Replace(",0000", "")) * book.BookSellAmount;
+                money += book.BookTotalSellPrice;
+            }
+            txt_ReceiptPrice.Text = money.ToString();
+        }
+        private void txb_CustomerPayment_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            int convertedPrice, PaymentPrice;
+            if ((int.TryParse(txt_ReceiptPrice.Text, out convertedPrice))&& (int.TryParse(txb_CustomerPayment.Text, out PaymentPrice)))
+            {
+                if(PaymentPrice> convertedPrice) 
+                {
+                    txb_CustomerPayment.Text = txt_ReceiptPrice.Text;
+                    PaymentPrice = convertedPrice;
+                }
+                txb_MoneyOwe.Text = (convertedPrice- PaymentPrice).ToString();
+            }
+            else
+            {
+                txb_CustomerPayment.Text = "0";
+            }
+        }
+        private void btn_SaveBillToDatabase_Click(object sender, RoutedEventArgs e)
+        {
+            string NextExportId = GetNextExportPaperID(this);
+            if (cbx_CustomerID.Text == "Thêm mới")
+                return;
+            Connection connect = new Connection();
+            string connectionString = connect.connection;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    //Create The BillID first
+                    string sqlQuery = $"INSERT INTO HOADON (MaHD, MaKH, NgayLap, TongTien, SoTienTra, ConLai) " +
+                          $"VALUES (@MaHD, @MaKH, @NgayLap, @TongTien, @SoTienTra, @ConLai)";
+                    SqlCommand command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@MaHD", NextExportId);
+                    command.Parameters.AddWithValue("@MaKH", cbx_CustomerID.Text);
+                    command.Parameters.AddWithValue("@NgayLap", DateTime.Now);
+                    command.Parameters.AddWithValue("@TongTien", txt_ReceiptPrice.Text);
+                    command.Parameters.AddWithValue("@SoTienTra", txb_CustomerPayment.Text);
+                    command.Parameters.AddWithValue("@ConLai", txb_MoneyOwe.Text);
+                    SqlDataReader reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
+
+                    //Create Each Detail
+                    foreach (Uct_Books book in BooksSell)
+                    {
+                        //Create Details
+                        sqlQuery = $"INSERT INTO CT_HOADON (MaHD, MaSach, SoLuong, DonGiaBan) " +
+                              $"VALUES (@MaHD, @MaSach, @SoLuong, @DonGiaBan)";
+                        command = new SqlCommand(sqlQuery, connection);
+                        command.Parameters.AddWithValue("@MaHD", NextExportId);
+                        command.Parameters.AddWithValue("@MaSach", book.BookID);
+                        command.Parameters.AddWithValue("@SoLuong", book.BookSellAmount);
+                        command.Parameters.AddWithValue("@DonGiaBan", book.BookPriceExport);
+                        reader = command.ExecuteReader();
+                        reader.Read();
+                        reader.Close();
+
+                        //Reduce Book
+                        sqlQuery = $"UPDATE SACH SET SOLUONGTON-=@SOLUONGTON WHERE MASACH=@MASACH";
+                        command = new SqlCommand(sqlQuery, connection);
+                        command.Parameters.AddWithValue("@SOLUONGTON", book.BookSellAmount);
+                        command.Parameters.AddWithValue("@MaSach", book.BookID);
+                        reader = command.ExecuteReader();
+                        reader.Read();
+                        reader.Close();
+                    }
+
+                    //Update Debt
+                    sqlQuery = $"UPDATE KHACHHANG SET SOTIENMUA+=@SOTIENMUA WHERE MaKH=@MaKH";
+                    command = new SqlCommand(sqlQuery, connection);
+
+                    command.Parameters.AddWithValue("@SOTIENMUA", Convert.ToInt32(txt_ReceiptPrice.Text));
+                    command.Parameters.AddWithValue("@MaKH", cbx_CustomerID.Text);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
+
+                    sqlQuery = $"UPDATE KHACHHANG SET SOTIENNO+=@SOTIENNO WHERE MaKH=@MaKH";
+                    command = new SqlCommand(sqlQuery, connection);
+
+                    command.Parameters.AddWithValue("@SOTIENNO", Convert.ToInt32(txb_MoneyOwe.Text));
+                    command.Parameters.AddWithValue("@MaKH", cbx_CustomerID.Text);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
+
+                    LoadCustomer(this, 0);
+                    LoadBook(this, 0);
+                    BooksSell = new ObservableCollection<Uct_Books>();
+                    cbx_CustomerID.Text = "";
+                    tbl_CustomerName.Text = "Tên khách hàng";
+                    tbl_CustomerPhoneNumber.Text = "Số điện thoại";
+                    tbl_CustomerEmail.Text = "Email";
+                    txt_CustomerDateOfBirth.Text = "Ngày Sinh";
+                    cbx_CustomerGender.Text = "";
+                    tbl_CustomerDetailAdress.Text = "Địa Chỉ";
+                    txb_MoneyOwe.Text = "";
+                    txb_CustomerPayment.Text = "";
+                    txt_ReceiptPrice.Text = "";
+                }
+            }
+            catch (Exception ex) 
+            {
+                Notification noti = new Notification("Error", "Error creating bills: " + ex.Message);
+            }
+            LoadExportPaper(this, isExportPaperDelete ? 1 : 0);
+        }
+
+        //view import export
         private void dtg_ImportBookReceiptList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedimportreceipt = (ImportedBookReceiptInfo)dtg_ImportBookReceiptList.SelectedItem;
         }
         private void ViewImportBook_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if ((selectedimportreceipt!=null)&&(!isImportPaperDelete))
+            if ((selectedimportreceipt != null) && (!isImportPaperDelete))
             {
                 selectedimportreceipt.Show();
             }
         }
-
         private void btn_ImportBookReceiptDelete_Click(object sender, RoutedEventArgs e)
         {
+            isExportPaperDelete = false;
             if (!isImportPaperDelete) //Switch from normal to delete
             {
                 dtg_ImportBookReceiptList.Columns[0].Visibility = Visibility.Visible;
@@ -528,17 +897,122 @@ namespace SE104_QLNS
                 btn_ImportBookReceiptDelete.Background = new SolidColorBrush(Colors.Transparent);
                 LoadImportPaper(this, 0);
             }
-        }
 
+        }
+        private void btn_DeleteBill_Click(object sender, RoutedEventArgs e)
+        {
+            isImportPaperDelete = false;
+            if (!isExportPaperDelete) //Switch from normal to delete
+            {
+                dtg_BillList.Columns[0].Visibility = Visibility.Visible;
+                btn_ImportBookReceiptDelete.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
+                isExportPaperDelete = true;
+                LoadExportPaper(this, 1);
+            }
+            else
+            {
+                dtg_BillList.Columns[0].Visibility = Visibility.Hidden;
+                isExportPaperDelete = false;
+                btn_ImportBookReceiptDelete.Background = new SolidColorBrush(Colors.Transparent);
+                LoadExportPaper(this, 0);
+            }
+
+        }
         private void btn_DeleteImportBook_Click(object sender, RoutedEventArgs e)
         {
             selectedimportreceipt.Show();
+        }
+        private void SelectImportExport_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dtg_BillList.Columns[0].Visibility = Visibility.Visible;
+            dtg_BillList.Columns[0].Visibility = Visibility.Hidden;
+            if (SelectImportExport.SelectedItem == null)
+                return;
+            cvs_ImportBookReceipt.Visibility = Visibility.Hidden;
+            cvs_Bill.Visibility = Visibility.Visible;
+            SelectImportExport.SelectedItem = null;
+        }
+        private void SwapExportImport_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dtg_ImportBookReceiptList.Columns[0].Visibility = Visibility.Visible;
+            dtg_ImportBookReceiptList.Columns[0].Visibility = Visibility.Hidden;
+            if (SwapExportImport.SelectedItem == null)
+                return;
+            cvs_ImportBookReceipt.Visibility = Visibility.Visible;
+            cvs_Bill.Visibility = Visibility.Hidden;
+            SwapExportImport.SelectedItem = null;
+        }
+
+        private void btn_DeleteExportBook_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedbillinfo != null)
+            {
+                selectedbillinfo.Show();
+            }
+        }
+        private void dtg_BillList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (dtg_BillList.SelectedItem != null)
+                selectedbillinfo = (BillInfo)dtg_BillList.SelectedItem;
+        }
+
+        private void dtg_BillList_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if ((selectedbillinfo != null) && (!isExportPaperDelete))
+                selectedbillinfo.Show();
         }
         //Books
         private void dtg_Books_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedbook = (Uct_Books)dtg_Books.SelectedItem;
         }
+            //Search Book
+        private void txt_Search_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (isBookList)
+            {
+                if (string.IsNullOrEmpty(txt_Search.Text))
+                {
+                    dtg_Books.ItemsSource = Books; // Reset to all items if no search text
+                    return;
+                }
+                if (Cbx_SearchBook.Text == "Tất Cả" || (Cbx_SearchBook.Text == null))
+                {
+                    var filteredItems = Books.Where(book =>
+                        book.BookName.ToLower().Contains(txt_Search.Text.ToLower()) ||
+                        book.BookGenre.ToLower().Contains(txt_Search.Text.ToLower()) ||
+                        book.BookAuthor.ToLower().Contains(txt_Search.Text.ToLower())
+                    ).ToList();
+
+                    dtg_Books.ItemsSource = filteredItems;
+                }
+                else if (Cbx_SearchBook.Text == "Tên Sách")
+                {
+                    var filteredItems = Books.Where(book =>
+                        book.BookName.ToLower().Contains(txt_Search.Text.ToLower())
+                    ).ToList();
+
+                    dtg_Books.ItemsSource = filteredItems;
+                }
+                else if (Cbx_SearchBook.Text == "Thể Loại")
+                {
+                    var filteredItems = Books.Where(book =>
+                        book.BookGenre.ToLower().Contains(txt_Search.Text.ToLower())
+                    ).ToList();
+                }
+                else if (Cbx_SearchBook.Text == "Tác Giả")
+                {
+                    var filteredItems = Books.Where(book =>
+                        book.BookAuthor.ToLower().Contains(txt_Search.Text.ToLower())
+                    ).ToList();
+                }
+            }
+            else
+            {
+
+            }
+        }
+
             //Add Book To ImportPanel
         private void btn_AddBook_Click(object sender, RoutedEventArgs e) // Click on Them/Add Button
         {
@@ -839,7 +1313,6 @@ namespace SE104_QLNS
                     Notification noti = new Notification("Error", "Error retrieving data: " + ex.Message);
                 }
                 //Checking if the book fit the requirement
-                limit = 0;                                       // TEMPORARY
                 foreach (Uct_BookImport child in wpn_ImportPaper.Children.OfType<Uct_BookImport>())
                 {
                     if (Convert.ToInt32(child.BookQuantity) < limit)
@@ -1019,7 +1492,7 @@ namespace SE104_QLNS
         }
         private void cvs_BooksDataGridList_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (!isBookUpdate && !isBookDelete)
+            if (!isBookUpdate && !isBookDelete && selectedbook!=null)
             {
                 BookInfoPopup bookInfoPopup = new BookInfoPopup(selectedbook);
                 bookInfoPopup.Show();
@@ -1104,7 +1577,7 @@ namespace SE104_QLNS
                     using (SqlTransaction transaction = connection.BeginTransaction())
                     {
                         // Get the maximum existing MaKH value
-                        string sqlQuery = "SELECT MAX(MaTG) AS LastMaTG FROM TACGIA";
+                        string sqlQuery = "SELECT MAX(MaTacGia) AS LastMaTG FROM TACGIA";
                         SqlCommand command = new SqlCommand(sqlQuery, connection, transaction);
 
                         object lastMaTG = command.ExecuteScalar();
@@ -1151,8 +1624,8 @@ namespace SE104_QLNS
                     {
                         while (reader.Read())
                         {
-                            MaTG = reader["MaTG"].ToString();
-                            TenTG = reader["TenTG"].ToString();
+                            MaTG = reader["MaTacGia"].ToString();
+                            TenTG = reader["TenTacGia"].ToString();
 
                             Uct_Author author = new Uct_Author(this);
                             author.AuthorSetState(state);

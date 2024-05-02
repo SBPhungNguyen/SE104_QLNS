@@ -28,6 +28,7 @@ namespace SE104_QLNS
         public MainWindow parent;
         public Uct_Books selectedbook;
         public bool IsClosing = false;
+        public float ImportExportRate = 1;
         public string BookURL
         {
             get; set;
@@ -58,6 +59,27 @@ namespace SE104_QLNS
             this.selectedbook = book;
             LoadGenres();
             LoadAuthors();
+
+            Connection connect = new Connection();
+            string connectionString = connect.connection;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    string sqlQuery = " SELECT GiaTri FROM THAMSO Where TenThamSo='TiLeGiaBan' ";
+                    SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+                    SqlDataReader reader = command.ExecuteReader();
+                    reader.Read();
+                    ImportExportRate = Convert.ToInt32(reader["GiaTri"].ToString());
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    Notification noti = new Notification("Error", "Error Retrieving Data: " + ex.Message);
+                }
+            }
         }
 
         public void CreateImage(string url)
@@ -246,6 +268,38 @@ namespace SE104_QLNS
                 this.Close();
             }
 
+        }
+
+        private void txt_ImportPrice_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            txt_ExportPrice.Text = "";
+            int convertedImportPrice;
+            if (int.TryParse(txt_ImportPrice.Text, out convertedImportPrice))
+            {
+                txt_ExportPrice.Text = (convertedImportPrice * ImportExportRate / 100).ToString();
+            }
+            else
+            {
+                txt_ImportPrice.Text = "0";
+            }
+        }
+
+        private void txt_DistributeYear_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            int test;
+            if (!int.TryParse(txt_DistributeYear.Text, out test))
+            {
+                txt_DistributeYear.Text = "0";
+            }
+        }
+
+        private void txt_Quantity_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            int test;
+            if (!int.TryParse(txt_Quantity.Text, out test))
+            {
+                txt_Quantity.Text = "0";
+            }
         }
     }
 }
