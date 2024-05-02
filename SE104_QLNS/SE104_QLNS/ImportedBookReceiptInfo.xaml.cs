@@ -1,5 +1,4 @@
-﻿using SE104_QLNS.Model;
-using SE104_QLNS.View;
+﻿using SE104_QLNS.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

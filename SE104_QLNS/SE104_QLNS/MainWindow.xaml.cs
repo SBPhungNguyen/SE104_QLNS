@@ -37,7 +37,7 @@ namespace SE104_QLNS
         public ObservableCollection<Uct_Books> FilteredBooks { get; set; } = new ObservableCollection<Uct_Books>();
         public ObservableCollection<Uct_Customer> Customers { get; set; } = new ObservableCollection<Uct_Customer>();
         public ObservableCollection<Uct_Employee> Employees { get; set; } = new ObservableCollection<Uct_Employee>();
-        public ObservableCollection<Uct_Author> Authors { get; set; } = new ObservableCollection<Uct_Author>();
+        
 
         public ObservableCollection<ImportedBookReceiptInfo> ImportBookReceipts { get; set; } = new ObservableCollection<ImportedBookReceiptInfo>();
         public ObservableCollection<BillInfo> Bills { get; set; } = new ObservableCollection<BillInfo>();
@@ -1670,13 +1670,13 @@ namespace SE104_QLNS
         }
         public void LoadAuthor(MainWindow mainwindow, int state)
         {
-            Authors = new ObservableCollection<Uct_Author>();
+            
 
             //connect to database
             string connectionString = connect.connection;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                mainwindow.Authors.Clear();
+               
                 string MaTG = "", TenTG = ""; ;
 
                 try
@@ -1693,10 +1693,6 @@ namespace SE104_QLNS
                             MaTG = reader["MaTacGia"].ToString();
                             TenTG = reader["TenTacGia"].ToString();
 
-                            Uct_Author author = new Uct_Author(this);
-                            author.AuthorSetState(state);
-                            author.LoadData(MaTG, TenTG);
-                            mainwindow.Authors.Add(author);
                         }
                     }
                     mainwindow.dtg_AuthorList.Items.Refresh();
@@ -1707,12 +1703,7 @@ namespace SE104_QLNS
                 {
                     Notification noti = new Notification("Error", "Error retrieving data: " + ex.Message);
                 }
-                wpn_Author.Children.Clear();
-                foreach (Uct_Employee child in Employees)
-                {
-                    child.EmployeeSetState(0);
-                    wpn_Author.Children.Add(child);
-                }
+               
             }
         }
         private void txt_CustomerSearch_TextChanged(object sender, TextChangedEventArgs e)
@@ -1741,6 +1732,33 @@ namespace SE104_QLNS
         private void btn_SaveBillAsPDF_Click(object sender, RoutedEventArgs e)
         {
             Bills[Bills.Count - 1].Show();
+        }
+
+        private void dtg_AuthorList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
+
+
+        private void SelectAuthorGenre_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dtg_AuthorList.Columns[0].Visibility = Visibility.Visible;
+            dtg_AuthorList.Columns[0].Visibility = Visibility.Hidden;
+            if (SelectAuthorGenre.SelectedItem == null)
+                return;
+            cvs_Author.Visibility = Visibility.Hidden;
+            cvs_Genre.Visibility = Visibility.Visible;
+            SelectImportExport.SelectedItem = null;
+        }
+        private void SwapGenreAuthor_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dtg_GenreList.Columns[0].Visibility = Visibility.Visible;
+            dtg_GenreList.Columns[0].Visibility = Visibility.Hidden;
+            if (SwapGenreAuthor.SelectedItem == null)
+                return;
+            cvs_Author.Visibility = Visibility.Visible;
+            cvs_Genre.Visibility = Visibility.Hidden;
+            SwapGenreAuthor.SelectedItem = null;
         }
     }
 }
