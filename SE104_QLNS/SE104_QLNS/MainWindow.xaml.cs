@@ -563,7 +563,7 @@ namespace SE104_QLNS
             string connectionString = connect.connection;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                mainwindow.Customers.Clear();
+                mainwindow.Employees.Clear();
                 string MaNV = "", HoTenNV = "", SDT = "", Email = "", DiaChi = "",
                     GioiTinh = "", NgaySinh = "", CCCD = "", ViTri = "", Ca = "", TenTK = "", MatKhau = "";
 
@@ -610,7 +610,7 @@ namespace SE104_QLNS
                 wpn_Employee.Children.Clear();
                 foreach (Uct_Employee child in Employees)
                 {
-                    wpn_Customer.Children.Add(child);
+                    wpn_Employee.Children.Add(child);
                 }
             }
         }
