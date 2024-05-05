@@ -1,0 +1,116 @@
+﻿<Window x:Class="SE104_QLNS.GenreAdd"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SE104_QLNS"
+        mc:Ignorable="d"
+        Title="GenreAdd" Height="250" Width="450"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True" Background="Transparent">
+    <Border Background="White" CornerRadius="10" BorderThickness="1" BorderBrush="Black">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Border CornerRadius="10,10,0,0" Background="#C2DECE"/>
+                <TextBlock Text="Tạo thể loại"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       VerticalAlignment="Center" Margin="15,0,251,0"/>
+                <Button Name="btn_ExitApp"
+        Grid.Column="3"
+        Click="btn_ExitApp_Click"
+         Width="40" 
+        Height="30"
+        BorderThickness="0"
+        Cursor="Hand" 
+        VerticalAlignment="Center"
+        HorizontalAlignment="Right">
+                    <Button.Content>
+                        <Image Source="/Images/icon_close.png" Width="20" Height="20"/>
+                    </Button.Content>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#154448"/>
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
+            <Grid Grid.Row="1">
+                <TextBlock Name="TextGenre" Text="Đặt tên cho thể loại được tạo:"
+                           FontSize="20"
+                           FontFamily="Tahoma"
+                           HorizontalAlignment="Center" 
+                           Margin="0,39,0,81" TextWrapping="Wrap"/>
+                <TextBox Name="txt_GenreName" FontWeight="Bold"
+                BorderThickness="0,0,0,1"
+                Height="30" Width="300" FontSize="18" 
+                HorizontalAlignment="Center" TextAlignment="Center"
+                           Margin="0,94,0,94"/>
+                <Button Name="btn_AddGenre"
+                        Content="Tạo" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" 
+                        Foreground="White" Margin="50,150,243,15" Click="btn_AddGenre_Click">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#154348"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Green"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="100" Height="30"
+                                        CornerRadius="10"
+                                        Background="{TemplateBinding Background}"
+                                        BorderThickness="1"
+                                        BorderBrush="#3CB76D">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button Name="btn_Back" Height="35"
+                        Content="Hủy Bỏ" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" 
+                        Foreground="White" Margin="243,150,50,15" Click="btn_Back_Click">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#6FB3B8"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#56A399"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="100" Height="30"
+                                        CornerRadius="10"
+                                        Background="{TemplateBinding Background}"
+                                        BorderThickness="1"
+                                        BorderBrush="#3CB76D">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

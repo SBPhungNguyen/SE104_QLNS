@@ -1119,12 +1119,17 @@ BorderThickness="{TemplateBinding BorderThickness}">
                         <!--Sreach bar-->
                         <Grid Grid.Row="0" Grid.ColumnSpan="2">
                             <Border Height="28" Width="100" CornerRadius="15,0,0,15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="345,2,499,2" >
-                                <ComboBox Style="{StaticResource MonthYearComboxbox}" Height="24" Width="80" Margin="16,1,2,1"/>
+                                <ComboBox Style="{StaticResource MonthYearComboxbox}" FontSize="13" Height="24" Width="80" Name="ImportExportComboBox"
+                                          Margin="16,1,2,1" SelectionChanged="ImportExportComboBox_SelectionChanged">
+                                    <ComboBoxItem>Tất Cả</ComboBoxItem>
+                                    <ComboBoxItem>Mã phiếu</ComboBoxItem>
+                                    <ComboBoxItem>Ngày lập</ComboBoxItem>
+                                </ComboBox>
                             </Border>
                             <Border Height="28" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,15,15,0" Margin="444,2,250,2">
                                 <Grid>
                                     <TextBox x:Name="txt_BillImportBookReceiptSearch" VerticalContentAlignment="Center" VerticalAlignment="Center"
-                             FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="193" Margin="5,0,0,0"/>
+                             FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="172" Margin="26,0,0,0" TextChanged="txt_BillImportBookReceiptSearch_TextChanged"/>
                                     <Image Source="/Images/icon_search.png" Stretch="Fill" Height="20" Width="20" Cursor="Hand" Margin="212,4,16,2"/>
 
                                 </Grid>
@@ -1811,7 +1816,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                         <!--Sreach bar-->
                         <Grid Grid.Row="0" Grid.ColumnSpan="3">
                             <Border Height="28" Width="100"  CornerRadius="15,0,0,15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="345,2,499,2" >
-                                <ComboBox Style="{StaticResource MonthYearComboxbox}" Height="24" Width="80" Margin="16,1,2,1" Name="CustomerSearchComboBox" SelectionChanged="CustomerSearchComboBox_SelectionChanged">
+                                <ComboBox Style="{StaticResource MonthYearComboxbox}" FontSize="13" Height="24" Width="80" Margin="16,1,2,1" Name="CustomerSearchComboBox" SelectionChanged="CustomerSearchComboBox_SelectionChanged">
                                     <ComboBoxItem>Tên</ComboBoxItem>
                                     <ComboBoxItem>SĐT</ComboBoxItem>
                                 </ComboBox>
@@ -1981,6 +1986,11 @@ BorderThickness="{TemplateBinding BorderThickness}">
 
                     <!--this is GENRE,AUTHOR panel-->
                     <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="38*"/>
+                            <ColumnDefinition Width="37*"/>
+                            <ColumnDefinition Width="921*"/>
+                        </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="40"/>
                             <RowDefinition/>
@@ -1989,22 +1999,26 @@ BorderThickness="{TemplateBinding BorderThickness}">
 
 
                         <!--Sreach bar-->
-                        <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                        <Grid Grid.Row="0" Grid.ColumnSpan="3">
                             <Border Height="28" Width="100" CornerRadius="15,0,0,15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="345,2,499,2" >
-                                <ComboBox Style="{StaticResource MonthYearComboxbox}" Height="24" Width="80" Margin="16,1,2,1"/>
+                                <ComboBox Name="SearchGenreAuthorCombobox" Style="{StaticResource MonthYearComboxbox}" Height="24" IsEnabled="False"
+                                          FontSize="13" Width="80" Margin="16,1,2,1" SelectedIndex="0" IsReadOnly="True">
+                                    <ComboBoxItem>Thể Loại</ComboBoxItem>
+                                    <ComboBoxItem>Tác Giả</ComboBoxItem>
+                                </ComboBox>
                             </Border>
                             <Border Height="28" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,15,15,0" Margin="444,2,250,2">
                                 <Grid>
                                     <TextBox x:Name="txt_AuthorGenreSearch" VerticalContentAlignment="Center" VerticalAlignment="Center"
-                             FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="193" Margin="5,0,0,0"/>
+                             FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="170" Margin="28,0,0,0" TextChanged="txt_AuthorGenreSearch_TextChanged"/>
                                     <Image Source="/Images/icon_search.png" Stretch="Fill" Height="20" Width="20" Cursor="Hand" Margin="212,4,16,2"/>
 
                                 </Grid>
                             </Border>
                         </Grid>
 
-                        <Canvas Grid.Row="2" x:Name="cvs_Author" Visibility="Visible">
-                            
+                        <Canvas Grid.Row="1" x:Name="cvs_Author" Visibility="Hidden" Grid.ColumnSpan="3">
+
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="50"/>
@@ -2014,8 +2028,9 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                 <DockPanel Grid.Row="0">
 
                                     <Border Height="30" CornerRadius="15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="10,6,0,4">
-                                        <ComboBox Name="SelectAuthorGenre" Style="{StaticResource MonthYearComboxbox}" FontSize="13" SelectionChanged="SelectAuthorGenre_SelectionChanged"
-                                                    Height="25" Width="150" Margin="24,2,20,1" >
+                                        <ComboBox Name="SelectAuthorGenre" Style="{StaticResource MonthYearComboxbox}" FontSize="14" SelectionChanged="SelectAuthorGenre_SelectionChanged"
+                                                    Height="25" Width="150" Margin="24,2,20,1" SelectedIndex="0">
+                                            <ComboBoxItem>Tác Giả</ComboBoxItem>
                                             <ComboBoxItem>Thể loại</ComboBoxItem>
                                         </ComboBox>
                                     </Border>
@@ -2186,7 +2201,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                         </Canvas>
 
 
-                        <Canvas Grid.Row="2" x:Name="cvs_Genre" Visibility="Hidden">
+                        <Canvas Grid.Row="1" x:Name="cvs_Genre" Visibility="Visible" Grid.ColumnSpan="3">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="50"/>
@@ -2195,21 +2210,21 @@ BorderThickness="{TemplateBinding BorderThickness}">
 
                                 <DockPanel Grid.Row="0">
                                     <Border Height="30" CornerRadius="15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="10,6,0,4">
-                                        <ComboBox Name="SwapGenreAuthor" Style="{StaticResource MonthYearComboxbox}" FontSize="13" Height="25" Width="150" Margin="24,2,20,1" SelectionChanged="SwapGenreAuthor_SelectionChanged" VerticalAlignment="Top">
-
+                                        <ComboBox Name="SwapGenreAuthor" Style="{StaticResource MonthYearComboxbox}" FontSize="14" Height="25" Width="150" SelectedIndex="0"
+                                                  Margin="24,2,20,1" SelectionChanged="SwapGenreAuthor_SelectionChanged" VerticalAlignment="Top">
+                                            <ComboBoxItem>Thể loại</ComboBoxItem>
                                             <ComboBoxItem>Tác giả</ComboBoxItem>
                                         </ComboBox>
                                     </Border>
 
                                     <Button Name="btn_AddGenre"
-         Height="40"
          Width="100"
          FontFamily="Tahoma" 
          FontSize="17" 
          FontWeight="Bold"
          Foreground="#154348" 
          Cursor="Hand" 
-         Margin="10,5,0,5">
+         Margin="10,5,0,5" Click="btn_AddGenre_Click">
                                         <Button.Style>
                                             <Style TargetType="Button">
                                                 <Setter Property="Background" Value="Transparent"/>
@@ -2256,7 +2271,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
          FontWeight="Bold" 
          Foreground="#154348" 
          Cursor="Hand" 
-         Margin="10,5,0,5">
+         Margin="10,5,0,5" Click="btn_EditGenre_Click">
                                         <Button.Style>
                                             <Style TargetType="Button">
                                                 <Setter Property="Background" Value="Transparent"/>
@@ -2296,7 +2311,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                         </Button.Template>
                                     </Button>
 
-                                    <Button Name="btn_DeleteGenre" 
+                                    <Button Name="btn_DeleteGenreList" 
          Height="40" 
          Width="85"
          FontFamily="Tahoma" 
@@ -2304,7 +2319,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
          FontWeight="Bold"
          Foreground="#154348"
          Cursor="Hand" 
-         Margin="10,5,0,5">
+         Margin="10,5,0,5" Click="btn_DeleteGenreList_Click">
                                         <Button.Style>
                                             <Style TargetType="Button">
                                                 <Setter Property="Background" Value="Transparent"/>
@@ -2355,9 +2370,84 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                 </DockPanel>
 
                                 <!--this is Genre list-->
-                                <DataGrid Name="dtg_GenreList" Grid.Row="1" ItemsSource="{Binding Genre}" Style="{StaticResource DataGrid}" Width="975" Height="475" ColumnHeaderHeight="40" Margin="10,0,10,10">
+                                <DataGrid Name="dtg_GenreList" Grid.Row="1" ItemsSource="{Binding Genres}" Style="{StaticResource DataGrid}" Width="975" Height="475" ColumnHeaderHeight="40" Margin="10,0,10,10" SelectionChanged="dtg_GenreList_SelectionChanged">
                                     <DataGrid.Columns>
-                                        <DataGridCheckBoxColumn Binding="{Binding IsChecked}"  Width="0.2*"/>
+                                        <DataGridTemplateColumn Header="" Visibility="Hidden">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button Name="btn_UpdateGenre" Height="40" Width="40" Margin="15,0,0,0" Click="btn_UpdateGenre_Click">
+                                                        <Button.Style>
+                                                            <Style TargetType="Button">
+                                                                <Setter Property="Background" Value="Transparent"/>
+                                                                <Setter Property="BorderThickness" Value="1"/>
+                                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                                <Style.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter Property="Background" Value="#C2DECE"/>
+                                                                        <Setter Property="BorderBrush" Value="#000000"/>
+                                                                    </Trigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Button.Style>
+                                                        <Button.Template>
+                                                            <ControlTemplate TargetType="Button">
+                                                                <Border Width="40" Height="40"
+CornerRadius="10"
+Background="{TemplateBinding Background}"
+BorderBrush="{TemplateBinding BorderBrush}"
+BorderThickness="{TemplateBinding BorderThickness}">
+                                                                    <Grid>
+                                                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                                                            <Image Source="/Images/icon_pencil.png" Margin="6,0,0,0"
+        Stretch="Fill" Height="25" Width="25"/>
+
+                                                                        </StackPanel>
+                                                                    </Grid>
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Button.Template>
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn Header="" Visibility="Hidden">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button Name="btn_DeleteGenre" Height="40" Width="40" Margin="15,0,0,0" Click="btn_DeleteGenre_Click">
+                                                        <Button.Style>
+                                                            <Style TargetType="Button">
+                                                                <Setter Property="Background" Value="Transparent"/>
+                                                                <Setter Property="BorderThickness" Value="1"/>
+                                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                                <Style.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter Property="Background" Value="#C2DECE"/>
+                                                                        <Setter Property="BorderBrush" Value="#000000"/>
+                                                                    </Trigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Button.Style>
+                                                        <Button.Template>
+                                                            <ControlTemplate TargetType="Button">
+                                                                <Border Width="40" Height="40"
+CornerRadius="10"
+Background="{TemplateBinding Background}"
+BorderBrush="{TemplateBinding BorderBrush}"
+BorderThickness="{TemplateBinding BorderThickness}">
+                                                                    <Grid>
+                                                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                                                            <Image Source="/Images/icon_bin.png" Margin="6,0,0,0"
+        Stretch="Fill" Height="25" Width="25"/>
+
+                                                                        </StackPanel>
+                                                                    </Grid>
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Button.Template>
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
                                         <DataGridTextColumn Header="#" Binding="{Binding GenreNum}" Width="0.2*" IsReadOnly="True"/>
                                         <DataGridTextColumn Header="Mã thể loại" Binding="{Binding GenreID}" Width="*" IsReadOnly="True"/>
                                         <DataGridTextColumn Header="Tên thể loại" Binding="{Binding GenreName}" Width="3*" IsReadOnly="True"/>

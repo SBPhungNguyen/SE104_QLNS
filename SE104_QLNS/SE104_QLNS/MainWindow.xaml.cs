@@ -34,10 +34,10 @@ namespace SE104_QLNS
         public ObservableCollection<Uct_Books> BooksSell { get; set; } = new ObservableCollection<Uct_Books>();
         public ObservableCollection<string> BookSearchItemsOriginal { get; set; } = new ObservableCollection<string>();
         public ObservableCollection<string> BookSearchItemsSearched { get; set; } = new ObservableCollection<string>();
-        public ObservableCollection<Uct_Books> FilteredBooks { get; set; } = new ObservableCollection<Uct_Books>();
         public ObservableCollection<Uct_Customer> Customers { get; set; } = new ObservableCollection<Uct_Customer>();
         public ObservableCollection<Uct_Employee> Employees { get; set; } = new ObservableCollection<Uct_Employee>();
-        
+
+        public ObservableCollection<Uct_Genre> Genres { get; set; } = new ObservableCollection<Uct_Genre>();
 
         public ObservableCollection<ImportedBookReceiptInfo> ImportBookReceipts { get; set; } = new ObservableCollection<ImportedBookReceiptInfo>();
         public ObservableCollection<BillInfo> Bills { get; set; } = new ObservableCollection<BillInfo>();
@@ -48,6 +48,7 @@ namespace SE104_QLNS
         Uct_Books selectedbook = null;
         ImportedBookReceiptInfo selectedimportreceipt = null;
         BillInfo selectedbillinfo = null;
+        Uct_Genre selectedgenre = null;
 
         bool isBookDelete = false;
         bool isBookUpdate = false;
@@ -68,6 +69,7 @@ namespace SE104_QLNS
             DataContext = this;
 
             LoadBook(this, 0);
+            LoadGenre(this, 0);
             LoadCustomer(this, 0);
             LoadEmployee(this, 0);
             LoadImportPaper(this, 0);
@@ -75,6 +77,8 @@ namespace SE104_QLNS
             txb_BillDate.Text = DateTime.Now.ToString();
             LoadAuthor(this, 0);
             Cbx_SearchBook.SelectedIndex = 0;
+            ImportExportComboBox.SelectedIndex = 0;
+            ImportDate.Text=DateTime.Now.ToString();
         }
 
         //Miscellaneous
@@ -236,7 +240,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error generating customer ID: " + ex.Message);
+                    Notification noti = new Notification("Error", "Error generating PHIEUNHAP ID: " + ex.Message);
                     nextImportPaperID = null; // Indicate error
                 }
             }
@@ -273,7 +277,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error generating customer ID: " + ex.Message);
+                    Notification noti = new Notification("Error", "Error generating HOADON ID: " + ex.Message);
                     nextExportPaperID = null; // Indicate error
                 }
             }
@@ -319,7 +323,44 @@ namespace SE104_QLNS
 
             return nextEmployeeID;
         }
+        public string GetNextGenreID(MainWindow mainwindow)
+        {
+            string connectionString = connect.connection;
+            string nextBookID = "TL000001"; // Initial value
 
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    // Use a transaction to ensure data consistency
+                    using (SqlTransaction transaction = connection.BeginTransaction())
+                    {
+                        string sqlQuery = "SELECT MAX(MaTheLoai) AS LastMaTheLoai FROM THELOAI";
+                        SqlCommand command = new SqlCommand(sqlQuery, connection, transaction);
+
+                        object LastMaTheLoai = command.ExecuteScalar();
+
+                        if (LastMaTheLoai != DBNull.Value)
+                        {
+                            int currentID = Convert.ToInt32(LastMaTheLoai.ToString().Substring(2)); // Extract numeric part
+                            currentID++; // Increment for next ID
+                            nextBookID = "TL" + currentID.ToString("D6"); // Format with leading zeros
+                        }
+
+                        transaction.Commit(); // Commit the transaction if successful
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Notification noti = new Notification("Error", "Error generating Book ID: " + ex.Message);
+                    nextBookID = null; // Indicate error
+                }
+            }
+
+            return nextBookID;
+        }
         //Load
         public void LoadBook(MainWindow mainwindow, int state)
         {
@@ -357,8 +398,10 @@ namespace SE104_QLNS
                             NamXB = reader["NamXB"].ToString();
                             HinhAnhSach = reader["HinhAnhSach"].ToString();
                             SoLuongTon = reader["SoLuongTon"].ToString(); // Assuming numeric data type
-                            DonGiaNhap = reader["DonGiaNhap"].ToString().Replace(",0000", "");
-                            DonGiaBan = reader["DonGiaBan"].ToString().Replace(",0000", ""); // Assuming date/time data type
+                            DonGiaNhap = reader["DonGiaNhap"].ToString();
+                            DonGiaBan = reader["DonGiaBan"].ToString(); // Assuming date/time data type
+                            DonGiaNhap = DonGiaNhap.Substring(0, DonGiaNhap.Length - 5);
+                            DonGiaBan = DonGiaBan.Substring(0, DonGiaBan.Length - 5);
 
                             Uct_Books book = new Uct_Books(0, this);
                             book.BookSetState(state);
@@ -376,7 +419,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving data: " + ex.Message);
+                    Notification noti = new Notification("Error", "Error retrieving data from SACH: " + ex.Message);
                 }
                 mainwindow.wpn_Books.Children.Clear();
                 mainwindow.wpn_ImportBooks.Children.Clear();
@@ -425,10 +468,12 @@ namespace SE104_QLNS
                             SDT = reader["SDT"].ToString();
                             DiaChi = reader["DiaChi"].ToString();
                             Email = reader["Email"].ToString();
-                            SoTienNo = reader["SoTienNo"].ToString().Replace(",0000", ""); // Assuming numeric data type
+                            SoTienNo = reader["SoTienNo"].ToString(); // Assuming numeric data type
+                            SoTienNo = SoTienNo.Substring(0, SoTienNo.Length - 5);
                             GioiTinh = reader["GioiTinh"].ToString();
                             NgaySinh = reader["NgaySinh"].ToString(); // Assuming date/time data type
-                            SoTienMua = reader["SoTienMua"].ToString().Replace(",0000",""); // Assuming numeric data type
+                            SoTienMua = reader["SoTienMua"].ToString(); // Assuming numeric data type
+                            SoTienMua = SoTienMua.Substring(0, SoTienMua.Length - 5);
 
                             string gender;
                             if (GioiTinh == "1")
@@ -448,7 +493,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving data: " + ex.Message);
+                    Notification noti = new Notification("Error", "Error retrieving data from KHACHHANG: " + ex.Message);
                 }
                 wpn_Customer.Children.Clear();
                 foreach (Uct_Customer child in Customers)
@@ -480,7 +525,8 @@ namespace SE104_QLNS
                         {
                             MaPhieuNhap = reader["MaPhieuNhap"].ToString();
                             NgayNhap = reader["NgayNhap"].ToString();
-                            TongTien = reader["TongTien"].ToString().Replace(",0000", "");
+                            TongTien = reader["TongTien"].ToString();
+                            TongTien = TongTien.Substring(0, TongTien.Length - 5);
 
                             ImportedBookReceiptInfo receipt = new ImportedBookReceiptInfo(this, state);
                             receipt.SetState(state);
@@ -494,7 +540,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving data: " + ex.Message);
+                    Notification noti = new Notification("Error", "Error retrieving data from PHIEUNHAP: " + ex.Message);
                 }
             }
         }
@@ -534,9 +580,13 @@ namespace SE104_QLNS
                             customerEmail = reader["Email"].ToString();
                             customerAddress = reader["DiaChi"].ToString();
 
-                            billTotal = reader["TongTien"].ToString().Replace(",0000", "");
-                            billPaid = reader["SoTienTra"].ToString().Replace(",0000", "");
-                            billRemaining = reader["ConLai"].ToString().Replace(",0000", "");
+                            billTotal = reader["TongTien"].ToString();
+                            billPaid = reader["SoTienTra"].ToString();
+                            billRemaining = reader["ConLai"].ToString();
+
+                            billTotal= billTotal.Substring(0, billTotal.Length - 5);
+                            billPaid = billPaid.Substring(0, billPaid.Length - 5);
+                            billRemaining = billRemaining.Substring(0, billRemaining.Length - 5);
 
                             BillInfo bill = new BillInfo(this, state);
                             bill.SetState(state);
@@ -551,7 +601,45 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving data: " + ex.Message);
+                    Notification noti = new Notification("Error", "Error retrieving data from HOADON: " + ex.Message);
+                }
+            }
+        }
+        public void LoadGenre(MainWindow mainwindow, int state)
+        {
+            mainwindow.Genres.Clear();
+            string connectionString = connect.connection;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string GenreID="", GenreName = "";
+
+                try
+                {
+                    connection.Open();
+                    string sqlQuery = "SELECT DISTINCT * FROM THELOAI";
+                    SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+                    int order = 1;
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            GenreID = reader["MaTheLoai"].ToString();
+                            GenreName = reader["TenTheLoai"].ToString();
+
+                            
+                            Uct_Genre genre = new Uct_Genre(order, GenreID, GenreName);
+                            mainwindow.Genres.Add(genre);
+                            order++;
+                        }
+                    }
+                    mainwindow.dtg_GenreList.Items.Refresh();
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    Notification noti = new Notification("Error", "Error retrieving data from GENRE: " + ex.Message);
                 }
             }
         }
@@ -564,7 +652,7 @@ namespace SE104_QLNS
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 mainwindow.Employees.Clear();
-                string MaNV = "", HoTenNV = "", SDT = "", Email = "", DiaChi = "",
+                string MaNV = "", HoTenNV = "", SDT = "", HinhAnh = "", DiaChi = "",
                     GioiTinh = "", NgaySinh = "", CCCD = "", ViTri = "", Ca = "", TenTK = "", MatKhau = "";
 
                 try
@@ -581,7 +669,6 @@ namespace SE104_QLNS
                             MaNV = reader["MaNV"].ToString();
                             HoTenNV = reader["HoTenNV"].ToString();
                             SDT = reader["SDT"].ToString();
-                            Email = reader["Email"].ToString();
                             DiaChi = reader["DiaChi"].ToString();
                             GioiTinh = reader["GioiTinh"].ToString();
                             NgaySinh = reader["NgaySinh"].ToString(); // Assuming date/time data type
@@ -590,14 +677,14 @@ namespace SE104_QLNS
                             Ca = reader["Ca"].ToString();
                             TenTK = reader["TenTK"].ToString();
                             MatKhau = reader["MatKhau"].ToString();
+                            HinhAnh = reader["HinhAnh"].ToString();
                             string gender;
                             if (GioiTinh == "1")
                                 gender = "Nam";
                             else
                                 gender = "Nữ";
-                            Uct_Employee employee = new Uct_Employee(this);
-                            employee.EmployeeSetState(state);
-                            employee.LoadData(MaNV, HoTenNV, NgaySinh, gender, CCCD, SDT, DiaChi, ViTri, Ca, TenTK, MatKhau);
+                            Uct_Employee employee = new Uct_Employee(this, state);
+                            employee.LoadData(MaNV, HoTenNV, NgaySinh, gender, CCCD, SDT, DiaChi, ViTri, Ca, TenTK, MatKhau, HinhAnh);
                             mainwindow.Employees.Add(employee);
                         }
                     }
@@ -605,7 +692,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving data: " + ex.Message);
+                    Notification noti = new Notification("Error", "Error retrieving data from NGUOIDUNG: " + ex.Message);
                 }
                 wpn_Employee.Children.Clear();
                 foreach (Uct_Employee child in Employees)
@@ -635,6 +722,68 @@ namespace SE104_QLNS
                             return;
                         BooksSell.Add(book);
                 }
+            }
+        }
+        private void ImportExportComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ImportExportComboBox.SelectedItem == null) return;
+
+            ComboBoxItem selectedItem = (ComboBoxItem)ImportExportComboBox.SelectedItem;
+            string selectedValue = selectedItem.Content.ToString();
+            ImportExportComboBox.Text = selectedValue;
+        }
+        private void txt_BillImportBookReceiptSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txt_BillImportBookReceiptSearch.Text))
+            {
+                dtg_BillList.ItemsSource = Bills; // Reset to all items if no search text
+
+                dtg_ImportBookReceiptList.ItemsSource = ImportBookReceipts;
+                return;
+            }
+            if (ImportExportComboBox.Text == "Tất Cả" || (ImportExportComboBox.Text == null))
+            {
+                var filteredItems = Bills.Where(bills =>
+                bills.BillID.ToLower().Contains(txt_BillImportBookReceiptSearch.Text.ToLower()) ||
+                    bills.CreationDate.ToLower().Contains(txt_BillImportBookReceiptSearch.Text.ToLower())
+                ).ToList();
+
+                dtg_BillList.ItemsSource = filteredItems;
+
+                var filteredItems2 = ImportBookReceipts.Where(receipt =>
+                receipt.ImportBookReceiptID.ToLower().Contains(txt_BillImportBookReceiptSearch.Text.ToLower()) ||
+                    receipt.Date.ToLower().Contains(txt_BillImportBookReceiptSearch.Text.ToLower())
+                ).ToList();
+
+                dtg_ImportBookReceiptList.ItemsSource = filteredItems2;
+            }
+            else if (ImportExportComboBox.Text == "Mã phiếu")
+            {
+                var filteredItems = Bills.Where(bills =>
+               bills.BillID.ToLower().Contains(txt_BillImportBookReceiptSearch.Text.ToLower())
+               ).ToList();
+
+                dtg_BillList.ItemsSource = filteredItems;
+
+                var filteredItems2 = ImportBookReceipts.Where(receipt =>
+                receipt.ImportBookReceiptID.ToLower().Contains(txt_BillImportBookReceiptSearch.Text.ToLower())
+                ).ToList();
+
+                dtg_ImportBookReceiptList.ItemsSource = filteredItems2;
+            }
+            else if (ImportExportComboBox.Text == "Ngày lập")
+            {
+                var filteredItems = Bills.Where(bills =>
+                   bills.CreationDate.ToLower().Contains(txt_BillImportBookReceiptSearch.Text.ToLower())
+               ).ToList();
+
+                dtg_BillList.ItemsSource = filteredItems;
+
+                var filteredItems2 = ImportBookReceipts.Where(receipt =>
+                    receipt.Date.ToLower().Contains(txt_BillImportBookReceiptSearch.Text.ToLower())
+                ).ToList();
+
+                dtg_ImportBookReceiptList.ItemsSource = filteredItems2;
             }
         }
         private void dtg_SellList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -707,7 +856,7 @@ namespace SE104_QLNS
                     }
                     catch (Exception ex)
                     {
-                        Notification noti = new Notification("Error", "Error retrieving data: " + ex.Message);
+                        Notification noti = new Notification("Error", "Error retrieving data from KHACHHANG: " + ex.Message);
                     }
                 }
             }
@@ -744,7 +893,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving data: " + ex.Message);
+                    Notification noti = new Notification("Error", "Error inserting into KHACHHANG: " + ex.Message);
                 }
             }
             LoadCustomer(this, 0);
@@ -754,7 +903,7 @@ namespace SE104_QLNS
             int money = 0;
             foreach (Uct_Books book in BooksSell)
             {
-                book.BookTotalSellPrice = Convert.ToInt32(book.BookPriceExport.Replace(",0000", "")) * book.BookSellAmount;
+                book.BookTotalSellPrice = Convert.ToInt32(book.BookPriceExport) * book.BookSellAmount;
                 money += book.BookTotalSellPrice;
             }
             txt_ReceiptPrice.Text = money.ToString();
@@ -863,7 +1012,7 @@ namespace SE104_QLNS
             }
             catch (Exception ex) 
             {
-                Notification noti = new Notification("Error", "Error creating bills: " + ex.Message);
+                Notification noti = new Notification("Error", "Error inserting into HOADON: " + ex.Message);
             }
             LoadExportPaper(this, isExportPaperDelete ? 1 : 0);
         }
@@ -1376,7 +1525,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving data: " + ex.Message);
+                    Notification noti = new Notification("Error", "Error retrieving data from THAMSO: " + ex.Message);
                 }
                 //Checking if the book fit the requirement
                 foreach (Uct_BookImport child in wpn_ImportPaper.Children.OfType<Uct_BookImport>())
@@ -1413,7 +1562,7 @@ namespace SE104_QLNS
                     }
                     catch (Exception ex)
                     {
-                        Notification noti = new Notification("Error", "Error: " + ex.Message);
+                        Notification noti = new Notification("Error", "Error retrieving data from SACH: " + ex.Message);
                     }
                 }
                 //Creating Import Paper for all
@@ -1434,7 +1583,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error: " + ex.Message);
+                    Notification noti = new Notification("Error", "Error inserting into PHIEUNHAP: " + ex.Message);
                 }
                 //Creating ImportPaper for each one
                 foreach (Uct_BookImport child in wpn_ImportPaper.Children.OfType<Uct_BookImport>())
@@ -1448,7 +1597,7 @@ namespace SE104_QLNS
                         command.Parameters.AddWithValue("@MaPhieuNhap", nextImportPaperID);
                         command.Parameters.AddWithValue("@MaSach", child.BookID);
                         command.Parameters.AddWithValue("@SoLuongNhap", child.BookQuantity);
-                        command.Parameters.AddWithValue("@DonGiaNhap", Convert.ToInt32(child.BookImportPrice.Replace(",0000", "")));
+                        command.Parameters.AddWithValue("@DonGiaNhap", Convert.ToInt32(child.BookImportPrice));
                         SqlDataReader reader = command.ExecuteReader();
                         reader.Read();
                         reader.Close();
@@ -1477,7 +1626,7 @@ namespace SE104_QLNS
                     }
                     catch (Exception ex)
                     {
-                        Notification noti = new Notification("Error", "Error: " + ex.Message);
+                        Notification noti = new Notification("Error", "Error inserting into PHIEUNHAP: " + ex.Message);
                     }
                 }
                 wpn_ImportPaper.Children.Clear();
@@ -1577,12 +1726,7 @@ namespace SE104_QLNS
             isEmployeeDelete = false;
             if (!isEmployeeUpdate) //Switch to Update
             {
-                wpn_Employee.Children.Clear();
-                foreach (Uct_Employee child in Employees)
-                {
-                    child.EmployeeSetState(1);
-                    wpn_Employee.Children.Add(child);
-                }
+                LoadEmployee(this, 1);
                 btn_EmployeeUpdate.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
                 btn_EmployeeDelete.Background = new SolidColorBrush(Colors.Transparent);
                 btn_EmployeeAdd.Background = new SolidColorBrush(Colors.Transparent);
@@ -1592,12 +1736,7 @@ namespace SE104_QLNS
             {
                 isEmployeeUpdate = false;
                 btn_EmployeeUpdate.Background = new SolidColorBrush(Colors.Transparent);
-                wpn_Employee.Children.Clear();
-                foreach (Uct_Employee child in Employees)
-                {
-                    child.EmployeeSetState(0);
-                    wpn_Employee.Children.Add(child);
-                }
+                LoadEmployee(this, 0);
             }
         }
         private void btn_EmployeeDelete_Click(object sender, RoutedEventArgs e)
@@ -1605,12 +1744,7 @@ namespace SE104_QLNS
             isEmployeeUpdate = false;
             if (!isEmployeeDelete) //Swap to Delete
             {
-                wpn_Employee.Children.Clear();
-                foreach (Uct_Employee child in Employees)
-                {
-                    child.EmployeeSetState(2);
-                    wpn_Employee.Children.Add(child);
-                }
+                LoadEmployee(this, 2);
                 btn_EmployeeDelete.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
                 btn_EmployeeUpdate.Background = new SolidColorBrush(Colors.Transparent);
                 btn_EmployeeAdd.Background = new SolidColorBrush(Colors.Transparent);
@@ -1620,12 +1754,7 @@ namespace SE104_QLNS
             {
                 isEmployeeDelete = false;
                 btn_EmployeeDelete.Background = new SolidColorBrush(Colors.Transparent);
-                wpn_Employee.Children.Clear();
-                foreach (Uct_Employee child in Employees)
-                {
-                    child.EmployeeSetState(0);
-                    wpn_Employee.Children.Add(child);
-                }
+                LoadEmployee(this, 0);
             }
         }
         public string GetNextAuthorID(MainWindow mainwindow)
@@ -1670,8 +1799,6 @@ namespace SE104_QLNS
         }
         public void LoadAuthor(MainWindow mainwindow, int state)
         {
-            
-
             //connect to database
             string connectionString = connect.connection;
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -1701,7 +1828,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving data: " + ex.Message);
+                    Notification noti = new Notification("Error", "Error retrieving data from TACGIA: " + ex.Message);
                 }
                
             }
@@ -1734,31 +1861,132 @@ namespace SE104_QLNS
             Bills[Bills.Count - 1].Show();
         }
 
+
+
         private void dtg_AuthorList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             
         }
 
-
+        //Genre
         private void SelectAuthorGenre_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            dtg_AuthorList.Columns[0].Visibility = Visibility.Visible;
-            dtg_AuthorList.Columns[0].Visibility = Visibility.Hidden;
+            if (SelectAuthorGenre.SelectedIndex == 0) return;
+
+            SearchGenreAuthorCombobox.SelectedIndex = 0;
+            dtg_GenreList.Columns[0].Visibility = Visibility.Hidden;
+            dtg_GenreList.Columns[0].Visibility = Visibility.Visible;
+
             if (SelectAuthorGenre.SelectedItem == null)
                 return;
+
             cvs_Author.Visibility = Visibility.Hidden;
             cvs_Genre.Visibility = Visibility.Visible;
-            SelectImportExport.SelectedItem = null;
+
+            SelectAuthorGenre.SelectedIndex = 0;
+            txt_AuthorGenreSearch.Text = "";
         }
         private void SwapGenreAuthor_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            dtg_GenreList.Columns[0].Visibility = Visibility.Visible;
-            dtg_GenreList.Columns[0].Visibility = Visibility.Hidden;
+            if (SwapGenreAuthor.SelectedIndex == 0) return;
+            SearchGenreAuthorCombobox.SelectedIndex=1;
+            dtg_AuthorList.Columns[0].Visibility = Visibility.Hidden;
+            dtg_AuthorList.Columns[0].Visibility = Visibility.Visible;
+
             if (SwapGenreAuthor.SelectedItem == null)
                 return;
+
             cvs_Author.Visibility = Visibility.Visible;
             cvs_Genre.Visibility = Visibility.Hidden;
-            SwapGenreAuthor.SelectedItem = null;
+
+            SwapGenreAuthor.SelectedIndex = 0;
+            txt_AuthorGenreSearch.Text = "";
+        }
+
+        private void btn_EditGenre_Click(object sender, RoutedEventArgs e)
+        {
+            dtg_GenreList.Columns[1].Visibility = Visibility.Hidden;
+            btn_DeleteGenreList.Background = new SolidColorBrush(Colors.Transparent);
+            if (dtg_GenreList.Columns[0].Visibility == Visibility.Hidden)
+            {
+                dtg_GenreList.Columns[0].Visibility = Visibility.Visible;
+                btn_EditGenre.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
+            }
+            else
+            {
+                dtg_GenreList.Columns[0].Visibility = Visibility.Hidden;
+                btn_EditGenre.Background = new SolidColorBrush(Colors.Transparent);
+            }
+        }
+
+        private void btn_DeleteGenre_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedgenre == null) return;
+            GenreAdd genreadd = new GenreAdd(this, 2, selectedgenre);
+            genreadd.Show();
+        }
+
+        private void btn_UpdateGenre_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedgenre == null) return;
+            GenreAdd genreadd = new GenreAdd(this, 1, selectedgenre);
+            genreadd.Show();
+        }
+
+        private void btn_DeleteGenreList_Click(object sender, RoutedEventArgs e)
+        {
+            dtg_GenreList.Columns[0].Visibility = Visibility.Hidden;
+            btn_EditGenre.Background = new SolidColorBrush(Colors.Transparent);
+            if (dtg_GenreList.Columns[1].Visibility == Visibility.Hidden)
+            {
+                dtg_GenreList.Columns[1].Visibility = Visibility.Visible;
+                btn_DeleteGenreList.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
+            }
+            else
+            {
+                dtg_GenreList.Columns[1].Visibility = Visibility.Hidden;
+                btn_DeleteGenreList.Background = new SolidColorBrush(Colors.Transparent);
+            }
+        }
+
+        private void btn_AddGenre_Click(object sender, RoutedEventArgs e)
+        {
+            dtg_GenreList.Columns[0].Visibility = Visibility.Hidden;
+            dtg_GenreList.Columns[1].Visibility = Visibility.Hidden;
+            btn_DeleteGenreList.Background = new SolidColorBrush(Colors.Transparent);
+            btn_EditGenre.Background = new SolidColorBrush(Colors.Transparent);
+
+            GenreAdd genreadd = new GenreAdd(this, 0, selectedgenre);
+            genreadd.Show();
+        }
+
+        private void dtg_GenreList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectedgenre = (Uct_Genre)dtg_GenreList.SelectedItem;
+        }
+
+        private void txt_AuthorGenreSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txt_AuthorGenreSearch.Text))
+            {
+                dtg_GenreList.ItemsSource = Genres;
+                //dtg_AuthorList.ItemsSource = Author;
+            }
+            else if (SearchGenreAuthorCombobox.Text == "Thể Loại")
+            {
+                var filteredItems = Genres.Where(genres =>
+                genres.GenreID.ToLower().Contains(txt_AuthorGenreSearch.Text.ToLower()) ||
+                    genres.GenreName.ToLower().Contains(txt_AuthorGenreSearch.Text.ToLower())
+                ).ToList();
+
+                dtg_GenreList.ItemsSource = filteredItems;
+
+            }
+            else
+            {
+                
+            }
+            dtg_GenreList.Items.Refresh();
         }
     }
 }

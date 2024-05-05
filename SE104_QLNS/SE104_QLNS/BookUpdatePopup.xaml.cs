@@ -44,8 +44,8 @@ namespace SE104_QLNS
             this.txt_BookName.Text = book.BookName;
             this.cbx_Genre.Text = book.BookGenre;
             this.cbx_Author.Text = book.BookAuthor;
-            this.txt_ImportPrice.Text = book.BookPriceImport.Replace(",0000", "");
-            this.txt_ExportPrice.Text = book.BookPriceExport.Replace(",0000", "");
+            this.txt_ImportPrice.Text = book.BookPriceImport;
+            this.txt_ExportPrice.Text = book.BookPriceExport;
             this.txt_Quantity.Text = book.Amount;
             this.BookURL = book.BookURL;
             txt_Distribute.Text = book.BookDistribution;
@@ -272,6 +272,7 @@ namespace SE104_QLNS
 
         private void txt_ImportPrice_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (txt_ExportPrice == null) return;
             txt_ExportPrice.Text = "";
             int convertedImportPrice;
             if (int.TryParse(txt_ImportPrice.Text, out convertedImportPrice))

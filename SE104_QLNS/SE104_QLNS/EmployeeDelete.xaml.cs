@@ -24,6 +24,7 @@ namespace SE104_QLNS
         public MainWindow parent;
         public Uct_Employee selectedemployee;
         public bool IsClosing = false;
+        public string PicURL {  get; set; }
         public EmployeeDelete()
         {
             InitializeComponent();
@@ -42,6 +43,13 @@ namespace SE104_QLNS
             this.tbl_EmployeeAddress.Text = employee.EmployeeAddress;
             this.tbl_EmployeeOccupation.Text = employee.EmployeeOccupation;
             this.tbl_EmployeeShift.Text = employee.EmployeeShift;
+            PicURL = employee.PicURL;
+
+            BitmapImage bimage = new BitmapImage();
+            bimage.BeginInit();
+            bimage.UriSource = new Uri(PicURL, UriKind.RelativeOrAbsolute);
+            bimage.EndInit();
+            img_EmployeeImage.Source = bimage;
         }
 
         private void btn_ExitApp_Click(object sender, RoutedEventArgs e)

@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,6 +25,7 @@ namespace SE104_QLNS
     {
         public bool IsClosing = false;
         public MainWindow parent;
+        public string HinhAnh = "/Images/Img_user_icon.png";
         public EmployeeAdd()
         {
             InitializeComponent();
@@ -31,8 +35,16 @@ namespace SE104_QLNS
             InitializeComponent();
             this.parent = mainwindow;
             txt_EmployeeID.Text = mainwindow.GetNextEmployeeID(mainwindow);
+            CreateImage(HinhAnh);
         }
-
+        public void CreateImage(string url)
+        {
+            BitmapImage bimage = new BitmapImage();
+            bimage.BeginInit();
+            bimage.UriSource = new Uri(url, UriKind.RelativeOrAbsolute);
+            bimage.EndInit();
+            img_EmployeeImage.Source = bimage;
+        }
         private void btn_EmployeeAdd_Click(object sender, RoutedEventArgs e)
         {
             Connection connect = new Connection();
@@ -42,11 +54,11 @@ namespace SE104_QLNS
                 try
                 {
                     connection.Open();
-                    string sqlQuery = $"INSERT INTO NGUOIDUNG (MANV, HoTenNV, SDT, NgaySinh, GioiTinh, DiaChi, CCCD, ViTri, Ca, TenTK, MatKhau) " +
-                      $"VALUES (@MaNV, @HoTenNV, @SDT, @NgaySinh, @GioiTinh, @DiaChi, @CCCD, @ViTri, @Ca, @TenTK, @MatKhau)";
+                    string sqlQuery = $"INSERT INTO NGUOIDUNG (MANV, HoTenNV, SDT, NgaySinh, GioiTinh, DiaChi, CCCD, ViTri, Ca, TenTK, MatKhau, HinhAnh) " +
+                      $"VALUES (@MaNV, @HoTenNV, @SDT, @NgaySinh, @GioiTinh, @DiaChi, @CCCD, @ViTri, @Ca, @TenTK, @MatKhau, @HinhAnh)";
                     SqlCommand command = new SqlCommand(sqlQuery, connection);
                     command.Parameters.AddWithValue("@MaNV", txt_EmployeeID.Text);
-                    
+
                     command.Parameters.AddWithValue("@HoTenNV", txt_EmployeeName.Text);
                     command.Parameters.AddWithValue("@SDT", txt_EmployeePhone.Text);
                     command.Parameters.AddWithValue("@NgaySinh", txt_EmployeeBirthday.Text);
@@ -59,8 +71,9 @@ namespace SE104_QLNS
                     command.Parameters.AddWithValue("@DiaChi", txt_EmployeeAddress.Text);
                     command.Parameters.AddWithValue("@CCCD", txt_EmployeeCard.Text);
                     command.Parameters.AddWithValue("@ViTri", txt_EmployeeOccupation.Text);
-                   
-                    
+
+                    command.Parameters.AddWithValue("@HinhAnh", HinhAnh);
+
                     command.Parameters.AddWithValue("@Ca", txt_EmployeeShift.Text);
                     command.Parameters.AddWithValue("@TenTK", txt_EmployeeTK.Text);
                     command.Parameters.AddWithValue("@MatKhau", txt_EmployeePass.Text);
@@ -81,6 +94,30 @@ namespace SE104_QLNS
         {
             IsClosing = true;
             this.Close();
+        }
+
+        private void btn_EmployeeImage_Click(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                try
+                {
+                    OpenFileDialog openFileDialog = new OpenFileDialog();
+                    openFileDialog.Filter = "Image files (*.png;*.jpg)|*.png;*.jpg|All files (*.*)|*.*";
+                    if (openFileDialog.ShowDialog() == true)
+                    {
+                        string selectedImagePath = openFileDialog.FileName;
+                        HinhAnh = selectedImagePath;
+                        CreateImage(HinhAnh);
+                        //Notification noti = new Notification("Updated", BookURL); .Replace("\\","/")
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Notification noti = new Notification("Error", "Error opening file: " + ex.Message);
+                }
+            });
         }
     }
 }

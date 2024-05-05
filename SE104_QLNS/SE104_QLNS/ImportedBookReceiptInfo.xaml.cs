@@ -116,8 +116,10 @@ namespace SE104_QLNS
                             MaSach = reader["MaSach"].ToString();
                             SoLuongNhap = reader["SoLuongNhap"].ToString();
                             BookURL = reader["HinhAnhSach"].ToString();
-                            DonGiaNhap = reader["DonGiaNhap"].ToString().Replace(",0000", "");
-                            
+                            DonGiaNhap = reader["DonGiaNhap"].ToString();
+                            DonGiaNhap = DonGiaNhap.Substring(0, DonGiaNhap.Length - 5);
+
+
                             ImportedBookInfo info = new ImportedBookInfo(order, importedBookReceiptInfo.ImportBookReceiptID
                                 , MaSach, BookURL, SoLuongNhap, DonGiaNhap);
                             importedBookReceiptInfo.ImportInfo.Add(info);

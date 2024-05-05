@@ -157,7 +157,8 @@ namespace SE104_QLNS
                             string exportBookURL = reader["HinhAnhSach"].ToString();
                             string exportedBookName = reader["TenDauSach"].ToString();
                             int exportedBookAmount = Convert.ToInt32(reader["SoLuong"].ToString());
-                            string exportedBookPrice = reader["DonGiaBan"].ToString().Replace(",0000", "");
+                            string exportedBookPrice = reader["DonGiaBan"].ToString();
+                            exportedBookPrice = exportedBookPrice.Substring(0, exportedBookPrice.Length - 5);
                             string exportedBookTotal = (Convert.ToInt32(exportedBookPrice)* exportedBookAmount).ToString();
 
                             ExportedBookInfo info = new ExportedBookInfo

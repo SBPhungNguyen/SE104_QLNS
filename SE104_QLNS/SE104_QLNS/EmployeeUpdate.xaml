@@ -57,10 +57,10 @@ HorizontalAlignment="Right" Margin="10,0,0,0" Click="btn_ExitApp_Click">
 
             <Grid Grid.Row="2">
                 <Border Name="bdr_EmployeeImage" Width="150" Height="200" Margin="33,15,565,113" CornerRadius="10">
-                    <Border.Background>
-                        <ImageBrush x:Name="img_EmployeeImage" Stretch="Fill" ImageSource="/Images/totoro.jpg"/>
-                    </Border.Background>
+                    <Image x:Name="img_EmployeeImage" Stretch="Fill"/>
                 </Border>
+                <Button Name="btn_EmployeeImage" Width="150" Height="200" Margin="33,15,565,113" Opacity="0.0" BorderThickness="0" Click="btn_EmployeeImage_Click"/>
+
                 <TextBlock Text="ID:" FontSize="18" Height="25" Width="50" Margin="251,12,447,291" RenderTransformOrigin="0.184,-0.376"/>
                 <TextBlock Text="Tên:" FontSize="18" Height="25" Margin="251,44,393,259" RenderTransformOrigin="0.184,-0.376" />
                 <TextBlock Text="Giới tính:" FontSize="18" Height="25" Margin="251,78,394,225" RenderTransformOrigin="0.184,-0.376"/>

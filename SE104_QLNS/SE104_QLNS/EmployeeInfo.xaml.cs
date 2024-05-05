@@ -20,12 +20,13 @@ namespace SE104_QLNS
     public partial class EmployeeInfo : Window
     {
         public bool IsClosing = false;
+        public string PicURL { get; set; }
         public EmployeeInfo()
         {
             InitializeComponent();
         }
         public EmployeeInfo(string employeeID, string employeeName, string employeeBirthday, string employeeGender, string employeeCard,
-            string employeePhonenumber, string employeeAddress, string employeeOccupation, string employeeShift, string employeeTK, string employeePass)
+            string employeePhonenumber, string employeeAddress, string employeeOccupation, string employeeShift, string employeeTK, string employeePass, string picURL)
         {
             InitializeComponent();
             tbl_EmployeeID.Text = employeeID;
@@ -34,13 +35,20 @@ namespace SE104_QLNS
             tbl_EmployeeBirthday.Text = employeeBirthday;
             tbl_EmployeeCard.Text = employeeCard;
             tbl_EmployeePhone.Text = employeePhonenumber;
-           
+
             tbl_EmployeeAddress.Text = employeeAddress;
             tbl_EmployeeOccupation.Text = employeeOccupation;
             tbl_EmployeeShift.Text = employeeShift;
             tbl_EmployeeTK.Text = employeeTK;
             tbl_EmployeePass.Text = employeePass;
+            PicURL = picURL;
+            BitmapImage bimage = new BitmapImage();
+            bimage.BeginInit();
+            bimage.UriSource = new Uri(PicURL, UriKind.RelativeOrAbsolute);
+            bimage.EndInit();
+            img_EmployeeImage.Source = bimage;
         }
+    
 
         private void btn_ExitApp_Click(object sender, RoutedEventArgs e)
         {

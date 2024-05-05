@@ -156,11 +156,11 @@ namespace SE104_QLNS
                     command.Parameters.AddWithValue("@MaSach", txt_BookID.Text);
                     command.Parameters.AddWithValue("@MaDauSach", BookTitleID);
                     command.Parameters.AddWithValue("@NXB", txt_Distribute.Text);
-                    command.Parameters.AddWithValue("@NamXB", txt_DistributeYear.Text);
+                    command.Parameters.AddWithValue("@NamXB", int.Parse(txt_DistributeYear.Text));
                     command.Parameters.AddWithValue("@HinhAnhSach", BookURL);
                     command.Parameters.AddWithValue("@SoLuongTon", int.Parse(txt_Quantity.Text));
-                    command.Parameters.AddWithValue("@DonGiaNhap", int.Parse(txt_ImportPrice.Text));
-                    command.Parameters.AddWithValue("@DonGiaBan", int.Parse(txt_ExportPrice.Text));
+                    command.Parameters.AddWithValue("@DonGiaNhap", txt_ImportPrice.Text);
+                    command.Parameters.AddWithValue("@DonGiaBan", txt_ExportPrice.Text);
 
 
                     reader = command.ExecuteReader();
@@ -222,9 +222,10 @@ namespace SE104_QLNS
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        string genres = reader["TenTheLoai"].ToString();
+                        string genresname = reader["TenTheLoai"].ToString();
                         SelectedGenre = reader["MaTheLoai"].ToString();
-                        cbx_Genre.Items.Add(genres);
+                        
+                        cbx_Genre.Items.Add(genresname);
                     }
                     reader.Close();
                 }

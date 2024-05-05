@@ -11,6 +11,38 @@
         <ControlTemplate TargetType="UserControl">
             <Border CornerRadius="15">
                 <Grid Margin="1,0,-1,0">
+                    <Button Name="btn_Button" Height="30" Width="30" Margin="15,10,15,0" VerticalAlignment="Top" HorizontalAlignment="Right" Click="btn_Button_Click">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#C2DECE"/>
+                                        <Setter Property="BorderBrush" Value="#000000"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="30" Height="30"
+CornerRadius="10"
+Background="{TemplateBinding Background}"
+BorderBrush="{TemplateBinding BorderBrush}"
+BorderThickness="{TemplateBinding BorderThickness}">
+                                    <Grid>
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                            <Image Name="ButtonImage" Source="{Binding Img_Type}" Margin="0,0,0,0" Stretch="Fill"/>
+
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
                     <Image Name="img_EmployeePic" Margin="20,21,165,44" Width="65" Height="85" Source="{Binding PicURL}" Stretch="Fill" />
                     <TextBlock Name="tbl_EmployeeID" Text="{Binding EmployeeID}" Margin="99,18,68,113" FontWeight="Bold"/>
 
@@ -18,15 +50,13 @@
 
                     <TextBlock Text="Ca làm:" Margin="99,114,99,17"/>
 
-                    <Image Name="img_Icon" HorizontalAlignment="Left" Height="20" Margin="224,6,0,0" VerticalAlignment="Top" Width="20"
-                   Source="{Binding Icon}" Stretch="Fill"/>
                     <TextBlock Name="tbl_EmployeeName" Margin="98,39,6,86" Text="{Binding EmployeeName}" FontWeight="Bold"
                                Height="25" Width="146" FontSize="14"/>
                     <TextBlock Name="tbl_PhoneNumber" HorizontalAlignment="Left" Margin="151,0,0,0" TextWrapping="Wrap" Text="{Binding EmployeePhonenumber}" VerticalAlignment="Center" Width="84"/>
                     <TextBlock Name="tbl_EmployeeOccupation" HorizontalAlignment="Left" Margin="99,90,0,0" TextWrapping="Wrap" Text="{Binding EmployeeOccupation}" VerticalAlignment="Top"
                                Height="18" Width="135" FontWeight="Bold"
                                />
-                    <TextBlock Name="tbl_EmployeeShift" HorizontalAlignment="Left" Margin="151,114,0,0" TextWrapping="Wrap" Text="{Binding EmployeeTime}" VerticalAlignment="Top" Width="81"/>
+                    <TextBlock Name="tbl_EmployeeShift" HorizontalAlignment="Left" Margin="151,114,0,0" TextWrapping="Wrap" Text="{Binding EmployeeShift}" VerticalAlignment="Top" Width="81"/>
                 </Grid>
                 <Border.Style>
                     <Style TargetType="Border">
