@@ -21,26 +21,45 @@
                        FontSize="18"
                        FontWeight="Bold"
                        VerticalAlignment="Center" Margin="15,0,251,0"/>
-                <Image Source="/Images/icon_close.png" Width="23" Height="23" 
-                       Stretch="Fill" 
-                       RenderTransformOrigin="1.864,0.792" 
-                       HorizontalAlignment="Right"
-                       Margin="0,4,7,3"/>
+                <Button Name="btn_ExitApp"
+Grid.Column="3"
+Click="btn_ExitApp_Click"
+ Width="40" 
+Height="30"
+BorderThickness="0"
+Cursor="Hand" 
+VerticalAlignment="Center"
+HorizontalAlignment="Right">
+                    <Button.Content>
+                        <Image Source="/Images/icon_close.png" Width="20" Height="20"/>
+                    </Button.Content>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#154448"/>
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
             </Grid>
             <Grid Grid.Row="1">
-                <TextBlock Text="Đặt tên cho tác giả được tạo:"
+                <TextBlock Name="TextAuthor" Text="Đặt tên cho tác giả được tạo:"
                            FontSize="20"
                            FontFamily="Tahoma"
                            HorizontalAlignment="Center" 
                            Margin="0,39,0,81" TextWrapping="Wrap"/>
-                <TextBox Name="txt_DistributeYear" FontWeight="Bold"
+                <TextBox Name="txt_AuthorName" FontWeight="Bold"
                 BorderThickness="0,0,0,1"
                 Height="30" Width="300" FontSize="18" 
                 HorizontalAlignment="Center" 
                            Margin="0,94,0,94"/>
                 <Button Name="btn_AddAuthor"
                         Content="Tạo" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" 
-                        Foreground="White" Margin="50,150,243,15">
+                        Foreground="White" Margin="50,150,243,15" Click="btn_AddAuthor_Click">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="#154348"/>
@@ -67,7 +86,7 @@
 
                 <Button Name="btn_Back" Height="35"
                         Content="Hủy Bỏ" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" 
-                        Foreground="White" Margin="243,150,50,15">
+                        Foreground="White" Margin="243,150,50,15" Click="btn_Back_Click">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="#6FB3B8"/>

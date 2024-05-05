@@ -40,7 +40,6 @@ namespace SE104_QLNS.View
         { get; set; }
         public string EmployeePhonenumber
         { get; set; }
-       
         public string EmployeeAddress
         { get; set; }
         public string EmployeeOccupation

@@ -2017,7 +2017,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                             </Border>
                         </Grid>
 
-                        <Canvas Grid.Row="1" x:Name="cvs_Author" Visibility="Hidden" Grid.ColumnSpan="3">
+                        <Canvas Grid.Row="1" x:Name="cvs_Author" Visibility="Visible" Grid.ColumnSpan="3">
 
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -2036,14 +2036,15 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                     </Border>
 
                                     <Button Name="btn_AddAuthor"
-         Height="40"
-         Width="100"
-         FontFamily="Tahoma" 
-         FontSize="17" 
-         FontWeight="Bold"
-         Foreground="#154348" 
-         Cursor="Hand" 
-         Margin="10,5,0,5">
+                                     Height="40"
+                                     Width="100"
+                                     FontFamily="Tahoma" 
+                                     FontSize="17" 
+                                     FontWeight="Bold"
+                                     Foreground="#154348" 
+                                     Cursor="Hand" 
+                                     Margin="10,5,0,5"
+                                            Click="btn_AddAuthor_Click">     
                                         <Button.Style>
                                             <Style TargetType="Button">
                                                 <Setter Property="Background" Value="Transparent"/>
@@ -2090,7 +2091,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
          FontWeight="Bold" 
          Foreground="#154348" 
          Cursor="Hand" 
-         Margin="10,5,0,5">
+         Margin="10,5,0,5" Click="btn_EditAuthor_Click">
                                         <Button.Style>
                                             <Style TargetType="Button">
                                                 <Setter Property="Background" Value="Transparent"/>
@@ -2130,7 +2131,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                         </Button.Template>
                                     </Button>
 
-                                    <Button Name="btn_DeleteAuthor" 
+                                    <Button Name="btn_DeleteAuthorList" 
          Height="40" 
          Width="85"
          FontFamily="Tahoma" 
@@ -2138,7 +2139,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
          FontWeight="Bold"
          Foreground="#154348"
          Cursor="Hand" 
-         Margin="10,5,0,5">
+         Margin="10,5,0,5" Click="btn_DeleteAuthorList_Click">
                                         <Button.Style>
                                             <Style TargetType="Button">
                                                 <Setter Property="Background" Value="Transparent"/>
@@ -2189,10 +2190,85 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                 </DockPanel>
 
                                 <!--this is Author list -->
-                                <DataGrid Name="dtg_AuthorList" Grid.Row="1" ItemsSource="{Binding Author}" Style="{StaticResource DataGrid}" Width="975" Height="475" ColumnHeaderHeight="40" Margin="10,0,10,10" SelectionChanged="dtg_AuthorList_SelectionChanged">
+                                <DataGrid Name="dtg_AuthorList" Grid.Row="1" ItemsSource="{Binding Authors}" Style="{StaticResource DataGrid}" Width="975" Height="475" ColumnHeaderHeight="40" Margin="10,0,10,10" SelectionChanged="dtg_AuthorList_SelectionChanged">
                                     <DataGrid.Columns>
-                                        <DataGridCheckBoxColumn Binding="{Binding IsChecked}" Width="0.2*"/>
-                                        <DataGridTextColumn Header="#" Binding="{Binding AuthorNum}" Width="0.2*" IsReadOnly="True"/>
+                                        <DataGridTemplateColumn Header="" Visibility="Hidden">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button Name="btn_UpdateAuthor" Height="40" Width="40" Margin="15,0,0,0" Click="btn_UpdateAuthor_Click">
+                                                        <Button.Style>
+                                                            <Style TargetType="Button">
+                                                                <Setter Property="Background" Value="Transparent"/>
+                                                                <Setter Property="BorderThickness" Value="1"/>
+                                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                                <Style.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter Property="Background" Value="#C2DECE"/>
+                                                                        <Setter Property="BorderBrush" Value="#000000"/>
+                                                                    </Trigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Button.Style>
+                                                        <Button.Template>
+                                                            <ControlTemplate TargetType="Button">
+                                                                <Border Width="40" Height="40"
+CornerRadius="10"
+Background="{TemplateBinding Background}"
+BorderBrush="{TemplateBinding BorderBrush}"
+BorderThickness="{TemplateBinding BorderThickness}">
+                                                                    <Grid>
+                                                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                                                            <Image Source="/Images/icon_pencil.png" Margin="6,0,0,0"
+        Stretch="Fill" Height="25" Width="25"/>
+
+                                                                        </StackPanel>
+                                                                    </Grid>
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Button.Template>
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn Header="" Visibility="Hidden">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button Name="btn_DeleteAuthor" Height="40" Width="40" Margin="15,0,0,0" Click="btn_DeleteAuthor_Click">
+                                                        <Button.Style>
+                                                            <Style TargetType="Button">
+                                                                <Setter Property="Background" Value="Transparent"/>
+                                                                <Setter Property="BorderThickness" Value="1"/>
+                                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                                <Style.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter Property="Background" Value="#C2DECE"/>
+                                                                        <Setter Property="BorderBrush" Value="#000000"/>
+                                                                    </Trigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Button.Style>
+                                                        <Button.Template>
+                                                            <ControlTemplate TargetType="Button">
+                                                                <Border Width="40" Height="40"
+CornerRadius="10"
+Background="{TemplateBinding Background}"
+BorderBrush="{TemplateBinding BorderBrush}"
+BorderThickness="{TemplateBinding BorderThickness}">
+                                                                    <Grid>
+                                                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                                                            <Image Source="/Images/icon_bin.png" Margin="6,0,0,0"
+        Stretch="Fill" Height="25" Width="25"/>
+
+                                                                        </StackPanel>
+                                                                    </Grid>
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Button.Template>
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTextColumn Header="#" Binding="{Binding GenreNum}" Width="0.2*" IsReadOnly="True"/>
                                         <DataGridTextColumn Header="Mã tác giả" Binding="{Binding AuthorID}" Width="*" IsReadOnly="True"/>
                                         <DataGridTextColumn Header="Tên tác giả" Binding="{Binding AuthorName}" Width="3*" IsReadOnly="True"/>
                                     </DataGrid.Columns>
@@ -2486,13 +2562,16 @@ BorderThickness="{TemplateBinding BorderThickness}">
                         <!--Buttons, list header,...-->
                         <!--Sreach bar-->
                         <Grid Grid.Row="0" Grid.ColumnSpan="2">
-                            <Border Height="28" Width="100" CornerRadius="15,0,0,15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="345,2,499,2" >
-                                <ComboBox Style="{StaticResource MonthYearComboxbox}" Height="24" Width="80" Margin="16,1,2,1"/>
+                            <Border Height="28" Width="100"  CornerRadius="15,0,0,15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="345,2,499,2" >
+                                <ComboBox Style="{StaticResource MonthYearComboxbox}" FontSize="13" Height="24" Width="80" Margin="16,1,2,1" Name="EmployeeSearchComboBox" SelectionChanged="EmployeeSearchComboBox_SelectionChanged">
+                                    <ComboBoxItem>Tên</ComboBoxItem>
+                                    <ComboBoxItem>SĐT</ComboBoxItem>
+                                </ComboBox>
                             </Border>
                             <Border Height="28" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,15,15,0" Margin="444,2,250,2">
                                 <Grid>
                                     <TextBox x:Name="txt_EmployeeSearch" VerticalContentAlignment="Center" VerticalAlignment="Center"
-                             FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="193" Margin="5,0,0,0"/>
+                                     FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="170" Margin="28,0,0,0" TextChanged="txt_EmployeeSearch_TextChanged"/>
                                     <Image Name="img_EmployeeSearch" Source="/Images/icon_search.png" Stretch="Fill" Height="20" Width="20" Cursor="Hand" Margin="212,4,16,2"/>
 
                                 </Grid>
@@ -2501,8 +2580,12 @@ BorderThickness="{TemplateBinding BorderThickness}">
 
                         <!--switch to grid/datagrid button, import book button, delete book button,... above list-->
                         <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="143*"/>
+                                <ColumnDefinition Width="106*"/>
+                            </Grid.ColumnDefinitions>
                             <Button Name="btn_EmployeeAdd" Height="40" Width="100"
-            FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="10,5,834,5" Click="btn_EmployeeAdd_Click">
+            FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="36,5,436,5" Click="btn_EmployeeAdd_Click">
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Setter Property="Background" Value="Transparent"/>
@@ -2539,7 +2622,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                             </Button>
 
                             <Button Name="btn_EmployeeUpdate" Height="40" Width="100"
-            FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="112,5,732,5" Click="btn_EmployeeUpdate_Click">
+            FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="138,5,334,5" Click="btn_EmployeeUpdate_Click">
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Setter Property="Background" Value="Transparent"/>
@@ -2576,7 +2659,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                             </Button>
 
                             <Button Name="btn_EmployeeDelete" Height="40" Width="100"
-            FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="214,5,630,5" Click="btn_EmployeeDelete_Click">
+            FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="240,5,232,5" Click="btn_EmployeeDelete_Click">
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Setter Property="Background" Value="Transparent"/>
@@ -2614,13 +2697,13 @@ BorderThickness="{TemplateBinding BorderThickness}">
 
                             <TextBlock FontSize="30" Text="Nhân viên" FontWeight="Bold" FontFamily="Tahoma"
                    VerticalAlignment="Top"
-       Height="54" Margin="424,0,324,0"/>
+       Height="54" Margin="424,0,324,0" Grid.ColumnSpan="2"/>
 
 
                             <Label Name="lbl_EmployeeCount" FontSize="18"
    Content="Tổng: 100"
    VerticalContentAlignment="Top" HorizontalContentAlignment="Right"
-FontFamily="Tahoma" Margin="890,16,15,2"/>
+FontFamily="Tahoma" Margin="318,16,15,2" Grid.Column="1"/>
 
                         </Grid>
 
