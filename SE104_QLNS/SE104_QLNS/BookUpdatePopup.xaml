@@ -103,7 +103,7 @@
                            Text="Giá bán:" Height="30" FontSize="18" 
                            Margin="362,323,10,115"/>
                 <TextBox Name="txt_Quantity" FontWeight="Bold" 
-                           Text="Số lượng:" Height="30" FontSize="18" 
+                           Text="Số lượng:" Height="30" FontSize="18" IsReadOnly="true"
                            Margin="362,360,10,78" TextChanged="txt_Quantity_TextChanged"/>
                 <Button Name="btn_Update" Height="35" Margin="45,411,298,22"
                         Content="Cập Nhật" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Click="btn_Update_Click">

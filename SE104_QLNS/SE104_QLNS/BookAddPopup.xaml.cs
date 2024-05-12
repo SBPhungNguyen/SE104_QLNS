@@ -161,17 +161,79 @@ namespace SE104_QLNS
                     command.Parameters.AddWithValue("@SoLuongTon", int.Parse(txt_Quantity.Text));
                     command.Parameters.AddWithValue("@DonGiaNhap", txt_ImportPrice.Text);
                     command.Parameters.AddWithValue("@DonGiaBan", txt_ExportPrice.Text);
-
-
                     reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
+
+                    string nextImportPaperID = parent.GetNextImportPaperID(parent);
+
+                    //Add to Import Book
+                     sqlQuery = "INSERT INTO PHIEUNHAP (MaPhieuNhap, NgayNhap, TongTien) " +
+                  $"VALUES (@MaPhieuNhap, @NgayNhap, @TongTien)";
+                    command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@MaPhieuNhap", nextImportPaperID);
+                    command.Parameters.AddWithValue("@NgayNhap", DateTime.Now);
+                    command.Parameters.AddWithValue("@TongTien", 0);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
+
+                    //Creating
+                    sqlQuery = "INSERT INTO CT_PHIEUNHAP (MaPhieuNhap, MaSach, SoLuongNhap, DonGiaNhap) " +
+                  $"VALUES (@MaPhieuNhap, @MaSach, @SoLuongNhap, @DonGiaNhap)";
+                    command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@MaPhieuNhap", nextImportPaperID);
+                    command.Parameters.AddWithValue("@MaSach", txt_BookID.Text);
+                    command.Parameters.AddWithValue("@SoLuongNhap", txt_Quantity.Text);
+                    command.Parameters.AddWithValue("@DonGiaNhap", txt_ImportPrice.Text);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
+                    //Adding to MoneySum
+
+
+                    //Get the current SUM
+                    sqlQuery = "SELECT TongTien FROM PHIEUNHAP WHERE MaPhieuNhap = @MaPhieuNhap";
+                    command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@MaPhieuNhap", nextImportPaperID);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    int SUM = Convert.ToInt32(reader["TongTien"]);
+                    SUM += Convert.ToInt32(txt_Quantity.Text) * Convert.ToInt32(txt_ImportPrice.Text);
+                    reader.Close();
+
+
+                    //Update The SUM
+                    sqlQuery = "UPDATE PHIEUNHAP SET TongTien=@TongTien WHERE MaPhieuNhap = @MaPhieuNhap";
+                    command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@TongTien", SUM);
+                    command.Parameters.AddWithValue("@MaPhieuNhap", nextImportPaperID);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
+
+                    //Create for BAOCAOTON
+                    sqlQuery = "INSERT INTO BAOCAOTON (Thang, Nam, MaSach, TonDau, PhatSinh, TonCuoi) " +
+                  $"VALUES (@Thang, @Nam, @MaSach, @TonDau, @PhatSinh, @TonCuoi)";
+                    command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@Thang", DateTime.Now.Month.ToString());
+                    command.Parameters.AddWithValue("@Nam", DateTime.Now.Year.ToString());
+                    command.Parameters.AddWithValue("@MaSach", txt_BookID.Text);
+                    command.Parameters.AddWithValue("@TonDau", 0);
+                    command.Parameters.AddWithValue("@PhatSinh", Convert.ToInt32(txt_Quantity.Text));
+                    command.Parameters.AddWithValue("@TonCuoi", Convert.ToInt32(txt_Quantity.Text));
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
                 }
                 catch (Exception ex)
                 {
                     Notification noti = new Notification("Error", "Error retrieving data: " + ex.Message);
                 }
             }
-
+            parent.LoadImportPaper(parent, 0);
             parent.LoadBook(parent, 0);
+            parent.LoadBaoCaoTon(parent, 0);
             IsClosing = true;
             this.Close();
         }

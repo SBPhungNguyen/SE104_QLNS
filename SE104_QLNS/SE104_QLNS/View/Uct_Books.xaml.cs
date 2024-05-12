@@ -18,6 +18,30 @@ namespace SE104_QLNS.View
     /// <summary>
     /// Interaction logic for Uct_Books.xaml
     /// </summary>
+    public partial class Uct_BaoCaoTon
+    {
+        public int Month { get; set; }
+        public int Year { get; set; }
+        public string BookId { get; set; }
+        public string HinhAnhSach { get; set; }
+        public string BookName { get; set; }
+        public int TonDau { get; set; }
+        public int PhatSinh { get; set; }
+        public int TonCuoi { get; set; }
+        public Uct_BaoCaoTon()
+        { }
+        public Uct_BaoCaoTon(int month, int year, string bookId, string hinhAnhSach, string bookName, int tonDau, int phatSinh, int tonCuoi)
+        {
+            Month = month;
+            Year = year;
+            BookId = bookId;
+            HinhAnhSach = hinhAnhSach;
+            BookName = bookName;
+            TonDau = tonDau;
+            PhatSinh = phatSinh;
+            TonCuoi = tonCuoi;
+        }
+    }
     public partial class Uct_Books : UserControl
     {
         public MainWindow parent;
