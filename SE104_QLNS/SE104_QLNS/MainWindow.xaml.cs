@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
@@ -36,21 +37,28 @@ namespace SE104_QLNS
         public ObservableCollection<string> BookSearchItemsSearched { get; set; } = new ObservableCollection<string>();
         public ObservableCollection<Uct_Customer> Customers { get; set; } = new ObservableCollection<Uct_Customer>();
         public ObservableCollection<Uct_Employee> Employees { get; set; } = new ObservableCollection<Uct_Employee>();
-
         public ObservableCollection<Uct_Genre> Genres { get; set; } = new ObservableCollection<Uct_Genre>();
         public ObservableCollection<Uct_Author> Authors { get; set; } = new ObservableCollection<Uct_Author>();
 
         public ObservableCollection<ImportedBookReceiptInfo> ImportBookReceipts { get; set; } = new ObservableCollection<ImportedBookReceiptInfo>();
         public ObservableCollection<BillInfo> Bills { get; set; } = new ObservableCollection<BillInfo>();
+        public ObservableCollection<Uct_BaoCaoTon> BaoCaoTon { get; set; } = new ObservableCollection<Uct_BaoCaoTon>();
 
         Connection connect = new Connection();
-
 
         Uct_Books selectedbook = null;
         ImportedBookReceiptInfo selectedimportreceipt = null;
         BillInfo selectedbillinfo = null;
         Uct_Genre selectedgenre = null;
         Uct_Author selectedauthor = null;
+
+        string ApDungQuyDinhKiemTraSoTienThu = "";
+        string SoLuongNhapToiThieu = "";
+        string SoLuongTonToiDaTruocNhap = "";
+        string SoLuongTonToiThieuSauBan = "";
+        string SoTienNoToiDa = "";
+        string TiLeGiaBan = "";
+
 
         bool isBookDelete = false;
         bool isBookUpdate = false;
@@ -76,8 +84,10 @@ namespace SE104_QLNS
             LoadEmployee(this, 0);
             LoadImportPaper(this, 0);
             LoadExportPaper(this, 0);
+            LoadTHAMSO(this, 0);
             txb_BillDate.Text = DateTime.Now.ToString();
             LoadAuthor(this, 0);
+            LoadBaoCaoTon(this, 0);
             Cbx_SearchBook.SelectedIndex = 0;
             ImportExportComboBox.SelectedIndex = 0;
             ImportDate.Text = DateTime.Now.ToString();
@@ -95,6 +105,7 @@ namespace SE104_QLNS
         }
 
         //Get ID
+
         public string GetNextBookTitleID(MainWindow mainwindow)
         {
             string connectionString = connect.connection;
@@ -363,6 +374,7 @@ namespace SE104_QLNS
 
             return nextBookID;
         }
+
         public string GetNextAuthorID(MainWindow mainwindow)
         {
             string connectionString = connect.connection;
@@ -415,7 +427,7 @@ namespace SE104_QLNS
 
                 string MaSach = "", TacGia = "", TheLoai = "", TenDauSach = "", NXB = "", NamXB = "",
                 HinhAnhSach = "", SoLuongTon = "", DonGiaNhap = "", DonGiaBan = "";
-
+                BookSearchItemsOriginal.Clear();
                 try
                 {
                     connection.Open();
@@ -478,6 +490,109 @@ namespace SE104_QLNS
                     {
                         mainwindow.wpn_Books.Children.Add(child);
                     }
+                }
+            }
+        }
+        public void LoadBaoCaoTon(MainWindow mainwindow, int state)
+        {
+            //connect to database
+            mainwindow.BaoCaoTon.Clear();
+            string connectionString = connect.connection;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+
+                string MaSach = "", HinhAnhSach = "", TenSach = "";
+                int TonDau = 0, PhatSinh = 0, TonCuoi = 0, Month = 0, Year = 0;
+                try
+                {
+                    connection.Open();
+                    string sqlQuery = "SELECT DISTINCT BAOCAOTON.*, DAUSACH.*, SACH.* FROM BAOCAOTON " +
+                        "JOIN SACH ON BAOCAOTON.MASACH = SACH.MASACH " +
+                        "JOIN DAUSACH ON SACH.MADAUSACH = DAUSACH.MADAUSACH";
+                    SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            MaSach = reader["MaSach"].ToString();
+                            TenSach = reader["TenDauSach"].ToString();
+                            HinhAnhSach = reader["HinhAnhSach"].ToString();
+                            TonDau = Convert.ToInt32(reader["TonDau"]);
+                            PhatSinh = Convert.ToInt32(reader["PhatSinh"]);
+                            TonCuoi = Convert.ToInt32(reader["TonCuoi"]);
+                            Month = Convert.ToInt32(reader["Thang"]);
+                            Year = Convert.ToInt32(reader["Nam"]);
+
+                            Uct_BaoCaoTon baocao = new Uct_BaoCaoTon(Month, Year, MaSach, HinhAnhSach, TenSach, TonDau, PhatSinh, TonCuoi);
+                            mainwindow.BaoCaoTon.Add(baocao);
+                        }
+                    }
+                    reader.Close();
+                    string Thang = "", Nam = "";
+
+                    //Add to Month from BAOCAOTON
+                    sqlQuery = "SELECT Thang FROM BAOCAOTON";
+                    command = new SqlCommand(sqlQuery, connection);
+                    reader = command.ExecuteReader();
+                    cbx_AmountReportMonth.Items.Add("Tất cả");
+                    cbx_AmountReportMonth.SelectedIndex = 0;
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            bool isDuplicate = false;
+                            Thang = reader["Thang"].ToString();
+                            foreach (string item in cbx_AmountReportMonth.Items)
+                            {
+                                if (item == Thang)
+                                {
+                                    isDuplicate = true;
+                                    break;
+                                }
+                            }
+                            if (!isDuplicate)
+                            {
+                                cbx_AmountReportMonth.Items.Add(Thang);
+                            }
+                        }
+                    }
+                    reader.Close();
+
+                    //Add to Year from BAOCAOTON
+                    sqlQuery = "SELECT Nam FROM BAOCAOTON";
+                    command = new SqlCommand(sqlQuery, connection);
+                    reader = command.ExecuteReader();
+
+                    cbx_AmountReportYear.Items.Add("Tất cả");
+                    cbx_AmountReportYear.SelectedIndex = 0;
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            bool isDuplicate = false;
+                            Nam = reader["Nam"].ToString();
+                            foreach (string item in cbx_AmountReportYear.Items)
+                            {
+                                if (item == Nam)
+                                {
+                                    isDuplicate = true;
+                                    break;
+                                }
+                            }
+                            if (!isDuplicate)
+                            {
+                                cbx_AmountReportYear.Items.Add(Nam);
+                            }
+                        }
+                    }
+                    reader.Close();
+
+                }
+                catch (Exception ex)
+                {
+                    Notification noti = new Notification("Error", "Error retrieving data from BAOCAOTON: " + ex.Message);
                 }
             }
         }
@@ -647,6 +762,79 @@ namespace SE104_QLNS
                 }
             }
         }
+        public void LoadTHAMSO(MainWindow mainwindow, int state)
+        {
+            string connectionString = connect.connection;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+
+                try
+                {
+                    //ApDungQuyDinhKiemTraSoTienThu
+                    connection.Open();
+                    string sqlQuery = "SELECT GIATRI FROM THAMSO WHERE TenThamSo='ApDungQuyDinhKiemTraSoTienThu'";
+                    SqlCommand command = new SqlCommand(sqlQuery, connection);
+                    SqlDataReader reader = command.ExecuteReader();
+                    reader.Read();
+                    ApDungQuyDinhKiemTraSoTienThu = reader["GIATRI"].ToString();
+                    reader.Close();
+                    if (Convert.ToInt32(ApDungQuyDinhKiemTraSoTienThu) == 1)
+                        cbx_CheckMoneyReceivedFromCustomer.IsChecked = true;
+                    else
+                        cbx_CheckMoneyReceivedFromCustomer.IsChecked = false;
+
+                    //SoLuongNhapToiThieu
+                    sqlQuery = "SELECT GIATRI FROM THAMSO WHERE TenThamSo='SoLuongNhapToiThieu'";
+                    command = new SqlCommand(sqlQuery, connection);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    SoLuongNhapToiThieu = reader["GIATRI"].ToString();
+                    reader.Close();
+                    tbx_BookMinimumImportQuantity.Text = SoLuongNhapToiThieu;
+
+                    //SoLuongTonToiDaTruocNhap
+                    sqlQuery = "SELECT GIATRI FROM THAMSO WHERE TenThamSo='SoLuongTonToiDaTruocNhap'";
+                    command = new SqlCommand(sqlQuery, connection);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    SoLuongTonToiDaTruocNhap = reader["GIATRI"].ToString();
+                    reader.Close();
+                    tbx_BookMinimumStockQuantityBeforeImporting.Text = SoLuongTonToiDaTruocNhap;
+
+                    //SoLuongTonToiThieuSauBan
+                    sqlQuery = "SELECT GIATRI FROM THAMSO WHERE TenThamSo='SoLuongTonToiThieuSauBan'";
+                    command = new SqlCommand(sqlQuery, connection);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    SoLuongTonToiThieuSauBan = reader["GIATRI"].ToString();
+                    reader.Close();
+                    tbx_BookMinimumStockQuantityAfterSelling.Text = SoLuongTonToiThieuSauBan;
+
+                    //SoTienNoToiDa
+                    sqlQuery = "SELECT GIATRI FROM THAMSO WHERE TenThamSo='SoTienNoToiDa'";
+                    command = new SqlCommand(sqlQuery, connection);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    SoTienNoToiDa = reader["GIATRI"].ToString();
+                    reader.Close();
+                    tbx_CustomerMaximumDebt.Text = SoTienNoToiDa;
+
+                    //TiLeGiaBan
+                    sqlQuery = "SELECT GIATRI FROM THAMSO WHERE TenThamSo='TiLeGiaBan'";
+                    command = new SqlCommand(sqlQuery, connection);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    TiLeGiaBan = reader["GIATRI"].ToString();
+                    reader.Close();
+                    tbx_ImportToExportRatio.Text = TiLeGiaBan;
+
+                }
+                catch (Exception ex)
+                {
+                    Notification noti = new Notification("Error", "Error retrieving data from THAMSO: " + ex.Message);
+                }
+            }
+        }
         public void LoadGenre(MainWindow mainwindow, int state)
         {
             mainwindow.Genres.Clear();
@@ -787,12 +975,15 @@ namespace SE104_QLNS
 
         private void btn_DeleteBookFromSellList_Click(object sender, RoutedEventArgs e)
         {
-            BooksSell = new ObservableCollection<Uct_Books>();
+            BooksSell.Clear();
             cbx_BookSearch.Text = null;
         }
         private void cbx_BookSearch_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (cbx_BookSearch.SelectedItem == null) return;
             cbx_BookSearch.Text = cbx_BookSearch.SelectedItem.ToString();
+            foreach (Uct_Books book in Books)
+                cbx_BookSearch.Text = cbx_BookSearch.SelectedItem.ToString();
             foreach (Uct_Books book in Books)
             {
                 if (book.BookID == cbx_BookSearch.Text.Substring(Math.Max(0, cbx_BookSearch.Text.Length - 8)))
@@ -924,6 +1115,7 @@ namespace SE104_QLNS
                             tbl_CustomerPhoneNumber.Text = reader["SDT"].ToString();
                             tbl_CustomerDetailAdress.Text = reader["DiaChi"].ToString();
                             tbl_CustomerEmail.Text = reader["Email"].ToString();
+                            tbl_CustomerDebtDisplay.Text = reader["SoTienNo"].ToString();
                             string GioiTinh = reader["GioiTinh"].ToString();
                             txt_CustomerDateOfBirth.Text = reader["NgaySinh"].ToString(); // Assuming date/time data type
 
@@ -986,10 +1178,12 @@ namespace SE104_QLNS
                 book.BookTotalSellPrice = Convert.ToInt32(book.BookPriceExport) * book.BookSellAmount;
                 money += book.BookTotalSellPrice;
             }
+            dtg_SellList.Items.Refresh();
             txt_ReceiptPrice.Text = money.ToString();
         }
         private void txb_CustomerPayment_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (txb_MoneyOwe == null) return;
             int convertedPrice, PaymentPrice;
             if ((int.TryParse(txt_ReceiptPrice.Text, out convertedPrice)) && (int.TryParse(txb_CustomerPayment.Text, out PaymentPrice)))
             {
@@ -998,12 +1192,84 @@ namespace SE104_QLNS
                     txb_CustomerPayment.Text = txt_ReceiptPrice.Text;
                     PaymentPrice = convertedPrice;
                 }
+                if (txb_MoneyOwe != null)
+                {
+                    txb_MoneyOwe.Text = (convertedPrice - PaymentPrice).ToString();
+                }
                 txb_MoneyOwe.Text = (convertedPrice - PaymentPrice).ToString();
             }
             else
             {
                 txb_CustomerPayment.Text = "0";
             }
+        }
+        private void UpdateBaoCaoTon(SqlConnection connection, string BookID, int Changes)
+        {
+            //Check if BAOCAOTON exists
+            string sqlQuery = $"Select MaSach, Thang, Nam From BAOCAOTON WHERE THANG=@THANG AND NAM=@NAM AND MASACH=@MASACH";
+            SqlCommand command = new SqlCommand(sqlQuery, connection);
+            command.Parameters.AddWithValue("@MaSach", BookID);
+            command.Parameters.AddWithValue("@Thang", DateTime.Now.Month.ToString());
+            command.Parameters.AddWithValue("@Nam", DateTime.Now.Year.ToString());
+            SqlDataReader reader = command.ExecuteReader();
+            if (reader.HasRows) //if has row, just update.
+            {
+                reader.Close();
+                sqlQuery = $"UPDATE BAOCAOTON SET PhatSinh+=@PhatSinh, TonCuoi+=@TonCuoi WHERE THANG=@THANG AND NAM=@NAM AND MASACH=@MASACH";
+                command = new SqlCommand(sqlQuery, connection);
+                command.Parameters.AddWithValue("@MaSach", BookID);
+                command.Parameters.AddWithValue("@Thang", DateTime.Now.Month.ToString());
+                command.Parameters.AddWithValue("@Nam", DateTime.Now.Year.ToString());
+                command.Parameters.AddWithValue("@PhatSinh", Changes);
+                command.Parameters.AddWithValue("@TonCuoi", Changes);
+                reader = command.ExecuteReader();
+                reader.Read();
+                reader.Close();
+            }
+            else //if doesn't, check previous month (it is impossible not to have previous
+                 //month since you always add books and BAOCAOTON at the same time
+                 //create new 
+            {
+                reader.Close();
+                int previousMonth = int.Parse(DateTime.Now.Month.ToString()) - 1;
+                int previousYear = int.Parse(DateTime.Now.Year.ToString());
+
+                // Handle January of the following year
+                if (previousMonth == 0)
+                {
+                    previousMonth = 12;
+                    previousYear--;
+                }
+
+                //Get TonCuoi from previous
+                string thangTruoc = previousMonth.ToString();
+                string namTruoc = previousYear.ToString();
+                int TonCuoiTruoc = 0;
+                sqlQuery = $"SELECT TonCuoi FROM BAOCAOTON WHERE THANG=@THANG AND NAM=@NAM AND MASACH=@MASACH";
+                command = new SqlCommand(sqlQuery, connection);
+                command.Parameters.AddWithValue("@MaSach", BookID);
+                command.Parameters.AddWithValue("@Thang", thangTruoc);
+                command.Parameters.AddWithValue("@Nam", namTruoc);
+                reader = command.ExecuteReader();
+                reader.Read();
+                TonCuoiTruoc = Convert.ToInt32(reader["TonCuoi"]);
+                reader.Close();
+
+                //Create for this BAOCAOTON
+                sqlQuery = "INSERT INTO BAOCAOTON (Thang, Nam, MaSach, TonDau, PhatSinh, TonCuoi) " +
+              $"VALUES (@Thang, @Nam, @MaSach, @TonDau, @PhatSinh, @TonCuoi)";
+                command = new SqlCommand(sqlQuery, connection);
+                command.Parameters.AddWithValue("@Thang", DateTime.Now.Month.ToString());
+                command.Parameters.AddWithValue("@Nam", DateTime.Now.Year.ToString());
+                command.Parameters.AddWithValue("@MaSach", BookID);
+                command.Parameters.AddWithValue("@TonDau", TonCuoiTruoc);
+                command.Parameters.AddWithValue("@PhatSinh", Changes);
+                command.Parameters.AddWithValue("@TonCuoi", TonCuoiTruoc + Changes);
+                reader = command.ExecuteReader();
+                reader.Read();
+                reader.Close();
+            }
+            LoadBaoCaoTon(this, 0);
         }
         private void btn_SaveBillToDatabase_Click(object sender, RoutedEventArgs e)
         {
@@ -1017,6 +1283,31 @@ namespace SE104_QLNS
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
+                    //check if the books can be sold first
+                    foreach (Uct_Books book in BooksSell)
+                    {
+                        if (Convert.ToInt32(book.Amount) - book.BookSellAmount < Convert.ToInt32(SoLuongTonToiThieuSauBan))
+                        {
+                            Notification noti = new Notification("Policy Violation", "Amount of Book for " + book.BookID + " after selling is less than Sell Limit: " + SoLuongTonToiThieuSauBan);
+                            return;
+                        }
+                    }
+                    //check if the customer can also handle the debt first
+                    {
+                        string query = $"SELECT SOTIENNO FROM KHACHHANG WHERE MaKH = @MaKH";
+                        SqlCommand com = new SqlCommand(query, connection);
+                        com.Parameters.AddWithValue("@MaKH", cbx_CustomerID.Text);
+                        SqlDataReader read = com.ExecuteReader();
+                        read.Read();
+                        string SoTienNo = read["SoTienNo"].ToString(); // Assuming numeric data type
+                        SoTienNo = SoTienNo.Substring(0, SoTienNo.Length - 5);
+                        read.Close();
+                        if (Convert.ToInt32(SoTienNo) + Convert.ToInt32(txb_MoneyOwe.Text) > Convert.ToInt32(SoTienNoToiDa))
+                        {
+                            Notification noti = new Notification("Policy Violation", "Amount of Customer Debt for " + cbx_CustomerID.Text + " after selling is more than debt Limit: " + SoTienNoToiDa);
+                            return;
+                        }
+                    }
                     //Create The BillID first
                     string sqlQuery = $"INSERT INTO HOADON (MaHD, MaKH, NgayLap, TongTien, SoTienTra, ConLai) " +
                           $"VALUES (@MaHD, @MaKH, @NgayLap, @TongTien, @SoTienTra, @ConLai)";
@@ -1054,6 +1345,8 @@ namespace SE104_QLNS
                         reader = command.ExecuteReader();
                         reader.Read();
                         reader.Close();
+
+                        UpdateBaoCaoTon(connection, book.BookID, -book.BookSellAmount);
                     }
 
                     //Update Debt
@@ -1068,7 +1361,6 @@ namespace SE104_QLNS
 
                     sqlQuery = $"UPDATE KHACHHANG SET SOTIENNO+=@SOTIENNO WHERE MaKH=@MaKH";
                     command = new SqlCommand(sqlQuery, connection);
-
                     command.Parameters.AddWithValue("@SOTIENNO", Convert.ToInt32(txb_MoneyOwe.Text));
                     command.Parameters.AddWithValue("@MaKH", cbx_CustomerID.Text);
                     reader = command.ExecuteReader();
@@ -1077,7 +1369,7 @@ namespace SE104_QLNS
 
                     LoadCustomer(this, 0);
                     LoadBook(this, 0);
-                    BooksSell = new ObservableCollection<Uct_Books>();
+                    BooksSell.Clear();
                     cbx_CustomerID.Text = "";
                     tbl_CustomerName.Text = "Tên khách hàng";
                     tbl_CustomerPhoneNumber.Text = "Số điện thoại";
@@ -1085,9 +1377,9 @@ namespace SE104_QLNS
                     txt_CustomerDateOfBirth.Text = "Ngày Sinh";
                     cbx_CustomerGender.Text = "";
                     tbl_CustomerDetailAdress.Text = "Địa Chỉ";
-                    txb_MoneyOwe.Text = "";
-                    txb_CustomerPayment.Text = "";
-                    txt_ReceiptPrice.Text = "";
+                    txb_MoneyOwe.Text = "0";
+                    txb_CustomerPayment.Text = "0";
+                    txt_ReceiptPrice.Text = "0";
                 }
             }
             catch (Exception ex)
@@ -1592,27 +1884,35 @@ namespace SE104_QLNS
                 //Checking if the thing is null
                 if (wpn_ImportPaper.Children.Count == 0)
                     return;
-                //Get the Requirement amount of books
-                int limit = 0;
-                try
-                {
-                    string sqlQuery = "SELECT GiaTri FROM THAMSO WHERE TenThamSo='SoLuongNhapToiThieu'";
-                    SqlCommand command = new SqlCommand(sqlQuery, connection);
-                    SqlDataReader reader = command.ExecuteReader();
-                    reader.Read();
-                    limit = Convert.ToInt32(reader["GiaTri"]);
-                    reader.Close();
-                }
-                catch (Exception ex)
-                {
-                    Notification noti = new Notification("Error", "Error retrieving data from THAMSO: " + ex.Message);
-                }
-                //Checking if the book fit the requirement
+                //check if the book can be imported
                 foreach (Uct_BookImport child in wpn_ImportPaper.Children.OfType<Uct_BookImport>())
                 {
-                    if (Convert.ToInt32(child.BookQuantity) < limit)
+                    try
                     {
-                        Notification noti = new Notification("Policy Violation", "Amount of Book Imported for " + child.BookID + " is less than limit: " + limit);
+                        string sqlQuery = "SELECT SoLuongTon FROM SACH WHERE MaSach = @MaSach";
+                        SqlCommand command = new SqlCommand(sqlQuery, connection);
+                        command.Parameters.AddWithValue("@MaSach", child.BookID);
+                        SqlDataReader reader = command.ExecuteReader();
+                        reader.Read();
+                        int Amount = Convert.ToInt32(reader["SoLuongTon"]);
+                        reader.Close();
+                        if (Amount > Convert.ToInt32(SoLuongTonToiDaTruocNhap))
+                        {
+                            Notification noti = new Notification("Policy Violation", "Amount of Book for " + child.BookID + " is more than Import Limit: " + SoLuongTonToiDaTruocNhap);
+                            return;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Notification noti = new Notification("Error", "Error retrieving data from SACH: " + ex.Message);
+                    }
+                }
+                //Checking if the imported amount of book fit the requirement
+                foreach (Uct_BookImport child in wpn_ImportPaper.Children.OfType<Uct_BookImport>())
+                {
+                    if (Convert.ToInt32(child.BookQuantity) < Convert.ToInt32(SoLuongNhapToiThieu))
+                    {
+                        Notification noti = new Notification("Policy Violation", "Amount of Book Imported for " + child.BookID + " is less than limit: " + SoLuongNhapToiThieu);
                         return;
                     }
                 }
@@ -1639,6 +1939,8 @@ namespace SE104_QLNS
                         reader = command.ExecuteReader();
                         reader.Read();
                         reader.Close();
+
+                        UpdateBaoCaoTon(connection, child.BookID, Convert.ToInt32(child.BookQuantity));
                     }
                     catch (Exception ex)
                     {
@@ -1837,14 +2139,14 @@ namespace SE104_QLNS
                 LoadEmployee(this, 0);
             }
         }
-        
+
         private void txt_CustomerSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             foreach (Uct_Customer child in wpn_Customer.Children)
             {
                 if (child is Uct_Customer)
                 {
-                    if (child.CustomerName.Contains(txt_CustomerSearch.Text)|| child.CustomerPhonenumber.Contains(txt_CustomerSearch.Text))
+                    if (child.CustomerName.Contains(txt_CustomerSearch.Text) || child.CustomerPhonenumber.Contains(txt_CustomerSearch.Text))
                     {
                         child.Visibility = Visibility.Visible;
                     }
@@ -1860,9 +2162,44 @@ namespace SE104_QLNS
         {
             foreach (Uct_Employee child in wpn_Employee.Children)
             {
-                if (child is Uct_Employee)
+                try
                 {
-                    if (child.EmployeeName.Contains(txt_EmployeeSearch.Text) || child.EmployeePhonenumber.Contains(txt_EmployeeSearch.Text))
+                    if (child is Uct_Employee)
+                    {
+                        if (child.EmployeeName.Contains(txt_EmployeeSearch.Text) || child.EmployeePhonenumber.Contains(txt_EmployeeSearch.Text))
+                        {
+                            child.Visibility = Visibility.Visible;
+                        }
+                        else
+                        {
+                            child.Visibility = Visibility.Collapsed;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Notification noti = new Notification("Error", "Error retrieving data from TACGIA: " + ex.Message);
+                }
+            }
+        }
+
+        private void CustomerSearchComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CustomerSearchComboBox.Text = CustomerSearchComboBox.SelectedItem.ToString();
+        }
+
+        private void EmployeeSearchComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (EmployeeSearchComboBox.SelectedItem == null) return;
+        }
+
+        private void btn_SaveBillAsPDF_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (Uct_Customer child in wpn_Customer.Children)
+            {
+                if (child is Uct_Customer)
+                {
+                    if (child.CustomerName.Contains(txt_CustomerSearch.Text) || child.CustomerPhonenumber.Contains(txt_CustomerSearch.Text))
                     {
                         child.Visibility = Visibility.Visible;
                     }
@@ -1871,22 +2208,8 @@ namespace SE104_QLNS
                         child.Visibility = Visibility.Collapsed;
                     }
                 }
+                Bills[Bills.Count - 1].Show();
             }
-        }
-
-        private void CustomerSearchComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            CustomerSearchComboBox.Text= CustomerSearchComboBox.SelectedItem.ToString();
-        }
-
-        private void EmployeeSearchComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            EmployeeSearchComboBox.Text = EmployeeSearchComboBox.SelectedItem.ToString();
-        }
-
-        private void btn_SaveBillAsPDF_Click(object sender, RoutedEventArgs e)
-        {
-            Bills[Bills.Count - 1].Show();
         }
         //Author
         private void SwapGenreAuthor_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -1924,6 +2247,7 @@ namespace SE104_QLNS
 
         private void btn_DeleteAuthor_Click(object sender, RoutedEventArgs e)
         {
+            CustomerSearchComboBox.Text = CustomerSearchComboBox.SelectedItem.ToString();
             if (selectedauthor == null) return;
             AuthorAdd genreadd = new AuthorAdd(this, 2, selectedauthor);
             genreadd.Show();
@@ -1964,6 +2288,7 @@ namespace SE104_QLNS
         }
         private void dtg_AuthorList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
             selectedauthor = (Uct_Author)dtg_AuthorList.SelectedItem;
         }
 
@@ -2067,11 +2392,149 @@ namespace SE104_QLNS
             }
             else
             {
-                
+
             }
             dtg_GenreList.Items.Refresh();
         }
 
+        private void btn_UpdateThamSo_Click(object sender, RoutedEventArgs e)
+        {
+            Connection connect = new Connection();
+            string connectionString = connect.connection;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    string sqlQuery; SqlCommand command; SqlDataReader reader;
+                    connection.Open();
+
+                    //ApDungQuyDinhKiemTraSoTienThu
+                    sqlQuery = $"UPDATE THAMSO SET GiaTri = @GiaTri WHERE TenThamSo='ApDungQuyDinhKiemTraSoTienThu'";
+                    command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@GiaTri", cbx_CheckMoneyReceivedFromCustomer.IsChecked ?? false ? "1" : "0");
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
+
+                    //SoLuongNhapToiThieu
+                    sqlQuery = $"UPDATE THAMSO SET GiaTri = @GiaTri WHERE TenThamSo='SoLuongNhapToiThieu'";
+                    command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@GiaTri", tbx_BookMinimumImportQuantity.Text);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
+
+                    //SoLuongTonToiDaTruocNhap
+                    sqlQuery = $"UPDATE THAMSO SET GiaTri = @GiaTri WHERE TenThamSo='SoLuongTonToiDaTruocNhap'";
+                    command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@GiaTri", tbx_BookMinimumStockQuantityBeforeImporting.Text);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
+
+                    //SoLuongTonToiThieuSauBan
+                    sqlQuery = $"UPDATE THAMSO SET GiaTri = @GiaTri WHERE TenThamSo='SoLuongTonToiThieuSauBan'";
+                    command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@GiaTri", tbx_BookMinimumStockQuantityAfterSelling.Text);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
+
+                    //SoTienNoToiDa
+                    sqlQuery = $"UPDATE THAMSO SET GiaTri = @GiaTri WHERE TenThamSo='SoTienNoToiDa'";
+                    command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@GiaTri", tbx_CustomerMaximumDebt.Text);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
+
+                    //TiLeGiaBan
+                    sqlQuery = $"UPDATE THAMSO SET GiaTri = @GiaTri WHERE TenThamSo='TiLeGiaBan'";
+                    command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@GiaTri", tbx_ImportToExportRatio.Text);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Notification noti = new Notification("Error", "Error updating ThamSo: " + ex.Message);
+            }
+            Notification noti2 = new Notification("Update", "Updated THAMSO successfully!");
+            LoadTHAMSO(this, 0);
+        }
+
+        private void txt_ReportSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txt_ReportSearch.Text))
+            {
+                dtg_AmountReport.ItemsSource = BaoCaoTon; // Reset to all items if no search text
+                return;
+            }
+            if (Cbx_SearchBook.Text == "Tất Cả" || (Cbx_SearchBook.Text == null))
+            {
+                var filteredItems = BaoCaoTon.Where(baocao =>
+                baocao.BookId.ToLower().Contains(txt_ReportSearch.Text.ToLower()) ||
+                    baocao.BookName.ToLower().Contains(txt_ReportSearch.Text.ToLower())
+                ).ToList();
+
+                dtg_AmountReport.ItemsSource = filteredItems;
+            }
+            else if (Cbx_SearchBook.Text == "Tên Sách")
+            {
+                var filteredItems = BaoCaoTon.Where(baocao =>
+                    baocao.BookName.ToLower().Contains(txt_ReportSearch.Text.ToLower())
+                ).ToList();
+
+                dtg_AmountReport.ItemsSource = filteredItems;
+            }
+
+        }
+
+        private void cbx_AmountReportMonth_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbx_AmountReportMonth.SelectedIndex == 0)
+            {
+                dtg_AmountReport.ItemsSource = BaoCaoTon;
+            }
+            else
+            {
+                var filteredItems = BaoCaoTon.Where(baocao =>
+                baocao.Month == Convert.ToInt32(cbx_AmountReportMonth.SelectedItem)
+                ).ToList();
+                if (cbx_AmountReportYear.SelectedIndex == 0) { }
+                else
+                {
+                    filteredItems = filteredItems.Where(baocao =>
+                baocao.Year == Convert.ToInt32(cbx_AmountReportYear.SelectedItem)
+                ).ToList();
+                }
+                dtg_AmountReport.ItemsSource = filteredItems;
+            }
+        }
+
+        private void cbx_AmountReportYear_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbx_AmountReportYear.SelectedIndex == 0)
+            {
+                dtg_AmountReport.ItemsSource = BaoCaoTon;
+            }
+            else
+            {
+                var filteredItems = BaoCaoTon.Where(baocao =>
+                baocao.Year == Convert.ToInt32(cbx_AmountReportYear.SelectedItem)
+                ).ToList();
+                if (cbx_AmountReportMonth.SelectedIndex == 0) { }
+                else
+                {
+                    filteredItems = filteredItems.Where(baocao =>
+                baocao.Month == Convert.ToInt32(cbx_AmountReportMonth.SelectedItem)
+                ).ToList();
+                }
+                dtg_AmountReport.ItemsSource = filteredItems;
+            }
+        }
     }
 }
 

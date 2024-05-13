@@ -87,6 +87,33 @@ namespace SE104_QLNS
                     reader.Read();
                     reader.Close();
 
+                    //Delete from BAOCAOTON
+                    sqlQuery = "DELETE FROM BAOCAOTON WHERE MaSach = @MaSach";
+
+                    command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@MaSach", tbl_BookID.Text);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
+
+                    //Delete from CT_HOADON
+                    sqlQuery = "DELETE FROM CT_HOADON WHERE MaSach = @MaSach";
+
+                    command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@MaSach", tbl_BookID.Text);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
+
+                    //Delete from CT_PHIEUNHAP
+                    sqlQuery = "DELETE FROM CT_PHIEUNHAP WHERE MaSach = @MaSach";
+
+                    command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@MaSach", tbl_BookID.Text);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
+
                     //Delete The Book
                     sqlQuery = "DELETE FROM SACH WHERE MaSach = @MaSach";
 
@@ -109,6 +136,7 @@ namespace SE104_QLNS
                     Notification noti = new Notification("Error", "Error Updating Book: " + ex.Message);
                 }
                 parent.LoadBook(parent, 0);
+                parent.LoadBaoCaoTon(parent, 0);
                 IsClosing = true;
                 this.Close();
             }
