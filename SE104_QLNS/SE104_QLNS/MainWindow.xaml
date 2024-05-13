@@ -142,7 +142,7 @@
 
 
                             <Border Height="28" Width="100" CornerRadius="15,0,0,15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="345,2,499,2" >
-                                <ComboBox Name="Cbx_SearchBook" Style="{StaticResource MonthYearComboxbox}" Height="24" Width="80" Margin="16,1,2,1" FontSize="13">
+                                <ComboBox Name="Cbx_SearchBook" Style="{StaticResource MonthYearComboxbox}" Height="24" Width="80" Margin="15,1,3,1" FontSize="13">
                                     <ComboBoxItem>Tất Cả</ComboBoxItem>
                                     <ComboBoxItem>Tên Sách</ComboBoxItem>
                                     <ComboBoxItem>Thể Loại</ComboBoxItem>
@@ -150,11 +150,11 @@
                                 </ComboBox>
 
                             </Border>
-                            <Border Height="28" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,15,15,0" Margin="444,2,250,2">
-                                <Grid>
-                                    <TextBox x:Name="txt_Search" VerticalContentAlignment="Center" VerticalAlignment="Bottom" TextChanged="txt_Search_TextChanged"
-                             FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="172" Margin="26,0,0,2"/>
-                                    <Image Name="img_HomeSearch" Source="/Images/icon_search.png" Stretch="Fill" Height="20" Width="20" Cursor="Hand" Margin="212,4,16,2"/>
+                            <Border Height="28" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,15,15,0" Margin="470,6,250,6">
+                                <Grid Margin="1,0,0,0">
+                                    <TextBox x:Name="txt_Search" VerticalContentAlignment="Center" VerticalAlignment="Center" TextChanged="txt_Search_TextChanged"
+                             FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="213" Margin="17,0,0,0"/>
+                                    <Image Name="img_HomeSearch" Source="/Images/icon_search.png" Stretch="Fill" Height="20" Width="20" Cursor="Hand" Margin="239,3,14,3" RenderTransformOrigin="1.122,0.374"/>
 
                                 </Grid>
                             </Border>
@@ -1123,18 +1123,18 @@ BorderThickness="{TemplateBinding BorderThickness}">
                         <!--Sreach bar-->
                         <Grid Grid.Row="0" Grid.ColumnSpan="2">
                             <Border Height="28" Width="100" CornerRadius="15,0,0,15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="345,2,499,2" >
-                                <ComboBox Style="{StaticResource MonthYearComboxbox}" FontSize="13" Height="24" Width="80" Name="ImportExportComboBox"
-                                          Margin="16,1,2,1" SelectionChanged="ImportExportComboBox_SelectionChanged">
+                                <ComboBox Style="{StaticResource MonthYearComboxbox}" FontSize="13" Height="24" Name="ImportExportComboBox"
+                                          Margin="16,1,5,1" SelectionChanged="ImportExportComboBox_SelectionChanged">
                                     <ComboBoxItem>Tất Cả</ComboBoxItem>
                                     <ComboBoxItem>Mã phiếu</ComboBoxItem>
                                     <ComboBoxItem>Ngày lập</ComboBoxItem>
                                 </ComboBox>
                             </Border>
-                            <Border Height="28" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,15,15,0" Margin="444,2,250,2">
-                                <Grid>
+                            <Border Height="28" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,15,15,0" Margin="470,6,250,6">
+                                <Grid Margin="1,0,0,0">
                                     <TextBox x:Name="txt_BillImportBookReceiptSearch" VerticalContentAlignment="Center" VerticalAlignment="Center"
-                             FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="172" Margin="26,0,0,0" TextChanged="txt_BillImportBookReceiptSearch_TextChanged"/>
-                                    <Image Source="/Images/icon_search.png" Stretch="Fill" Height="20" Width="20" Cursor="Hand" Margin="212,4,16,2"/>
+                             FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="227" Margin="10,0,0,0" TextChanged="txt_BillImportBookReceiptSearch_TextChanged"/>
+                                    <Image Source="/Images/icon_search.png" Stretch="Fill" Height="20" Width="20" Cursor="Hand" Margin="242,3,11,3"/>
 
                                 </Grid>
                             </Border>
@@ -1421,13 +1421,13 @@ BorderThickness="{TemplateBinding BorderThickness}">
                         <!--Sreach bar-->
                         <Grid Grid.Row="0">
                             <Border Height="28" Width="100" CornerRadius="15,0,0,15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="345,2,499,2" >
-                                <ComboBox Style="{StaticResource MonthYearComboxbox}" Height="24" Width="80" Margin="16,1,2,1"/>
+                                <ComboBox Style="{StaticResource MonthYearComboxbox}" Height="24" Margin="16,1,5,1"/>
                             </Border>
-                            <Border Height="28" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,15,15,0" Margin="444,2,250,2">
+                            <Border Height="28" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,15,15,0" Margin="470,6,250,6">
                                 <Grid>
                                     <TextBox x:Name="txt_ReceiptSearch" VerticalContentAlignment="Center" VerticalAlignment="Center"
-                             FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="193" Margin="5,0,0,0"/>
-                                    <Image Name="img_ReceiptSearch" Source="/Images/icon_search.png" Stretch="Fill" Height="20" Width="20" Cursor="Hand" Margin="212,4,16,2"/>
+                             FontSize="16" BorderThickness="0,0,0,1" Margin="10,0,37,0"/>
+                                    <Image Name="img_ReceiptSearch" Source="/Images/icon_search.png" Stretch="Fill" Height="20" Width="20" Cursor="Hand" Margin="243,3,11,3"/>
 
                                 </Grid>
                             </Border>
@@ -1625,16 +1625,16 @@ BorderThickness="{TemplateBinding BorderThickness}">
                         <!--Sreach bar-->
                         <Grid Grid.Row="0" Grid.ColumnSpan="2">
                             <Border Height="28" Width="100" CornerRadius="15,0,0,15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="345,2,499,2" >
-                                <ComboBox Style="{StaticResource MonthYearComboxbox}" FontSize="13" SelectedIndex="0" Height="24" Width="80" Margin="16,1,2,1">
+                                <ComboBox Style="{StaticResource MonthYearComboxbox}" FontSize="13" SelectedIndex="0" Height="24" Margin="16,1,5,1">
                                     <ComboBoxItem>Tất Cả</ComboBoxItem>
                                     <ComboBoxItem>Tên Sách</ComboBoxItem>
                                 </ComboBox>
                             </Border>
-                            <Border Height="28" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,15,15,0" Margin="444,2,250,2">
+                            <Border Height="28" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,15,15,0" Margin="470,6,250,6">
                                 <Grid>
                                     <TextBox x:Name="txt_ReportSearch" VerticalContentAlignment="Center" VerticalAlignment="Center"
-                             FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="170" Margin="28,0,0,0" TextChanged="txt_ReportSearch_TextChanged"/>
-                                    <Image Name="img_ReportSearch" Source="/Images/icon_search.png" Stretch="Fill" Height="20" Width="20" Cursor="Hand" Margin="212,4,16,2"/>
+                             FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="227" Margin="10,0,0,0" TextChanged="txt_ReportSearch_TextChanged"/>
+                                    <Image Name="img_ReportSearch" Source="/Images/icon_search.png" Stretch="Fill" Height="20" Width="20" Cursor="Hand" Margin="243,3,11,3"/>
 
                                 </Grid>
                             </Border>
@@ -1814,16 +1814,16 @@ BorderThickness="{TemplateBinding BorderThickness}">
                         <!--Sreach bar-->
                         <Grid Grid.Row="0" Grid.ColumnSpan="3">
                             <Border Height="28" Width="100"  CornerRadius="15,0,0,15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="345,2,499,2" >
-                                <ComboBox Style="{StaticResource MonthYearComboxbox}" FontSize="13" Height="24" Width="80" Margin="16,1,2,1" Name="cbx_CustomerSearch" SelectionChanged="CustomerSearchComboBox_SelectionChanged">
+                                <ComboBox Style="{StaticResource MonthYearComboxbox}" FontSize="13" Height="24" Margin="16,1,5,1" Name="cbx_CustomerSearch" SelectionChanged="CustomerSearchComboBox_SelectionChanged">
                                     <ComboBoxItem>Tên</ComboBoxItem>
                                     <ComboBoxItem>SĐT</ComboBoxItem>
                                 </ComboBox>
                             </Border>
-                            <Border Height="28" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,15,15,0" Margin="444,2,250,2">
-                                <Grid>
+                            <Border Height="28" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,15,15,0" Margin="470,6,250,6">
+                                <Grid Margin="1,0,0,0">
                                     <TextBox x:Name="txt_CustomerSearch" VerticalContentAlignment="Center" VerticalAlignment="Center"
-                             FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="170" Margin="28,0,0,0" />
-                                    <Image Name="img_CustomerSearch" Source="/Images/icon_search.png" Stretch="Fill" Height="20" Width="20" Cursor="Hand" Margin="212,4,16,2"/>
+                             FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="226" Margin="10,0,0,0" />
+                                    <Image Name="img_CustomerSearch" Source="/Images/icon_search.png" Stretch="Fill" Height="20" Width="20" Cursor="Hand" Margin="242,3,11,3"/>
 
                                 </Grid>
                             </Border>
@@ -1998,14 +1998,11 @@ BorderThickness="{TemplateBinding BorderThickness}">
 
                         <!--Sreach bar-->
                         <Grid Grid.Row="0" Grid.ColumnSpan="3">
-                            <Border Height="28" Width="100" CornerRadius="15,0,0,15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="345,2,499,2" >
-
-                            </Border>
-                            <Border Height="28" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,15,15,0" Margin="444,2,250,2">
-                                <Grid>
+                            <Border Height="28" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="15,15,15,15" Margin="414,6,250,6">
+                                <Grid Margin="15,0,0,0">
                                     <TextBox x:Name="txt_AuthorGenreSearch" VerticalContentAlignment="Center" VerticalAlignment="Center"
-                             FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="170" Margin="28,0,0,0" TextChanged="txt_AuthorGenreSearch_TextChanged"/>
-                                    <Image Source="/Images/icon_search.png" Stretch="Fill" Height="20" Width="20" Cursor="Hand" Margin="212,4,16,2"/>
+                             FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="266" TextChanged="txt_AuthorGenreSearch_TextChanged" Margin="13,0,0,0"/>
+                                    <Image Source="/Images/icon_search.png" Stretch="Fill" Height="20" Width="20" Cursor="Hand" Margin="284,3,11,3"/>
 
                                 </Grid>
                             </Border>
@@ -2557,16 +2554,16 @@ BorderThickness="{TemplateBinding BorderThickness}">
                         <!--Sreach bar-->
                         <Grid Grid.Row="0" Grid.ColumnSpan="2">
                             <Border Height="28" Width="100"  CornerRadius="15,0,0,15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="345,2,499,2" >
-                                <ComboBox Style="{StaticResource MonthYearComboxbox}" SelectedIndex="0" FontSize="13" Height="24" Width="80" Margin="16,1,2,1" Name="EmployeeSearchComboBox" SelectionChanged="EmployeeSearchComboBox_SelectionChanged">
+                                <ComboBox Style="{StaticResource MonthYearComboxbox}" SelectedIndex="0" FontSize="13" Height="24" Margin="16,1,5,1" Name="EmployeeSearchComboBox" SelectionChanged="EmployeeSearchComboBox_SelectionChanged">
                                     <ComboBoxItem>Tên</ComboBoxItem>
                                     <ComboBoxItem>SĐT</ComboBoxItem>
                                 </ComboBox>
                             </Border>
-                            <Border Height="28" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,15,15,0" Margin="444,2,250,2">
+                            <Border Height="28" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,15,15,0" Margin="470,6,250,6">
                                 <Grid>
                                     <TextBox x:Name="txt_EmployeeSearch" VerticalContentAlignment="Center" VerticalAlignment="Center"
-                                     FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="170" Margin="28,0,0,0" TextChanged="txt_EmployeeSearch_TextChanged"/>
-                                    <Image Name="img_EmployeeSearch" Source="/Images/icon_search.png" Stretch="Fill" Height="20" Width="20" Cursor="Hand" Margin="212,4,16,2"/>
+                                     FontSize="16" BorderThickness="0,0,0,1" TextChanged="txt_EmployeeSearch_TextChanged" Margin="10,0,37,0"/>
+                                    <Image Name="img_EmployeeSearch" Source="/Images/icon_search.png" Stretch="Fill" Height="20" Width="20" Cursor="Hand" Margin="243,3,11,3"/>
 
                                 </Grid>
                             </Border>
