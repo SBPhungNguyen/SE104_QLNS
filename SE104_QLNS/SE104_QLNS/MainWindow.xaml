@@ -15,7 +15,8 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
-                <RowDefinition/>
+                <RowDefinition Height="63*"/>
+                <RowDefinition Height="61*"/>
             </Grid.RowDefinitions>
             <Grid x:Name="grd_Header" Grid.Row="0" Background="#C2DECE">
                 <Grid.ColumnDefinitions>
@@ -108,7 +109,7 @@
                 </Button>
             </Grid>
 
-            <TabControl Name="tcl_Navigation" Grid.Row="1" BorderThickness="0">
+            <TabControl Name="tcl_Navigation" Grid.Row="1" BorderThickness="0" Grid.RowSpan="2">
                 <!-- HOME -->
                 <TabItem>
                     <TabItem.Header>
@@ -705,7 +706,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                            VerticalContentAlignment="Center"
                                            HorizontalAlignment="Center"
                                            VerticalAlignment="Center"
-                                           Margin="10,0,15,0"/>
+                                           Margin="0,0,15,0"/>
 
                                     <Label x:Name="lbl_BillDate"
                                            Content="Ngày lập hóa đơn:  "
@@ -715,7 +716,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                            VerticalContentAlignment="Center"
                                            HorizontalAlignment="Right"
                                            VerticalAlignment="Center"
-                                           Margin="100,0,15,0"/>
+                                           Margin="70,0,15,0"/>
 
                                     <TextBox x:Name="txb_BillDate"
        Text="22/22/2222"
@@ -1278,8 +1279,8 @@ BorderThickness="{TemplateBinding BorderThickness}">
 
                                 <DockPanel Grid.Row="0">
                                     <Border Height="30" CornerRadius="15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="10,6,0,4">
-                                        <ComboBox Name="SelectImportExport" Style="{StaticResource MonthYearComboxbox}" FontSize="13" SelectionChanged="SelectImportExport_SelectionChanged"
-                                                  Height="25" Width="150" Margin="24,2,20,1" >
+                                        <ComboBox Name="SelectImportExport" Style="{StaticResource MonthYearComboxbox}" SelectionChanged="SelectImportExport_SelectionChanged"
+                                                  Height="25" Width="150" Margin="24,2,20,1" FontSize="17" FontWeight="Bold" >
                                             <ComboBoxItem>Hoá Đơn</ComboBoxItem>
                                         </ComboBox>
                                     </Border>
@@ -1652,7 +1653,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
 
                         <Grid Grid.Row="1">
                             <Border Height="30" CornerRadius="15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="10,6,718,4">
-                                <ComboBox Style="{StaticResource MonthYearComboxbox}" Height="25" Margin="24,2,20,1" FontSize="13" SelectedIndex="0">
+                                <ComboBox x:Name="cbx_SwapReport" Style="{StaticResource MonthYearComboxbox}" Height="25" Margin="24,2,20,1" FontSize="17" FontWeight="Bold" SelectedIndex="0">
                                     <ComboBoxItem>Báo Cáo Tồn</ComboBoxItem>
                                     <ComboBoxItem>Báo Cáo Công Nợ</ComboBoxItem>
                                 </ComboBox>
@@ -1823,7 +1824,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                         <!--Sreach bar-->
                         <Grid Grid.Row="0" Grid.ColumnSpan="3">
                             <Border Height="28" Width="100"  CornerRadius="15,0,0,15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="345,2,499,2" >
-                                <ComboBox Style="{StaticResource MonthYearComboxbox}" FontSize="13" Height="24" Width="80" Margin="16,1,2,1" Name="CustomerSearchComboBox" SelectionChanged="CustomerSearchComboBox_SelectionChanged">
+                                <ComboBox Style="{StaticResource MonthYearComboxbox}" FontSize="13" Height="24" Width="80" Margin="16,1,2,1" Name="cbx_CustomerSearch" SelectionChanged="CustomerSearchComboBox_SelectionChanged">
                                     <ComboBoxItem>Tên</ComboBoxItem>
                                     <ComboBoxItem>SĐT</ComboBoxItem>
                                 </ComboBox>
@@ -1951,9 +1952,9 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                 </Button.Template>
                             </Button>
 
-                            <TextBlock FontSize="30" Text="Khách hàng" FontWeight="Bold" FontFamily="Tahoma"
-                                       VerticalAlignment="Top"
-                           Height="54" Margin="424,0,324,0"/>
+                            <TextBlock FontSize="30" Text="Khách hàng" FontWeight="Bold" FontFamily="Tahoma" HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                           Height="Auto" Margin="424,0,324,0"/>
 
                             <Label Name="lbl_CustomerCount" FontSize="18"
                        Content="Tổng: 100"
@@ -1962,7 +1963,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
 
                         </Grid>
 
-                        <ScrollViewer Grid.Row="2" HorizontalAlignment="Left" Height="461" VerticalAlignment="Top" Width="938" Grid.ColumnSpan="3" Margin="3,0,0,0">
+                        <ScrollViewer Grid.Row="2" HorizontalAlignment="Left" Height="461" VerticalAlignment="Top" Width="988" Grid.ColumnSpan="3" Margin="3,0,0,0">
                             <WrapPanel Name="wpn_Customer" Orientation="Horizontal">
 
                             </WrapPanel>
@@ -2051,7 +2052,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                      Foreground="#154348" 
                                      Cursor="Hand" 
                                      Margin="10,5,0,5"
-                                            Click="btn_AddAuthor_Click">     
+                                            Click="btn_AddAuthor_Click">
                                         <Button.Style>
                                             <Style TargetType="Button">
                                                 <Setter Property="Background" Value="Transparent"/>
@@ -2762,7 +2763,7 @@ FontFamily="Tahoma" Margin="318,16,15,2" Grid.Column="1"/>
                     <Grid Margin="10">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
-                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="1.75*"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1.5*"/>
@@ -2955,7 +2956,7 @@ FontFamily="Tahoma" Margin="318,16,15,2" Grid.Column="1"/>
                                        HorizontalContentAlignment="Center"
                                        VerticalContentAlignment="Center"/>
 
-                                <Grid Margin="0,25,0,0">
+                                <Grid Margin="0,30,0,0" HorizontalAlignment="Center">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>

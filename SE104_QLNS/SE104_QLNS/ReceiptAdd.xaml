@@ -44,7 +44,7 @@
                 <TextBlock Text="Tiền thu:" FontSize="18" Height="25" Margin="392,232,251,71" RenderTransformOrigin="0.184,-0.376" />
                 <TextBlock Text="Nợ sau khi thu:" FontSize="18" Height="25" Margin="392,272,225,31" RenderTransformOrigin="0.184,-0.376"/>
 
-                <TextBox Name="tbl_CustomerID" Text="NV000001" FontSize="18" Height="25" Margin="205,11,425,292" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"
+                <TextBox Name="tb_CustomerID" Text="NV000001" FontSize="18" Height="25" Margin="205,11,425,292" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"
                      BorderThickness="0,0,0,1" VerticalContentAlignment="Bottom"/>
                 <TextBlock Name="tbl_CustomerName" Text="Ninh Dương Lan Ngọc" FontSize="18" Height="25" Margin="205,44,315,259" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"/>
                 <TextBlock Name="tbl_CustomerPhone" Text="SĐT" FontSize="18" Height="25" Margin="205,78,380,225" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"/>
@@ -60,7 +60,7 @@
             </Grid>
 
             <Grid Grid.Row="3">
-                <Button Name="btn_Delete" 
+                <Button Name="btn_SaveCustomerReceipt" 
                     Content="Lưu và xuất PDF" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="228,-9,227,19">
                     <Button.Style>
                         <Style TargetType="Button">

@@ -112,7 +112,7 @@ HorizontalAlignment="Right" Margin="10,0,0,0" Click="btn_ExitApp_Click">
                     <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_useravatar.png" Margin="34,47,311,296" RenderTransformOrigin="1.028,0.552"/>
                     <TextBlock Text="Ngày sinh" FontSize="20" FontFamily="Tahoma" Foreground="#154448" 
                         Height="30" Width="200" Margin="30,87,140,251"/>
-                    <TextBox x:Name="txt_CustomeBirth" Height="35" FontFamily="Tahoma" FontWeight="Bold" Foreground="#154448" 
+                    <TextBox x:Name="txt_CustomerBirth" Height="35" FontFamily="Tahoma" FontWeight="Bold" Foreground="#154448" 
                              Padding="35,0,35,0"
                         BorderThickness="0,0,0,2" BorderBrush="#154448"  Margin="30,117,26,216"
                         VerticalContentAlignment="Bottom" FontSize="20"/>
@@ -149,7 +149,7 @@ HorizontalAlignment="Right" Margin="10,0,0,0" Click="btn_ExitApp_Click">
                         </Button.Template>
                     </Button>
                     <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_birthday.png" Margin="34,123,311,220" RenderTransformOrigin="1.028,0.552"/>
-                    <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_calendar.png" Margin="319,123,26,220" RenderTransformOrigin="1.028,0.552"/>
+                    <Image x:Name="img_Calendar" Height="25" Width="25" Stretch="Fill" Source="/Images/icon_calendar.png" Margin="319,123,26,220" RenderTransformOrigin="1.028,0.552"/>
                     <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_phone.png" Margin="34,193,311,150" RenderTransformOrigin="1.028,0.552"/>
                 </Grid>
             </Grid>
