@@ -1061,7 +1061,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                     </Grid>
 
 
-                                    <Button x:Name="btn_SaveBillAsPDF"
+                                    <Button x:Name="btn_SaveBillAsPDF" Visibility="Hidden"
                                             Content="Lưu .PDF"
                                             FontSize="14"
                                             Style="{StaticResource LightBlueButton}"
