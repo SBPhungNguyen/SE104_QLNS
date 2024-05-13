@@ -63,11 +63,10 @@
             </Grid>
 
             <StackPanel Grid.Row="2" Margin="25,10,25,0" Height="540" VerticalAlignment="Top">
-                <Grid Width="500">
+                <Grid Width="650">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="125*"/>
-                        <ColumnDefinition Width="27*"/>
-                        <ColumnDefinition Width="98*"/>
+                        <ColumnDefinition Width="30*"/>
+                        <ColumnDefinition Width="70*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
