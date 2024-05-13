@@ -72,7 +72,7 @@
                 <TextBlock Text="Số lượng:" Height="30" FontSize="18" 
             Margin="235,356,281,82"/>
 
-                <TextBox Name="txt_BookID" Text="ID" FontWeight="Bold"
+                <TextBox Name="txt_BookID" Text="ID" FontWeight="Bold" IsReadOnly="True"
                          BorderThickness="0,0,0,1"
                            Height="30" FontSize="18" 
                            Margin="362,60,10,378"/>
@@ -88,7 +88,7 @@
                            Height="30" FontSize="18" 
                            Margin="362,169,10,269"
                           Style="{StaticResource MonthYearComboxbox}" SelectionChanged="cbx_Author_SelectionChanged"/>
-                <TextBox Name="txt_Distribute" FontWeight="Bold"
+                <TextBox Name="txt_Distributor" FontWeight="Bold"
                            BorderThickness="0,0,0,1"
                             Height="30" FontSize="18" 
                            Margin="362,207,10,231"/>

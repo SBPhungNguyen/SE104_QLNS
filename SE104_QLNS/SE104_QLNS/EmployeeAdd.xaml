@@ -67,7 +67,7 @@ HorizontalAlignment="Right" Margin="10,0,0,0" Click="btn_ExitApp_Click">
                 <TextBlock Text="CMND/CCCD:" FontSize="18" Height="25" Margin="251,110,377,193" RenderTransformOrigin="0.184,-0.376" />
                 <TextBlock Text="SĐT:" FontSize="18" Height="25" Margin="251,143,395,160" RenderTransformOrigin="0.184,-0.376"/>
                 <TextBlock Text="Địa chỉ:" FontSize="18" Height="25" Margin="251,174,393,129" RenderTransformOrigin="0.184,-0.376"/>
-                <TextBlock Text="Vị trí:" FontSize="18" Height="25" Margin="251,213,392,90" RenderTransformOrigin="0.184,-0.376" />
+                <TextBlock Text="Chức vụ:" FontSize="18" Height="25" Margin="251,213,392,90" RenderTransformOrigin="0.184,-0.376" />
                 <TextBlock Text="Ca làm việc:" FontSize="18" Height="25" Margin="251,245,393,58" RenderTransformOrigin="0.184,-0.376"/>
 
                 <TextBox Name="txt_EmployeeID" Text="" FontSize="18" Height="25" Margin="384,11,250,292" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"
@@ -101,7 +101,7 @@ HorizontalAlignment="Right" Margin="10,0,0,0" Click="btn_ExitApp_Click">
                 <TextBox Name="txt_EmployeePass" Text="" FontSize="14" Height="25" Margin="104,269,554,34" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"
                          BorderThickness="0,0,0,1" VerticalContentAlignment="Bottom"/>
 
-                <Image Height="20" Width="20" Stretch="Fill" Margin="198,274,530,34" Source="/Images/icon_eye.png" Cursor="Hand"/>
+                <Image x:Name="img_SeePassword" Height="20" Width="20" Stretch="Fill" Margin="198,274,530,34" Source="/Images/icon_eye.png" Cursor="Hand"/>
             </Grid>
 
             <Grid Grid.Row="3">

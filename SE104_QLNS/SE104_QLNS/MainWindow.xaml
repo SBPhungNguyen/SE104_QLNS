@@ -1472,7 +1472,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                 </Button.Template>
                             </Button>
 
-                            <Button Name="btn_PrintReceipt" Height="40" Width="100"
+                            <Button Name="btn_ReceiptDelete" Height="40" Width="100"
                                FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="112,5,732,5">
                                 <Button.Style>
                                     <Style TargetType="Button">
@@ -1509,7 +1509,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                 </Button.Template>
                             </Button>
 
-                            <Button Name="btn_ReceiptDelete" Height="40" Width="100"
+                            <Button Name="btn_PrintReceipt" Height="40" Width="100"
                                FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="214,5,630,5">
                                 <Button.Style>
                                     <Style TargetType="Button">
@@ -1548,16 +1548,6 @@ BorderThickness="{TemplateBinding BorderThickness}">
 
                             <TextBlock FontSize="30" Text="Phiếu thu" FontWeight="Bold" FontFamily="Tahoma"
                           Height="50" Margin="448,2,333,-2"/>
-
-                            <TextBlock Text="Tổng: " FontSize="18"
-                          FontFamily="Tahoma"
-                          Height="24" Width="50" Margin="731,20,163,6" Grid.Row="1"/>
-
-                            <Label Name="lbl_ReceiptCount" FontSize="18"
-                      Content="28283" FontWeight="Bold"
-                      VerticalContentAlignment="Top" HorizontalContentAlignment="Right"
-                   FontFamily="Tahoma" Margin="785,16,66,2"/>
-
                         </Grid>
 
 
@@ -2009,11 +1999,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                         <!--Sreach bar-->
                         <Grid Grid.Row="0" Grid.ColumnSpan="3">
                             <Border Height="28" Width="100" CornerRadius="15,0,0,15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="345,2,499,2" >
-                                <ComboBox Name="SearchGenreAuthorCombobox" Style="{StaticResource MonthYearComboxbox}" Height="24" IsEnabled="False"
-                                          FontSize="13" Width="80" Margin="16,1,2,1" SelectedIndex="0" IsReadOnly="True">
-                                    <ComboBoxItem>Thể Loại</ComboBoxItem>
-                                    <ComboBoxItem>Tác Giả</ComboBoxItem>
-                                </ComboBox>
+
                             </Border>
                             <Border Height="28" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,15,15,0" Margin="444,2,250,2">
                                 <Grid>
@@ -2036,7 +2022,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                 <DockPanel Grid.Row="0">
 
                                     <Border Height="30" CornerRadius="15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="10,6,0,4">
-                                        <ComboBox Name="SelectAuthorGenre" Style="{StaticResource MonthYearComboxbox}" FontSize="14" SelectionChanged="SelectAuthorGenre_SelectionChanged"
+                                        <ComboBox Name="cbx_SwitchToGenre" Style="{StaticResource MonthYearComboxbox}" FontSize="14" SelectionChanged="SelectAuthorGenre_SelectionChanged"
                                                     Height="25" Width="150" Margin="24,2,20,1" SelectedIndex="0">
                                             <ComboBoxItem>Tác Giả</ComboBoxItem>
                                             <ComboBoxItem>Thể loại</ComboBoxItem>
@@ -2139,7 +2125,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                         </Button.Template>
                                     </Button>
 
-                                    <Button Name="btn_DeleteAuthorList" 
+                                    <Button Name="btn_DeleteAuthor" 
          Height="40" 
          Width="85"
          FontFamily="Tahoma" 
@@ -2395,7 +2381,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                         </Button.Template>
                                     </Button>
 
-                                    <Button Name="btn_DeleteGenreList" 
+                                    <Button Name="btn_DeleteGenre" 
          Height="40" 
          Width="85"
          FontFamily="Tahoma" 
@@ -2716,7 +2702,7 @@ FontFamily="Tahoma" Margin="318,16,15,2" Grid.Column="1"/>
                         </Grid>
 
 
-                        <ScrollViewer Grid.Row="2" Canvas.Left="5" Canvas.Top="6" HorizontalAlignment="Center" Height="461" VerticalAlignment="Top" Width="938">
+                        <ScrollViewer Grid.Row="2" Canvas.Left="5" Canvas.Top="6" HorizontalAlignment="Center" Height="461" VerticalAlignment="Top" Width="988">
                             <WrapPanel Name="wpn_Employee" Orientation="Horizontal">
                                 <View:Uct_Employee PicURL="/Images/Chill Wallpaper On.png"
                            Icon="/Images/Img_Information.png"
@@ -2841,22 +2827,26 @@ FontFamily="Tahoma" Margin="318,16,15,2" Grid.Column="1"/>
                                         </Button.Content>
                                     </Button>
 
-                                    <Button x:Name="btn_AddManagerFromSettingSection"
-                                            Style="{StaticResource SettingSectionButton}"
-                                            Grid.Column="2"
-                                            Grid.Row="0"
-                                            Width="130"
-                                            HorizontalAlignment="Left"
-                                            VerticalAlignment="Center"
-                                            HorizontalContentAlignment="Center"
-                                            VerticalContentAlignment="Center"
-                                            Margin="0,0,0,5">
+                                    <Button x:Name="btn_AddBookFromSettingSection"
+        Style="{StaticResource SettingSectionButton}"
+        Grid.Column="2"
+        Grid.Row="0"
+        Width="130"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        HorizontalContentAlignment="Center"
+        VerticalContentAlignment="Center" 
+        Margin="0, 10, 0, 5">
                                         <Button.Content>
                                             <DockPanel>
-                                                <Image Source="/Images/icon_manager.png" Width="50" Height="50"/>
-                                                <TextBlock Text="Quản lý" FontSize="20"  
-                                                           Foreground="#154448"
-                                                           VerticalAlignment="Center"/>
+                                                <Image Source="/Images/icon_add_book.png"
+                   Width="40" 
+                   Height="40"/>
+                                                <TextBlock Text="Sách" 
+                       FontSize="20" 
+                       Foreground="#154448"
+                       VerticalAlignment="Center"
+                       Margin="5,0,0,0"/>
                                             </DockPanel>
                                         </Button.Content>
                                     </Button>
@@ -2903,30 +2893,6 @@ FontFamily="Tahoma" Margin="318,16,15,2" Grid.Column="1"/>
                                                        Height="40"/>
                                                 <TextBlock Text="Tác giả" 
                                                            FontSize="20"  
-                                                           Foreground="#154448"
-                                                           VerticalAlignment="Center"
-                                                           Margin="5,0,0,0"/>
-                                            </DockPanel>
-                                        </Button.Content>
-                                    </Button>
-
-                                    <Button x:Name="btn_AddBookFromSettingSection"
-                                            Style="{StaticResource SettingSectionButton}"
-                                            Grid.Column="2"
-                                            Grid.Row="1"
-                                            Width="130"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            HorizontalContentAlignment="Center"
-                                            VerticalContentAlignment="Center" 
-                                            Margin="0, 10, 0, 0">
-                                        <Button.Content>
-                                            <DockPanel>
-                                                <Image Source="/Images/icon_add_book.png"
-                                                       Width="40" 
-                                                       Height="40"/>
-                                                <TextBlock Text="Sách" 
-                                                           FontSize="20" 
                                                            Foreground="#154448"
                                                            VerticalAlignment="Center"
                                                            Margin="5,0,0,0"/>

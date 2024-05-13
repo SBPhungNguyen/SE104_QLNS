@@ -51,7 +51,7 @@ HorizontalAlignment="Right">
                            FontSize="20"
                            FontFamily="Tahoma"
                            HorizontalAlignment="Center" 
-                           Margin="0,39,0,81" TextWrapping="Wrap"/>
+                           Margin="0,39,0,150" TextWrapping="Wrap"/>
                 <TextBox Name="txt_AuthorName" FontWeight="Bold"
                 BorderThickness="0,0,0,1"
                 Height="30" Width="300" FontSize="18" 
