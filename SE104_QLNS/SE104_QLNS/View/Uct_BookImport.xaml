@@ -20,7 +20,7 @@
                     <TextBlock>
                          <TextBox Name="tbl_BookQuantity" Background="Transparent" BorderBrush="Transparent" Text="{Binding BookQuantity}" Margin="150,62,17,4" Width="40"/>
                     </TextBlock>
-                    <Button Name="Remove" Margin="206,3,4,52" Width="25" Height="25" Background="#C2DECE" BorderThickness="1" BorderBrush="#6FB3B8" Click="Remove_Click">
+                    <Button Name="btn_Remove" Margin="206,3,4,52" Width="25" Height="25" Background="#C2DECE" BorderThickness="1" BorderBrush="#6FB3B8" Click="Remove_Click">
                         <Image Source="/Images/icon_trashcan.png" Stretch="Fill"/>
                     </Button>
                 </Grid>
