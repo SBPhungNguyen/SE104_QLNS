@@ -50,7 +50,7 @@ namespace SE104_QLNS
                     command.Parameters.AddWithValue("@HoTenKH", txt_CustomerName.Text);
                     command.Parameters.AddWithValue("@Email", txt_CustomerEmail.Text);
                     command.Parameters.AddWithValue("@SDT", txt_CustomerPhone.Text);
-                    command.Parameters.AddWithValue("@NgaySinh", txt_CustomeBirth.Text);
+                    command.Parameters.AddWithValue("@NgaySinh", DateTime.Parse(txt_CustomerBirth.Text));
                     string gender;
                     if (cbx_Gender.Text == "Nam")
                         gender = "1";
@@ -62,6 +62,22 @@ namespace SE104_QLNS
                     command.Parameters.AddWithValue("@SoTienMua", "0");
 
                     SqlDataReader reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
+
+                    //Create for BAOCAOCONGNO
+                    sqlQuery = "INSERT INTO BAOCAOCONGNO (Thang, Nam, MaKH, NoDau, PhatSinh, NoCuoi) " +
+                  $"VALUES (@Thang, @Nam, @MaKH, @NoDau, @PhatSinh, @NoCuoi)";
+                    command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@Thang", DateTime.Now.Month.ToString());
+                    command.Parameters.AddWithValue("@Nam", DateTime.Now.Year.ToString());
+                    command.Parameters.AddWithValue("@MaKH", txt_CustomerID.Text);
+                    command.Parameters.AddWithValue("@NoDau", 0);
+                    command.Parameters.AddWithValue("@PhatSinh", Convert.ToInt32(0));
+                    command.Parameters.AddWithValue("@NoCuoi", Convert.ToInt32(0));
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
                 }
                 catch (Exception ex)
                 {
@@ -69,7 +85,19 @@ namespace SE104_QLNS
                 }
             }
 
-            parent.LoadCustomer(parent, 0);
+            if (parent.isCustomerDelete)
+            {
+                parent.LoadCustomer(parent, 2);
+            }
+            else if(parent.isCustomerUpdate)
+            {
+                parent.LoadCustomer(parent, 1);
+            }
+            else
+            {
+                parent.LoadCustomer(parent, 0);
+            }
+            parent.LoadBaoCaoCongNo(parent, 0);
             IsClosing = true;
             this.Close();
         }
@@ -78,6 +106,11 @@ namespace SE104_QLNS
         {
             IsClosing = true;
             this.Close();
+        }
+
+        private void dpk_CustomerBirthday_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            txt_CustomerBirth.Text = dpk_CustomerBirthday.SelectedDate.Value.Date.ToString().Substring(0, 10);
         }
     }
 }

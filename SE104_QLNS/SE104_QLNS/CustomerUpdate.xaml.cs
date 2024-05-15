@@ -41,7 +41,14 @@ namespace SE104_QLNS
             this.txt_CustomerBirthday.Text = customer.CustomerBirthday;
             this.txt_CustomerName.Text = customer.CustomerName;
             this.txt_CustomerPhone.Text = customer.CustomerPhonenumber;
-            this.cbx_Gender.Text = customer.CustomerGender;
+            if (customer.CustomerGender == "Nam")
+            {
+                cbx_Gender.SelectedIndex = 0;
+            }
+            else
+            {
+                cbx_Gender.SelectedIndex = 1;
+            }
             this.txt_CustomerAddress.Text = customer.CustomerAddress;
             this.tbl_CustomerSpent.Text = customer.CustomerSpending;
             this.tbl_CustomerDebt.Text = customer.CustomerDebt;
@@ -95,11 +102,28 @@ namespace SE104_QLNS
                 {
                     Notification noti = new Notification("Error", "Error updatong customer: " + ex.Message);
                 }
-                parent.LoadCustomer(parent, 0);
+                if (parent.isCustomerDelete)
+                {
+                    parent.LoadCustomer(parent, 2);
+                }
+                else if (parent.isCustomerUpdate)
+                {
+                    parent.LoadCustomer(parent, 1);
+
+                }
+                else
+                {
+
+                    parent.LoadCustomer(parent, 0);
+                }
                 IsClosing = true;
                 this.Close();
             }
         }
 
+        private void dpk_CustomerBirthday_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            txt_CustomerBirthday.Text = dpk_CustomerBirthday.SelectedDate.Value.Date.ToString().Substring(0, 10);
+        }
     }
 }

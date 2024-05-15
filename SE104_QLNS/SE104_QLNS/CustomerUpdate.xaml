@@ -74,6 +74,8 @@ HorizontalAlignment="Right" Margin="10,0,0,0" Click="btn_ExitApp_Click">
                     <TextBlock Name="tbl_CustomerID" Height="25" Margin="105,31,10,132" FontSize="16" Text="KH000001" FontWeight="Bold"/>
                     <TextBox Name="txt_CustomerMail" BorderThickness="0,0,0,1" Margin="115,88,5,70" FontSize="14" Text="22521148@gm.uit.edu.vn" FontWeight="Bold" />
                     <TextBox Name="txt_CustomerBirthday" BorderThickness="0,0,0,1" Height="25" Margin="155,140,10,23" FontSize="14" Text="22/02/2000" FontWeight="Bold" />
+                    <DatePicker x:Name="dpk_CustomerBirthday" SelectedDateChanged="dpk_CustomerBirthday_SelectedDateChanged" FontSize="1" Height="25" Margin="331,140,10,23" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold">
+                    </DatePicker>
                 </Grid>
                 <Grid Grid.Column="1">
                     <Image Height="25" Width="25" Stretch="Fill" Source="/Images/icon_useravatar.png" Margin="20,27,329,136" RenderTransformOrigin="1.028,0.552"/>

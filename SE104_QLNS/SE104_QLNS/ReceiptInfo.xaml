@@ -25,7 +25,30 @@
                            FontSize="18"
                            FontWeight="Bold"
                            VerticalAlignment="Center" Margin="15,0,251,0"/>
-                <Image Source="/Images/icon_close.png" Width="23" Height="23" Stretch="Fill"  RenderTransformOrigin="1.864,0.792" Margin="718,3,7,4"/>
+                <Button Name="btn_ExitApp"
+Grid.Column="3"
+Click="btn_ExitApp_Click"
+ Width="40" 
+Height="30"
+BorderThickness="0"
+Cursor="Hand" 
+VerticalAlignment="Center"
+HorizontalAlignment="Right">
+                    <Button.Content>
+                        <Image Source="/Images/icon_close.png" Width="20" Height="20"/>
+                    </Button.Content>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#154448"/>
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
             </Grid>
             <Grid Grid.Row="1">
                 <TextBlock x:Name="ReceiptID"
@@ -94,7 +117,7 @@
 
             <Grid Grid.Row="3">
                 <Button Name="btn_Ok" 
-                        Content="OK" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="228,-9,227,19">
+                        Content="OK" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="228,-9,227,19" Click="btn_Ok_Click">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="#154348"/>

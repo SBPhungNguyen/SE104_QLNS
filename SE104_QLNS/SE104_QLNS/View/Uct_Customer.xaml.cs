@@ -19,6 +19,31 @@ namespace SE104_QLNS.View
     /// <summary>
     /// Interaction logic for Uct_Customer.xaml
     /// </summary>
+    
+    public partial class Uct_BaoCaoCongNo
+    {
+        public int Month { get; set; }
+        public int Year { get; set; }
+        public string CustomerID { get; set; }
+        public string CustomerName { get; set; }
+        public int NoDau { get; set; }
+        public int PhatSinh { get; set; }
+        public int NoCuoi { get; set; }
+        public Uct_BaoCaoCongNo()
+        {
+
+        }
+        public Uct_BaoCaoCongNo(int month, int year, string customerID, string customerName, int noDau, int phatSinh, int noCuoi)
+        {
+            Month = month;
+            Year = year;
+            CustomerID = customerID;
+            CustomerName = customerName;
+            NoDau = noDau;
+            PhatSinh = phatSinh;
+            NoCuoi = noCuoi;
+        }
+    }
     public partial class Uct_Customer : UserControl
     {
         Connection connect = new Connection();

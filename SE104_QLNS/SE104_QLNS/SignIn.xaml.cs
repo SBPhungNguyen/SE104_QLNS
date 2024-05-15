@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SE104_QLNS
 {
@@ -26,7 +27,7 @@ namespace SE104_QLNS
             tb_username.Text = "admin";
             tb_password.Password = "admin";
         }
-        private void Login(string email, string password)
+        private void Login(string TenTK, string password)
         {
             Connection connect = new Connection();
             string connectionString = connect.connection;
@@ -36,21 +37,21 @@ namespace SE104_QLNS
                 try
                 {
                     connection.Open();
-                    string sqlQuery = "SELECT Email, MatKhau FROM NGUOIDUNG WHERE Email = @Email";
+                    string sqlQuery = "SELECT TenTK, MatKhau FROM NGUOIDUNG WHERE TenTK = @TenTK";
                     SqlCommand command = new SqlCommand(sqlQuery, connection);
-                    command.Parameters.AddWithValue("@Email", email);
+                    command.Parameters.AddWithValue("@TenTK", TenTK);
 
                     SqlDataReader reader = command.ExecuteReader();
                     if (reader.Read())
                     {
-                        string dbEmail = reader["Email"].ToString();
+                        string dbTenTK = reader["TenTK"].ToString();
                         string dbPassword = reader["MatKhau"].ToString();
 
                         if (password == dbPassword)
                         {
                             // Show login successful notification
-                            Notification notification = new Notification("Login Successful!", "Welcome to the application.");
-                            notification.Show();
+                            MainWindow main = new MainWindow();
+                            main.Show();
                             this.Close();
                         }
                         else
@@ -79,9 +80,9 @@ namespace SE104_QLNS
         }
         private void btn_Login_Click(object sender, RoutedEventArgs e)
         {
-            string email = tb_username.Text;
+            string TenTK = tb_username.Text;
             string password = tb_password.Password;
-            Login(email, password);
+            Login(TenTK, password);
         }
 
         private void btn_ExitApp_Click(object sender, RoutedEventArgs e)

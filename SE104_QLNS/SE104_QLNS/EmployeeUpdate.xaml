@@ -89,8 +89,9 @@ HorizontalAlignment="Right" Margin="10,0,0,0" Click="btn_ExitApp_Click">
                 <TextBox Name="txt_EmployeeShift" Text="13h-18h" FontSize="18" Height="25" Margin="384,245,20,58" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"
                          BorderThickness="0,0,0,1"/>
                 <TextBlock Text="Ngày sinh:" FontSize="18" Height="25" Margin="492,78,153,225" RenderTransformOrigin="0.184,-0.376" />
-                <TextBox Name="txt_EmployeeBirthday" Text="22/02/2000" FontSize="18" Height="25" Margin="587,78,46,225" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"/>
-
+                <DatePicker x:Name="dpk_EmployeeBirthday" SelectedDateChanged="dpk_EmployeeBirthday_SelectedDateChanged" FontSize="1" Height="25" Margin="692,78,15,225" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold">
+                </DatePicker>
+                <TextBox Name="tbx_EmployeeBirthday" Text="" FontSize="18" Height="25" Margin="587,78,46,225" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"/>
                 <TextBlock Text="Tên tài khoản:" FontSize="14" Height="25" Margin="12,248,650,55"/>
                 <TextBlock Text="Password:" FontSize="14" Height="25" Margin="12,274,672,29"/>
                 <TextBox x:Name="txt_EmployeeTK" Text="nv000001" FontSize="14" Height="25" Margin="104,243,554,60" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"
@@ -99,8 +100,7 @@ HorizontalAlignment="Right" Margin="10,0,0,0" Click="btn_ExitApp_Click">
                          BorderThickness="0,0,0,1" VerticalContentAlignment="Bottom"/>
 
                 <Image Height="20" Width="20" Stretch="Fill" Margin="198,274,530,34" Source="/Images/icon_eye.png" Cursor="Hand"/>
-                <Image Height="20" Width="20" Stretch="Fill" Margin="706,80,22,228" Source="/Images/icon_calendar.png" RenderTransformOrigin="15.06,-3.72" Cursor="Hand"/>
-            </Grid>
+                 </Grid>
 
             <Grid Grid.Row="3">
                 <Button Name="btn_EmployeeUpdate" 

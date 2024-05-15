@@ -38,7 +38,7 @@ namespace SE104_QLNS
             this.tbl_EmployeeID.Text = employee.EmployeeID;
             this.txt_EmployeeName.Text = employee.EmployeeName;
             this.cbx_Gender.Text = employee.EmployeeGender;
-            this.txt_EmployeeBirthday.Text = employee.EmployeeBirthday;
+            this.tbx_EmployeeBirthday.Text = employee.EmployeeBirthday;
             this.txt_EmployeeCard.Text = employee.EmployeeCard;
             this.txt_EmployeePhone.Text = employee.EmployeePhonenumber;
             this.txt_EmployeeAddress.Text = employee.EmployeeAddress;
@@ -89,7 +89,7 @@ namespace SE104_QLNS
                     else
                         gender = "0";
                     command.Parameters.AddWithValue("@GioiTinh", gender);
-                    command.Parameters.AddWithValue("@NgaySinh", DateTime.Parse(txt_EmployeeBirthday.Text));
+                    command.Parameters.AddWithValue("@NgaySinh", DateTime.Parse(tbx_EmployeeBirthday.Text));
                     command.Parameters.AddWithValue("@CCCD", txt_EmployeeCard.Text);
                     command.Parameters.AddWithValue("@Ca", txt_EmployeeShift.Text);
                     command.Parameters.AddWithValue("@ViTri", txt_EmployeeOccupation.Text);
@@ -129,6 +129,11 @@ namespace SE104_QLNS
                     Notification noti = new Notification("Error", "Error opening file: " + ex.Message);
                 }
             });
+        }
+
+        private void dpk_EmployeeBirthday_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            tbx_EmployeeBirthday.Text = dpk_EmployeeBirthday.SelectedDate.Value.Date.ToString().Substring(0, 10);
         }
     }
 }

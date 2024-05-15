@@ -104,9 +104,8 @@ namespace SE104_QLNS.View
         {
             if (state == 0) //Default
             {
-                EmployeeInfo employee = new EmployeeInfo(EmployeeID, EmployeeName,
-                    EmployeePhonenumber, EmployeeBirthday, EmployeeGender, EmployeeCard,
-                    EmployeeAddress, EmployeeOccupation, EmployeeShift, EmployeeTK, EmployeePass, PicURL);
+                EmployeeInfo employee = new EmployeeInfo(EmployeeID, EmployeeName, EmployeeBirthday, EmployeeGender, EmployeeCard
+                    , EmployeePhonenumber, EmployeeAddress, EmployeeOccupation, EmployeeShift, EmployeeTK, EmployeePass, PicURL);
                 employee.Visibility = Visibility.Visible;
                 employee.Topmost = true;
 

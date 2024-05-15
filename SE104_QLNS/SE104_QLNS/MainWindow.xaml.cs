@@ -39,10 +39,11 @@ namespace SE104_QLNS
         public ObservableCollection<Uct_Employee> Employees { get; set; } = new ObservableCollection<Uct_Employee>();
         public ObservableCollection<Uct_Genre> Genres { get; set; } = new ObservableCollection<Uct_Genre>();
         public ObservableCollection<Uct_Author> Authors { get; set; } = new ObservableCollection<Uct_Author>();
-
+        public ObservableCollection<Uct_CustomerReceipt> CustomerReceipt { get; set; } = new ObservableCollection<Uct_CustomerReceipt>();
         public ObservableCollection<ImportedBookReceiptInfo> ImportBookReceipts { get; set; } = new ObservableCollection<ImportedBookReceiptInfo>();
         public ObservableCollection<BillInfo> Bills { get; set; } = new ObservableCollection<BillInfo>();
         public ObservableCollection<Uct_BaoCaoTon> BaoCaoTon { get; set; } = new ObservableCollection<Uct_BaoCaoTon>();
+        public ObservableCollection<Uct_BaoCaoCongNo> BaoCaoCongNo { get; set; } = new ObservableCollection<Uct_BaoCaoCongNo>();
 
         Connection connect = new Connection();
 
@@ -51,6 +52,7 @@ namespace SE104_QLNS
         BillInfo selectedbillinfo = null;
         Uct_Genre selectedgenre = null;
         Uct_Author selectedauthor = null;
+        Uct_CustomerReceipt selectedcustomerreceipt = null;
 
         string ApDungQuyDinhKiemTraSoTienThu = "";
         string SoLuongNhapToiThieu = "";
@@ -60,18 +62,20 @@ namespace SE104_QLNS
         string TiLeGiaBan = "";
 
 
-        bool isBookDelete = false;
-        bool isBookUpdate = false;
-        bool isBookList = true;
+        public bool isBookDelete = false;
+        public bool isBookUpdate = false;
+        public bool isBookList = true;
 
-        bool isImportPaperDelete = false;
-        bool isExportPaperDelete = false;
+        public bool isImportPaperDelete = false;
+        public bool isExportPaperDelete = false;
 
-        bool isCustomerUpdate = false;
-        bool isCustomerDelete = false;
+        public bool isCustomerUpdate = false;
+        public bool isCustomerDelete = false;
 
-        bool isEmployeeUpdate = false;
-        bool isEmployeeDelete = false;
+        public bool isEmployeeUpdate = false;
+        public bool isEmployeeDelete = false;
+
+        public bool isCustomerReceiptDelete = false;
 
         public MainWindow()
         {
@@ -88,6 +92,8 @@ namespace SE104_QLNS
             txb_BillDate.Text = DateTime.Now.ToString();
             LoadAuthor(this, 0);
             LoadBaoCaoTon(this, 0);
+            LoadBaoCaoCongNo(this, 0);
+            LoadCustomerReceipt(this, 0);
             Cbx_SearchBook.SelectedIndex = 0;
             ImportExportComboBox.SelectedIndex = 0;
             ImportDate.Text = DateTime.Now.ToString();
@@ -374,7 +380,44 @@ namespace SE104_QLNS
 
             return nextBookID;
         }
+        public string GetNextCustomerReceiptID(MainWindow mainwindow)
+        {
+            string connectionString = connect.connection;
+            string nextBookID = "PT000001"; // Initial value
 
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    // Use a transaction to ensure data consistency
+                    using (SqlTransaction transaction = connection.BeginTransaction())
+                    {
+                        string sqlQuery = "SELECT MAX(MaPhieuThuTien) AS LastMaMaPhieuThuTien FROM PHIEUTHUTIEN";
+                        SqlCommand command = new SqlCommand(sqlQuery, connection, transaction);
+
+                        object LastMaMaPhieuThuTien = command.ExecuteScalar();
+
+                        if (LastMaMaPhieuThuTien != DBNull.Value)
+                        {
+                            int currentID = Convert.ToInt32(LastMaMaPhieuThuTien.ToString().Substring(2)); // Extract numeric part
+                            currentID++; // Increment for next ID
+                            nextBookID = "PT" + currentID.ToString("D6"); // Format with leading zeros
+                        }
+
+                        transaction.Commit(); // Commit the transaction if successful
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Notification noti = new Notification("Error", "Error generating Book ID: " + ex.Message);
+                    nextBookID = null; // Indicate error
+                }
+            }
+
+            return nextBookID;
+        }
         public string GetNextAuthorID(MainWindow mainwindow)
         {
             string connectionString = connect.connection;
@@ -493,6 +536,70 @@ namespace SE104_QLNS
                 }
             }
         }
+        public void LoadCustomerReceipt(MainWindow mainwindow, int state)
+        {
+            //connect to database
+            mainwindow.CustomerReceipt.Clear();
+            string connectionString = connect.connection;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    string sqlQuery = "SELECT DISTINCT PHIEUTHUTIEN.*, KHACHHANG.* FROM PHIEUTHUTIEN " +
+                        " LEFT JOIN KHACHHANG ON PHIEUTHUTIEN.MaKH = KHACHHANG.MaKH";
+                    SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            string MaPhieuThuTien = reader["MaPhieuThuTien"].ToString();
+                            string MaKH = reader["MaKH"].ToString();
+                            string NgayThuTien = reader["NgayThuTien"].ToString();
+                            string TenKH = reader["HoTenKH"].ToString();
+                            string SDT = reader["SDT"].ToString();
+                            string Email = reader["Email"].ToString();
+                            string DiaChi = reader["DiaChi"].ToString();
+                            string SoTienThu = reader["SoTienThu"].ToString();
+                            SoTienThu = SoTienThu.Substring(0, SoTienThu.Length - 5);
+                            string SoTienTruocThu = reader["SoTienTruocThu"].ToString();
+                            SoTienTruocThu = SoTienTruocThu.Substring(0, SoTienTruocThu.Length - 5);
+                            string SoTienSauThu = reader["SoTienSauThu"].ToString();
+                            SoTienSauThu = SoTienSauThu.Substring(0, SoTienSauThu.Length - 5);
+
+                            Uct_CustomerReceipt receipt = new Uct_CustomerReceipt(MaPhieuThuTien, MaKH, TenKH, SDT, Email, DiaChi, NgayThuTien, SoTienTruocThu, SoTienThu, SoTienSauThu);
+                            mainwindow.CustomerReceipt.Add(receipt);
+                        }
+                    }
+                    mainwindow.dtg_CustomerPaymentReceipt.Items.Refresh();
+                    reader.Close();
+
+                }
+                catch (Exception ex)
+                {
+                    Notification noti = new Notification("Error", "Error retrieving data from PHIEUTHUTIEN: " + ex.Message);
+                }
+                mainwindow.wpn_Books.Children.Clear();
+                mainwindow.wpn_ImportBooks.Children.Clear();
+                if (state == 3)
+                {
+                    foreach (Uct_Books child in Books)
+                    {
+                        wpn_ImportBooks.Children.Add(child);
+                    }
+                }
+                else
+                {
+                    foreach (Uct_Books child in Books)
+                    {
+                        mainwindow.wpn_Books.Children.Add(child);
+                    }
+                }
+
+            }
+        }
         public void LoadBaoCaoTon(MainWindow mainwindow, int state)
         {
             //connect to database
@@ -596,6 +703,107 @@ namespace SE104_QLNS
                 }
             }
         }
+        public void LoadBaoCaoCongNo(MainWindow mainwindow, int state)
+        {
+            //connect to database
+            mainwindow.BaoCaoCongNo.Clear();
+            string connectionString = connect.connection;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+
+                string MaKH = "", HoTenKH = "";
+                int NoDau = 0, PhatSinh = 0, NoCuoi = 0, Month = 0, Year = 0;
+                try
+                {
+                    connection.Open();
+                    string sqlQuery = "SELECT DISTINCT BAOCAOCONGNO.*, KHACHHANG.* FROM BAOCAOCONGNO " +
+                        "JOIN KHACHHANG ON BAOCAOCONGNO.MaKH = KHACHHANG.MaKH ";
+                    SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            MaKH = reader["MaKH"].ToString();
+                            HoTenKH = reader["HoTenKH"].ToString();
+                            NoDau = Convert.ToInt32(reader["NoDau"]);
+                            PhatSinh = Convert.ToInt32(reader["PhatSinh"]);
+                            NoCuoi = Convert.ToInt32(reader["NoCuoi"]);
+                            Month = Convert.ToInt32(reader["Thang"]);
+                            Year = Convert.ToInt32(reader["Nam"]);
+
+                            Uct_BaoCaoCongNo baocao = new Uct_BaoCaoCongNo(Month, Year, MaKH, HoTenKH, NoDau, PhatSinh, NoCuoi);
+                            mainwindow.BaoCaoCongNo.Add(baocao);
+                        }
+                    }
+                    reader.Close();
+                    string Thang = "", Nam = "";
+
+                    //Add to Month from BAOCAOTON
+                    sqlQuery = "SELECT Thang FROM BAOCAOCONGNO";
+                    command = new SqlCommand(sqlQuery, connection);
+                    reader = command.ExecuteReader();
+                    cbx_CustomerDebtReportMonth.Items.Add("Tất cả");
+                    cbx_CustomerDebtReportMonth.SelectedIndex = 0;
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            bool isDuplicate = false;
+                            Thang = reader["Thang"].ToString();
+                            foreach (string item in cbx_CustomerDebtReportMonth.Items)
+                            {
+                                if (item == Thang)
+                                {
+                                    isDuplicate = true;
+                                    break;
+                                }
+                            }
+                            if (!isDuplicate)
+                            {
+                                cbx_CustomerDebtReportMonth.Items.Add(Thang);
+                            }
+                        }
+                    }
+                    reader.Close();
+
+                    //Add to Year from BAOCAOTON
+                    sqlQuery = "SELECT Nam FROM BAOCAOCONGNO";
+                    command = new SqlCommand(sqlQuery, connection);
+                    reader = command.ExecuteReader();
+
+                    cbx_CustomerDebtReportYear.Items.Add("Tất cả");
+                    cbx_CustomerDebtReportYear.SelectedIndex = 0;
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            bool isDuplicate = false;
+                            Nam = reader["Nam"].ToString();
+                            foreach (string item in cbx_CustomerDebtReportYear.Items)
+                            {
+                                if (item == Nam)
+                                {
+                                    isDuplicate = true;
+                                    break;
+                                }
+                            }
+                            if (!isDuplicate)
+                            {
+                                cbx_CustomerDebtReportYear.Items.Add(Nam);
+                            }
+                        }
+                    }
+                    reader.Close();
+
+                }
+                catch (Exception ex)
+                {
+                    Notification noti = new Notification("Error", "Error retrieving data from BAOCAOCONGNO: " + ex.Message);
+                }
+            }
+        }
         public void LoadCustomer(MainWindow mainwindow, int state)
         {
             Customers = new ObservableCollection<Uct_Customer>();
@@ -628,7 +836,7 @@ namespace SE104_QLNS
                             SoTienNo = reader["SoTienNo"].ToString(); // Assuming numeric data type
                             SoTienNo = SoTienNo.Substring(0, SoTienNo.Length - 5);
                             GioiTinh = reader["GioiTinh"].ToString();
-                            NgaySinh = reader["NgaySinh"].ToString(); // Assuming date/time data type
+                            NgaySinh = reader["NgaySinh"].ToString().Substring(0, 10); // Assuming date/time data type
                             SoTienMua = reader["SoTienMua"].ToString(); // Assuming numeric data type
                             SoTienMua = SoTienMua.Substring(0, SoTienMua.Length - 5);
 
@@ -939,7 +1147,7 @@ namespace SE104_QLNS
                             SDT = reader["SDT"].ToString();
                             DiaChi = reader["DiaChi"].ToString();
                             GioiTinh = reader["GioiTinh"].ToString();
-                            NgaySinh = reader["NgaySinh"].ToString(); // Assuming date/time data type
+                            NgaySinh = reader["NgaySinh"].ToString().Substring(0, 10); // Assuming date/time data type
                             CCCD = reader["CCCD"].ToString();
                             ViTri = reader["ViTri"].ToString();
                             Ca = reader["Ca"].ToString();
@@ -983,8 +1191,6 @@ namespace SE104_QLNS
             if (cbx_BookSearch.SelectedItem == null) return;
             cbx_BookSearch.Text = cbx_BookSearch.SelectedItem.ToString();
             foreach (Uct_Books book in Books)
-                cbx_BookSearch.Text = cbx_BookSearch.SelectedItem.ToString();
-            foreach (Uct_Books book in Books)
             {
                 if (book.BookID == cbx_BookSearch.Text.Substring(Math.Max(0, cbx_BookSearch.Text.Length - 8)))
                 {
@@ -994,6 +1200,8 @@ namespace SE104_QLNS
                     BooksSell.Add(book);
                 }
             }
+            cbx_BookSearch.SelectedItem = null;
+
         }
         private void ImportExportComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -1162,6 +1370,21 @@ namespace SE104_QLNS
                     command.Parameters.AddWithValue("@SoTienMua", "0");
 
                     SqlDataReader reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
+                    //Create for BAOCAOCONGNO
+                    sqlQuery = "INSERT INTO BAOCAOCONGNO (Thang, Nam, MaKH, NoDau, PhatSinh, NoCuoi) " +
+                  $"VALUES (@Thang, @Nam, @MaKH, @NoDau, @PhatSinh, @NoCuoi)";
+                    command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@Thang", DateTime.Now.Month.ToString());
+                    command.Parameters.AddWithValue("@Nam", DateTime.Now.Year.ToString());
+                    command.Parameters.AddWithValue("@MaKH", MaKH);
+                    command.Parameters.AddWithValue("@NoDau", 0);
+                    command.Parameters.AddWithValue("@PhatSinh", Convert.ToInt32(0));
+                    command.Parameters.AddWithValue("@NoCuoi", Convert.ToInt32(0));
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
                 }
                 catch (Exception ex)
                 {
@@ -1169,6 +1392,7 @@ namespace SE104_QLNS
                 }
             }
             LoadCustomer(this, 0);
+            LoadBaoCaoCongNo(this, 0);
         }
         private void dtg_SellList_CurrentCellChanged(object sender, EventArgs e)
         {
@@ -1271,6 +1495,75 @@ namespace SE104_QLNS
             }
             LoadBaoCaoTon(this, 0);
         }
+
+        public void UpdateBaoCaoCongNo(SqlConnection connection, string MaKH, int Changes)
+        {
+            //Check if BAOCAOCONGNO exists
+            string sqlQuery = $"Select MaKH, Thang, Nam From BAOCAOCONGNO WHERE THANG=@THANG AND NAM=@NAM AND MaKH=@MaKH";
+            SqlCommand command = new SqlCommand(sqlQuery, connection);
+            command.Parameters.AddWithValue("@MaKH", MaKH);
+            command.Parameters.AddWithValue("@Thang", DateTime.Now.Month.ToString());
+            command.Parameters.AddWithValue("@Nam", DateTime.Now.Year.ToString());
+            SqlDataReader reader = command.ExecuteReader();
+            if (reader.HasRows) //if has row, just update.
+            {
+                reader.Close();
+                sqlQuery = $"UPDATE BAOCAOCONGNO SET PhatSinh+=@PhatSinh, NoCuoi+=@NoCuoi WHERE THANG=@THANG AND NAM=@NAM AND MaKH=@MaKH";
+                command = new SqlCommand(sqlQuery, connection);
+                command.Parameters.AddWithValue("@MaKH", MaKH);
+                command.Parameters.AddWithValue("@Thang", DateTime.Now.Month.ToString());
+                command.Parameters.AddWithValue("@Nam", DateTime.Now.Year.ToString());
+                command.Parameters.AddWithValue("@PhatSinh", Changes);
+                command.Parameters.AddWithValue("@NoCuoi", Changes);
+                reader = command.ExecuteReader();
+                reader.Read();
+                reader.Close();
+            }
+            else //if doesn't, check previous month (it is impossible not to have previous
+                 //month since you always add khachhang and BAOCAOCONGNO at the same time
+                 //create new 
+            {
+                reader.Close();
+                int previousMonth = int.Parse(DateTime.Now.Month.ToString()) - 1;
+                int previousYear = int.Parse(DateTime.Now.Year.ToString());
+
+                // Handle January of the following year
+                if (previousMonth == 0)
+                {
+                    previousMonth = 12;
+                    previousYear--;
+                }
+
+                //Get NoCuoi from previous
+                string thangTruoc = previousMonth.ToString();
+                string namTruoc = previousYear.ToString();
+                int NoCuoiTruoc = 0;
+                sqlQuery = $"SELECT NoCuoi FROM BAOCAOCONGNO WHERE THANG=@THANG AND NAM=@NAM AND MaKH=@MaKH";
+                command = new SqlCommand(sqlQuery, connection);
+                command.Parameters.AddWithValue("@MaKH", MaKH);
+                command.Parameters.AddWithValue("@Thang", thangTruoc);
+                command.Parameters.AddWithValue("@Nam", namTruoc);
+                reader = command.ExecuteReader();
+                reader.Read();
+                NoCuoiTruoc = Convert.ToInt32(reader["NoCuoi"]);
+                reader.Close();
+
+                //Create for this BAOCAOCONGNO
+                sqlQuery = "INSERT INTO BAOCAOCONGNO (Thang, Nam, MaKH, NoDau, PhatSinh, NoCuoi) " +
+              $"VALUES (@Thang, @Nam, @MaKH, @NoDau, @PhatSinh, @NoCuoi)";
+                command = new SqlCommand(sqlQuery, connection);
+                command.Parameters.AddWithValue("@Thang", DateTime.Now.Month.ToString());
+                command.Parameters.AddWithValue("@Nam", DateTime.Now.Year.ToString());
+                command.Parameters.AddWithValue("@MaKH", MaKH);
+                command.Parameters.AddWithValue("@NoDau", NoCuoiTruoc);
+                command.Parameters.AddWithValue("@PhatSinh", Changes);
+                command.Parameters.AddWithValue("@NoCuoi", NoCuoiTruoc + Changes);
+                reader = command.ExecuteReader();
+                reader.Read();
+                reader.Close();
+            }
+            LoadBaoCaoCongNo(this, 0);
+        }
         private void btn_SaveBillToDatabase_Click(object sender, RoutedEventArgs e)
         {
             string NextExportId = GetNextExportPaperID(this);
@@ -1367,6 +1660,9 @@ namespace SE104_QLNS
                     reader.Read();
                     reader.Close();
 
+                    UpdateBaoCaoCongNo(connection, cbx_CustomerID.Text, Convert.ToInt32(txb_MoneyOwe.Text));
+
+
                     LoadCustomer(this, 0);
                     LoadBook(this, 0);
                     BooksSell.Clear();
@@ -1443,25 +1739,26 @@ namespace SE104_QLNS
         {
             selectedimportreceipt.Show();
         }
-        private void SelectImportExport_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cbx_SwapFromImportToExport_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             dtg_BillList.Columns[0].Visibility = Visibility.Visible;
             dtg_BillList.Columns[0].Visibility = Visibility.Hidden;
-            if (SelectImportExport.SelectedItem == null)
+            if (cbx_SwapFromImportToExport.SelectedIndex == 0)
                 return;
             cvs_ImportBookReceipt.Visibility = Visibility.Hidden;
             cvs_Bill.Visibility = Visibility.Visible;
-            SelectImportExport.SelectedItem = null;
+            cbx_SwapFromImportToExport.SelectedIndex = 0;
         }
-        private void SwapExportImport_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cbx_SwapFromExportToImport_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (dtg_ImportBookReceiptList == null) return;
             dtg_ImportBookReceiptList.Columns[0].Visibility = Visibility.Visible;
             dtg_ImportBookReceiptList.Columns[0].Visibility = Visibility.Hidden;
-            if (SwapExportImport.SelectedItem == null)
+            if (cbx_SwapFromExportToImport.SelectedIndex == 0)
                 return;
             cvs_ImportBookReceipt.Visibility = Visibility.Visible;
             cvs_Bill.Visibility = Visibility.Hidden;
-            SwapExportImport.SelectedItem = null;
+            cbx_SwapFromExportToImport.SelectedIndex = 0;
         }
 
         private void btn_DeleteExportBook_Click(object sender, RoutedEventArgs e)
@@ -1617,7 +1914,10 @@ namespace SE104_QLNS
                     cvs_ImportBooks.Visibility = Visibility.Visible;
                     cvs_ImportBooks_List.Visibility = Visibility.Visible;
 
+
                     dtg_ImportBooks.Items.Refresh();
+                    dtg_ImportBooks.Columns[0].Visibility = Visibility.Hidden;
+                    dtg_ImportBooks.Columns[0].Visibility = Visibility.Visible;
 
                     btn_AddBook.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
                     btn_DeleteBook.Background = new SolidColorBrush(Colors.Transparent);
@@ -2140,24 +2440,6 @@ namespace SE104_QLNS
             }
         }
 
-        private void txt_CustomerSearch_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            foreach (Uct_Customer child in wpn_Customer.Children)
-            {
-                if (child is Uct_Customer)
-                {
-                    if (child.CustomerName.Contains(txt_CustomerSearch.Text) || child.CustomerPhonenumber.Contains(txt_CustomerSearch.Text))
-                    {
-                        child.Visibility = Visibility.Visible;
-                    }
-                    else
-                    {
-                        child.Visibility = Visibility.Collapsed;
-                    }
-                }
-            }
-        }
-
         private void txt_EmployeeSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             foreach (Uct_Employee child in wpn_Employee.Children)
@@ -2185,7 +2467,6 @@ namespace SE104_QLNS
 
         private void CustomerSearchComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CustomerSearchComboBox.Text = CustomerSearchComboBox.SelectedItem.ToString();
         }
 
         private void EmployeeSearchComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -2215,9 +2496,17 @@ namespace SE104_QLNS
         private void SwapGenreAuthor_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (SwapGenreAuthor.SelectedIndex == 0) return;
-            SearchGenreAuthorCombobox.SelectedIndex = 1;
-            dtg_AuthorList.Columns[0].Visibility = Visibility.Hidden;
-            dtg_AuthorList.Columns[0].Visibility = Visibility.Visible;
+            SwapGenreAuthor.SelectedIndex = 1;
+            if (dtg_AuthorList.Columns[0].Visibility == Visibility.Hidden)
+            {
+                dtg_AuthorList.Columns[0].Visibility = Visibility.Visible;
+                dtg_AuthorList.Columns[0].Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                dtg_AuthorList.Columns[0].Visibility = Visibility.Hidden;
+                dtg_AuthorList.Columns[0].Visibility = Visibility.Visible;
+            }
 
             if (SwapGenreAuthor.SelectedItem == null)
                 return;
@@ -2232,7 +2521,7 @@ namespace SE104_QLNS
         private void btn_EditAuthor_Click(object sender, RoutedEventArgs e)
         {
             dtg_AuthorList.Columns[1].Visibility = Visibility.Hidden;
-            btn_DeleteAuthorList.Background = new SolidColorBrush(Colors.Transparent);
+            btn_DeleteAuthor.Background = new SolidColorBrush(Colors.Transparent);
             if (dtg_AuthorList.Columns[0].Visibility == Visibility.Hidden)
             {
                 dtg_AuthorList.Columns[0].Visibility = Visibility.Visible;
@@ -2247,7 +2536,7 @@ namespace SE104_QLNS
 
         private void btn_DeleteAuthor_Click(object sender, RoutedEventArgs e)
         {
-            CustomerSearchComboBox.Text = CustomerSearchComboBox.SelectedItem.ToString();
+            cbx_CustomerSearch.Text = cbx_CustomerSearch.SelectedItem.ToString();
             if (selectedauthor == null) return;
             AuthorAdd genreadd = new AuthorAdd(this, 2, selectedauthor);
             genreadd.Show();
@@ -2267,12 +2556,12 @@ namespace SE104_QLNS
             if (dtg_AuthorList.Columns[1].Visibility == Visibility.Hidden)
             {
                 dtg_AuthorList.Columns[1].Visibility = Visibility.Visible;
-                btn_DeleteAuthorList.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
+                btn_DeleteAuthor.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
             }
             else
             {
                 dtg_AuthorList.Columns[1].Visibility = Visibility.Hidden;
-                btn_DeleteAuthorList.Background = new SolidColorBrush(Colors.Transparent);
+                btn_DeleteAuthor.Background = new SolidColorBrush(Colors.Transparent);
             }
         }
 
@@ -2280,7 +2569,7 @@ namespace SE104_QLNS
         {
             dtg_AuthorList.Columns[0].Visibility = Visibility.Hidden;
             dtg_AuthorList.Columns[1].Visibility = Visibility.Hidden;
-            btn_DeleteAuthorList.Background = new SolidColorBrush(Colors.Transparent);
+            btn_DeleteAuthor.Background = new SolidColorBrush(Colors.Transparent);
             btn_EditAuthor.Background = new SolidColorBrush(Colors.Transparent);
 
             AuthorAdd authoradd = new AuthorAdd(this, 0, selectedauthor);
@@ -2293,28 +2582,35 @@ namespace SE104_QLNS
         }
 
         //Genre
-        private void SelectAuthorGenre_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cbx_SwitchToGenre_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (SelectAuthorGenre.SelectedIndex == 0) return;
+            if (cbx_SwitchToGenre.SelectedIndex == 0) return;
 
-            SearchGenreAuthorCombobox.SelectedIndex = 0;
-            dtg_GenreList.Columns[0].Visibility = Visibility.Hidden;
-            dtg_GenreList.Columns[0].Visibility = Visibility.Visible;
+            if (dtg_GenreList.Columns[0].Visibility == Visibility.Visible)
+            {
+                dtg_GenreList.Columns[0].Visibility = Visibility.Hidden;
+                dtg_GenreList.Columns[0].Visibility = Visibility.Visible;
+            }
+            else
+            {
+                dtg_GenreList.Columns[0].Visibility = Visibility.Visible;
+                dtg_GenreList.Columns[0].Visibility = Visibility.Hidden;
+            }
 
-            if (SelectAuthorGenre.SelectedItem == null)
+            if (cbx_SwitchToGenre.SelectedItem == null)
                 return;
 
             cvs_Author.Visibility = Visibility.Hidden;
             cvs_Genre.Visibility = Visibility.Visible;
 
-            SelectAuthorGenre.SelectedIndex = 0;
+            cbx_SwitchToGenre.SelectedIndex = 0;
             txt_AuthorGenreSearch.Text = "";
         }
 
         private void btn_EditGenre_Click(object sender, RoutedEventArgs e)
         {
             dtg_GenreList.Columns[1].Visibility = Visibility.Hidden;
-            btn_DeleteGenreList.Background = new SolidColorBrush(Colors.Transparent);
+            btn_DeleteGenreMode.Background = new SolidColorBrush(Colors.Transparent);
             if (dtg_GenreList.Columns[0].Visibility == Visibility.Hidden)
             {
                 dtg_GenreList.Columns[0].Visibility = Visibility.Visible;
@@ -2341,19 +2637,19 @@ namespace SE104_QLNS
             genreadd.Show();
         }
 
-        private void btn_DeleteGenreList_Click(object sender, RoutedEventArgs e)
+        private void btn_DeleteGenreMode_Click(object sender, RoutedEventArgs e)
         {
             dtg_GenreList.Columns[0].Visibility = Visibility.Hidden;
             btn_EditGenre.Background = new SolidColorBrush(Colors.Transparent);
             if (dtg_GenreList.Columns[1].Visibility == Visibility.Hidden)
             {
                 dtg_GenreList.Columns[1].Visibility = Visibility.Visible;
-                btn_DeleteGenreList.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
+                btn_DeleteGenreMode.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
             }
             else
             {
                 dtg_GenreList.Columns[1].Visibility = Visibility.Hidden;
-                btn_DeleteGenreList.Background = new SolidColorBrush(Colors.Transparent);
+                btn_DeleteGenreMode.Background = new SolidColorBrush(Colors.Transparent);
             }
         }
 
@@ -2361,7 +2657,7 @@ namespace SE104_QLNS
         {
             dtg_GenreList.Columns[0].Visibility = Visibility.Hidden;
             dtg_GenreList.Columns[1].Visibility = Visibility.Hidden;
-            btn_DeleteGenreList.Background = new SolidColorBrush(Colors.Transparent);
+            btn_DeleteGenreMode.Background = new SolidColorBrush(Colors.Transparent);
             btn_EditGenre.Background = new SolidColorBrush(Colors.Transparent);
 
             GenreAdd genreadd = new GenreAdd(this, 0, selectedgenre);
@@ -2378,9 +2674,9 @@ namespace SE104_QLNS
             if (string.IsNullOrEmpty(txt_AuthorGenreSearch.Text))
             {
                 dtg_GenreList.ItemsSource = Genres;
-                //dtg_AuthorList.ItemsSource = Author;
+                dtg_AuthorList.ItemsSource = Authors;
             }
-            else if (SearchGenreAuthorCombobox.Text == "Thể Loại")
+            else 
             {
                 var filteredItems = Genres.Where(genres =>
                 genres.GenreID.ToLower().Contains(txt_AuthorGenreSearch.Text.ToLower()) ||
@@ -2389,12 +2685,15 @@ namespace SE104_QLNS
 
                 dtg_GenreList.ItemsSource = filteredItems;
 
-            }
-            else
-            {
+                var filteredItems2 = Authors.Where(author =>
+                author.AuthorID.ToLower().Contains(txt_AuthorGenreSearch.Text.ToLower()) ||
+                    author.AuthorName.ToLower().Contains(txt_AuthorGenreSearch.Text.ToLower())
+                ).ToList();
 
+                dtg_GenreList.ItemsSource = filteredItems;
             }
             dtg_GenreList.Items.Refresh();
+            dtg_AuthorList.Items.Refresh();
         }
 
         private void btn_UpdateThamSo_Click(object sender, RoutedEventArgs e)
@@ -2470,9 +2769,10 @@ namespace SE104_QLNS
             if (string.IsNullOrEmpty(txt_ReportSearch.Text))
             {
                 dtg_AmountReport.ItemsSource = BaoCaoTon; // Reset to all items if no search text
+                dtg_CustomerDebtReport.ItemsSource = BaoCaoCongNo;
                 return;
             }
-            if (Cbx_SearchBook.Text == "Tất Cả" || (Cbx_SearchBook.Text == null))
+            if (cbx_SearchAmountCustomerReport.Text == "Tất Cả" || (cbx_SearchAmountCustomerReport.Text == null))
             {
                 var filteredItems = BaoCaoTon.Where(baocao =>
                 baocao.BookId.ToLower().Contains(txt_ReportSearch.Text.ToLower()) ||
@@ -2480,14 +2780,41 @@ namespace SE104_QLNS
                 ).ToList();
 
                 dtg_AmountReport.ItemsSource = filteredItems;
+
+                var filteredItems2 = BaoCaoCongNo.Where(baocao =>
+                baocao.CustomerID.ToLower().Contains(txt_ReportSearch.Text.ToLower()) ||
+                    baocao.CustomerName.ToLower().Contains(txt_ReportSearch.Text.ToLower())
+                ).ToList();
+
+                dtg_CustomerDebtReport.ItemsSource = filteredItems2;
             }
-            else if (Cbx_SearchBook.Text == "Tên Sách")
+            else if(cbx_SearchAmountCustomerReport.SelectedIndex==1)
+            {
+                var filteredItems = BaoCaoTon.Where(baocao =>
+                    baocao.BookId.ToLower().Contains(txt_ReportSearch.Text.ToLower())
+                ).ToList();
+
+                dtg_AmountReport.ItemsSource = filteredItems;
+
+                var filteredItems2 = BaoCaoCongNo.Where(baocao =>
+                baocao.CustomerID.ToLower().Contains(txt_ReportSearch.Text.ToLower())
+                ).ToList();
+
+                dtg_CustomerDebtReport.ItemsSource = filteredItems2;
+            }
+            else if (cbx_SearchAmountCustomerReport.SelectedIndex == 2)
             {
                 var filteredItems = BaoCaoTon.Where(baocao =>
                     baocao.BookName.ToLower().Contains(txt_ReportSearch.Text.ToLower())
                 ).ToList();
 
                 dtg_AmountReport.ItemsSource = filteredItems;
+
+                var filteredItems2 = BaoCaoCongNo.Where(baocao =>
+                    baocao.CustomerName.ToLower().Contains(txt_ReportSearch.Text.ToLower())
+                ).ToList();
+
+                dtg_CustomerDebtReport.ItemsSource = filteredItems2;
             }
 
         }
@@ -2533,6 +2860,229 @@ namespace SE104_QLNS
                 ).ToList();
                 }
                 dtg_AmountReport.ItemsSource = filteredItems;
+            }
+        }
+
+        private void btn_ReceiptAdd_Click(object sender, RoutedEventArgs e)
+        {
+            btn_ReceiptAdd.Background = new SolidColorBrush(Colors.Transparent);
+            isCustomerReceiptDelete = false;
+            ReceiptAdd receipt = new ReceiptAdd(this);
+            receipt.Show();
+        }
+
+        private void dtg_CustomerPaymentReceipt_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectedcustomerreceipt = (Uct_CustomerReceipt)dtg_CustomerPaymentReceipt.SelectedItem;
+        }
+
+        private void dtg_CustomerPaymentReceipt_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (isCustomerReceiptDelete) return;
+            if ((selectedcustomerreceipt != null) && (!isCustomerReceiptDelete))
+            {
+                ReceiptInfo receiptinfo = new ReceiptInfo(selectedcustomerreceipt);
+                receiptinfo.Show();
+            }
+        }
+
+        private void btn_DeleteReceipt_Click(object sender, RoutedEventArgs e)
+        {
+            if(!isCustomerReceiptDelete)
+            {
+                btn_ReceiptDelete.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
+                isCustomerReceiptDelete = true;
+                dtg_CustomerPaymentReceipt.Columns[0].Visibility = Visibility.Visible;
+            }
+            else
+            {
+                btn_ReceiptDelete.Background = new SolidColorBrush(Colors.Transparent);
+                isCustomerReceiptDelete = false;
+                dtg_CustomerPaymentReceipt.Columns[0].Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void btn_DeleteCustomerReceipt_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedcustomerreceipt != null)
+            {
+                ReceiptDelete receiptinfo = new ReceiptDelete(selectedcustomerreceipt, this);
+                receiptinfo.Show();
+            }
+        }
+
+        private void txt_ReceiptSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void txt_CustomerSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            foreach (Uct_Customer child in wpn_Customer.Children)
+            {
+                child.Visibility = Visibility.Collapsed;
+                try
+                {
+                    if (cbx_CustomerSearch.SelectedIndex == 0) // Search by Name or Phone Number
+                    {
+                        if (child.CustomerName.ToLower().Contains(txt_CustomerSearch.Text.ToLower()) ||
+                            child.CustomerPhonenumber.ToLower().Contains(txt_CustomerSearch.Text.ToLower())||
+                            child.CustomerID.ToLower().Contains(txt_CustomerSearch.Text.ToLower()))
+                        {
+                            child.Visibility = Visibility.Visible;
+                        }
+                    }
+                    else if (cbx_CustomerSearch.SelectedIndex == 1) // Search by Name only
+                    {
+                        if (child.CustomerID.ToLower().Contains(txt_CustomerSearch.Text.ToLower()))
+                        {
+                            child.Visibility = Visibility.Visible;
+                        }
+                    }
+                    else if (cbx_CustomerSearch.SelectedIndex == 2) // Search by Name only
+                    {
+                        if (child.CustomerName.ToLower().Contains(txt_CustomerSearch.Text.ToLower()))
+                        {
+                            child.Visibility = Visibility.Visible;
+                        }
+                    }
+                    else // Search by Phone Number only (assuming cbx_CustomerSearch.SelectedIndex == 2)
+                    {
+                        if (child.CustomerPhonenumber.ToLower().Contains(txt_CustomerSearch.Text.ToLower()))
+                        {
+                            child.Visibility = Visibility.Visible;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Notification noti = new Notification("Error", "Error retrieving data from KHACHHANG: " + ex.Message);
+                }
+            }
+        }
+
+        private void btn_DeleteCustomerReceipt_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_AddCustomerFromSettingSection_Click(object sender, RoutedEventArgs e)
+        {
+            CustomerAdd customer = new CustomerAdd(this);
+            customer.Show();
+        }
+
+        private void btn_AddEmployeeFromSettingSection_Click(object sender, RoutedEventArgs e)
+        {
+            EmployeeAdd employee = new EmployeeAdd(this);
+            employee.Show();
+        }
+
+        private void btn_AddBookFromSettingSection_Click(object sender, RoutedEventArgs e)
+        {
+            BookAddPopup bookaddpopup = new BookAddPopup(this);
+            bookaddpopup.Show();
+        }
+
+        private void btn_AddGenreFromSettingSection_Click(object sender, RoutedEventArgs e)
+        {
+            GenreAdd genreadd = new GenreAdd(this, 0, selectedgenre);
+            genreadd.Show();
+        }
+
+        private void btn_AddAuthorFromSettingSection_Click(object sender, RoutedEventArgs e)
+        {
+            AuthorAdd authoradd = new AuthorAdd(this, 0, selectedauthor);
+            authoradd.Show();
+        }
+
+        private void cbx_SwapReport_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cvs_AmountReport == null) return;
+            if (cvs_CustomerDebtReport == null) return;
+            if(cbx_SwapReport.SelectedIndex==1)
+            {
+                cvs_AmountReport.Visibility = Visibility.Hidden;
+                cvs_CustomerDebtReport.Visibility = Visibility.Visible;
+                dtg_CustomerDebtReport.Columns[0].Visibility = Visibility.Hidden;
+                dtg_CustomerDebtReport.Columns[0].Visibility = Visibility.Visible;
+                cbx_SearchAmountCustomerReport.Items.Clear();
+                cbx_SearchAmountCustomerReport.Items.Add("Tất Cả");
+                cbx_SearchAmountCustomerReport.Items.Add("Mã KH");
+                cbx_SearchAmountCustomerReport.Items.Add("Tên KH");
+                cbx_SearchAmountCustomerReport.SelectedIndex = 0;
+                txt_ReportSearch.Text = "";
+            }
+            else
+            {
+                cvs_AmountReport.Visibility = Visibility.Visible;
+                cvs_CustomerDebtReport.Visibility = Visibility.Hidden;
+                dtg_AmountReport.Columns[0].Visibility= Visibility.Hidden;
+                dtg_AmountReport.Columns[0].Visibility = Visibility.Visible;
+                cbx_SearchAmountCustomerReport.Items.Clear();
+                cbx_SearchAmountCustomerReport.Items.Add("Tất Cả");
+                cbx_SearchAmountCustomerReport.Items.Add("Mã Sách");
+                cbx_SearchAmountCustomerReport.Items.Add("Tên Sách");
+                cbx_SearchAmountCustomerReport.SelectedIndex = 0;
+                txt_ReportSearch.Text = "";
+            }
+        }
+
+        private void btn_ReceiptDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (dtg_CustomerPaymentReceipt.Columns[0].Visibility == Visibility.Hidden)
+            {
+                dtg_CustomerPaymentReceipt.Columns[0].Visibility = Visibility.Visible;
+                btn_ReceiptDelete.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
+            }
+            else
+            {
+                dtg_CustomerPaymentReceipt.Columns[0].Visibility = Visibility.Hidden;
+                btn_ReceiptDelete.Background = new SolidColorBrush(Colors.Transparent);
+            }
+        }
+
+        private void cbx_CustomerDebtReportMonth_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbx_CustomerDebtReportMonth.SelectedIndex == 0)
+            {
+                dtg_CustomerDebtReport.ItemsSource = BaoCaoCongNo;
+            }
+            else
+            {
+                var filteredItems = BaoCaoCongNo.Where(baocao =>
+                baocao.Month == Convert.ToInt32(cbx_CustomerDebtReportMonth.SelectedItem)
+                ).ToList();
+                if (cbx_CustomerDebtReportYear.SelectedIndex == 0) { }
+                else
+                {
+                    filteredItems = filteredItems.Where(baocao =>
+                baocao.Year == Convert.ToInt32(cbx_CustomerDebtReportYear.SelectedItem)
+                ).ToList();
+                }
+                dtg_CustomerDebtReport.ItemsSource = filteredItems;
+            }
+        }
+
+        private void cbx_CustomerDebtReportYear_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbx_CustomerDebtReportYear.SelectedIndex == 0)
+            {
+                dtg_CustomerDebtReport.ItemsSource = BaoCaoCongNo;
+            }
+            else
+            {
+                var filteredItems = BaoCaoCongNo.Where(baocao =>
+                baocao.Year == Convert.ToInt32(cbx_CustomerDebtReportYear.SelectedItem)
+                ).ToList();
+                if (cbx_CustomerDebtReportMonth.SelectedIndex == 0) { }
+                else
+                {
+                    filteredItems = filteredItems.Where(baocao =>
+                baocao.Month == Convert.ToInt32(cbx_CustomerDebtReportMonth.SelectedItem)
+                ).ToList();
+                }
+                dtg_CustomerDebtReport.ItemsSource = filteredItems;
             }
         }
     }

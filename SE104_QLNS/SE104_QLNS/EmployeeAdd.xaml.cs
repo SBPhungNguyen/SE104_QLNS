@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -21,6 +22,7 @@ namespace SE104_QLNS
     /// <summary>
     /// Interaction logic for EmployeeAdd.xaml
     /// </summary>
+    
     public partial class EmployeeAdd : Window
     {
         public bool IsClosing = false;
@@ -61,7 +63,7 @@ namespace SE104_QLNS
 
                     command.Parameters.AddWithValue("@HoTenNV", txt_EmployeeName.Text);
                     command.Parameters.AddWithValue("@SDT", txt_EmployeePhone.Text);
-                    command.Parameters.AddWithValue("@NgaySinh", txt_EmployeeBirthday.Text);
+                    command.Parameters.AddWithValue("@NgaySinh", DateTime.Parse(tbx_EmployeeBirthday.Text));
                     string gender;
                     if (cbx_Gender.Text == "Nam")
                         gender = "1";
@@ -118,6 +120,11 @@ namespace SE104_QLNS
                     Notification noti = new Notification("Error", "Error opening file: " + ex.Message);
                 }
             });
+        }
+
+        private void dpk_EmployeeBirthday_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            tbx_EmployeeBirthday.Text= dpk_EmployeeBirthday.SelectedDate.Value.Date.ToString().Substring(0, 10); ;
         }
     }
 }

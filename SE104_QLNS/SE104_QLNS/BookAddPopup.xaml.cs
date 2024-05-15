@@ -155,7 +155,7 @@ namespace SE104_QLNS
                     command = new SqlCommand(sqlQuery, connection);
                     command.Parameters.AddWithValue("@MaSach", txt_BookID.Text);
                     command.Parameters.AddWithValue("@MaDauSach", BookTitleID);
-                    command.Parameters.AddWithValue("@NXB", txt_Distribute.Text);
+                    command.Parameters.AddWithValue("@NXB", txt_Distributor.Text);
                     command.Parameters.AddWithValue("@NamXB", int.Parse(txt_DistributeYear.Text));
                     command.Parameters.AddWithValue("@HinhAnhSach", BookURL);
                     command.Parameters.AddWithValue("@SoLuongTon", int.Parse(txt_Quantity.Text));
