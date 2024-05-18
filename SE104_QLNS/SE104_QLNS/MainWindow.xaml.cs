@@ -1185,6 +1185,7 @@ namespace SE104_QLNS
         {
             BooksSell.Clear();
             cbx_BookSearch.Text = null;
+            UpdateSellPrice();
         }
         private void cbx_BookSearch_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -1273,6 +1274,7 @@ namespace SE104_QLNS
         {
             if (selectedbook != null)
                 BooksSell.Remove(selectedbook);
+            UpdateSellPrice();
         }
         private void cbx_CustomerID_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -1396,6 +1398,10 @@ namespace SE104_QLNS
         }
         private void dtg_SellList_CurrentCellChanged(object sender, EventArgs e)
         {
+            UpdateSellPrice();
+        }
+        private void UpdateSellPrice()
+        {
             int money = 0;
             foreach (Uct_Books book in BooksSell)
             {
@@ -1404,6 +1410,7 @@ namespace SE104_QLNS
             }
             dtg_SellList.Items.Refresh();
             txt_ReceiptPrice.Text = money.ToString();
+            txb_MoneyOwe.Text = (money - Convert.ToInt32(txb_CustomerPayment.Text)).ToString();
         }
         private void txb_CustomerPayment_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -3085,6 +3092,6 @@ namespace SE104_QLNS
                 dtg_CustomerDebtReport.ItemsSource = filteredItems;
             }
         }
+
     }
 }
-
