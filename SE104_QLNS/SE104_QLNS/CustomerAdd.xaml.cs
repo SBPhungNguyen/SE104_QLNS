@@ -85,19 +85,7 @@ namespace SE104_QLNS
                 }
             }
 
-            if (parent.isCustomerDelete)
-            {
-                parent.LoadCustomer(parent, 2);
-            }
-            else if(parent.isCustomerUpdate)
-            {
-                parent.LoadCustomer(parent, 1);
-            }
-            else
-            {
-                parent.LoadCustomer(parent, 0);
-            }
-            parent.LoadBaoCaoCongNo(parent, 0);
+            parent.LoadAll(parent);
             IsClosing = true;
             this.Close();
         }

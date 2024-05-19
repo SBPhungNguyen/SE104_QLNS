@@ -102,8 +102,7 @@ namespace SE104_QLNS
                     Notification noti = new Notification("Error", "Error retrieving data: " + ex.Message);
                 }
             }
-            parent.LoadCustomer(parent, 0);
-            parent.LoadCustomerReceipt(parent, 0);
+            parent.LoadAll(parent);
             this.Close();
         }
 

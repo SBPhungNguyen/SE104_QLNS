@@ -263,7 +263,7 @@ namespace SE104_QLNS
                 {
                     Notification noti = new Notification("Error", "Error Updating Book: " + ex.Message);
                 }
-                parent.LoadBook(parent, 0);
+                parent.LoadAll(parent);
                 IsClosing = true;
                 this.Close();
             }

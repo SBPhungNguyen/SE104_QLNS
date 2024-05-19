@@ -87,7 +87,7 @@ namespace SE104_QLNS
                 {
                     Notification noti = new Notification("Error", "Error deleting employee: " + ex.Message);
                 }
-                parent.LoadEmployee(parent, 0);
+                parent.LoadAll(parent);
                 IsClosing = true;
                 this.Close();
             }

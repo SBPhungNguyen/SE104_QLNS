@@ -55,6 +55,7 @@ HorizontalAlignment="Right">
                 <TextBox Name="txt_AuthorName" FontWeight="Bold"
                 BorderThickness="0,0,0,1"
                 Height="30" Width="300" FontSize="18" 
+                         TextAlignment="Center"
                 HorizontalAlignment="Center" 
                            Margin="0,94,0,94"/>
                 <Button Name="btn_AddAuthor"

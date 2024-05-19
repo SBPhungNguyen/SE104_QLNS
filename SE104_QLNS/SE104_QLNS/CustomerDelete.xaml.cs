@@ -92,8 +92,7 @@ namespace SE104_QLNS
                 {
                     Notification noti = new Notification("Error", "Error deleting customer: " + ex.Message);
                 }
-                parent.LoadCustomer(parent, 0);
-                parent.LoadBaoCaoCongNo(parent, 0);
+                parent.LoadAll(parent);
                 IsClosing = true;
                 this.Close();
             }

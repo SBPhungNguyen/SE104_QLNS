@@ -133,7 +133,7 @@ namespace SE104_QLNS
                 {
                     Notification noti = new Notification("Error", "Error Inserting/Updating Genres: " + ex.Message);
                 }
-                parent.LoadGenre(parent, 0);
+                parent.LoadAll(parent);
                 parent.dtg_GenreList.Items.Refresh();
             }
             this.Close();

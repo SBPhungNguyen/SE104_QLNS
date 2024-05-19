@@ -231,9 +231,7 @@ namespace SE104_QLNS
                     Notification noti = new Notification("Error", "Error retrieving data: " + ex.Message);
                 }
             }
-            parent.LoadImportPaper(parent, 0);
-            parent.LoadBook(parent, 0);
-            parent.LoadBaoCaoTon(parent, 0);
+            parent.LoadAll(parent);
             IsClosing = true;
             this.Close();
         }

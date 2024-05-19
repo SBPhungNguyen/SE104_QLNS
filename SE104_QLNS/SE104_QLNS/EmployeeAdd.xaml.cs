@@ -87,7 +87,7 @@ namespace SE104_QLNS
                 }
             }
 
-            parent.LoadEmployee(parent, 0);
+            parent.LoadAll(parent);
             IsClosing = true;
             this.Close();
         }

@@ -102,20 +102,7 @@ namespace SE104_QLNS
                 {
                     Notification noti = new Notification("Error", "Error updatong customer: " + ex.Message);
                 }
-                if (parent.isCustomerDelete)
-                {
-                    parent.LoadCustomer(parent, 2);
-                }
-                else if (parent.isCustomerUpdate)
-                {
-                    parent.LoadCustomer(parent, 1);
-
-                }
-                else
-                {
-
-                    parent.LoadCustomer(parent, 0);
-                }
+                parent.LoadAll(parent);
                 IsClosing = true;
                 this.Close();
             }

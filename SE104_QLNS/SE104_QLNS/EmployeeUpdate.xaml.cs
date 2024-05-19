@@ -26,6 +26,8 @@ namespace SE104_QLNS
         public Uct_Employee selectedemployee;
         public bool IsClosing = false;
         public string HinhAnh;
+        public bool isPasswordVisible = false;
+        public string password;
         public EmployeeUpdate()
         {
             InitializeComponent();
@@ -45,7 +47,9 @@ namespace SE104_QLNS
             this.txt_EmployeeOccupation.Text = employee.EmployeeOccupation;
             this.txt_EmployeeShift.Text = employee.EmployeeShift;
             this.txt_EmployeeTK.Text = employee.EmployeeTK;
-            this.txt_EmployeePass.Text = employee.EmployeePass;
+            password = employee.EmployeePass;
+            this.txt_EmployeePass.Text = new string('*', password.Length);
+            this.txt_EmployeePass.IsReadOnly = true;
             HinhAnh = employee.PicURL;
             CreateImage(HinhAnh);
         }
@@ -94,15 +98,15 @@ namespace SE104_QLNS
                     command.Parameters.AddWithValue("@Ca", txt_EmployeeShift.Text);
                     command.Parameters.AddWithValue("@ViTri", txt_EmployeeOccupation.Text);
                     command.Parameters.AddWithValue("@TenTK", txt_EmployeeTK.Text);
-                    command.Parameters.AddWithValue("@MatKhau", txt_EmployeePass.Text);
+                    command.Parameters.AddWithValue("@MatKhau", password);
                     command.Parameters.AddWithValue("@HinhAnh", HinhAnh);
                     SqlDataReader reader = command.ExecuteReader();
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error updatong employee: " + ex.Message);
+                    Notification noti = new Notification("Error", "Error updating employee: " + ex.Message);
                 }
-                parent.LoadEmployee(parent, 1);
+                parent.LoadAll(parent);
                 IsClosing = true;
                 this.Close();
             }
@@ -134,6 +138,27 @@ namespace SE104_QLNS
         private void dpk_EmployeeBirthday_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             tbx_EmployeeBirthday.Text = dpk_EmployeeBirthday.SelectedDate.Value.Date.ToString().Substring(0, 10);
+        }
+
+        private void btn_seepassword_Click(object sender, RoutedEventArgs e)
+        {
+            isPasswordVisible = !isPasswordVisible;
+            if (isPasswordVisible)
+            {
+                txt_EmployeePass.Text = password;
+                txt_EmployeePass.IsReadOnly = false;
+            }
+            else
+            {
+                this.txt_EmployeePass.Text = new string('*', password.Length);
+                txt_EmployeePass.IsReadOnly = true;
+            }
+        }
+
+        private void txt_EmployeePass_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(isPasswordVisible)
+            password=txt_EmployeePass.Text;
         }
     }
 }

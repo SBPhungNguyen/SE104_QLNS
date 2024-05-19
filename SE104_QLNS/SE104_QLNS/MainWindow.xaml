@@ -1294,6 +1294,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                     Width="85"
                                     FontFamily="Tahoma" 
                                     FontSize="17" 
+                                            HorizontalAlignment="Left"
                                     FontWeight="Bold"
                                     Foreground="#154348"
                                     Cursor="Hand" 
@@ -1336,15 +1337,6 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                             </ControlTemplate>
                                         </Button.Template>
                                     </Button>
-
-                                    <Label x:Name="lbl_TotalImportBookReceipt" 
-                                      Content="Tổng: 100"
-                                      Grid.Column="2"
-                                   HorizontalAlignment="Right"
-                                      VerticalAlignment="Center"
-                                      FontSize="18"
-                                      Foreground="#154448"
-                                   Margin="0,0,15,0"/>
                                 </DockPanel>
 
                                 <!--this is _Imported Book Receipt list -->
@@ -1976,11 +1968,6 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                        VerticalAlignment="Center"
                            Height="Auto" Margin="424,0,324,0"/>
 
-                            <Label Name="lbl_CustomerCount" FontSize="18"
-                       Content="Tổng: 100"
-                       VerticalContentAlignment="Top" HorizontalContentAlignment="Right"
-                    FontFamily="Tahoma" Margin="890,16,15,2"/>
-
                         </Grid>
 
                         <ScrollViewer Grid.Row="2" HorizontalAlignment="Left" Height="461" VerticalAlignment="Top" Width="988" Grid.ColumnSpan="3" Margin="3,0,0,0">
@@ -2039,7 +2026,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                             </Border>
                         </Grid>
 
-                        <Canvas Grid.Row="1" x:Name="cvs_Author" Visibility="Visible" Grid.ColumnSpan="4">
+                        <Canvas Grid.Row="1" x:Name="cvs_Author" Visibility="Hidden" Grid.ColumnSpan="4">
 
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -2153,9 +2140,10 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                         </Button.Template>
                                     </Button>
 
-                                    <Button Name="btn_DeleteAuthor" 
+                                    <Button Name="btn_DeleteAuthorList" 
          Height="40" 
          Width="85"
+                                            HorizontalAlignment="Left"
          FontFamily="Tahoma" 
          FontSize="17" 
          FontWeight="Bold"
@@ -2201,14 +2189,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                         </Button.Template>
                                     </Button>
 
-                                    <Label x:Name="lbl_TotalAuthor" 
-           Content="Tổng: 100"
-           Grid.Column="2"
-        HorizontalAlignment="Right"
-           VerticalAlignment="Center"
-           FontSize="18"
-           Foreground="#154448"
-        Margin="0,0,15,0"/>
+                                    
                                 </DockPanel>
 
                                 <!--this is Author list -->
@@ -2411,6 +2392,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
 
                                     <Button Name="btn_DeleteGenreMode" 
          Height="40" 
+                                            HorizontalAlignment="Left"
          Width="85"
          FontFamily="Tahoma" 
          FontSize="17" 
@@ -2456,15 +2438,6 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                             </ControlTemplate>
                                         </Button.Template>
                                     </Button>
-
-                                    <Label x:Name="lbl_TotalGenre" 
-           Content="Tổng: 100"
-           Grid.Column="2"
-        HorizontalAlignment="Right"
-           VerticalAlignment="Center"
-           FontSize="18"
-           Foreground="#154448"
-        Margin="0,0,15,0"/>
                                 </DockPanel>
 
                                 <!--this is Genre list-->
@@ -2511,7 +2484,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                         <DataGridTemplateColumn Header="" Visibility="Hidden">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <Button Name="btn_DeleteGenreMode" Height="40" Width="40" Margin="15,0,0,0" Click="btn_DeleteGenreMode_Click">
+                                                    <Button Name="btn_DeleteGenre" Height="40" Width="40" Margin="15,0,0,0" Click="btn_DeleteGenre_Click">
                                                         <Button.Style>
                                                             <Style TargetType="Button">
                                                                 <Setter Property="Background" Value="Transparent"/>
@@ -2720,12 +2693,6 @@ BorderThickness="{TemplateBinding BorderThickness}">
                             <TextBlock FontSize="30" Text="Nhân viên" FontWeight="Bold" FontFamily="Tahoma"
                    VerticalAlignment="Top"
        Height="54" Margin="424,0,324,0" Grid.ColumnSpan="2"/>
-
-
-                            <Label Name="lbl_EmployeeCount" FontSize="18"
-   Content="Tổng: 100"
-   VerticalContentAlignment="Top" HorizontalContentAlignment="Right"
-FontFamily="Tahoma" Margin="318,16,15,2" Grid.Column="1"/>
 
                         </Grid>
 

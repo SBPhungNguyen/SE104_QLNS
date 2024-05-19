@@ -21,6 +21,9 @@ namespace SE104_QLNS
     {
         public bool IsClosing = false;
         public string PicURL { get; set; }
+
+        public bool isPasswordVisible = false;
+        public string password;
         public EmployeeInfo()
         {
             InitializeComponent();
@@ -40,7 +43,8 @@ namespace SE104_QLNS
             tbl_EmployeeOccupation.Text = employeeOccupation;
             tbl_EmployeeShift.Text = employeeShift;
             tbl_EmployeeTK.Text = employeeTK;
-            tbl_EmployeePass.Text = employeePass;
+            password = employeePass;
+            this.tbl_EmployeePass.Text = new string('*', password.Length);
             PicURL = picURL;
             BitmapImage bimage = new BitmapImage();
             bimage.BeginInit();
@@ -65,6 +69,18 @@ namespace SE104_QLNS
             IsClosing = true;
             this.Close();
         }
-    
+
+        private void btn_seepassword_Click(object sender, RoutedEventArgs e)
+        {
+            isPasswordVisible = !isPasswordVisible;
+            if (isPasswordVisible)
+            {
+                tbl_EmployeePass.Text = password;
+            }
+            else
+            {
+                this.tbl_EmployeePass.Text = new string('*', password.Length);
+            }
+        }
     }
 }

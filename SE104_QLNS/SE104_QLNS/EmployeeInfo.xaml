@@ -81,7 +81,15 @@ HorizontalAlignment="Right" Margin="10,0,10,0" Click="btn_ExitApp_Click">
                 <TextBlock x:Name="tbl_EmployeeTK" Text="nv000001" FontSize="14" Height="25" Margin="104,249,554,54" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"/>
                 <TextBlock Name="tbl_EmployeePass" Text="Hehehe" FontSize="14" Height="25" Margin="104,274,554,29" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"/>
 
-                <Image Height="20" Width="20" Stretch="Fill" Margin="195,275,533,33" Source="/Images/icon_eye.png" Cursor="Hand"/>
+                <Button x:Name="btn_seepassword" Content="{Binding}" Cursor="Hand" Height="20" Width="20" Margin="198,274,530,34" Click="btn_seepassword_Click">
+                    <Button.Background>
+                        <ImageBrush>
+                            <ImageBrush.ImageSource>
+                                <BitmapImage UriSource="/Images/icon_eye.png" />
+                            </ImageBrush.ImageSource>
+                        </ImageBrush>
+                    </Button.Background>
+                </Button>
             </Grid>
         </Grid>
     </Border>

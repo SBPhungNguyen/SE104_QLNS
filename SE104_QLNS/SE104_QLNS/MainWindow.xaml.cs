@@ -82,18 +82,8 @@ namespace SE104_QLNS
             InitializeComponent();
             DataContext = this;
 
-            LoadBook(this, 0);
-            LoadGenre(this, 0);
-            LoadCustomer(this, 0);
-            LoadEmployee(this, 0);
-            LoadImportPaper(this, 0);
-            LoadExportPaper(this, 0);
-            LoadTHAMSO(this, 0);
+            LoadAll(this);
             txb_BillDate.Text = DateTime.Now.ToString();
-            LoadAuthor(this, 0);
-            LoadBaoCaoTon(this, 0);
-            LoadBaoCaoCongNo(this, 0);
-            LoadCustomerReceipt(this, 0);
             Cbx_SearchBook.SelectedIndex = 0;
             ImportExportComboBox.SelectedIndex = 0;
             ImportDate.Text = DateTime.Now.ToString();
@@ -459,6 +449,62 @@ namespace SE104_QLNS
             return nextAuthorID;
         }
         //Load
+        public void LoadAll(MainWindow mainwindow)
+        {
+            //Book
+            if(mainwindow.isBookDelete)
+                mainwindow.LoadBook(mainwindow, 1);
+            else if(mainwindow.isBookUpdate)
+                mainwindow.LoadBook(mainwindow, 2);
+            else
+                mainwindow.LoadBook(mainwindow, 0);
+
+            //CustomerReceipt
+            mainwindow.LoadCustomerReceipt(mainwindow);
+
+            //BaoCaoTon
+            mainwindow.LoadBaoCaoTon(mainwindow);
+
+            //BaoCaoCongNo
+            mainwindow.LoadBaoCaoCongNo(mainwindow);
+
+            //Customer
+            if (mainwindow.isCustomerDelete)
+                mainwindow.LoadCustomer(mainwindow, 2);
+            else if (mainwindow.isCustomerUpdate)
+                mainwindow.LoadCustomer(mainwindow, 1);
+            else
+                mainwindow.LoadCustomer(mainwindow, 0);
+
+            //Import
+            if(mainwindow.isImportPaperDelete)
+                mainwindow.LoadImportPaper(mainwindow, 1);
+            else
+                mainwindow.LoadImportPaper(mainwindow, 0);
+
+            //Bills
+            if (mainwindow.isExportPaperDelete)
+                mainwindow.LoadExportPaper(mainwindow, 1);
+            else
+                mainwindow.LoadExportPaper(mainwindow, 0);
+
+            //Tham So
+            mainwindow.LoadTHAMSO(mainwindow);
+
+            //Genre
+            mainwindow.LoadGenre(mainwindow);
+
+            //Author
+            mainwindow.LoadAuthor(mainwindow);
+
+            //employee
+            if (mainwindow.isEmployeeDelete)
+                mainwindow.LoadEmployee(mainwindow,2);
+            else if (mainwindow.isEmployeeUpdate)
+                mainwindow.LoadEmployee(mainwindow, 1);
+            else
+                mainwindow.LoadEmployee(mainwindow, 0);
+        }
         public void LoadBook(MainWindow mainwindow, int state)
         {
             //connect to database
@@ -536,7 +582,7 @@ namespace SE104_QLNS
                 }
             }
         }
-        public void LoadCustomerReceipt(MainWindow mainwindow, int state)
+        public void LoadCustomerReceipt(MainWindow mainwindow)
         {
             //connect to database
             mainwindow.CustomerReceipt.Clear();
@@ -581,26 +627,9 @@ namespace SE104_QLNS
                 {
                     Notification noti = new Notification("Error", "Error retrieving data from PHIEUTHUTIEN: " + ex.Message);
                 }
-                mainwindow.wpn_Books.Children.Clear();
-                mainwindow.wpn_ImportBooks.Children.Clear();
-                if (state == 3)
-                {
-                    foreach (Uct_Books child in Books)
-                    {
-                        wpn_ImportBooks.Children.Add(child);
-                    }
-                }
-                else
-                {
-                    foreach (Uct_Books child in Books)
-                    {
-                        mainwindow.wpn_Books.Children.Add(child);
-                    }
-                }
-
             }
         }
-        public void LoadBaoCaoTon(MainWindow mainwindow, int state)
+        public void LoadBaoCaoTon(MainWindow mainwindow)
         {
             //connect to database
             mainwindow.BaoCaoTon.Clear();
@@ -643,6 +672,7 @@ namespace SE104_QLNS
                     sqlQuery = "SELECT Thang FROM BAOCAOTON";
                     command = new SqlCommand(sqlQuery, connection);
                     reader = command.ExecuteReader();
+                    cbx_AmountReportMonth.Items.Clear();
                     cbx_AmountReportMonth.Items.Add("Tất cả");
                     cbx_AmountReportMonth.SelectedIndex = 0;
                     if (reader.HasRows)
@@ -671,7 +701,7 @@ namespace SE104_QLNS
                     sqlQuery = "SELECT Nam FROM BAOCAOTON";
                     command = new SqlCommand(sqlQuery, connection);
                     reader = command.ExecuteReader();
-
+                    cbx_AmountReportYear.Items.Clear();
                     cbx_AmountReportYear.Items.Add("Tất cả");
                     cbx_AmountReportYear.SelectedIndex = 0;
                     if (reader.HasRows)
@@ -703,7 +733,7 @@ namespace SE104_QLNS
                 }
             }
         }
-        public void LoadBaoCaoCongNo(MainWindow mainwindow, int state)
+        public void LoadBaoCaoCongNo(MainWindow mainwindow)
         {
             //connect to database
             mainwindow.BaoCaoCongNo.Clear();
@@ -744,6 +774,7 @@ namespace SE104_QLNS
                     sqlQuery = "SELECT Thang FROM BAOCAOCONGNO";
                     command = new SqlCommand(sqlQuery, connection);
                     reader = command.ExecuteReader();
+                    cbx_CustomerDebtReportMonth.Items.Clear();
                     cbx_CustomerDebtReportMonth.Items.Add("Tất cả");
                     cbx_CustomerDebtReportMonth.SelectedIndex = 0;
                     if (reader.HasRows)
@@ -768,11 +799,12 @@ namespace SE104_QLNS
                     }
                     reader.Close();
 
-                    //Add to Year from BAOCAOTON
+                    //Add to Year from BaoCAOCONGNO
                     sqlQuery = "SELECT Nam FROM BAOCAOCONGNO";
                     command = new SqlCommand(sqlQuery, connection);
                     reader = command.ExecuteReader();
 
+                    cbx_CustomerDebtReportYear.Items.Clear();
                     cbx_CustomerDebtReportYear.Items.Add("Tất cả");
                     cbx_CustomerDebtReportYear.SelectedIndex = 0;
                     if (reader.HasRows)
@@ -820,7 +852,7 @@ namespace SE104_QLNS
                 try
                 {
                     connection.Open();
-                    string sqlQuery = "SELECT * FROM KHACHHANG";
+                    string sqlQuery = "SELECT *, CONVERT(varchar(10), NgaySinh, 103) AS FormattedDate FROM KHACHHANG";
                     SqlCommand command = new SqlCommand(sqlQuery, connection);
 
                     SqlDataReader reader = command.ExecuteReader();
@@ -836,7 +868,7 @@ namespace SE104_QLNS
                             SoTienNo = reader["SoTienNo"].ToString(); // Assuming numeric data type
                             SoTienNo = SoTienNo.Substring(0, SoTienNo.Length - 5);
                             GioiTinh = reader["GioiTinh"].ToString();
-                            NgaySinh = reader["NgaySinh"].ToString().Substring(0, 10); // Assuming date/time data type
+                            NgaySinh = reader["FormattedDate"].ToString(); // Assuming date/time data type
                             SoTienMua = reader["SoTienMua"].ToString(); // Assuming numeric data type
                             SoTienMua = SoTienMua.Substring(0, SoTienMua.Length - 5);
 
@@ -970,7 +1002,7 @@ namespace SE104_QLNS
                 }
             }
         }
-        public void LoadTHAMSO(MainWindow mainwindow, int state)
+        public void LoadTHAMSO(MainWindow mainwindow)
         {
             string connectionString = connect.connection;
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -1043,7 +1075,7 @@ namespace SE104_QLNS
                 }
             }
         }
-        public void LoadGenre(MainWindow mainwindow, int state)
+        public void LoadGenre(MainWindow mainwindow)
         {
             mainwindow.Genres.Clear();
             string connectionString = connect.connection;
@@ -1081,7 +1113,7 @@ namespace SE104_QLNS
                 }
             }
         }
-        public void LoadAuthor(MainWindow mainwindow, int state)
+        public void LoadAuthor(MainWindow mainwindow)
         {
             mainwindow.Authors.Clear();
             string connectionString = connect.connection;
@@ -1134,7 +1166,7 @@ namespace SE104_QLNS
                 try
                 {
                     connection.Open();
-                    string sqlQuery = "SELECT * FROM NGUOIDUNG";
+                    string sqlQuery = "SELECT *, CONVERT(varchar(10), NgaySinh, 103) AS FormattedDate FROM NGUOIDUNG;";
                     SqlCommand command = new SqlCommand(sqlQuery, connection);
 
                     SqlDataReader reader = command.ExecuteReader();
@@ -1147,7 +1179,7 @@ namespace SE104_QLNS
                             SDT = reader["SDT"].ToString();
                             DiaChi = reader["DiaChi"].ToString();
                             GioiTinh = reader["GioiTinh"].ToString();
-                            NgaySinh = reader["NgaySinh"].ToString().Substring(0, 10); // Assuming date/time data type
+                            NgaySinh = reader["FormattedDate"].ToString(); // Assuming date/time data type
                             CCCD = reader["CCCD"].ToString();
                             ViTri = reader["ViTri"].ToString();
                             Ca = reader["Ca"].ToString();
@@ -1177,7 +1209,6 @@ namespace SE104_QLNS
                 }
             }
         }
-
 
         // Sell
 
@@ -1393,8 +1424,7 @@ namespace SE104_QLNS
                     Notification noti = new Notification("Error", "Error inserting into KHACHHANG: " + ex.Message);
                 }
             }
-            LoadCustomer(this, 0);
-            LoadBaoCaoCongNo(this, 0);
+            LoadAll(this);
         }
         private void dtg_SellList_CurrentCellChanged(object sender, EventArgs e)
         {
@@ -1500,7 +1530,7 @@ namespace SE104_QLNS
                 reader.Read();
                 reader.Close();
             }
-            LoadBaoCaoTon(this, 0);
+            LoadAll(this);
         }
 
         public void UpdateBaoCaoCongNo(SqlConnection connection, string MaKH, int Changes)
@@ -1569,7 +1599,7 @@ namespace SE104_QLNS
                 reader.Read();
                 reader.Close();
             }
-            LoadBaoCaoCongNo(this, 0);
+            LoadAll(this);
         }
         private void btn_SaveBillToDatabase_Click(object sender, RoutedEventArgs e)
         {
@@ -1670,8 +1700,7 @@ namespace SE104_QLNS
                     UpdateBaoCaoCongNo(connection, cbx_CustomerID.Text, Convert.ToInt32(txb_MoneyOwe.Text));
 
 
-                    LoadCustomer(this, 0);
-                    LoadBook(this, 0);
+                    LoadAll(this);
                     BooksSell.Clear();
                     cbx_CustomerID.Text = "";
                     tbl_CustomerName.Text = "Tên khách hàng";
@@ -1689,7 +1718,7 @@ namespace SE104_QLNS
             {
                 Notification noti = new Notification("Error", "Error inserting into HOADON: " + ex.Message);
             }
-            LoadExportPaper(this, isExportPaperDelete ? 1 : 0);
+            LoadAll(this);
         }
 
         //view import export
@@ -1706,41 +1735,40 @@ namespace SE104_QLNS
         }
         private void btn_ImportBookReceiptDelete_Click(object sender, RoutedEventArgs e)
         {
-            isExportPaperDelete = false;
+            btn_DeleteBill_Click(sender, e);
+            
+        }
+        private void btn_DeleteBill_Click(object sender, RoutedEventArgs e)
+        {
+            if (!isExportPaperDelete) //Switch from normal to delete
+            {
+                dtg_BillList.Columns[0].Visibility = Visibility.Visible;
+                btn_DeleteBill.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
+                isExportPaperDelete = true;
+                LoadAll(this);
+            }
+            else
+            {
+                dtg_BillList.Columns[0].Visibility = Visibility.Hidden;
+                isExportPaperDelete = false;
+                btn_DeleteBill.Background = new SolidColorBrush(Colors.Transparent);
+
+                LoadAll(this);
+            }
             if (!isImportPaperDelete) //Switch from normal to delete
             {
                 dtg_ImportBookReceiptList.Columns[0].Visibility = Visibility.Visible;
                 btn_ImportBookReceiptDelete.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
                 isImportPaperDelete = true;
-                LoadImportPaper(this, 1);
+                LoadAll(this);
             }
             else
             {
                 dtg_ImportBookReceiptList.Columns[0].Visibility = Visibility.Hidden;
                 isImportPaperDelete = false;
                 btn_ImportBookReceiptDelete.Background = new SolidColorBrush(Colors.Transparent);
-                LoadImportPaper(this, 0);
+                LoadAll(this);
             }
-
-        }
-        private void btn_DeleteBill_Click(object sender, RoutedEventArgs e)
-        {
-            isImportPaperDelete = false;
-            if (!isExportPaperDelete) //Switch from normal to delete
-            {
-                dtg_BillList.Columns[0].Visibility = Visibility.Visible;
-                btn_ImportBookReceiptDelete.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
-                isExportPaperDelete = true;
-                LoadExportPaper(this, 1);
-            }
-            else
-            {
-                dtg_BillList.Columns[0].Visibility = Visibility.Hidden;
-                isExportPaperDelete = false;
-                btn_ImportBookReceiptDelete.Background = new SolidColorBrush(Colors.Transparent);
-                LoadExportPaper(this, 0);
-            }
-
         }
         private void btn_DeleteImportBook_Click(object sender, RoutedEventArgs e)
         {
@@ -1748,10 +1776,25 @@ namespace SE104_QLNS
         }
         private void cbx_SwapFromImportToExport_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            dtg_BillList.Columns[0].Visibility = Visibility.Visible;
-            dtg_BillList.Columns[0].Visibility = Visibility.Hidden;
             if (cbx_SwapFromImportToExport.SelectedIndex == 0)
                 return;
+
+            if (!isExportPaperDelete)
+            {
+                dtg_BillList.Columns[0].Visibility = Visibility.Visible;
+                dtg_ImportBookReceiptList.Columns[0].Visibility = Visibility.Visible;
+                dtg_BillList.Columns[0].Visibility = Visibility.Hidden;
+                dtg_ImportBookReceiptList.Columns[0].Visibility = Visibility.Hidden;
+            }
+            else
+            {
+
+                dtg_BillList.Columns[0].Visibility = Visibility.Hidden;
+                dtg_ImportBookReceiptList.Columns[0].Visibility = Visibility.Hidden;
+                dtg_BillList.Columns[0].Visibility = Visibility.Visible;
+                dtg_ImportBookReceiptList.Columns[0].Visibility = Visibility.Visible;
+            }
+
             cvs_ImportBookReceipt.Visibility = Visibility.Hidden;
             cvs_Bill.Visibility = Visibility.Visible;
             cbx_SwapFromImportToExport.SelectedIndex = 0;
@@ -1759,10 +1802,23 @@ namespace SE104_QLNS
         private void cbx_SwapFromExportToImport_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (dtg_ImportBookReceiptList == null) return;
-            dtg_ImportBookReceiptList.Columns[0].Visibility = Visibility.Visible;
-            dtg_ImportBookReceiptList.Columns[0].Visibility = Visibility.Hidden;
             if (cbx_SwapFromExportToImport.SelectedIndex == 0)
                 return;
+            if (!isExportPaperDelete)
+            {
+                dtg_BillList.Columns[0].Visibility = Visibility.Visible;
+                dtg_ImportBookReceiptList.Columns[0].Visibility = Visibility.Visible;
+                dtg_BillList.Columns[0].Visibility = Visibility.Hidden;
+                dtg_ImportBookReceiptList.Columns[0].Visibility = Visibility.Hidden;
+            }
+            else
+            {
+
+                dtg_BillList.Columns[0].Visibility = Visibility.Hidden;
+                dtg_ImportBookReceiptList.Columns[0].Visibility = Visibility.Hidden;
+                dtg_BillList.Columns[0].Visibility = Visibility.Visible;
+                dtg_ImportBookReceiptList.Columns[0].Visibility = Visibility.Visible;
+            }
             cvs_ImportBookReceipt.Visibility = Visibility.Visible;
             cvs_Bill.Visibility = Visibility.Hidden;
             cbx_SwapFromExportToImport.SelectedIndex = 0;
@@ -1811,6 +1867,7 @@ namespace SE104_QLNS
                     ).ToList();
 
                     dtg_Books.ItemsSource = filteredItems;
+                    lbl_BookCount.Content=filteredItems.Count.ToString();
                 }
                 else if (Cbx_SearchBook.Text == "Tên Sách")
                 {
@@ -1819,27 +1876,36 @@ namespace SE104_QLNS
                     ).ToList();
 
                     dtg_Books.ItemsSource = filteredItems;
+                    lbl_BookCount.Content = filteredItems.Count.ToString();
                 }
                 else if (Cbx_SearchBook.Text == "Thể Loại")
                 {
                     var filteredItems = Books.Where(book =>
                         book.BookGenre.ToLower().Contains(txt_Search.Text.ToLower())
                     ).ToList();
+
+                    dtg_Books.ItemsSource = filteredItems;
+                    lbl_BookCount.Content = filteredItems.Count.ToString();
                 }
                 else if (Cbx_SearchBook.Text == "Tác Giả")
                 {
                     var filteredItems = Books.Where(book =>
                         book.BookAuthor.ToLower().Contains(txt_Search.Text.ToLower())
                     ).ToList();
+
+                    dtg_Books.ItemsSource = filteredItems;
+                    lbl_BookCount.Content = filteredItems.Count.ToString();
                 }
             }
             else
             {
+                int amount = 0;
                 if (string.IsNullOrEmpty(txt_Search.Text))
                 {
                     foreach (Uct_Books child in wpn_Books.Children)
                     {
                         child.Visibility = Visibility.Visible;
+                        amount++;
                     }
                 }
                 if (Cbx_SearchBook.Text == "Tất Cả" || (Cbx_SearchBook.Text == null))
@@ -1852,6 +1918,7 @@ namespace SE104_QLNS
                             || child.BookGenre.Contains(txt_Search.Text))
                         {
                             child.Visibility = Visibility.Visible;
+                            amount++;
                         }
                         else
                         {
@@ -1866,6 +1933,7 @@ namespace SE104_QLNS
                         if (child.BookName.Contains(txt_Search.Text))
                         {
                             child.Visibility = Visibility.Visible;
+                            amount++;
                         }
                         else
                         {
@@ -1880,6 +1948,7 @@ namespace SE104_QLNS
                         if (child.BookGenre.Contains(txt_Search.Text))
                         {
                             child.Visibility = Visibility.Visible;
+                            amount++;
                         }
                         else
                         {
@@ -1894,6 +1963,7 @@ namespace SE104_QLNS
                         if (child.BookAuthor.Contains(txt_Search.Text))
                         {
                             child.Visibility = Visibility.Visible;
+                            amount++;
                         }
                         else
                         {
@@ -1901,6 +1971,7 @@ namespace SE104_QLNS
                         }
                     }
                 }
+                lbl_BookCount.Content = amount;
             }
         }
 
@@ -1960,6 +2031,7 @@ namespace SE104_QLNS
 
                     dtg_ImportBooks.Items.Refresh();
 
+                    LoadAll(this);
                     this.LoadBook(this, 3);
                     wpn_Books.Children.Clear();
                     wpn_ImportBooks.Children.Clear();
@@ -1980,7 +2052,7 @@ namespace SE104_QLNS
 
                     cvs_ImportBooks.Visibility = Visibility.Hidden;
                     cvs_ImportBooks_Grid.Visibility = Visibility.Hidden;
-                    this.LoadBook(this, 0);
+                    LoadAll(this);
                     dtg_Books.Items.Refresh();
                     btn_AddBook.Background = new SolidColorBrush(Colors.Transparent);
 
@@ -2032,16 +2104,7 @@ namespace SE104_QLNS
                     btn_DeleteBook.Background = new SolidColorBrush(Colors.Transparent);
                     btn_AddBook.Background = new SolidColorBrush(Colors.Transparent);
 
-                    int state;
-                    if (!isBookDelete && !isBookUpdate)
-                        state = 0;
-                    else if (isBookDelete)
-                        state = 1;
-                    else if (isBookUpdate)
-                        state = 2;
-                    else
-                        state = 0;
-                    LoadBook(this, state);
+                    LoadAll(this);
                     isBookList = false;
                 }
                 else //Swap From Table To List (Default)
@@ -2054,16 +2117,7 @@ namespace SE104_QLNS
                     dtg_Books.Items.Refresh();
                     btn_SwitchView.Background = new SolidColorBrush(Colors.Transparent);
 
-                    int state;
-                    if (!isBookDelete && !isBookUpdate)
-                        state = 0;
-                    else if (isBookDelete)
-                        state = 1;
-                    else if (isBookUpdate)
-                        state = 2;
-                    else
-                        state = 0;
-                    LoadBook(this, state);
+                    LoadAll(this);
 
                     isBookList = true;
                 }
@@ -2098,19 +2152,19 @@ namespace SE104_QLNS
             {
                 if (!isBookDelete)
                 {
-                    LoadBook(this, 1);
                     btn_DeleteBook.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
                     btn_AddBook.Background = new SolidColorBrush(Colors.Transparent);
                     btn_UpdateBook.Background = new SolidColorBrush(Colors.Transparent);
                     isBookDelete = true;
                     isBookUpdate = false;
+                    LoadAll(this);
                 }
                 else
                 {
-                    LoadBook(this, 0);
                     dtg_Books.Columns[0].Visibility = Visibility.Hidden;
                     btn_DeleteBook.Background = new SolidColorBrush(Colors.Transparent);
                     isBookDelete = false;
+                    LoadAll(this);
                 }
             }
         }
@@ -2152,18 +2206,18 @@ namespace SE104_QLNS
             {
                 if (!isBookUpdate)
                 {
-                    LoadBook(this, 2);
                     btn_UpdateBook.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
                     btn_DeleteBook.Background = new SolidColorBrush(Colors.Transparent);
                     btn_AddBook.Background = new SolidColorBrush(Colors.Transparent);
                     isBookDelete = false;
                     isBookUpdate = true;
+                    LoadAll(this);
                 }
                 else
                 {
-                    LoadBook(this, 0);
                     btn_UpdateBook.Background = new SolidColorBrush(Colors.Transparent);
                     isBookUpdate = false;
+                    LoadAll(this);
                 }
             }
         }
@@ -2319,8 +2373,8 @@ namespace SE104_QLNS
                     }
                 }
                 wpn_ImportPaper.Children.Clear();
+                LoadAll(this);
                 LoadBook(this, 3);
-                LoadImportPaper(this, 0);
             }
         }
         private void dtg_ImportBooks_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -2404,9 +2458,6 @@ namespace SE104_QLNS
         }
         private void btn_EmployeeAdd_Click(object sender, RoutedEventArgs e)
         {
-            btn_EmployeeUpdate.Background = new SolidColorBrush(Colors.Transparent);
-            isEmployeeUpdate = false;
-            isEmployeeDelete = false;
             EmployeeAdd employee = new EmployeeAdd(this);
             employee.Show();
         }
@@ -2415,17 +2466,17 @@ namespace SE104_QLNS
             isEmployeeDelete = false;
             if (!isEmployeeUpdate) //Switch to Update
             {
-                LoadEmployee(this, 1);
                 btn_EmployeeUpdate.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
                 btn_EmployeeDelete.Background = new SolidColorBrush(Colors.Transparent);
                 btn_EmployeeAdd.Background = new SolidColorBrush(Colors.Transparent);
                 isEmployeeUpdate = true;
+                LoadAll(this);
             }
             else //Turn off update
             {
                 isEmployeeUpdate = false;
                 btn_EmployeeUpdate.Background = new SolidColorBrush(Colors.Transparent);
-                LoadEmployee(this, 0);
+                LoadAll(this);
             }
         }
         private void btn_EmployeeDelete_Click(object sender, RoutedEventArgs e)
@@ -2433,17 +2484,17 @@ namespace SE104_QLNS
             isEmployeeUpdate = false;
             if (!isEmployeeDelete) //Swap to Delete
             {
-                LoadEmployee(this, 2);
                 btn_EmployeeDelete.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
                 btn_EmployeeUpdate.Background = new SolidColorBrush(Colors.Transparent);
                 btn_EmployeeAdd.Background = new SolidColorBrush(Colors.Transparent);
                 isEmployeeDelete = true;
+                LoadAll(this);
             }
             else //Turn off delete
             {
                 isEmployeeDelete = false;
                 btn_EmployeeDelete.Background = new SolidColorBrush(Colors.Transparent);
-                LoadEmployee(this, 0);
+                LoadAll(this);
             }
         }
 
@@ -2528,7 +2579,7 @@ namespace SE104_QLNS
         private void btn_EditAuthor_Click(object sender, RoutedEventArgs e)
         {
             dtg_AuthorList.Columns[1].Visibility = Visibility.Hidden;
-            btn_DeleteAuthor.Background = new SolidColorBrush(Colors.Transparent);
+            btn_DeleteAuthorList.Background = new SolidColorBrush(Colors.Transparent);
             if (dtg_AuthorList.Columns[0].Visibility == Visibility.Hidden)
             {
                 dtg_AuthorList.Columns[0].Visibility = Visibility.Visible;
@@ -2539,11 +2590,22 @@ namespace SE104_QLNS
                 dtg_AuthorList.Columns[0].Visibility = Visibility.Hidden;
                 btn_EditAuthor.Background = new SolidColorBrush(Colors.Transparent);
             }
+            dtg_GenreList.Columns[1].Visibility = Visibility.Hidden;
+            btn_DeleteGenreMode.Background = new SolidColorBrush(Colors.Transparent);
+            if (dtg_GenreList.Columns[0].Visibility == Visibility.Hidden)
+            {
+                dtg_GenreList.Columns[0].Visibility = Visibility.Visible;
+                btn_EditGenre.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
+            }
+            else
+            {
+                dtg_GenreList.Columns[0].Visibility = Visibility.Hidden;
+                btn_EditGenre.Background = new SolidColorBrush(Colors.Transparent);
+            }
         }
 
         private void btn_DeleteAuthor_Click(object sender, RoutedEventArgs e)
         {
-            cbx_CustomerSearch.Text = cbx_CustomerSearch.SelectedItem.ToString();
             if (selectedauthor == null) return;
             AuthorAdd genreadd = new AuthorAdd(this, 2, selectedauthor);
             genreadd.Show();
@@ -2558,26 +2620,20 @@ namespace SE104_QLNS
 
         private void btn_DeleteAuthorList_Click(object sender, RoutedEventArgs e)
         {
-            dtg_AuthorList.Columns[0].Visibility = Visibility.Hidden;
-            btn_EditAuthor.Background = new SolidColorBrush(Colors.Transparent);
-            if (dtg_AuthorList.Columns[1].Visibility == Visibility.Hidden)
-            {
-                dtg_AuthorList.Columns[1].Visibility = Visibility.Visible;
-                btn_DeleteAuthor.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
-            }
-            else
-            {
-                dtg_AuthorList.Columns[1].Visibility = Visibility.Hidden;
-                btn_DeleteAuthor.Background = new SolidColorBrush(Colors.Transparent);
-            }
+            btn_DeleteGenreMode_Click(sender, e);
         }
 
         private void btn_AddAuthor_Click(object sender, RoutedEventArgs e)
         {
             dtg_AuthorList.Columns[0].Visibility = Visibility.Hidden;
             dtg_AuthorList.Columns[1].Visibility = Visibility.Hidden;
-            btn_DeleteAuthor.Background = new SolidColorBrush(Colors.Transparent);
-            btn_EditAuthor.Background = new SolidColorBrush(Colors.Transparent);
+            btn_DeleteAuthorList.Background = new SolidColorBrush(Colors.Transparent);
+            btn_EditAuthor.Background = new SolidColorBrush(Colors.Transparent); 
+            
+            dtg_GenreList.Columns[0].Visibility = Visibility.Hidden;
+            dtg_GenreList.Columns[1].Visibility = Visibility.Hidden;
+            btn_DeleteGenreMode.Background = new SolidColorBrush(Colors.Transparent);
+            btn_EditGenre.Background = new SolidColorBrush(Colors.Transparent);
 
             AuthorAdd authoradd = new AuthorAdd(this, 0, selectedauthor);
             authoradd.Show();
@@ -2616,18 +2672,7 @@ namespace SE104_QLNS
 
         private void btn_EditGenre_Click(object sender, RoutedEventArgs e)
         {
-            dtg_GenreList.Columns[1].Visibility = Visibility.Hidden;
-            btn_DeleteGenreMode.Background = new SolidColorBrush(Colors.Transparent);
-            if (dtg_GenreList.Columns[0].Visibility == Visibility.Hidden)
-            {
-                dtg_GenreList.Columns[0].Visibility = Visibility.Visible;
-                btn_EditGenre.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
-            }
-            else
-            {
-                dtg_GenreList.Columns[0].Visibility = Visibility.Hidden;
-                btn_EditGenre.Background = new SolidColorBrush(Colors.Transparent);
-            }
+            btn_EditAuthor_Click(sender, e);
         }
 
         private void btn_DeleteGenre_Click(object sender, RoutedEventArgs e)
@@ -2658,10 +2703,27 @@ namespace SE104_QLNS
                 dtg_GenreList.Columns[1].Visibility = Visibility.Hidden;
                 btn_DeleteGenreMode.Background = new SolidColorBrush(Colors.Transparent);
             }
+            dtg_AuthorList.Columns[0].Visibility = Visibility.Hidden;
+            btn_EditAuthor.Background = new SolidColorBrush(Colors.Transparent);
+            if (dtg_AuthorList.Columns[1].Visibility == Visibility.Hidden)
+            {
+                dtg_AuthorList.Columns[1].Visibility = Visibility.Visible;
+                btn_DeleteAuthorList.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
+            }
+            else
+            {
+                dtg_AuthorList.Columns[1].Visibility = Visibility.Hidden;
+                btn_DeleteAuthorList.Background = new SolidColorBrush(Colors.Transparent);
+            }
         }
 
         private void btn_AddGenre_Click(object sender, RoutedEventArgs e)
         {
+            dtg_AuthorList.Columns[0].Visibility = Visibility.Hidden;
+            dtg_AuthorList.Columns[1].Visibility = Visibility.Hidden;
+            btn_DeleteAuthorList.Background = new SolidColorBrush(Colors.Transparent);
+            btn_EditAuthor.Background = new SolidColorBrush(Colors.Transparent);
+
             dtg_GenreList.Columns[0].Visibility = Visibility.Hidden;
             dtg_GenreList.Columns[1].Visibility = Visibility.Hidden;
             btn_DeleteGenreMode.Background = new SolidColorBrush(Colors.Transparent);
@@ -2761,14 +2823,23 @@ namespace SE104_QLNS
                     reader = command.ExecuteReader();
                     reader.Read();
                     reader.Close();
+
+                    //Gia Ban Sach
+                    sqlQuery = $"UPDATE SACH SET DonGiaBan=DonGiaNhap*@GiaTri/100";
+                    command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@GiaTri", tbx_ImportToExportRatio.Text);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
+
+                    Notification noti2 = new Notification("Update", "Updated THAMSO successfully!");
+                    LoadAll(this);
                 }
             }
             catch (Exception ex)
             {
                 Notification noti = new Notification("Error", "Error updating ThamSo: " + ex.Message);
             }
-            Notification noti2 = new Notification("Update", "Updated THAMSO successfully!");
-            LoadTHAMSO(this, 0);
         }
 
         private void txt_ReportSearch_TextChanged(object sender, TextChangedEventArgs e)

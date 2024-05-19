@@ -76,7 +76,7 @@ namespace SE104_QLNS
                 {
                     Notification noti = new Notification("Error", "Error deleting CustomerReceipt: " + ex.Message);
                 }
-                parent.LoadCustomerReceipt(parent, 0);
+                parent.LoadAll(parent);
                 this.Close();
             }
         }

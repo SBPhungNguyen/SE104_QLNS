@@ -102,8 +102,6 @@ HorizontalAlignment="Right" Margin="10,0,0,0" Click="btn_ExitApp_Click">
                          BorderThickness="0,0,0,1" VerticalContentAlignment="Bottom"/>
                 <TextBox Name="txt_EmployeePass" Text="" FontSize="14" Height="25" Margin="104,269,554,34" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"
                          BorderThickness="0,0,0,1" VerticalContentAlignment="Bottom"/>
-
-                <Image x:Name="img_SeePassword" Height="20" Width="20" Stretch="Fill" Margin="198,274,530,34" Source="/Images/icon_eye.png" Cursor="Hand"/>
             </Grid>
 
             <Grid Grid.Row="3">

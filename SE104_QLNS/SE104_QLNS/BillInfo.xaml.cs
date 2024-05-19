@@ -219,7 +219,7 @@ namespace SE104_QLNS
                 {
                     Notification noti = new Notification("Error", "Error: " + ex.Message);
                 }
-                parent.LoadExportPaper(parent, 1);
+                parent.LoadAll(parent);
                 this.Hide();
             }
         }

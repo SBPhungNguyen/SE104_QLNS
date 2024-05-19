@@ -96,11 +96,19 @@ HorizontalAlignment="Right" Margin="10,0,0,0" Click="btn_ExitApp_Click">
                 <TextBlock Text="Password:" FontSize="14" Height="25" Margin="12,274,672,29"/>
                 <TextBox x:Name="txt_EmployeeTK" Text="nv000001" FontSize="14" Height="25" Margin="104,243,554,60" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"
                          BorderThickness="0,0,0,1" VerticalContentAlignment="Bottom"/>
-                <TextBox Name="txt_EmployeePass" Text="Hehehe" FontSize="14" Height="25" Margin="104,269,554,34" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"
-                         BorderThickness="0,0,0,1" VerticalContentAlignment="Bottom"/>
+                <TextBox Name="txt_EmployeePass" Text="Hehehe" FontSize="14" Height="25"  Margin="104,269,554,34" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"
+                         BorderThickness="0,0,0,1" VerticalContentAlignment="Bottom" TextChanged="txt_EmployeePass_TextChanged"/>
 
-                <Image Height="20" Width="20" Stretch="Fill" Margin="198,274,530,34" Source="/Images/icon_eye.png" Cursor="Hand"/>
-                 </Grid>
+                <Button x:Name="btn_seepassword" Content="{Binding}" Cursor="Hand" Height="20" Width="20" Margin="198,274,530,34" Click="btn_seepassword_Click">
+                    <Button.Background>
+                        <ImageBrush>
+                            <ImageBrush.ImageSource>
+                                <BitmapImage UriSource="/Images/icon_eye.png" />
+                            </ImageBrush.ImageSource>
+                        </ImageBrush>
+                    </Button.Background>
+                </Button>
+            </Grid>
 
             <Grid Grid.Row="3">
                 <Button Name="btn_EmployeeUpdate" 

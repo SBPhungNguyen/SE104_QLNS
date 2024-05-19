@@ -133,7 +133,7 @@ namespace SE104_QLNS
                 {
                     Notification noti = new Notification("Error", "Error Inserting/Updating Authors: " + ex.Message);
                 }
-                parent.LoadAuthor(parent, 0);
+                parent.LoadAll(parent);
                 parent.dtg_AuthorList.Items.Refresh();
             }
             this.Close();
