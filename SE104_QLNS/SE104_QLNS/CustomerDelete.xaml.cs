@@ -86,11 +86,13 @@ namespace SE104_QLNS
                     command.Parameters.AddWithValue("@MaKH", tbl_CustomerID.Text); // Assuming MaKH is stored in txt_CustomerID textbox
 
                     command.ExecuteNonQuery();
+                    Notification notification = new Notification("Xóa Thành Công", "Xóa khách hàng mã " + tbl_CustomerID.Text + " thành công!"); ;
+
 
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error deleting customer: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi xóa khách hàng: " + ex.Message);
                 }
                 parent.LoadAll(parent);
                 IsClosing = true;

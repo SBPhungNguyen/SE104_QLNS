@@ -24,8 +24,8 @@ namespace SE104_QLNS
         public SignIn()
         {
             InitializeComponent();
-            tb_username.Text = "admin";
-            tb_password.Password = "admin";
+            //tb_username.Text = "admin";
+            //tb_password.Password = "admin";
         }
         private void Login(string TenTK, string password)
         {
@@ -57,14 +57,14 @@ namespace SE104_QLNS
                         else
                         {
                             // Show incorrect password notification
-                            Notification notification = new Notification("Error", "Incorrect Password!");
+                            Notification notification = new Notification("Lỗi", "Sai mât khẩu!");
                             notification.Show();
                         }
                     }
                     else
                     {
                         // Show username not found notification
-                        Notification notification = new Notification("Error", "Username not found!");
+                        Notification notification = new Notification("Lỗi", "Không tìm thấy username!");
                         notification.Show();
                     }
 
@@ -72,7 +72,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification notification = new Notification("Error", "Error retrieving data: " + ex.Message);
+                    Notification notification = new Notification("Lỗi", "Đã gặp lỗi khi lấy thông tin đăng nhập: " + ex.Message);
                     notification.Show();
                 }
             }

@@ -64,7 +64,7 @@ HorizontalAlignment="Right">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="2.3*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -74,7 +74,7 @@ HorizontalAlignment="Right">
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    
+
                     <TextBlock Text="Ngày thu:" Grid.Column="0" Grid.Row="0" Foreground="#154448" FontSize="18" Height="25"/>
                     <TextBlock Text="Mã khách hàng:" Grid.Column="0" Grid.Row="1" Foreground="#154448" FontSize="18" Height="25"/>
                     <TextBlock Text="Tên:" Grid.Column="0" Grid.Row="2"  FontSize="18" Foreground="#154448" Height="25" />
@@ -87,7 +87,8 @@ HorizontalAlignment="Right">
                     <TextBlock Name="tbl_CustomerName" Grid.Column="1" Grid.Row="2" Text="Ninh Dương Lan Ngọc" Foreground="#154448" FontSize="18" Height="25" FontWeight="Bold"/>
                     <TextBlock Name="tbl_CustomerPhone" Grid.Column="1" Grid.Row="3" Text="SĐT" FontSize="18" Foreground="#154448" Height="25" FontWeight="Bold"/>
                     <TextBlock Name="tbl_CustomerEmail" Grid.Column="1" Grid.Row="4" Text="ImSoDesperate@gmail.com" Foreground="#154448" FontSize="18" Height="25" FontWeight="Bold"/>
-                    <TextBlock Name="tbl_CustomerAddress" Grid.Column="1" Grid.Row="5" Text="HEH I've always wondered that" Foreground="#154448" FontSize="18" Height="25" FontWeight="Bold"/>
+                    <TextBlock Name="tbl_CustomerAddress" TextWrapping="Wrap"
+                               Grid.Column="1" Grid.Row="5" Text="HEH I've always wondered that" Foreground="#154448" FontSize="18" FontWeight="Bold" Margin="0,0,0,-33"/>
                 </Grid>
 
 
@@ -102,13 +103,13 @@ HorizontalAlignment="Right">
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Text="Số nợ thu trước:" Grid.Column="0" Grid.Row="0" Foreground="#154448" FontSize="18" Height="25" />
-                    <TextBlock Text="Tiền thu:" Grid.Column="0" Grid.Row="1" FontSize="18" Foreground="#154448" Height="25" />
-                    <TextBlock Text="Nợ sau khi thu:" Grid.Column="0" Grid.Row="2" FontSize="18" Foreground="#154448" Height="25" />
+                    <TextBlock Text="Số nợ thu trước:" Grid.Column="0" Grid.Row="0" Foreground="#154448" FontSize="18" Height="25" Margin="0,1,0,24" Grid.RowSpan="2" />
+                    <TextBlock Text="Tiền thu:" Grid.Column="0" Grid.Row="1" FontSize="18" Foreground="#154448" Height="25" Margin="0,1,0,24" Grid.RowSpan="2" />
+                    <TextBlock Text="Nợ sau khi thu:" Grid.Column="0" Grid.Row="2" FontSize="18" Foreground="#154448" Height="25" Margin="0,1,0,-1" />
 
-                    <TextBlock Name="tbl_DebtBefore" Text="Địa chỉ:" Grid.Column="1" Grid.Row="0" Foreground="#154448" FontSize="18" TextWrapping="Wrap" FontWeight="Bold"/>
-                    <TextBlock Name="tbl_Paid" Text="Nhân viên"  Grid.Column="1" Grid.Row="1" Foreground="#154448" FontSize="18" Height="25" FontWeight="Bold"/>
-                    <TextBlock Name="tbl_DebtAfter"  Text="13h-18h"  Grid.Column="1" Grid.Row="2" Foreground="#154448" FontSize="18" Height="25" FontWeight="Bold"/>
+                    <TextBlock Name="tbl_DebtBefore" Text="Địa chỉ:" Grid.Row="0" Foreground="#154448" FontSize="18" TextWrapping="Wrap" FontWeight="Bold" Grid.ColumnSpan="2" Margin="162,1,0,24" Grid.RowSpan="2"/>
+                    <TextBlock Name="tbl_Paid" Text="Nhân viên" Grid.Row="1" Foreground="#154448" FontSize="18" Height="25" FontWeight="Bold" Grid.ColumnSpan="2" Margin="162,1,0,24" Grid.RowSpan="2"/>
+                    <TextBlock Name="tbl_DebtAfter"  Text="13h-18h" Grid.Row="2" Foreground="#154448" FontSize="18" Height="25" FontWeight="Bold" Grid.ColumnSpan="2" Margin="162,1,0,-1"/>
                 </Grid>
             </StackPanel>
 

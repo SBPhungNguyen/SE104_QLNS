@@ -53,9 +53,9 @@ namespace SE104_QLNS
                     command.Parameters.AddWithValue("@NgaySinh", DateTime.Parse(txt_CustomerBirth.Text));
                     string gender;
                     if (cbx_Gender.Text == "Nam")
-                        gender = "1";
+                        gender = "True";
                     else
-                        gender = "0";
+                        gender = "False";
                     command.Parameters.AddWithValue("@GioiTinh", gender);
                     command.Parameters.AddWithValue("@DiaChi", txt_CustomerAddress.Text);
                     command.Parameters.AddWithValue("@SoTienNo", "0");
@@ -78,10 +78,12 @@ namespace SE104_QLNS
                     reader = command.ExecuteReader();
                     reader.Read();
                     reader.Close();
+
+                    Notification notification = new Notification("Tạo Thành Công", "Thêm Khách hàng mã "+txt_CustomerID.Text+" thành công!");
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving data: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi thêm khách hàng: " + ex.Message);
                 }
             }
 
@@ -99,6 +101,14 @@ namespace SE104_QLNS
         private void dpk_CustomerBirthday_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             txt_CustomerBirth.Text = dpk_CustomerBirthday.SelectedDate.Value.Date.ToString().Substring(0, 10);
+        }
+
+        private void txt_CustomerPhone_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!int.TryParse(txt_CustomerPhone.Text, out int parsedValue))
+            {
+                txt_CustomerPhone.Text = "0";
+            }
         }
     }
 }

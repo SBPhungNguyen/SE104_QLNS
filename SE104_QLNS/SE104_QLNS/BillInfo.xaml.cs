@@ -94,7 +94,6 @@ namespace SE104_QLNS
             else
             {
                 BillIDName.Text = "Bạn có chắc muốn xóa Hóa đơn ";
-                btn_SaveAsPDF.Visibility = Visibility.Hidden;
                 btn_Ok.Visibility= Visibility.Hidden;
             }
         }
@@ -173,7 +172,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving data: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi lấy thông tin Hóa Đơn: " + ex.Message);
                 }
             }
         }
@@ -217,7 +216,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi xóa Hóa Đơn: " + ex.Message);
                 }
                 parent.LoadAll(parent);
                 this.Hide();

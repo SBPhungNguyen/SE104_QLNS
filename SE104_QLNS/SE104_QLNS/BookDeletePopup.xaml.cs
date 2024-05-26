@@ -114,6 +114,13 @@ namespace SE104_QLNS
                     reader.Read();
                     reader.Close();
 
+                    //delete empty PHIEUNHAP
+                    sqlQuery = @" DELETE PHIEUNHAP WHERE MaPhieuNhap NOT IN (SELECT DISTINCT MaPhieuNhap FROM CT_PHIEUNHAP)";
+                    command = new SqlCommand(sqlQuery, connection);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
+
                     //Delete The Book
                     sqlQuery = "DELETE FROM SACH WHERE MaSach = @MaSach";
 
@@ -133,7 +140,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error Updating Book: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi cập nhật sách: " + ex.Message);
                 }
                 parent.LoadAll(parent);
                 IsClosing = true;

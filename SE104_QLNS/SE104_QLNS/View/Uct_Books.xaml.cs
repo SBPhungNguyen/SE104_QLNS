@@ -166,13 +166,14 @@ namespace SE104_QLNS.View
 
                 if (!isDuplicate)
                 {
-                    Uct_BookImport bookimport = new Uct_BookImport();
+                    Uct_BookImport bookimport = new Uct_BookImport(parent);
                     bookimport.BookID = this.BookID;
                     bookimport.BookName = this.BookName;
                     bookimport.BookImportPrice = this.BookPriceImport;
                     bookimport.BookQuantity = "1";
                     bookimport.BookURL = this.BookURL;
                     parent.wpn_ImportPaper.Children.Add(bookimport);
+                    bookimport.UpdateMoney();
                 }
             }
         }

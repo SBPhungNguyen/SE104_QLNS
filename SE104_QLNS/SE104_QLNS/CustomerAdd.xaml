@@ -125,7 +125,7 @@ HorizontalAlignment="Right" Margin="10,0,0,0" Click="btn_ExitApp_Click">
                     <TextBox x:Name="txt_CustomerPhone" Height="35" FontFamily="Tahoma" FontWeight="Bold" Foreground="#154448" 
                         BorderThickness="0,0,0,2" BorderBrush="#154448" Margin="30,188,26,145"
                              Padding="35,0,0,0"
-                        VerticalContentAlignment="Bottom" FontSize="20"/>
+                        VerticalContentAlignment="Bottom" FontSize="20" TextChanged="txt_CustomerPhone_TextChanged"/>
 
                     <Button Name="btn_AddCustomer" Height="35" 
                         Content="Thêm khách hàng" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="-190,313,186,20" Click="btn_AddCustomer_Click">

@@ -34,6 +34,7 @@ namespace SE104_QLNS
             parent = mainwindow;
             LoadCustomerID();
             cbx_CustomerID.SelectedIndex = 0;
+            tbl_DebtAfter.Text = "0";
         }
         public void LoadCustomerID()
         {
@@ -64,6 +65,11 @@ namespace SE104_QLNS
 
         private void btn_SaveCustomerReceipt_Click(object sender, RoutedEventArgs e)
         {
+            if(tbl_Paid.Text=="0")
+            {
+                Notification noti = new Notification("Thất bại", "Xin hãy nhập số tiền sẽ thu khác 0!");
+                return;
+            }
             string ReceiptID = parent.GetNextCustomerReceiptID(parent);
             Connection connect = new Connection();
             string connectionString = connect.connection;
@@ -95,11 +101,11 @@ namespace SE104_QLNS
                     reader.Read();
                     reader.Close();
 
-                    parent.UpdateBaoCaoCongNo(connection, cbx_CustomerID.Text, -Convert.ToInt32(tbl_Paid.Text));
+                    parent.UpdateBaoCaoCongNo(connection, cbx_CustomerID.Text, 0, -Convert.ToInt32(tbl_Paid.Text));
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving data: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi lưu phiếu thu tiền: " + ex.Message);
                 }
             }
             parent.LoadAll(parent);
@@ -132,10 +138,11 @@ namespace SE104_QLNS
                         tbx_DebtBefore.Text= TienNo.Substring(0, TienNo.Length - 5);
                         reader.Close();
                     }
+                    tbl_Paid.Text = "0";
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving data from KHACHHANG: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi lấy thông tin từ KHACHHANG: " + ex.Message);
                 }
             }
         }
@@ -150,6 +157,7 @@ namespace SE104_QLNS
                 if (parsedValue > Convert.ToInt32(tbx_DebtBefore.Text))
                 {
                     tbl_Paid.Text = tbx_DebtBefore.Text;
+                    parsedValue = Convert.ToInt32(tbl_Paid.Text);
                     tbl_DebtAfter.Text = "0";
                 }
                 else
@@ -160,7 +168,7 @@ namespace SE104_QLNS
             }
             else
             {
-                tbl_Paid.Text = ""; // Clear the textbox
+                tbl_Paid.Text = "0"; // Clear the textbox
             }
         }
 

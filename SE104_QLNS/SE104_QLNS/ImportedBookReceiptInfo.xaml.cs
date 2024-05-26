@@ -95,6 +95,7 @@ namespace SE104_QLNS
         {
             //connect to database
             string connectionString = connect.connection;
+            int Amount=0;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
 
@@ -124,14 +125,15 @@ namespace SE104_QLNS
                                 , MaSach, BookURL, SoLuongNhap, DonGiaNhap);
                             importedBookReceiptInfo.ImportInfo.Add(info);
                             order++;
-
+                            Amount += Convert.ToInt32(SoLuongNhap);
                         }
                     }
                     reader.Close();
+                    tbl_Amount.Text = Amount.ToString();
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving data: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi khi lấy dữ liệu từ CT_PHIEUNHAP: " + ex.Message);
                 }
             }
         }
@@ -174,7 +176,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error Updating Book: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi khi xóa Phiếu nhập: " + ex.Message);
                 }
                 parent.LoadAll(parent);
                 this.Close();

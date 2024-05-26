@@ -118,6 +118,7 @@
                 <PasswordBox Name="tb_password"
                          Padding="30,0,0,0"
                          Height="25" Width="280"
+                             
                          HorizontalAlignment="Center"
                          BorderThickness="0,0,0,2"
                          FontFamily="Tahoma"

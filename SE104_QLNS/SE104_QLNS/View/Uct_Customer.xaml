@@ -12,7 +12,7 @@
         <ControlTemplate>
             <Border CornerRadius="15">
                 <Grid>
-                    <Image Name="img_Icon" Height="20" Width="20" Source="{Binding Img_Type}" Stretch="Fill" Margin="146,14,14,166"/>
+                    <Image Name="img_Icon" Height="20" Width="20" Source="/Images/Img_user_icon.png" Stretch="Fill" Margin="146,14,14,166"/>
                     <Label Name="lbl_CustomerID" Content="{Binding CustomerID}" Margin="0,36,0,138" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
                     <Label Name="lbl_CustomerName" Content="{Binding CustomerName}" Margin="0,58,0,105" FontWeight="Bold" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
                     <TextBlock Text="SĐT:" Margin="13,102,124,72" />

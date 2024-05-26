@@ -50,7 +50,7 @@
                 </Button>
             </Grid>
             <Grid Grid.Row="1">
-                <TextBlock Text="Phiếu thu" 
+                <TextBlock Text="Lập Phiếu thu" 
                        FontSize="25"
                        FontWeight="Bold"
                        FontFamily="Tahoma"
@@ -73,7 +73,7 @@
                 <TextBlock Name="tbl_CustomerName" Text="" FontSize="18" Height="25" Margin="205,44,315,259" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"/>
                 <TextBlock Name="tbl_CustomerPhone" Text="" FontSize="18" Height="25" Margin="205,78,380,225" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"/>
                 <TextBlock Name="tbl_CustomerEmail" Text="" FontSize="18" Height="25" Margin="205,110,166,193" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"/>
-                <TextBlock Name="tbl_CustomerAddress" Text="" FontSize="18" Height="25" Margin="205,143,166,160" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"/>
+                <TextBlock Name="tbl_CustomerAddress" TextWrapping="Wrap" Text="" FontSize="18" Margin="205,143,108,132" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"/>
                 <TextBox Name="tbx_DebtBefore"  IsReadOnly="True" Text="" FontSize="18" Margin="552,201,21,100" RenderTransformOrigin="0.184,-0.376" TextWrapping="Wrap" FontWeight="Bold"/>
                 <TextBox Name="tbl_Paid" Text="0" FontSize="18" Height="25" Margin="552,238,21,65" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"
                      BorderThickness="0,0,0,1" TextChanged="tbl_Paid_TextChanged"/>
@@ -85,7 +85,7 @@
 
             <Grid Grid.Row="3">
                 <Button Name="btn_SaveCustomerReceipt" 
-                    Content="Lưu và xuất PDF" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="228,-15,228,25" Click="btn_SaveCustomerReceipt_Click">
+                    Content="Lưu" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="White" Margin="228,-15,228,25" Click="btn_SaveCustomerReceipt_Click">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="#154348"/>

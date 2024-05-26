@@ -66,9 +66,9 @@ namespace SE104_QLNS
                     command.Parameters.AddWithValue("@NgaySinh", DateTime.Parse(tbx_EmployeeBirthday.Text));
                     string gender;
                     if (cbx_Gender.Text == "Nam")
-                        gender = "1";
+                        gender = "True";
                     else
-                        gender = "0";
+                        gender = "False";
                     command.Parameters.AddWithValue("@GioiTinh", gender);
                     command.Parameters.AddWithValue("@DiaChi", txt_EmployeeAddress.Text);
                     command.Parameters.AddWithValue("@CCCD", txt_EmployeeCard.Text);
@@ -83,7 +83,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving data: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi thêm nhân viên: " + ex.Message);
                 }
             }
 
@@ -111,13 +111,12 @@ namespace SE104_QLNS
                         string selectedImagePath = openFileDialog.FileName;
                         HinhAnh = selectedImagePath;
                         CreateImage(HinhAnh);
-                        //Notification noti = new Notification("Updated", BookURL); .Replace("\\","/")
                     }
 
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error opening file: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi khi mở hình ảnh: " + ex.Message);
                 }
             });
         }
@@ -125,6 +124,14 @@ namespace SE104_QLNS
         private void dpk_EmployeeBirthday_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             tbx_EmployeeBirthday.Text= dpk_EmployeeBirthday.SelectedDate.Value.Date.ToString().Substring(0, 10); ;
+        }
+
+        private void txt_EmployeePhone_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!int.TryParse(txt_EmployeePhone.Text, out int parsedValue))
+            {
+                txt_EmployeePhone.Text = "0";
+            }
         }
     }
 }

@@ -65,7 +65,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error Retrieving Data: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi đọc dữ liệu từ THAMSO: " + ex.Message);
                 }
             }
         }
@@ -228,7 +228,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving data: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi tạo sách: " + ex.Message);
                 }
             }
             parent.LoadAll(parent);
@@ -261,7 +261,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving authors: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi lấy thông tin tác giả: " + ex.Message);
                 }
             }
         }
@@ -291,7 +291,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving genres: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi lấy thông tin thể loại: " + ex.Message);
                 }
             }
         }
@@ -313,13 +313,12 @@ namespace SE104_QLNS
                         string selectedImagePath = openFileDialog.FileName;
                         BookURL = selectedImagePath;
                         CreateImage(BookURL);
-                        //Notification noti = new Notification("Updated", BookURL); .Replace("\\","/")
                     }
 
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error opening file: "+ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi mở hình ảnh: "+ex.Message);
                 }
             });
         }

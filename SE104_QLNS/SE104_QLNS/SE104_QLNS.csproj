@@ -101,14 +101,8 @@
     <Compile Include="BookUpdatePopup.xaml.cs">
       <DependentUpon>BookUpdatePopup.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GenreAddAskPopup.xaml.cs">
-      <DependentUpon>GenreAddAskPopup.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ImportedBookReceiptInfo.xaml.cs">
       <DependentUpon>ImportedBookReceiptInfo.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SaveReceiptPopup.xaml.cs">
-      <DependentUpon>SaveReceiptPopup.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Connection.cs" />
     <Compile Include="CustomerAdd.xaml.cs">
@@ -150,14 +144,8 @@
     <Compile Include="Notification.xaml.cs">
       <DependentUpon>Notification.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SaveReceiptPDF.xaml.cs">
-      <DependentUpon>SaveReceiptPDF.xaml</DependentUpon>
-    </Compile>
     <Compile Include="SignIn.xaml.cs">
       <DependentUpon>SignIn.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SignUp.xaml.cs">
-      <DependentUpon>SignUp.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserConfirmation.xaml.cs">
       <DependentUpon>UserConfirmation.xaml</DependentUpon>
@@ -238,10 +226,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GenreAddAskPopup.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="ImportedBookReceiptInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -274,19 +258,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SaveReceiptPDF.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="SaveReceiptPopup.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="SignIn.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="SignUp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -454,6 +426,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\icon_reset.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

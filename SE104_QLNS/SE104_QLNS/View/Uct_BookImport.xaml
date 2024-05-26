@@ -18,7 +18,10 @@
                     <TextBlock Name="tbl_BookName" Text="{Binding BookName}" Margin="130,22,11,39"/>
                     <TextBlock Name="tbl_ImportPrice" Text="{Binding BookImportPrice}" Margin="157,42,11,20"/>
                     <TextBlock>
-                         <TextBox Name="tbl_BookQuantity" Background="Transparent" BorderBrush="Transparent" Text="{Binding BookQuantity}" Margin="150,62,17,4" Width="40"/>
+                         <TextBox Name="tbl_BookQuantity" Background="Transparent" BorderBrush="Transparent" 
+                                  Text="{Binding BookQuantity}" Margin="150,62,17,4" Width="40" 
+                                  TextChanged="tbl_BookQuantity_TextChanged"
+                                  />
                     </TextBlock>
                     <Button Name="btn_Remove" Margin="206,3,4,52" Width="25" Height="25" Background="#C2DECE" BorderThickness="1" BorderBrush="#6FB3B8" Click="Remove_Click">
                         <Image Source="/Images/icon_trashcan.png" Stretch="Fill"/>

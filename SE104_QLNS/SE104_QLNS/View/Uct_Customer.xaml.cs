@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace SE104_QLNS.View
     /// <summary>
     /// Interaction logic for Uct_Customer.xaml
     /// </summary>
-    
+
     public partial class Uct_BaoCaoCongNo
     {
         public int Month { get; set; }
@@ -54,13 +55,12 @@ namespace SE104_QLNS.View
         public string CustomerName { get; set; }
         public string CustomerEmail { get; set; }
         public string CustomerPhonenumber { get; set; }
-        public string CustomerBirthday { get; set; }  
+        public string CustomerBirthday { get; set; }
         public string CustomerGender { get; set; }
         public string CustomerAddress { get; set; }
         public string CustomerSpending { get; set; }
         public string CustomerDebt { get; set; }
 
-        public string Img_Type = "/Images/Img_user_icon.png";
         public Uct_Customer()
         {
             InitializeComponent();
@@ -76,21 +76,10 @@ namespace SE104_QLNS.View
         public void CustomerSetState(int state)
         {
             this.state = state;
-            switch (state)
-            {
-                case 0:
-                    Img_Type = "/Images/Img_user_icon.png";
-                    break;
-                case 1:
-                    Img_Type = "/Images/icon_pencil.png";
-                    break;
-                case 2:
-                    Img_Type = "/Images/icon_bin.png";
-                    break;
-            }
         }
+
         public void LoadData(string customerID, string customerName, string customerBirthday, string customerGender,
-            string customerPhonenumber, string customerAddress, string customerEmail,  string customerSpending,
+            string customerPhonenumber, string customerAddress, string customerEmail, string customerSpending,
             string customerDebt)
         {
             CustomerID = customerID;
@@ -102,6 +91,7 @@ namespace SE104_QLNS.View
             CustomerAddress = customerAddress;
             CustomerSpending = customerSpending;
             CustomerDebt = customerDebt;
+
         }
 
         private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -116,7 +106,7 @@ namespace SE104_QLNS.View
                 customer.Visibility = Visibility.Visible;
                 customer.Topmost = true;
             }
-            else if ( state == 1) //Update
+            else if (state == 1) //Update
             {
                 CustomerUpdate customer = new CustomerUpdate(this, parent);
                 customer.Visibility = Visibility.Visible;

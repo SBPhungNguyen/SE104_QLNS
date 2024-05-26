@@ -104,6 +104,8 @@ namespace SE104_QLNS
                         SqlDataReader reader = command.ExecuteReader();
                         reader.Read();
                         reader.Close();
+
+                        Notification notification = new Notification("Thêm Thành Công", "Thêm tác giả thành công!");
                     }
                     else if (state == 1)//Update
                     {
@@ -116,6 +118,8 @@ namespace SE104_QLNS
                         SqlDataReader reader = command.ExecuteReader();
                         reader.Read();
                         reader.Close();
+
+                        Notification notification = new Notification("Sửa Thành Công", "Sửa tác giả thành công!");
                     }
                     else if (state == 2)//Delete
                     {
@@ -127,11 +131,12 @@ namespace SE104_QLNS
                         SqlDataReader reader = command.ExecuteReader();
                         reader.Read();
                         reader.Close();
+                        Notification notification = new Notification("Xóa Thành Công", "Xóa tác giả thành công!");
                     }
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error Inserting/Updating Authors: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi Thao tác trên Tác Giả: " + ex.Message);
                 }
                 parent.LoadAll(parent);
                 parent.dtg_AuthorList.Items.Refresh();

@@ -133,7 +133,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error generating BookTitle ID: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi tạo BookTitle ID: " + ex.Message);
                     nextBookID = null; // Indicate error
                 }
             }
@@ -171,7 +171,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error generating Book ID: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi tạo Book ID: " + ex.Message);
                     nextBookID = null; // Indicate error
                 }
             }
@@ -211,7 +211,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error generating customer ID: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi tạo customer ID: " + ex.Message);
                     nextCustomerID = null; // Indicate error
                 }
             }
@@ -249,7 +249,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error generating PHIEUNHAP ID: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi tạo PHIEUNHAP ID: " + ex.Message);
                     nextImportPaperID = null; // Indicate error
                 }
             }
@@ -286,7 +286,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error generating HOADON ID: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi tạo HOADON ID: " + ex.Message);
                     nextExportPaperID = null; // Indicate error
                 }
             }
@@ -325,7 +325,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error generating employee ID: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi tạo employee ID: " + ex.Message);
                     nextEmployeeID = null; // Indicate error
                 }
             }
@@ -363,7 +363,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error generating Book ID: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi tạo Book ID: " + ex.Message);
                     nextBookID = null; // Indicate error
                 }
             }
@@ -401,7 +401,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error generating Book ID: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi tạo Book ID: " + ex.Message);
                     nextBookID = null; // Indicate error
                 }
             }
@@ -441,7 +441,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error generating author ID: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi tạo author ID: " + ex.Message);
                     nextAuthorID = null; // Indicate error
                 }
             }
@@ -562,7 +562,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving data from SACH: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi lấy thông tin từ SACH: " + ex.Message);
                 }
                 mainwindow.wpn_Books.Children.Clear();
                 mainwindow.wpn_ImportBooks.Children.Clear();
@@ -625,7 +625,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving data from PHIEUTHUTIEN: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi lấy thông tin từ PHIEUTHUTIEN: " + ex.Message);
                 }
             }
         }
@@ -729,7 +729,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving data from BAOCAOTON: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi lấy thông tin từ BAOCAOTON: " + ex.Message);
                 }
             }
         }
@@ -832,7 +832,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving data from BAOCAOCONGNO: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi lấy thông tin từ BAOCAOCONGNO: " + ex.Message);
                 }
             }
         }
@@ -846,6 +846,7 @@ namespace SE104_QLNS
             {
                 mainwindow.Customers.Clear();
                 cbx_CustomerID.Items.Clear();
+
                 string MaKH = "", HoTenKH = "", SDT = "", DiaChi = "",
                 Email = "", SoTienNo = "", GioiTinh = "", NgaySinh = "", SoTienMua = "";
 
@@ -873,7 +874,7 @@ namespace SE104_QLNS
                             SoTienMua = SoTienMua.Substring(0, SoTienMua.Length - 5);
 
                             string gender;
-                            if (GioiTinh == "1")
+                            if (GioiTinh == "True")
                                 gender = "Nam";
                             else
                                 gender = "Nữ";
@@ -887,10 +888,11 @@ namespace SE104_QLNS
                     }
                     reader.Close();
                     cbx_CustomerID.Items.Add("Thêm mới");
+                    cbx_CustomerID.SelectedIndex = 0;
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving data from KHACHHANG: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi lấy thông tin từ KHACHHANG: " + ex.Message);
                 }
                 wpn_Customer.Children.Clear();
                 foreach (Uct_Customer child in Customers)
@@ -937,7 +939,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving data from PHIEUNHAP: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi lấy thông tin từ PHIEUNHAP: " + ex.Message);
                 }
             }
         }
@@ -998,7 +1000,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving data from HOADON: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi lấy thông tin từ HOADON: " + ex.Message);
                 }
             }
         }
@@ -1039,7 +1041,7 @@ namespace SE104_QLNS
                     reader.Read();
                     SoLuongTonToiDaTruocNhap = reader["GIATRI"].ToString();
                     reader.Close();
-                    tbx_BookMinimumStockQuantityBeforeImporting.Text = SoLuongTonToiDaTruocNhap;
+                    tbx_BookMaximumStockQuantityBeforeImporting.Text = SoLuongTonToiDaTruocNhap;
 
                     //SoLuongTonToiThieuSauBan
                     sqlQuery = "SELECT GIATRI FROM THAMSO WHERE TenThamSo='SoLuongTonToiThieuSauBan'";
@@ -1071,7 +1073,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving data from THAMSO: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi lấy thông tin từ THAMSO: " + ex.Message);
                 }
             }
         }
@@ -1109,7 +1111,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving data from GENRE: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi lấy thông tin từ GENRE: " + ex.Message);
                 }
             }
         }
@@ -1147,7 +1149,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving data from AUTHOR: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi lấy thông tin từ AUTHOR: " + ex.Message);
                 }
             }
         }
@@ -1187,7 +1189,7 @@ namespace SE104_QLNS
                             MatKhau = reader["MatKhau"].ToString();
                             HinhAnh = reader["HinhAnh"].ToString();
                             string gender;
-                            if (GioiTinh == "1")
+                            if (GioiTinh == "True")
                                 gender = "Nam";
                             else
                                 gender = "Nữ";
@@ -1200,7 +1202,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving data from NGUOIDUNG: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi lấy thông tin từ NGUOIDUNG: " + ex.Message);
                 }
                 wpn_Employee.Children.Clear();
                 foreach (Uct_Employee child in Employees)
@@ -1216,6 +1218,9 @@ namespace SE104_QLNS
         {
             BooksSell.Clear();
             cbx_BookSearch.Text = null;
+            txb_CustomerPayment.Text = "0";
+            txb_MoneyOwe.Text = "0";
+            txt_ReceiptPrice.Text = "0";
             UpdateSellPrice();
         }
         private void cbx_BookSearch_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -1318,7 +1323,7 @@ namespace SE104_QLNS
                 tbl_CustomerDetailAdress.IsReadOnly = false;
                 tbl_CustomerEmail.IsReadOnly = false;
                 txt_CustomerDateOfBirth.IsReadOnly = false;
-                cbx_CustomerGender.IsReadOnly = false;
+                cbx_CustomerGender.SelectedIndex = 1;
 
                 btn_SaveNewCustomerInfomation.Visibility = Visibility.Visible;
                 tbl_CustomerName.Text = "Tên khách hàng";
@@ -1336,7 +1341,6 @@ namespace SE104_QLNS
                 tbl_CustomerDetailAdress.IsReadOnly = true;
                 tbl_CustomerEmail.IsReadOnly = true;
                 txt_CustomerDateOfBirth.IsReadOnly = true;
-                cbx_CustomerGender.IsReadOnly = true;
 
                 string connectionString = connect.connection;
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -1369,7 +1373,7 @@ namespace SE104_QLNS
                     }
                     catch (Exception ex)
                     {
-                        Notification noti = new Notification("Error", "Error retrieving data from KHACHHANG: " + ex.Message);
+                        Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi lấy thông tin từ KHACHHANG: " + ex.Message);
                     }
                 }
             }
@@ -1377,6 +1381,36 @@ namespace SE104_QLNS
         private void btn_SaveNewCustomerInfomation_Click(object sender, RoutedEventArgs e)
         {
             string MaKH = GetNextCustomerID(this);
+            if (tbl_CustomerName.Text == "Tên khách hàng")
+            {
+                Notification noti = new Notification("Thiếu Thông Tin", "Vui lòng nhập đầy đủ thông tin cho khách hàng.");
+                return;
+            }
+            if (tbl_CustomerPhoneNumber.Text == "Số điện thoại")
+            {
+                Notification noti = new Notification("Thiếu Thông Tin", "Vui lòng nhập đầy đủ thông tin cho khách hàng.");
+                return;
+            }
+            if (tbl_CustomerDetailAdress.Text == "Địa chỉ")
+            {
+                Notification noti = new Notification("Thiếu Thông Tin", "Vui lòng nhập đầy đủ thông tin cho khách hàng.");
+                return;
+            }
+            if (tbl_CustomerEmail.Text == "Email")
+            {
+                Notification noti = new Notification("Thiếu Thông Tin", "Vui lòng nhập đầy đủ thông tin cho khách hàng.");
+                return;
+            }
+            if (txt_CustomerDateOfBirth.Text == "Ngày Sinh")
+            {
+                Notification noti = new Notification("Thiếu Thông Tin", "Vui lòng nhập đầy đủ thông tin cho khách hàng.");
+                return;
+            }
+            if (cbx_CustomerGender.Text == "Giới Tính")
+            {
+                Notification noti = new Notification("Thiếu Thông Tin", "Vui lòng nhập đầy đủ thông tin cho khách hàng.");
+                return;
+            }
             Connection connect = new Connection();
             string connectionString = connect.connection;
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -1391,7 +1425,7 @@ namespace SE104_QLNS
                     command.Parameters.AddWithValue("@HoTenKH", tbl_CustomerName.Text);
                     command.Parameters.AddWithValue("@Email", tbl_CustomerEmail.Text);
                     command.Parameters.AddWithValue("@SDT", tbl_CustomerPhoneNumber.Text);
-                    command.Parameters.AddWithValue("@NgaySinh", txt_CustomerDateOfBirth.Text);
+                    command.Parameters.AddWithValue("@NgaySinh", DateTime.Parse(txt_CustomerDateOfBirth.Text));
                     string gender;
                     if (cbx_CustomerGender.Text == "Nam")
                         gender = "1";
@@ -1405,6 +1439,7 @@ namespace SE104_QLNS
                     SqlDataReader reader = command.ExecuteReader();
                     reader.Read();
                     reader.Close();
+
                     //Create for BAOCAOCONGNO
                     sqlQuery = "INSERT INTO BAOCAOCONGNO (Thang, Nam, MaKH, NoDau, PhatSinh, NoCuoi) " +
                   $"VALUES (@Thang, @Nam, @MaKH, @NoDau, @PhatSinh, @NoCuoi)";
@@ -1418,10 +1453,15 @@ namespace SE104_QLNS
                     reader = command.ExecuteReader();
                     reader.Read();
                     reader.Close();
+
+                    btn_SaveNewCustomerInfomation.Visibility = Visibility.Hidden;
+                    Notification notification = new Notification("Tạo Thành Công", "Thêm Khách hàng mã " + MaKH + " thành công!");
+
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error inserting into KHACHHANG: " + ex.Message);
+                    btn_SaveNewCustomerInfomation.Visibility = Visibility.Hidden;
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi thêm vào KHACHHANG: " + ex.Message);
                 }
             }
             LoadAll(this);
@@ -1464,7 +1504,7 @@ namespace SE104_QLNS
                 txb_CustomerPayment.Text = "0";
             }
         }
-        private void UpdateBaoCaoTon(SqlConnection connection, string BookID, int Changes)
+        private void UpdateBaoCaoTon(SqlConnection connection, string BookID, int PhatSinhChanges, int TonCuoiChanges)
         {
             //Check if BAOCAOTON exists
             string sqlQuery = $"Select MaSach, Thang, Nam From BAOCAOTON WHERE THANG=@THANG AND NAM=@NAM AND MASACH=@MASACH";
@@ -1481,8 +1521,8 @@ namespace SE104_QLNS
                 command.Parameters.AddWithValue("@MaSach", BookID);
                 command.Parameters.AddWithValue("@Thang", DateTime.Now.Month.ToString());
                 command.Parameters.AddWithValue("@Nam", DateTime.Now.Year.ToString());
-                command.Parameters.AddWithValue("@PhatSinh", Changes);
-                command.Parameters.AddWithValue("@TonCuoi", Changes);
+                command.Parameters.AddWithValue("@PhatSinh", PhatSinhChanges);
+                command.Parameters.AddWithValue("@TonCuoi", TonCuoiChanges);
                 reader = command.ExecuteReader();
                 reader.Read();
                 reader.Close();
@@ -1524,8 +1564,8 @@ namespace SE104_QLNS
                 command.Parameters.AddWithValue("@Nam", DateTime.Now.Year.ToString());
                 command.Parameters.AddWithValue("@MaSach", BookID);
                 command.Parameters.AddWithValue("@TonDau", TonCuoiTruoc);
-                command.Parameters.AddWithValue("@PhatSinh", Changes);
-                command.Parameters.AddWithValue("@TonCuoi", TonCuoiTruoc + Changes);
+                command.Parameters.AddWithValue("@PhatSinh", PhatSinhChanges);
+                command.Parameters.AddWithValue("@TonCuoi", TonCuoiTruoc + TonCuoiChanges);
                 reader = command.ExecuteReader();
                 reader.Read();
                 reader.Close();
@@ -1533,7 +1573,7 @@ namespace SE104_QLNS
             LoadAll(this);
         }
 
-        public void UpdateBaoCaoCongNo(SqlConnection connection, string MaKH, int Changes)
+        public void UpdateBaoCaoCongNo(SqlConnection connection, string MaKH, int PhatSinhChanges, int NoCuoiChanges)
         {
             //Check if BAOCAOCONGNO exists
             string sqlQuery = $"Select MaKH, Thang, Nam From BAOCAOCONGNO WHERE THANG=@THANG AND NAM=@NAM AND MaKH=@MaKH";
@@ -1550,8 +1590,8 @@ namespace SE104_QLNS
                 command.Parameters.AddWithValue("@MaKH", MaKH);
                 command.Parameters.AddWithValue("@Thang", DateTime.Now.Month.ToString());
                 command.Parameters.AddWithValue("@Nam", DateTime.Now.Year.ToString());
-                command.Parameters.AddWithValue("@PhatSinh", Changes);
-                command.Parameters.AddWithValue("@NoCuoi", Changes);
+                command.Parameters.AddWithValue("@PhatSinh", PhatSinhChanges);
+                command.Parameters.AddWithValue("@NoCuoi", NoCuoiChanges);
                 reader = command.ExecuteReader();
                 reader.Read();
                 reader.Close();
@@ -1593,8 +1633,8 @@ namespace SE104_QLNS
                 command.Parameters.AddWithValue("@Nam", DateTime.Now.Year.ToString());
                 command.Parameters.AddWithValue("@MaKH", MaKH);
                 command.Parameters.AddWithValue("@NoDau", NoCuoiTruoc);
-                command.Parameters.AddWithValue("@PhatSinh", Changes);
-                command.Parameters.AddWithValue("@NoCuoi", NoCuoiTruoc + Changes);
+                command.Parameters.AddWithValue("@PhatSinh", PhatSinhChanges);
+                command.Parameters.AddWithValue("@NoCuoi", NoCuoiTruoc + NoCuoiChanges);
                 reader = command.ExecuteReader();
                 reader.Read();
                 reader.Close();
@@ -1604,7 +1644,8 @@ namespace SE104_QLNS
         private void btn_SaveBillToDatabase_Click(object sender, RoutedEventArgs e)
         {
             string NextExportId = GetNextExportPaperID(this);
-            if (cbx_CustomerID.Text == "Thêm mới")
+            string MaKH = cbx_CustomerID.Text;
+            if (MaKH == "Thêm mới")
                 return;
             Connection connect = new Connection();
             string connectionString = connect.connection;
@@ -1618,7 +1659,7 @@ namespace SE104_QLNS
                     {
                         if (Convert.ToInt32(book.Amount) - book.BookSellAmount < Convert.ToInt32(SoLuongTonToiThieuSauBan))
                         {
-                            Notification noti = new Notification("Policy Violation", "Amount of Book for " + book.BookID + " after selling is less than Sell Limit: " + SoLuongTonToiThieuSauBan);
+                            Notification noti = new Notification("Vi phạm quy định", "Số lượng sáchh mã " + book.BookID + " sau khi bán bé hơn quy định: " + SoLuongTonToiThieuSauBan);
                             return;
                         }
                     }
@@ -1626,7 +1667,7 @@ namespace SE104_QLNS
                     {
                         string query = $"SELECT SOTIENNO FROM KHACHHANG WHERE MaKH = @MaKH";
                         SqlCommand com = new SqlCommand(query, connection);
-                        com.Parameters.AddWithValue("@MaKH", cbx_CustomerID.Text);
+                        com.Parameters.AddWithValue("@MaKH", MaKH);
                         SqlDataReader read = com.ExecuteReader();
                         read.Read();
                         string SoTienNo = read["SoTienNo"].ToString(); // Assuming numeric data type
@@ -1634,7 +1675,7 @@ namespace SE104_QLNS
                         read.Close();
                         if (Convert.ToInt32(SoTienNo) + Convert.ToInt32(txb_MoneyOwe.Text) > Convert.ToInt32(SoTienNoToiDa))
                         {
-                            Notification noti = new Notification("Policy Violation", "Amount of Customer Debt for " + cbx_CustomerID.Text + " after selling is more than debt Limit: " + SoTienNoToiDa);
+                            Notification noti = new Notification("Vi phạm quy định", "Số nợ của khách " + MaKH + " sau khi bán lớn hơn quy định: " + SoTienNoToiDa);
                             return;
                         }
                     }
@@ -1643,7 +1684,7 @@ namespace SE104_QLNS
                           $"VALUES (@MaHD, @MaKH, @NgayLap, @TongTien, @SoTienTra, @ConLai)";
                     SqlCommand command = new SqlCommand(sqlQuery, connection);
                     command.Parameters.AddWithValue("@MaHD", NextExportId);
-                    command.Parameters.AddWithValue("@MaKH", cbx_CustomerID.Text);
+                    command.Parameters.AddWithValue("@MaKH", MaKH);
                     command.Parameters.AddWithValue("@NgayLap", DateTime.Now);
                     command.Parameters.AddWithValue("@TongTien", txt_ReceiptPrice.Text);
                     command.Parameters.AddWithValue("@SoTienTra", txb_CustomerPayment.Text);
@@ -1676,32 +1717,32 @@ namespace SE104_QLNS
                         reader.Read();
                         reader.Close();
 
-                        UpdateBaoCaoTon(connection, book.BookID, -book.BookSellAmount);
+                        UpdateBaoCaoTon(connection, book.BookID, 0,-book.BookSellAmount);
                     }
-
-                    //Update Debt
-                    sqlQuery = $"UPDATE KHACHHANG SET SOTIENMUA+=@SOTIENMUA WHERE MaKH=@MaKH";
+                    //Update customer
+                    sqlQuery = $"UPDATE KHACHHANG SET SoTienMua+=@SoTienMua WHERE MaKH=@MaKH";
                     command = new SqlCommand(sqlQuery, connection);
 
-                    command.Parameters.AddWithValue("@SOTIENMUA", Convert.ToInt32(txt_ReceiptPrice.Text));
-                    command.Parameters.AddWithValue("@MaKH", cbx_CustomerID.Text);
+                    command.Parameters.AddWithValue("@SoTienMua", Convert.ToInt32(txt_ReceiptPrice.Text));
+                    command.Parameters.AddWithValue("@MaKH", MaKH);
                     reader = command.ExecuteReader();
                     reader.Read();
-                    reader.Close();
+                    reader.Close(); ;
 
-                    sqlQuery = $"UPDATE KHACHHANG SET SOTIENNO+=@SOTIENNO WHERE MaKH=@MaKH";
+                    sqlQuery = $"UPDATE KHACHHANG SET SoTienNo+=@SoTienNo WHERE MaKH=@MaKH";
                     command = new SqlCommand(sqlQuery, connection);
                     command.Parameters.AddWithValue("@SOTIENNO", Convert.ToInt32(txb_MoneyOwe.Text));
-                    command.Parameters.AddWithValue("@MaKH", cbx_CustomerID.Text);
+                    command.Parameters.AddWithValue("@MaKH", MaKH);
                     reader = command.ExecuteReader();
                     reader.Read();
                     reader.Close();
 
-                    UpdateBaoCaoCongNo(connection, cbx_CustomerID.Text, Convert.ToInt32(txb_MoneyOwe.Text));
-
+                    UpdateBaoCaoCongNo(connection, MaKH, Convert.ToInt32(txb_MoneyOwe.Text), Convert.ToInt32(txb_MoneyOwe.Text));
 
                     LoadAll(this);
+
                     BooksSell.Clear();
+
                     cbx_CustomerID.Text = "";
                     tbl_CustomerName.Text = "Tên khách hàng";
                     tbl_CustomerPhoneNumber.Text = "Số điện thoại";
@@ -1709,14 +1750,17 @@ namespace SE104_QLNS
                     txt_CustomerDateOfBirth.Text = "Ngày Sinh";
                     cbx_CustomerGender.Text = "";
                     tbl_CustomerDetailAdress.Text = "Địa Chỉ";
-                    txb_MoneyOwe.Text = "0";
-                    txb_CustomerPayment.Text = "0";
+
                     txt_ReceiptPrice.Text = "0";
+                    txb_CustomerPayment.Text = "0";
+                    txb_MoneyOwe.Text = "0";
+
+                    Notification notification = new Notification("Tạo thành công!", "Tạo Hóa đơn với mã " + NextExportId + " thành công!"); ;
                 }
             }
             catch (Exception ex)
             {
-                Notification noti = new Notification("Error", "Error inserting into HOADON: " + ex.Message);
+                Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi thêm vào HOADON: " + ex.Message);
             }
             LoadAll(this);
         }
@@ -1991,6 +2035,7 @@ namespace SE104_QLNS
                     //set this visible
                     cvs_ImportBooks.Visibility = Visibility.Visible;
                     cvs_ImportBooks_List.Visibility = Visibility.Visible;
+                    txt_ImportID.Text = GetNextImportPaperID(this);
 
 
                     dtg_ImportBooks.Items.Refresh();
@@ -2028,6 +2073,7 @@ namespace SE104_QLNS
                     //set this visible
                     cvs_ImportBooks.Visibility = Visibility.Visible;
                     cvs_ImportBooks_Grid.Visibility = Visibility.Visible;
+                    txt_ImportID.Text = GetNextImportPaperID(this);
 
                     dtg_ImportBooks.Items.Refresh();
 
@@ -2083,6 +2129,7 @@ namespace SE104_QLNS
                 bookimport.BookQuantity = "1";
                 bookimport.BookURL = selectedbook.BookURL;
                 this.wpn_ImportPaper.Children.Add(bookimport);
+                bookimport.UpdateMoney();
             }
         }
         //Switch View
@@ -2094,16 +2141,13 @@ namespace SE104_QLNS
                 {
                     //set other hidden
                     cvs_BooksDataGridList.Visibility = Visibility.Hidden;
-                    cvs_ImportBooks.Visibility = Visibility.Hidden;
 
                     //set this visible
                     cvs_BooksGridList.Visibility = Visibility.Visible;
 
                     //button color
                     btn_SwitchView.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
-                    btn_DeleteBook.Background = new SolidColorBrush(Colors.Transparent);
-                    btn_AddBook.Background = new SolidColorBrush(Colors.Transparent);
-
+                    
                     LoadAll(this);
                     isBookList = false;
                 }
@@ -2129,44 +2173,23 @@ namespace SE104_QLNS
             wpn_Books.Children.Clear();
             if (cvs_ImportBooks.Visibility == Visibility.Visible)
                 return;
-            if (cvs_BooksDataGridList.Visibility == Visibility.Visible) //List View
+            if (!isBookDelete) //Disabled to Enabled
             {
-                if (!isBookDelete) //Disabled to Enabled
-                {
-                    dtg_Books.Columns[0].Visibility = Visibility.Visible;
-                    dtg_Books.Columns[1].Visibility = Visibility.Hidden;
-                    btn_DeleteBook.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
-                    btn_AddBook.Background = new SolidColorBrush(Colors.Transparent);
-                    btn_UpdateBook.Background = new SolidColorBrush(Colors.Transparent);
-                    isBookDelete = true;
-                    isBookUpdate = false;
-                }
-                else //Enabled to Disabled
-                {
-                    dtg_Books.Columns[0].Visibility = Visibility.Hidden;
-                    btn_DeleteBook.Background = new SolidColorBrush(Colors.Transparent);
-                    isBookDelete = false;
-                }
+                dtg_Books.Columns[0].Visibility = Visibility.Visible;
+                dtg_Books.Columns[1].Visibility = Visibility.Hidden;
+                btn_DeleteBook.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
+                btn_AddBook.Background = new SolidColorBrush(Colors.Transparent);
+                btn_UpdateBook.Background = new SolidColorBrush(Colors.Transparent);
+                isBookDelete = true;
+                isBookUpdate = false;
             }
-            else if (cvs_BooksGridList.Visibility == Visibility.Visible)//TableView
+            else //Enabled to Disabled
             {
-                if (!isBookDelete)
-                {
-                    btn_DeleteBook.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
-                    btn_AddBook.Background = new SolidColorBrush(Colors.Transparent);
-                    btn_UpdateBook.Background = new SolidColorBrush(Colors.Transparent);
-                    isBookDelete = true;
-                    isBookUpdate = false;
-                    LoadAll(this);
-                }
-                else
-                {
-                    dtg_Books.Columns[0].Visibility = Visibility.Hidden;
-                    btn_DeleteBook.Background = new SolidColorBrush(Colors.Transparent);
-                    isBookDelete = false;
-                    LoadAll(this);
-                }
+                dtg_Books.Columns[0].Visibility = Visibility.Hidden;
+                btn_DeleteBook.Background = new SolidColorBrush(Colors.Transparent);
+                isBookDelete = false;
             }
+            LoadAll(this);
         }
         private void btn_DeleteBook_Click2(object sender, RoutedEventArgs e) //DeleteBook for each Book
         {
@@ -2181,45 +2204,24 @@ namespace SE104_QLNS
         {
             if (cvs_ImportBooks.Visibility == Visibility.Visible)
                 return;
-            if (cvs_BooksDataGridList.Visibility == Visibility.Visible) //List View
+            if (!isBookUpdate) //Disabled to Enabled
             {
-                if (!isBookUpdate) //Disabled to Enabled
-                {
-                    dtg_Books.Columns[1].Visibility = Visibility.Visible;
-                    dtg_Books.Columns[0].Visibility = Visibility.Hidden;
-                    btn_UpdateBook.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
-                    btn_DeleteBook.Background = new SolidColorBrush(Colors.Transparent);
-                    btn_AddBook.Background = new SolidColorBrush(Colors.Transparent);
+                dtg_Books.Columns[1].Visibility = Visibility.Visible;
+                dtg_Books.Columns[0].Visibility = Visibility.Hidden;
+                btn_UpdateBook.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
+                btn_DeleteBook.Background = new SolidColorBrush(Colors.Transparent);
+                btn_AddBook.Background = new SolidColorBrush(Colors.Transparent);
 
-                    isBookDelete = false;
-                    isBookUpdate = true;
-                }
-                else //Enabled to Disabled
-                {
-                    dtg_Books.Columns[1].Visibility = Visibility.Hidden;
-                    btn_UpdateBook.Background = new SolidColorBrush(Colors.Transparent);
-                    isBookUpdate = false;
-                }
-
+                isBookDelete = false;
+                isBookUpdate = true;
             }
-            else if (cvs_BooksGridList.Visibility == Visibility.Visible)//TableView
+            else //Enabled to Disabled
             {
-                if (!isBookUpdate)
-                {
-                    btn_UpdateBook.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
-                    btn_DeleteBook.Background = new SolidColorBrush(Colors.Transparent);
-                    btn_AddBook.Background = new SolidColorBrush(Colors.Transparent);
-                    isBookDelete = false;
-                    isBookUpdate = true;
-                    LoadAll(this);
-                }
-                else
-                {
-                    btn_UpdateBook.Background = new SolidColorBrush(Colors.Transparent);
-                    isBookUpdate = false;
-                    LoadAll(this);
-                }
+                dtg_Books.Columns[1].Visibility = Visibility.Hidden;
+                btn_UpdateBook.Background = new SolidColorBrush(Colors.Transparent);
+                isBookUpdate = false;
             }
+            LoadAll(this);
         }
         private void btn_UpdateBook_Click2(object sender, RoutedEventArgs e)
         {
@@ -2259,13 +2261,13 @@ namespace SE104_QLNS
                         reader.Close();
                         if (Amount > Convert.ToInt32(SoLuongTonToiDaTruocNhap))
                         {
-                            Notification noti = new Notification("Policy Violation", "Amount of Book for " + child.BookID + " is more than Import Limit: " + SoLuongTonToiDaTruocNhap);
+                            Notification noti = new Notification("Vi phạm quy định", "Số lượng sách được nhập cho " + child.BookID + " lớn hơn quy định: " + SoLuongTonToiDaTruocNhap);
                             return;
                         }
                     }
                     catch (Exception ex)
                     {
-                        Notification noti = new Notification("Error", "Error retrieving data from SACH: " + ex.Message);
+                        Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi lấy thông tin từ SACH: " + ex.Message);
                     }
                 }
                 //Checking if the imported amount of book fit the requirement
@@ -2273,7 +2275,7 @@ namespace SE104_QLNS
                 {
                     if (Convert.ToInt32(child.BookQuantity) < Convert.ToInt32(SoLuongNhapToiThieu))
                     {
-                        Notification noti = new Notification("Policy Violation", "Amount of Book Imported for " + child.BookID + " is less than limit: " + SoLuongNhapToiThieu);
+                        Notification noti = new Notification("Vi phạm quy định", "Số lượng sách được nhập cho " + child.BookID + " bé hơn quy định: " + SoLuongNhapToiThieu);
                         return;
                     }
                 }
@@ -2282,30 +2284,20 @@ namespace SE104_QLNS
                 {
                     try
                     {
-                        //Get the amount of books
-                        string sqlQuery = "SELECT SoLuongTon FROM SACH WHERE MaSach = @MaSach";
+                        //Update The Actual Book
+                        string sqlQuery = "UPDATE SACH SET SOLUONGTON+=@SOLUONGTON WHERE MaSach = @MaSach";
                         SqlCommand command = new SqlCommand(sqlQuery, connection);
+                        command.Parameters.AddWithValue("@SOLUONGTON", Convert.ToInt32(child.BookQuantity));
                         command.Parameters.AddWithValue("@MaSach", child.BookID);
                         SqlDataReader reader = command.ExecuteReader();
                         reader.Read();
-                        int Amount = Convert.ToInt32(reader["SoLuongTon"]);
-                        Amount += Convert.ToInt32(child.BookQuantity);
                         reader.Close();
 
-                        //Update The Actual Book
-                        sqlQuery = "UPDATE SACH SET SOLUONGTON=@SOLUONGTON WHERE MaSach = @MaSach";
-                        command = new SqlCommand(sqlQuery, connection);
-                        command.Parameters.AddWithValue("@SOLUONGTON", Amount);
-                        command.Parameters.AddWithValue("@MaSach", child.BookID);
-                        reader = command.ExecuteReader();
-                        reader.Read();
-                        reader.Close();
-
-                        UpdateBaoCaoTon(connection, child.BookID, Convert.ToInt32(child.BookQuantity));
+                        UpdateBaoCaoTon(connection, child.BookID, Convert.ToInt32(child.BookQuantity), Convert.ToInt32(child.BookQuantity));
                     }
                     catch (Exception ex)
                     {
-                        Notification noti = new Notification("Error", "Error retrieving data from SACH: " + ex.Message);
+                        Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi lấy thông tin từ SACH: " + ex.Message);
                     }
                 }
                 //Creating Import Paper for all
@@ -2326,7 +2318,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error inserting into PHIEUNHAP: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi thêm vào PHIEUNHAP: " + ex.Message);
                 }
                 //Creating ImportPaper for each one
                 foreach (Uct_BookImport child in wpn_ImportPaper.Children.OfType<Uct_BookImport>())
@@ -2366,10 +2358,12 @@ namespace SE104_QLNS
                         reader = command.ExecuteReader();
                         reader.Read();
                         reader.Close();
+
+                        Notification noti = new Notification("Thành Công", "Thêm phiếu nhập thành công");
                     }
                     catch (Exception ex)
                     {
-                        Notification noti = new Notification("Error", "Error inserting into PHIEUNHAP: " + ex.Message);
+                        Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi thêm vào PHIEUNHAP: " + ex.Message);
                     }
                 }
                 wpn_ImportPaper.Children.Clear();
@@ -2500,25 +2494,52 @@ namespace SE104_QLNS
 
         private void txt_EmployeeSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            foreach (Uct_Employee child in wpn_Employee.Children)
+            if (cbx_EmployeeSearch.SelectedIndex == 0)
             {
-                try
+                foreach (Uct_Employee child in wpn_Employee.Children)
                 {
-                    if (child is Uct_Employee)
+                    try
                     {
-                        if (child.EmployeeName.Contains(txt_EmployeeSearch.Text) || child.EmployeePhonenumber.Contains(txt_EmployeeSearch.Text))
+                        if (child is Uct_Employee)
                         {
-                            child.Visibility = Visibility.Visible;
-                        }
-                        else
-                        {
-                            child.Visibility = Visibility.Collapsed;
+                            if (child.EmployeeName.ToLower().Contains(txt_EmployeeSearch.Text.ToLower()))
+                            {
+                                child.Visibility = Visibility.Visible;
+                            }
+                            else
+                            {
+                                child.Visibility = Visibility.Collapsed;
+                            }
                         }
                     }
+                    catch (Exception ex)
+                    {
+                        Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi lấy thông tin từ TACGIA: " + ex.Message);
+                    }
                 }
-                catch (Exception ex)
+            }
+            else
+            {
+                foreach (Uct_Employee child in wpn_Employee.Children)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving data from TACGIA: " + ex.Message);
+                    try
+                    {
+                        if (child is Uct_Employee)
+                        {
+                            if (child.EmployeePhonenumber.ToLower().Contains(txt_EmployeeSearch.Text.ToLower()))
+                            {
+                                child.Visibility = Visibility.Visible;
+                            }
+                            else
+                            {
+                                child.Visibility = Visibility.Collapsed;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi lấy thông tin từ TACGIA: " + ex.Message);
+                    }
                 }
             }
         }
@@ -2527,9 +2548,9 @@ namespace SE104_QLNS
         {
         }
 
-        private void EmployeeSearchComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cbx_EmployeeSearch_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (EmployeeSearchComboBox.SelectedItem == null) return;
+            if (cbx_EmployeeSearch.SelectedItem == null) return;
         }
 
         private void btn_SaveBillAsPDF_Click(object sender, RoutedEventArgs e)
@@ -2759,7 +2780,7 @@ namespace SE104_QLNS
                     author.AuthorName.ToLower().Contains(txt_AuthorGenreSearch.Text.ToLower())
                 ).ToList();
 
-                dtg_GenreList.ItemsSource = filteredItems;
+                dtg_AuthorList.ItemsSource = filteredItems2;
             }
             dtg_GenreList.Items.Refresh();
             dtg_AuthorList.Items.Refresh();
@@ -2795,7 +2816,7 @@ namespace SE104_QLNS
                     //SoLuongTonToiDaTruocNhap
                     sqlQuery = $"UPDATE THAMSO SET GiaTri = @GiaTri WHERE TenThamSo='SoLuongTonToiDaTruocNhap'";
                     command = new SqlCommand(sqlQuery, connection);
-                    command.Parameters.AddWithValue("@GiaTri", tbx_BookMinimumStockQuantityBeforeImporting.Text);
+                    command.Parameters.AddWithValue("@GiaTri", tbx_BookMaximumStockQuantityBeforeImporting.Text);
                     reader = command.ExecuteReader();
                     reader.Read();
                     reader.Close();
@@ -2832,13 +2853,13 @@ namespace SE104_QLNS
                     reader.Read();
                     reader.Close();
 
-                    Notification noti2 = new Notification("Update", "Updated THAMSO successfully!");
+                    Notification noti2 = new Notification("Thành Công", "Cập nhật THAMSO thành công!");
                     LoadAll(this);
                 }
             }
             catch (Exception ex)
             {
-                Notification noti = new Notification("Error", "Error updating ThamSo: " + ex.Message);
+                Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi khi cập nhật ThamSo: " + ex.Message);
             }
         }
 
@@ -2951,6 +2972,7 @@ namespace SE104_QLNS
 
         private void dtg_CustomerPaymentReceipt_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (isCustomerReceiptDelete) return;
             selectedcustomerreceipt = (Uct_CustomerReceipt)dtg_CustomerPaymentReceipt.SelectedItem;
         }
 
@@ -2991,7 +3013,36 @@ namespace SE104_QLNS
 
         private void txt_ReceiptSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (string.IsNullOrEmpty(txt_ReceiptSearch.Text))
+            {
+                dtg_CustomerPaymentReceipt.ItemsSource = CustomerReceipt; // Reset to all items if no search text
+                return;
+            }
+            if (cbx_ReceiptSearch.SelectedIndex==0)
+            {
+                var filteredItems = CustomerReceipt.Where(receipt =>
+                    (receipt.CustomerName.ToLower().Contains(txt_ReceiptSearch.Text.ToLower())||
+                    (receipt.CustomerID.ToLower().Contains(txt_ReceiptSearch.Text.ToLower()))
+                )).ToList();
 
+                dtg_CustomerPaymentReceipt.ItemsSource = filteredItems;
+            }
+            else if (cbx_ReceiptSearch.SelectedIndex == 1)
+            {
+                var filteredItems = CustomerReceipt.Where(receipt =>
+                    receipt.CustomerID.ToLower().Contains(txt_ReceiptSearch.Text.ToLower())
+                ).ToList();
+
+                dtg_CustomerPaymentReceipt.ItemsSource = filteredItems;
+            }
+            else
+            {
+                var filteredItems = CustomerReceipt.Where(receipt =>
+                    receipt.CustomerName.ToLower().Contains(txt_ReceiptSearch.Text.ToLower())
+                ).ToList();
+
+                dtg_CustomerPaymentReceipt.ItemsSource = filteredItems;
+            }
         }
 
         private void txt_CustomerSearch_TextChanged(object sender, TextChangedEventArgs e)
@@ -3034,7 +3085,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving data from KHACHHANG: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi lấy thông tin từ KHACHHANG: " + ex.Message);
                 }
             }
         }
@@ -3112,11 +3163,13 @@ namespace SE104_QLNS
             {
                 dtg_CustomerPaymentReceipt.Columns[0].Visibility = Visibility.Visible;
                 btn_ReceiptDelete.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#C2DECE");
+                isCustomerReceiptDelete = true;
             }
             else
             {
                 dtg_CustomerPaymentReceipt.Columns[0].Visibility = Visibility.Hidden;
                 btn_ReceiptDelete.Background = new SolidColorBrush(Colors.Transparent);
+                isCustomerReceiptDelete = false;
             }
         }
 
@@ -3164,5 +3217,68 @@ namespace SE104_QLNS
             }
         }
 
+        private void Cbx_SearchBook_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            txt_Search.Text = "";
+        }
+
+        private void dpk_CustomerBirthday_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            txt_CustomerDateOfBirth.Text = dpk_CustomerBirthday.SelectedDate.Value.Date.ToString().Substring(0, 10);
+            
+        }
+
+        private void tbx_BookMaximumStockQuantityBeforeImporting_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!int.TryParse(tbx_BookMaximumStockQuantityBeforeImporting.Text, out int parsedValue))
+            {
+                tbx_BookMaximumStockQuantityBeforeImporting.Text = SoLuongTonToiDaTruocNhap;
+            }
+        }
+
+        private void tbx_BookMinimumStockQuantityAfterSelling_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!int.TryParse(tbx_BookMinimumStockQuantityAfterSelling.Text, out int parsedValue))
+            {
+                tbx_BookMinimumStockQuantityAfterSelling.Text = SoLuongTonToiThieuSauBan;
+            }
+        }
+
+        private void tbx_ImportToExportRatio_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!int.TryParse(tbx_ImportToExportRatio.Text, out int parsedValue))
+            {
+                tbx_ImportToExportRatio.Text = TiLeGiaBan;
+            }
+        }
+
+        private void tbx_BookMinimumImportQuantity_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!int.TryParse(tbx_BookMinimumImportQuantity.Text, out int parsedValue))
+            {
+                tbx_BookMinimumImportQuantity.Text = SoLuongNhapToiThieu;
+            }
+        }
+
+        private void tbx_CustomerMaximumDebt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!int.TryParse(tbx_CustomerMaximumDebt.Text, out int parsedValue))
+            {
+                tbx_CustomerMaximumDebt.Text = SoTienNoToiDa;
+            }
+        }
+
+        private void btn_ResetThamSo_Click(object sender, RoutedEventArgs e)
+        {
+            tbx_BookMaximumStockQuantityBeforeImporting.Text = SoLuongTonToiDaTruocNhap;
+            tbx_BookMinimumStockQuantityAfterSelling.Text = SoLuongTonToiThieuSauBan;
+            tbx_ImportToExportRatio.Text = TiLeGiaBan;
+            tbx_BookMinimumImportQuantity.Text = SoLuongNhapToiThieu;
+            tbx_CustomerMaximumDebt.Text = SoTienNoToiDa;
+            if (Convert.ToInt32(ApDungQuyDinhKiemTraSoTienThu) == 1)
+                cbx_CheckMoneyReceivedFromCustomer.IsChecked = true;
+            else
+                cbx_CheckMoneyReceivedFromCustomer.IsChecked = false;
+        }
     }
 }

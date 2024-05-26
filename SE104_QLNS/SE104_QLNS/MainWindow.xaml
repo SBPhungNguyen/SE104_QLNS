@@ -142,7 +142,7 @@
 
 
                             <Border Height="28" Width="100" CornerRadius="15,0,0,15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="345,2,499,2" >
-                                <ComboBox Name="Cbx_SearchBook" Style="{StaticResource MonthYearComboxbox}" Height="24" Width="80" Margin="15,1,3,1" FontSize="13">
+                                <ComboBox Name="Cbx_SearchBook" Style="{StaticResource MonthYearComboxbox}" Width="80" Margin="15,1,3,1" FontSize="13" SelectionChanged="Cbx_SearchBook_SelectionChanged" >
                                     <ComboBoxItem>Tất Cả</ComboBoxItem>
                                     <ComboBoxItem>Tên Sách</ComboBoxItem>
                                     <ComboBoxItem>Thể Loại</ComboBoxItem>
@@ -159,8 +159,8 @@
                                 </Grid>
                             </Border>
 
-                            <Button Name="btn_SwitchView" Height="40" Width="100"
-                                FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="112,0,732,0" Click="btn_SwitchView_Click">
+                            <Button Name="btn_SwitchView" Width="100"
+                                FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="138,0,758,0" Click="btn_SwitchView_Click">
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Setter Property="Background" Value="Transparent"/>
@@ -237,7 +237,7 @@
                             </Button>
 
                             <Button Name="btn_UpdateBook" Height="40" Width="100"
-                                FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="112,5,732,5" Click="btn_UpdateBook_Click">
+                                FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="138,5,758,0" Click="btn_UpdateBook_Click" VerticalAlignment="Top">
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Setter Property="Background" Value="Transparent"/>
@@ -274,7 +274,7 @@
                             </Button>
 
                             <Button Name="btn_DeleteBook" Width="100"
-                                FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="240,5,656,0" Click="btn_DeleteBook_Click" Height="40" VerticalAlignment="Top">
+                                FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="240,5,656,5" Click="btn_DeleteBook_Click">
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Setter Property="Background" Value="Transparent"/>
@@ -575,11 +575,11 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                                 </WrapPanel>
                                             </ScrollViewer>
                                             <TextBlock Margin="15,400,189,51" Text="Tổng tiền:" FontSize="18" FontWeight="Bold"/>
-                                            <Label Name="lbl_SumImportMoney" 
+                                            <TextBlock Name="tbl_SumImportMoney" 
                                                    Margin="113,396,16,45" 
-                                                   Content="9000" 
+                                                   Text="9000" 
                                                    FontSize="18" FontWeight="Bold" 
-                                                   HorizontalContentAlignment="Right"/>
+                                                   HorizontalAlignment="Right"/>
                                             <Button Name="btn_ImportBooks"
                                                     Margin="0,431,4,2"
                                                     Content="Nhập"
@@ -900,25 +900,33 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                                  Text="Email"/>
 
                                         <!-- Customer's DateOfBirth -->
-                                        <Border     Grid.Column="1"
-                                                    Grid.Row="1"
-                                                    CornerRadius="5"
-                                                    Height="30" Width="190"
-                                                    Background="White"
-                                                    BorderBrush="Black"
-                                                    BorderThickness="1">
+                                        <Border     
+    Grid.Column="1"
+    Grid.Row="1"
+    CornerRadius="5"
+    Height="30"
+    Width="190"
+    Background="White"
+    BorderBrush="Black"
+    BorderThickness="1">
 
-                                            <TextBox x:Name="txt_CustomerDateOfBirth"
-                                                    Height="30"
-                                                    Width="190"
-                                                    Style="{StaticResource CustomerInfoTextBox}"
-                                                    Text="Ngày Sinh"
-                                                    VerticalAlignment="Center" 
-                                                    HorizontalAlignment="Center"
-                                                    VerticalContentAlignment="Center" 
-                                                    Foreground="#FF154448" 
-                                                    BorderThickness="0">
-                                            </TextBox>
+                                            <Grid Margin="157,0,0,0">
+
+                                                <TextBox x:Name="txt_CustomerDateOfBirth"
+                 Height="30"
+                 Width="190"
+                 Style="{StaticResource CustomerInfoTextBox}"
+                 Text="Ngày Sinh"
+                 VerticalAlignment="Center" 
+                 HorizontalAlignment="Left"
+                 VerticalContentAlignment="Center" 
+                 Foreground="#FF154448" 
+                 BorderThickness="0" Margin="-159,0,0,0" />
+                                                <DatePicker x:Name="dpk_CustomerBirthday" 
+SelectedDateChanged="dpk_CustomerBirthday_SelectedDateChanged"
+Height="30"       />
+
+                                            </Grid>
                                         </Border>
 
 
@@ -927,6 +935,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                         <ComboBox x:Name="cbx_CustomerGender"
                                                   Grid.Column="2"
                                                   Grid.Row="1"
+                                                  IsReadOnly="True"
                                                   Style="{StaticResource CustomerCombobox}"
                                                   HorizontalAlignment="Center"
                                                   VerticalAlignment="Center"
@@ -1418,8 +1427,8 @@ BorderThickness="{TemplateBinding BorderThickness}">
                         <!--Sreach bar-->
                         <Grid Grid.Row="0">
                             <Border Height="28" Width="100" CornerRadius="15,0,0,15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="345,2,499,2" >
-                                <ComboBox Style="{StaticResource MonthYearComboxbox}" FontSize="13" SelectedIndex="0" Height="24" Margin="16,1,5,1">
-
+                                <ComboBox Style="{StaticResource MonthYearComboxbox}" Name="cbx_ReceiptSearch"
+                                          FontSize="13" SelectedIndex="0" Height="24" Margin="16,1,5,1">
                                     <ComboBoxItem>Tất Cả</ComboBoxItem>
                                     <ComboBoxItem>Mã KH</ComboBoxItem>
                                     <ComboBoxItem>Tên KH</ComboBoxItem>
@@ -1427,8 +1436,8 @@ BorderThickness="{TemplateBinding BorderThickness}">
                             </Border>
                             <Border Height="28" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,15,15,0" Margin="470,6,250,6">
                                 <Grid>
-                                    <TextBox x:Name="txt_ReceiptSearch" VerticalContentAlignment="Center" VerticalAlignment="Center"
-                             FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="170" Margin="28,0,0,0" TextChanged="txt_ReceiptSearch_TextChanged"/>
+                                    <TextBox x:Name="txt_ReceiptSearch" VerticalContentAlignment="Center" VerticalAlignment="Bottom"
+                             FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="170" Margin="28,0,0,2" TextChanged="txt_ReceiptSearch_TextChanged"/>
                                     <Image Name="img_ReceiptSearch" Source="/Images/icon_search.png" Stretch="Fill" Height="20" Width="20" Cursor="Hand" Margin="212,4,16,2"/>
 
                                 </Grid>
@@ -1475,7 +1484,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                             </Button>
 
                             <Button Name="btn_ReceiptDelete" Height="40" Width="100"
-                               FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="112,5,732,5" Click="btn_ReceiptDelete_Click">
+                               FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Margin="138,0,758,5" Click="btn_ReceiptDelete_Click" VerticalAlignment="Bottom">
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Setter Property="Background" Value="Transparent"/>
@@ -1607,11 +1616,11 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                     <DataGridTextColumn Header="Mã phiếu thu" Binding="{Binding ReceiptID}" Width="*" IsReadOnly="True"/>
                                     <DataGridTextColumn Header="Mã khách hàng" Binding="{Binding CustomerID}" Width="*" IsReadOnly="True"/>
                                     <DataGridTextColumn Header="Tên khách hàng" Binding="{Binding CustomerName}" Width="1.5*" IsReadOnly="True"/>
-                                    <DataGridTextColumn Header="SĐT" Binding="{Binding CustomerNumber}" Width="0.5*" IsReadOnly="True"/>
-                                    <DataGridTextColumn Header="Ngày thu" Binding="{Binding PaymentDate}" Width="*" IsReadOnly="True"/>
-                                    <DataGridTextColumn Header="Số nợ trước thu" Binding="{Binding DebtBefore}" Width="*" IsReadOnly="True"/>
-                                    <DataGridTextColumn Header="Tiền thu" Binding="{Binding Payment}" Width="*" IsReadOnly="True"/>
-                                    <DataGridTextColumn Header="Số nợ sau thu" Binding="{Binding DebtAfter}" Width="*" IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="SĐT" Binding="{Binding CustomerNumber}" Width="*" IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Ngày thu" Binding="{Binding PaymentDate}" Width="1.1*" IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Số nợ trước thu" Binding="{Binding DebtBefore}" Width="0.8*" IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Tiền thu" Binding="{Binding Payment}" Width="0.8*" IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Số nợ sau thu" Binding="{Binding DebtAfter}" Width="0.8*" IsReadOnly="True"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </StackPanel>
@@ -1698,21 +1707,31 @@ BorderThickness="{TemplateBinding BorderThickness}">
                         <!--this is Book Amount Report panel-->
                         <Canvas Grid.Row="2" Name="cvs_AmountReport" Visibility="Visible">
                             <StackPanel>
-                                <Grid>
+                                <Grid Margin="20,0,0,0">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="0.17*"></ColumnDefinition>
+                                        <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                                        <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                                        <ColumnDefinition Width="0.15*"></ColumnDefinition>
                                         <ColumnDefinition Width="0.15*"></ColumnDefinition>
                                         <ColumnDefinition Width="*"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
+                                    <Label Name="lbl_AmountReportMonth" FontSize="20"
+   Content="Tháng:" FontWeight="Bold" Grid.Column="0" VerticalAlignment="Center"
+   VerticalContentAlignment="Top" HorizontalContentAlignment="Right" HorizontalAlignment="Center"
+FontFamily="Tahoma"/>
                                     <ComboBox x:Name="cbx_AmountReportMonth" 
                                           Text="Tháng"
-                                          Grid.Column="0"
+                                          Grid.Column="1"
                                           Margin="20, 10, 0, 10"
                                           Style="{StaticResource MonthYearComboxbox}" 
                                           BorderThickness="0,0,0,2" 
                                           BorderBrush="#154448" SelectionChanged="cbx_AmountReportMonth_SelectionChanged"/>
+                                    <Label Name="lbl_AmountReportYear" FontSize="20"
+   Content="Năm:" FontWeight="Bold" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"
+   VerticalContentAlignment="Top" HorizontalContentAlignment="Right"
+FontFamily="Tahoma"/>
                                     <ComboBox x:Name="cbx_AmountReportYear" 
-                                          Grid.Column="1"
+                                          Grid.Column="3"
                                           Text="Năm"
                                           Margin="20, 10, 0, 10"
                                           Style="{StaticResource MonthYearComboxbox}" 
@@ -1754,23 +1773,32 @@ BorderThickness="{TemplateBinding BorderThickness}">
                         <!--this is Customer Debt Report panel-->
                         <Canvas Grid.Row="2" Name="cvs_CustomerDebtReport" Visibility="Hidden">
                             <StackPanel>
-                                <Grid>
+                                <Grid Margin="20,0,0,0">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="0.17*"></ColumnDefinition>
+                                        <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                                        <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                                        <ColumnDefinition Width="0.15*"></ColumnDefinition>
                                         <ColumnDefinition Width="0.15*"></ColumnDefinition>
                                         <ColumnDefinition Width="*"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
-
+                                    <Label Name="lbl_CustomerDebtReportMonth" FontSize="20"
+   Content="Tháng:" FontWeight="Bold" Grid.Column="0" VerticalAlignment="Center"
+   VerticalContentAlignment="Top" HorizontalContentAlignment="Right" HorizontalAlignment="Center"
+FontFamily="Tahoma"/>
                                     <ComboBox x:Name="cbx_CustomerDebtReportMonth" 
                                               Text="Tháng"
-                                              Grid.Column="0"
+                                              Grid.Column="1"
                                               Margin="20, 10, 0, 10"
                                               Style="{StaticResource MonthYearComboxbox}" 
                                               BorderThickness="0,0,0,2" 
                                               SelectionChanged="cbx_CustomerDebtReportMonth_SelectionChanged"
                                               BorderBrush="#154448"/>
+                                    <Label Name="lbl_CustomerDebtReportYear" FontSize="20"
+   Content="Năm:" FontWeight="Bold" Grid.Column="2" VerticalAlignment="Center"
+   VerticalContentAlignment="Top" HorizontalContentAlignment="Right" HorizontalAlignment="Center"
+FontFamily="Tahoma"/>
                                     <ComboBox x:Name="cbx_CustomerDebtReportYear" 
-                                              Grid.Column="1"
+                                              Grid.Column="3"
                                               Text="Năm"
                                               Margin="20, 10, 0, 10"
                                               Style="{StaticResource MonthYearComboxbox}" 
@@ -1844,7 +1872,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                             <Border Height="28" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,15,15,0" Margin="470,6,250,6">
                                 <Grid Margin="1,0,0,0">
                                     <TextBox x:Name="txt_CustomerSearch" VerticalContentAlignment="Center" VerticalAlignment="Center"
-                             FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="226" Margin="10,0,0,0" />
+                             FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="226" Margin="10,0,0,0" TextChanged="txt_CustomerSearch_TextChanged" />
                                     <Image Name="img_CustomerSearch" Source="/Images/icon_search.png" Stretch="Fill" Height="20" Width="20" Cursor="Hand" Margin="242,3,11,3"/>
 
                                 </Grid>
@@ -2016,10 +2044,10 @@ BorderThickness="{TemplateBinding BorderThickness}">
 
                         <!--Sreach bar-->
                         <Grid Grid.Row="0" Grid.ColumnSpan="4">
-                            <Border Height="28" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="15,15,15,15" Margin="414,6,250,6">
+                            <Border Height="28" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="15,15,15,15" Margin="314,6,350,6">
                                 <Grid Margin="15,0,0,0">
-                                    <TextBox x:Name="txt_AuthorGenreSearch" VerticalContentAlignment="Center" VerticalAlignment="Center"
-                             FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="266" TextChanged="txt_AuthorGenreSearch_TextChanged" Margin="13,0,0,0"/>
+                                    <TextBox x:Name="txt_AuthorGenreSearch" VerticalContentAlignment="Center" VerticalAlignment="Bottom"
+                             FontSize="16" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Width="266" TextChanged="txt_AuthorGenreSearch_TextChanged" Margin="13,0,0,2"/>
                                     <Image Source="/Images/icon_search.png" Stretch="Fill" Height="20" Width="20" Cursor="Hand" Margin="284,3,11,3"/>
 
                                 </Grid>
@@ -2189,7 +2217,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                         </Button.Template>
                                     </Button>
 
-                                    
+
                                 </DockPanel>
 
                                 <!--this is Author list -->
@@ -2558,15 +2586,15 @@ BorderThickness="{TemplateBinding BorderThickness}">
                         <!--Sreach bar-->
                         <Grid Grid.Row="0" Grid.ColumnSpan="2">
                             <Border Height="28" Width="100"  CornerRadius="15,0,0,15" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="345,2,499,2" >
-                                <ComboBox Style="{StaticResource MonthYearComboxbox}" SelectedIndex="0" FontSize="13" Height="24" Margin="16,1,5,1" Name="EmployeeSearchComboBox" SelectionChanged="EmployeeSearchComboBox_SelectionChanged">
+                                <ComboBox Name="cbx_EmployeeSearch" Style="{StaticResource MonthYearComboxbox}" SelectedIndex="0" FontSize="13" Height="24" Margin="16,1,5,1" SelectionChanged="cbx_EmployeeSearch_SelectionChanged">
                                     <ComboBoxItem>Tên</ComboBoxItem>
                                     <ComboBoxItem>SĐT</ComboBoxItem>
                                 </ComboBox>
                             </Border>
                             <Border Height="28" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,15,15,0" Margin="470,6,250,6">
                                 <Grid>
-                                    <TextBox x:Name="txt_EmployeeSearch" VerticalContentAlignment="Center" VerticalAlignment="Center"
-                                     FontSize="16" BorderThickness="0,0,0,1" TextChanged="txt_EmployeeSearch_TextChanged" Margin="10,0,37,0"/>
+                                    <TextBox x:Name="txt_EmployeeSearch" VerticalContentAlignment="Center" VerticalAlignment="Top"
+                                     FontSize="16" BorderThickness="0,0,0,1" TextChanged="txt_EmployeeSearch_TextChanged" Margin="10,2,37,0"/>
                                     <Image Name="img_EmployeeSearch" Source="/Images/icon_search.png" Stretch="Fill" Height="20" Width="20" Cursor="Hand" Margin="243,3,11,3"/>
 
                                 </Grid>
@@ -3001,13 +3029,13 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                     <StackPanel Grid.Row="0" Grid.Column="0">
                                         <TextBlock Text="Số lượng tồn tối đa trước khi nhập:"
                                                Foreground="#154448" FontSize="20" Margin="10,0,0,0"/>
-                                        <TextBox x:Name="tbx_BookMinimumStockQuantityBeforeImporting"
+                                        <TextBox x:Name="tbx_BookMaximumStockQuantityBeforeImporting"
                                                  Style="{StaticResource CustomerInfoTextBox}"
                                                  Width="150"
                                                  FontSize="20" 
                                                  FontWeight="Bold"
                                                  HorizontalAlignment="Left"
-                                                 Margin="10"/>
+                                                 Margin="10" TextChanged="tbx_BookMaximumStockQuantityBeforeImporting_TextChanged"/>
                                     </StackPanel>
 
                                     <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Margin="369,0,0,76" Grid.RowSpan="2">
@@ -3019,7 +3047,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                                  FontSize="20" 
                                                  FontWeight="Bold"
                                                  HorizontalAlignment="Left"
-                                                 Margin="10"/>
+                                                 Margin="10" TextChanged="tbx_BookMinimumStockQuantityAfterSelling_TextChanged"/>
                                     </StackPanel>
                                     <StackPanel Grid.Row="0" Grid.Column="1" Margin="220,0,0,0" Grid.RowSpan="2">
                                         <TextBlock Text="Tỉ lệ giá bán:"
@@ -3028,7 +3056,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
              Style="{StaticResource CustomerInfoTextBox}"
              Width="150"
              FontSize="20" 
-             FontWeight="Bold" Margin="-90,0,0,0"/>
+             FontWeight="Bold" Margin="-90,0,0,0" TextChanged="tbx_ImportToExportRatio_TextChanged"/>
                                     </StackPanel>
                                     <StackPanel Grid.Row="1" Grid.Column="0">
                                         <TextBlock Text="Số lượng nhập tối thiểu:"
@@ -3039,7 +3067,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                                  FontSize="20" 
                                                  FontWeight="Bold"
                                                  HorizontalAlignment="Left"
-                                                 Margin="10"/>
+                                                 Margin="10" TextChanged="tbx_BookMinimumImportQuantity_TextChanged"/>
                                     </StackPanel>
 
                                     <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="369,0,0,0">
@@ -3051,7 +3079,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                                  FontSize="20" 
                                                  FontWeight="Bold"
                                                  HorizontalAlignment="Left"
-                                                 Margin="10"/>
+                                                 Margin="10" TextChanged="tbx_CustomerMaximumDebt_TextChanged"/>
                                     </StackPanel>
 
                                     <DockPanel Grid.Row="4" Grid.ColumnSpan="2" Margin="0,10,0,0">
@@ -3071,6 +3099,41 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                         </CheckBox>
                                     </DockPanel>
                                 </Grid>
+                                <Button x:Name="btn_ResetThamSo" Height="40" Width="100" HorizontalAlignment="Right" Margin="0,-120,50,0"
+FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Click="btn_ResetThamSo_Click">
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#C2DECE"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Width="100" Height="40"
+                        CornerRadius="10"
+                        Background="{TemplateBinding Background}"
+                        BorderThickness="0"
+                        BorderBrush="#3CB76D">
+                                                <Grid>
+                                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                                        <Image Source="/Images/icon_reset.png" Margin="15,0,0,0"
+        Stretch="Fill" Height="25" Width="25"/>
+                                                        <TextBlock Text="Reset"
+                   Padding="10,0,0,0"
+        VerticalAlignment="Center"
+        FontFamily="Tahoma"
+        FontWeight="Bold"
+        FontSize="16"  RenderTransformOrigin="0.151,0.392"/>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
                                 <Button x:Name="btn_UpdateThamSo" Height="40" Width="100" HorizontalAlignment="Right" Margin="0,-30,50,0"
                                 FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Click="btn_UpdateThamSo_Click">
                                     <Button.Style>

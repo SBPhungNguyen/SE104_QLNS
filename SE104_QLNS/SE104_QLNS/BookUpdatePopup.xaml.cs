@@ -77,7 +77,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error Retrieving Data: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi đọc dữ liệu từ THAMSO: " + ex.Message);
                 }
             }
         }
@@ -110,7 +110,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error opening file: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi mở hình ảnh: " + ex.Message);
                 }
             });
         }
@@ -152,7 +152,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving authors: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi lấy thông tin từ Tác giả: " + ex.Message);
                 }
             }
         }
@@ -180,7 +180,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error retrieving genres: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi lấy thông tin từ thể loại: " + ex.Message);
                 }
             }
         }
@@ -261,7 +261,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error Updating Book: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi cập nhật sách:" + ex.Message);
                 }
                 parent.LoadAll(parent);
                 IsClosing = true;

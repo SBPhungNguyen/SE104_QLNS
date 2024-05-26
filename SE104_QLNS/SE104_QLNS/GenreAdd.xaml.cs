@@ -104,6 +104,8 @@ namespace SE104_QLNS
                         SqlDataReader reader = command.ExecuteReader();
                         reader.Read();
                         reader.Close();
+
+                        Notification notification = new Notification("Tạo Thành Công", "Tạo Thể loại thành công!");
                     }
                     else if (state==1)//Update
                     {
@@ -116,6 +118,7 @@ namespace SE104_QLNS
                         SqlDataReader reader = command.ExecuteReader();
                         reader.Read();
                         reader.Close();
+                        Notification notification = new Notification("Sửa Thành Công", "Sửa Thể loại thành công!");
                     }
                     else if (state == 2)//Delete
                     {
@@ -127,14 +130,15 @@ namespace SE104_QLNS
                         SqlDataReader reader = command.ExecuteReader();
                         reader.Read();
                         reader.Close();
+
+                        Notification notification = new Notification("Xóa Thành Công", "Xóa Thể loại thành công!");
                     }
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error Inserting/Updating Genres: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi khi thao tác trên Thể loại: " + ex.Message);
                 }
                 parent.LoadAll(parent);
-                parent.dtg_GenreList.Items.Refresh();
             }
             this.Close();
         }

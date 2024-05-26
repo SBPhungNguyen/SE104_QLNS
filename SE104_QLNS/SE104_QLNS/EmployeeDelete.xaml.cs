@@ -75,17 +75,17 @@ namespace SE104_QLNS
                     if (rowsAffected > 0)
                     {
                         // Employee deleted successfully
-                        Notification noti = new Notification("Success", "Employee deleted successfully!");
+                        Notification noti = new Notification("Thành Công", "Nhân viên xóa thành công!");
                     }
                     else
                     {
                         // No employee found with the given MaKH
-                        Notification noti = new Notification("Error", "Employee not found!");
+                        Notification noti = new Notification("Lỗi", "Không tìm thấy nhân viên!");
                     }
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error deleting employee: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi xóa nhân viên: " + ex.Message);
                 }
                 parent.LoadAll(parent);
                 IsClosing = true;

@@ -100,10 +100,12 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error updatong customer: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi sửa khách hàng: " + ex.Message);
                 }
                 parent.LoadAll(parent);
                 IsClosing = true;
+
+                Notification notification = new Notification("Sửa Thành Công", "Sửa khách hàng mã " + tbl_CustomerID.Text + " thành công!"); ;
                 this.Close();
             }
         }
@@ -111,6 +113,14 @@ namespace SE104_QLNS
         private void dpk_CustomerBirthday_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             txt_CustomerBirthday.Text = dpk_CustomerBirthday.SelectedDate.Value.Date.ToString().Substring(0, 10);
+        }
+
+        private void txt_CustomerPhone_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!int.TryParse(txt_CustomerPhone.Text, out int parsedValue))
+            {
+                txt_CustomerPhone.Text = "0";
+            }
         }
     }
 }

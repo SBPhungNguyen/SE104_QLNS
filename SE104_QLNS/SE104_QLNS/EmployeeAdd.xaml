@@ -82,7 +82,7 @@ HorizontalAlignment="Right" Margin="10,0,0,0" Click="btn_ExitApp_Click">
                 <TextBox Name="txt_EmployeeCard" Text="" FontSize="18" Height="25" Margin="384,110,166,193" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"
                          BorderThickness="0,0,0,1"/>
                 <TextBox Name="txt_EmployeePhone" Text="" FontSize="18" Height="25" Margin="384,143,166,160" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"
-                         BorderThickness="0,0,0,1"/>
+                         BorderThickness="0,0,0,1" TextChanged="txt_EmployeePhone_TextChanged"/>
                 <TextBox Name="txt_EmployeeAddress" Text="" FontSize="18" Margin="384,174,21,127" RenderTransformOrigin="0.184,-0.376" TextWrapping="Wrap" FontWeight="Bold"
                          BorderThickness="0,0,0,1"/>
                 <TextBox Name="txt_EmployeeOccupation" Text="" FontSize="18" Height="25" Margin="384,213,21,90" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"

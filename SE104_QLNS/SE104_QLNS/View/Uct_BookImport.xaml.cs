@@ -45,6 +45,7 @@ namespace SE104_QLNS.View
 
         private void Remove_Click(object sender, RoutedEventArgs e)
         {
+            if (parent.wpn_ImportPaper == null) return; ;
             foreach (Uct_BookImport child in parent.wpn_ImportPaper.Children.OfType<Uct_BookImport>())
             {
                 if (this == child)
@@ -53,6 +54,27 @@ namespace SE104_QLNS.View
                     break;
                 }
             }
+            UpdateMoney();
+        }
+
+        private void tbl_BookQuantity_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (!int.TryParse(textBox.Text, out int parsedQuantity))
+            {
+                textBox.Text = "1";
+            }
+            BookQuantity = textBox.Text;
+            UpdateMoney();
+        }
+        public void UpdateMoney()
+        {
+            int money = 0;
+            foreach (Uct_BookImport child in parent.wpn_ImportPaper.Children.OfType<Uct_BookImport>())
+            {
+                money += Convert.ToInt32(child.BookImportPrice) * Convert.ToInt32(child.BookQuantity);
+            }
+            parent.tbl_SumImportMoney.Text = money.ToString();
         }
     }
 }

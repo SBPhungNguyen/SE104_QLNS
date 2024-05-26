@@ -64,17 +64,17 @@ namespace SE104_QLNS
                     if (rowsAffected > 0)
                     {
                         // Customer deleted successfully
-                        Notification noti = new Notification("Success", "CustomerReceipt deleted successfully!");
+                        Notification noti = new Notification("Thành công", "Xóa Phiếu thu thành công!");
                     }
                     else
                     {
                         // No customer found with the given MaKH
-                        Notification noti = new Notification("Error", "CustomerReceipt not found!");
+                        Notification noti = new Notification("Lỗi", "Không tìm thấy phiếu thu!");
                     }
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error deleting CustomerReceipt: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi xóa phiếu thu: " + ex.Message);
                 }
                 parent.LoadAll(parent);
                 this.Close();

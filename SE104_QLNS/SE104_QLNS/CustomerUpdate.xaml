@@ -86,7 +86,7 @@ HorizontalAlignment="Right" Margin="10,0,0,0" Click="btn_ExitApp_Click">
                     <TextBlock Text="Giới tính:" FontSize="16" Margin="56,137,234,28"/>
 
                     <TextBox Name="txt_CustomerName" BorderThickness="0,0,0,1" Margin="155,30,10,133" FontSize="16" Text="Han Duong Tong Nguyen" TextWrapping="Wrap" FontWeight="Bold"/>
-                    <TextBox Name="txt_CustomerPhone" Margin="155,88,5,70" FontSize="14" Text="0123456789" FontWeight="Bold" BorderThickness="0,0,0,1"/>
+                    <TextBox Name="txt_CustomerPhone" Margin="155,88,5,70" FontSize="14" Text="0123456789" FontWeight="Bold" BorderThickness="0,0,0,1" TextChanged="txt_CustomerPhone_TextChanged"/>
                     <ComboBox x:Name="cbx_Gender"
 Text=""
 Height="30"

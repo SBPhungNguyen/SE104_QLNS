@@ -104,7 +104,7 @@ namespace SE104_QLNS
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error updating employee: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi sửa nhân viên: " + ex.Message);
                 }
                 parent.LoadAll(parent);
                 IsClosing = true;
@@ -124,13 +124,12 @@ namespace SE104_QLNS
                         string selectedImagePath = openFileDialog.FileName;
                         HinhAnh = selectedImagePath;
                         CreateImage(HinhAnh);
-                        //Notification noti = new Notification("Updated", BookURL); .Replace("\\","/")
                     }
 
                 }
                 catch (Exception ex)
                 {
-                    Notification noti = new Notification("Error", "Error opening file: " + ex.Message);
+                    Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi khi mở hình ảnh: " + ex.Message);
                 }
             });
         }
