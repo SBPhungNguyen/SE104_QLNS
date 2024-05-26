@@ -75,9 +75,11 @@
                 <TextBlock Name="tbl_CustomerEmail" Text="" FontSize="18" Height="25" Margin="205,110,166,193" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"/>
                 <TextBlock Name="tbl_CustomerAddress" TextWrapping="Wrap" Text="" FontSize="18" Margin="205,143,108,132" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"/>
                 <TextBox Name="tbx_DebtBefore"  IsReadOnly="True" Text="" FontSize="18" Margin="552,201,21,100" RenderTransformOrigin="0.184,-0.376" TextWrapping="Wrap" FontWeight="Bold"/>
-                <TextBox Name="tbl_Paid" Text="0" FontSize="18" Height="25" Margin="552,238,21,65" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"
+                <TextBox Name="tbl_Paid" Text="0" FontSize="18" Height="25" Margin="552,238,21,65" PreviewTextInput="tbl_Paid_PreviewTextInput"
+                         RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"
                      BorderThickness="0,0,0,1" TextChanged="tbl_Paid_TextChanged"/>
-                <TextBlock Name="tbl_DebtAfter" Text="" FontSize="18" Height="25" Margin="552,272,20,31" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"
+                <TextBlock Name="tbl_DebtAfter" Text="" FontSize="18" Height="25" Margin="552,272,20,31" 
+                           RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"
                      Foreground="Red"/>
 
                 <Rectangle Height="2" Margin="548,262,20,64" Fill="Green"/>

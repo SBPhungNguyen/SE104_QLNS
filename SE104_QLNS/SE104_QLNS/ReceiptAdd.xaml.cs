@@ -150,26 +150,57 @@ namespace SE104_QLNS
         private void tbl_Paid_TextChanged(object sender, TextChangedEventArgs e)
         {
             if ((tbx_DebtBefore == null)|| (tbx_DebtBefore.Text=="")) return;
-            int parsedValue;
 
-            if (int.TryParse(tbl_Paid.Text, out parsedValue))
+            if (int.TryParse(tbl_Paid.Text, out int parsedValue))
             {
-                if (parsedValue > Convert.ToInt32(tbx_DebtBefore.Text))
+                if (parent.ApDungQuyDinhKiemTraSoTienThu == "1")
                 {
-                    tbl_Paid.Text = tbx_DebtBefore.Text;
-                    parsedValue = Convert.ToInt32(tbl_Paid.Text);
-                    tbl_DebtAfter.Text = "0";
+                    if (parsedValue > Convert.ToInt32(tbx_DebtBefore.Text))
+                    {
+                        tbl_Paid.Text = tbx_DebtBefore.Text;
+                        parsedValue = Convert.ToInt32(tbl_Paid.Text);
+                        tbl_DebtAfter.Text = "0";
+                    }
+                    else
+                    {
+                        parsedValue = Convert.ToInt32(tbx_DebtBefore.Text) - parsedValue;
+                        tbl_DebtAfter.Text = parsedValue.ToString();
+                    }
                 }
                 else
                 {
-                    parsedValue = Convert.ToInt32(tbx_DebtBefore.Text) - parsedValue;
-                    tbl_DebtAfter.Text = parsedValue.ToString();
+                    if(parsedValue > Convert.ToInt32(tbx_DebtBefore.Text))
+                    {
+                        tbl_DebtAfter.Text = "0";
+                    }
+                    else
+                    {
+                        parsedValue = Convert.ToInt32(tbx_DebtBefore.Text) - parsedValue;
+                        tbl_DebtAfter.Text = parsedValue.ToString();
+                    }
                 }
             }
             else
             {
                 tbl_Paid.Text = "0"; // Clear the textbox
+                tbl_DebtAfter.Text = tbx_DebtBefore.Text;
             }
+        }
+        private void tbl_Paid_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsTextNumeric(e.Text);
+        }
+
+        private bool IsTextNumeric(string text)
+        {
+            foreach (char c in text)
+            {
+                if (!char.IsDigit(c))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
     }

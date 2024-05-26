@@ -93,6 +93,12 @@ namespace SE104_QLNS
 
         private void btn_Add_Click(object sender, RoutedEventArgs e) 
         {
+            if(Convert.ToInt32(txt_Quantity.Text) < Convert.ToInt32(parent.SoLuongNhapToiThieu))
+            {
+                Notification noti = new Notification("Vi phạm quy định", "Số lượng sách nhập phải lớn hơn " + parent.SoLuongNhapToiThieu);
+                return;
+            }
+
             Connection connect = new Connection();
             string connectionString = connect.connection;
             using (SqlConnection connection = new SqlConnection(connectionString))

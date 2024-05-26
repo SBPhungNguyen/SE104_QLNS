@@ -11,6 +11,7 @@ using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -54,12 +55,12 @@ namespace SE104_QLNS
         Uct_Author selectedauthor = null;
         Uct_CustomerReceipt selectedcustomerreceipt = null;
 
-        string ApDungQuyDinhKiemTraSoTienThu = "";
-        string SoLuongNhapToiThieu = "";
-        string SoLuongTonToiDaTruocNhap = "";
-        string SoLuongTonToiThieuSauBan = "";
-        string SoTienNoToiDa = "";
-        string TiLeGiaBan = "";
+        public string ApDungQuyDinhKiemTraSoTienThu = "";
+        public string SoLuongNhapToiThieu = "";
+        public string SoLuongTonToiDaTruocNhap = "";
+        public string SoLuongTonToiThieuSauBan = "";
+        public string SoTienNoToiDa = "";
+        public string TiLeGiaBan = "";
 
 
         public bool isBookDelete = false;
@@ -1225,6 +1226,17 @@ namespace SE104_QLNS
         }
         private void cbx_BookSearch_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //// Get the current text from the combobox
+            //string searchText = cbx_BookSearch.Text;
+
+            //BookSearchItemsSearched.Clear();
+            //foreach (string Searched in BookSearchItemsOriginal)
+            //{
+            //    if(Searched.ToLower().Contains(searchText.ToLower()))
+            //    BookSearchItemsSearched.Add(Searched);
+            //}
+
+            //cbx_BookSearch.ItemsSource = BookSearchItemsSearched;
             if (cbx_BookSearch.SelectedItem == null) return;
             cbx_BookSearch.Text = cbx_BookSearch.SelectedItem.ToString();
             foreach (Uct_Books book in Books)
@@ -1237,8 +1249,6 @@ namespace SE104_QLNS
                     BooksSell.Add(book);
                 }
             }
-            cbx_BookSearch.SelectedItem = null;
-
         }
         private void ImportExportComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -1659,7 +1669,7 @@ namespace SE104_QLNS
                     {
                         if (Convert.ToInt32(book.Amount) - book.BookSellAmount < Convert.ToInt32(SoLuongTonToiThieuSauBan))
                         {
-                            Notification noti = new Notification("Vi phạm quy định", "Số lượng sáchh mã " + book.BookID + " sau khi bán bé hơn quy định: " + SoLuongTonToiThieuSauBan);
+                            Notification noti = new Notification("Vi phạm quy định", "Số lượng sách mã " + book.BookID + " sau khi bán bé hơn quy định: " + SoLuongTonToiThieuSauBan);
                             return;
                         }
                     }
@@ -1894,128 +1904,316 @@ namespace SE104_QLNS
         //Search Book
         private void txt_Search_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (isBookList)
+            lbl_BookCount.Content = "0";
+            if (cvs_ImportBooks.Visibility == Visibility.Hidden)
             {
-                if (string.IsNullOrEmpty(txt_Search.Text))
+                if (isBookList)
                 {
-                    dtg_Books.ItemsSource = Books; // Reset to all items if no search text
-                    return;
-                }
-                if (Cbx_SearchBook.Text == "Tất Cả" || (Cbx_SearchBook.Text == null))
-                {
-                    var filteredItems = Books.Where(book =>
-                    book.BookID.ToLower().Contains(txt_Search.Text.ToLower()) ||
-                        book.BookName.ToLower().Contains(txt_Search.Text.ToLower()) ||
-                        book.BookGenre.ToLower().Contains(txt_Search.Text.ToLower()) ||
-                        book.BookAuthor.ToLower().Contains(txt_Search.Text.ToLower())
-                    ).ToList();
+                    if (string.IsNullOrEmpty(txt_Search.Text))
+                    {
+                        dtg_Books.ItemsSource = Books; // Reset to all items if no search text
+                        int amount = 0;
+                        foreach (Uct_Books child in Books)
+                        {
+                            amount += Convert.ToInt32(child.Amount);
+                        }
+                        lbl_BookCount.Content = amount.ToString();
+                        return;
+                    }
+                    if (Cbx_SearchBook.Text == "Tất Cả" || (Cbx_SearchBook.Text == null))
+                    {
+                        var filteredItems = Books.Where(book =>
+                        book.BookID.ToLower().Contains(txt_Search.Text.ToLower()) ||
+                            book.BookName.ToLower().Contains(txt_Search.Text.ToLower()) ||
+                            book.BookGenre.ToLower().Contains(txt_Search.Text.ToLower()) ||
+                            book.BookAuthor.ToLower().Contains(txt_Search.Text.ToLower())
+                        ).ToList();
 
-                    dtg_Books.ItemsSource = filteredItems;
-                    lbl_BookCount.Content=filteredItems.Count.ToString();
-                }
-                else if (Cbx_SearchBook.Text == "Tên Sách")
-                {
-                    var filteredItems = Books.Where(book =>
-                        book.BookName.ToLower().Contains(txt_Search.Text.ToLower())
-                    ).ToList();
+                        dtg_Books.ItemsSource = filteredItems;
+                        int amount = 0;
+                        foreach (Uct_Books child in filteredItems)
+                        {
+                            amount += Convert.ToInt32(child.Amount);
+                        }
+                        lbl_BookCount.Content = amount.ToString();
+                    }
+                    else if (Cbx_SearchBook.Text == "Tên Sách")
+                    {
+                        var filteredItems = Books.Where(book =>
+                            book.BookName.ToLower().Contains(txt_Search.Text.ToLower())
+                        ).ToList();
 
-                    dtg_Books.ItemsSource = filteredItems;
-                    lbl_BookCount.Content = filteredItems.Count.ToString();
-                }
-                else if (Cbx_SearchBook.Text == "Thể Loại")
-                {
-                    var filteredItems = Books.Where(book =>
-                        book.BookGenre.ToLower().Contains(txt_Search.Text.ToLower())
-                    ).ToList();
+                        dtg_Books.ItemsSource = filteredItems;
+                        int amount = 0;
+                        foreach (Uct_Books child in filteredItems)
+                        {
+                            amount += Convert.ToInt32(child.Amount);
+                        }
+                        lbl_BookCount.Content = amount.ToString();
+                    }
+                    else if (Cbx_SearchBook.Text == "Thể Loại")
+                    {
+                        var filteredItems = Books.Where(book =>
+                            book.BookGenre.ToLower().Contains(txt_Search.Text.ToLower())
+                        ).ToList();
 
-                    dtg_Books.ItemsSource = filteredItems;
-                    lbl_BookCount.Content = filteredItems.Count.ToString();
-                }
-                else if (Cbx_SearchBook.Text == "Tác Giả")
-                {
-                    var filteredItems = Books.Where(book =>
-                        book.BookAuthor.ToLower().Contains(txt_Search.Text.ToLower())
-                    ).ToList();
+                        dtg_Books.ItemsSource = filteredItems;
+                        int amount = 0;
+                        foreach (Uct_Books child in filteredItems)
+                        {
+                            amount += Convert.ToInt32(child.Amount);
+                        }
+                        lbl_BookCount.Content = amount.ToString();
+                    }
+                    else if (Cbx_SearchBook.Text == "Tác Giả")
+                    {
+                        var filteredItems = Books.Where(book =>
+                            book.BookAuthor.ToLower().Contains(txt_Search.Text.ToLower())
+                        ).ToList();
 
-                    dtg_Books.ItemsSource = filteredItems;
-                    lbl_BookCount.Content = filteredItems.Count.ToString();
+                        dtg_Books.ItemsSource = filteredItems;
+                        int amount = 0;
+                        foreach (Uct_Books child in filteredItems)
+                        {
+                            amount += Convert.ToInt32(child.Amount);
+                        }
+                        lbl_BookCount.Content = amount.ToString();
+                    }
+                }
+                else
+                {
+                    int amount = 0;
+                    if (string.IsNullOrEmpty(txt_Search.Text))
+                    {
+                        foreach (Uct_Books child in wpn_Books.Children)
+                        {
+                            child.Visibility = Visibility.Visible;
+                            amount += Convert.ToInt32(child.Amount);
+                        }
+                    }
+                    else
+                    {
+                        if (Cbx_SearchBook.Text == "Tất Cả" || (Cbx_SearchBook.Text == null))
+                        {
+                            foreach (Uct_Books child in wpn_Books.Children)
+                            {
+                                if (child.BookName.ToLower().Contains(txt_Search.Text.ToLower())
+                                    || child.BookAuthor.ToLower().Contains(txt_Search.Text.ToLower())
+                                    || child.BookID.ToLower().Contains(txt_Search.Text.ToLower())
+                                    || child.BookGenre.ToLower().Contains(txt_Search.Text.ToLower()))
+                                {
+                                    child.Visibility = Visibility.Visible;
+                                    amount += Convert.ToInt32(child.Amount);
+                                }
+                                else
+                                {
+                                    child.Visibility = Visibility.Collapsed;
+                                }
+                            }
+                        }
+                        else if (Cbx_SearchBook.Text == "Tên Sách")
+                        {
+                            foreach (Uct_Books child in wpn_Books.Children)
+                            {
+                                if (child.BookName.ToLower().Contains(txt_Search.Text.ToLower()))
+                                {
+                                    child.Visibility = Visibility.Visible;
+                                    amount += Convert.ToInt32(child.Amount);
+                                }
+                                else
+                                {
+                                    child.Visibility = Visibility.Collapsed;
+                                }
+                            }
+                        }
+                        else if (Cbx_SearchBook.Text == "Thể Loại")
+                        {
+                            foreach (Uct_Books child in wpn_Books.Children)
+                            {
+                                if (child.BookGenre.ToLower().Contains(txt_Search.Text.ToLower()))
+                                {
+                                    child.Visibility = Visibility.Visible;
+                                    amount += Convert.ToInt32(child.Amount);
+                                }
+                                else
+                                {
+                                    child.Visibility = Visibility.Collapsed;
+                                }
+                            }
+                        }
+                        else if (Cbx_SearchBook.Text == "Tác Giả")
+                        {
+                            foreach (Uct_Books child in wpn_Books.Children)
+                            {
+                                if (child.BookAuthor.ToLower().Contains(txt_Search.Text.ToLower()))
+                                {
+                                    child.Visibility = Visibility.Visible;
+                                    amount += Convert.ToInt32(child.Amount);
+                                }
+                                else
+                                {
+                                    child.Visibility = Visibility.Collapsed;
+                                }
+                            }
+                        }
+                    }
+                    lbl_BookCount.Content = amount;
                 }
             }
             else
             {
-                int amount = 0;
-                if (string.IsNullOrEmpty(txt_Search.Text))
+                if (isBookList)
                 {
-                    foreach (Uct_Books child in wpn_Books.Children)
+                    if (string.IsNullOrEmpty(txt_Search.Text))
                     {
-                        child.Visibility = Visibility.Visible;
-                        amount++;
+                        dtg_ImportBooks.ItemsSource = Books; // Reset to all items if no search text
+                        int amount = 0;
+                        foreach (Uct_Books child in Books)
+                        {
+                            amount += Convert.ToInt32(child.Amount);
+                        }
+                        lbl_BookCount.Content = amount.ToString();
+                        return;
+                    }
+                    if (Cbx_SearchBook.Text == "Tất Cả" || (Cbx_SearchBook.Text == null))
+                    {
+                        var filteredItems = Books.Where(book =>
+                        book.BookID.ToLower().Contains(txt_Search.Text.ToLower()) ||
+                            book.BookName.ToLower().Contains(txt_Search.Text.ToLower()) ||
+                            book.BookGenre.ToLower().Contains(txt_Search.Text.ToLower()) ||
+                            book.BookAuthor.ToLower().Contains(txt_Search.Text.ToLower())
+                        ).ToList();
+
+                        dtg_ImportBooks.ItemsSource = filteredItems;
+                        int amount = 0;
+                        foreach (Uct_Books child in filteredItems)
+                        {
+                            amount += Convert.ToInt32(child.Amount);
+                        }
+                        lbl_BookCount.Content = amount.ToString();
+                    }
+                    else if (Cbx_SearchBook.Text == "Tên Sách")
+                    {
+                        var filteredItems = Books.Where(book =>
+                            book.BookName.ToLower().Contains(txt_Search.Text.ToLower())
+                        ).ToList();
+
+                        dtg_ImportBooks.ItemsSource = filteredItems;
+                        int amount = 0;
+                        foreach (Uct_Books child in filteredItems)
+                        {
+                            amount += Convert.ToInt32(child.Amount);
+                        }
+                        lbl_BookCount.Content = amount.ToString();
+                    }
+                    else if (Cbx_SearchBook.Text == "Thể Loại")
+                    {
+                        var filteredItems = Books.Where(book =>
+                            book.BookGenre.ToLower().Contains(txt_Search.Text.ToLower())
+                        ).ToList();
+
+                        dtg_ImportBooks.ItemsSource = filteredItems;
+                        int amount = 0;
+                        foreach (Uct_Books child in filteredItems)
+                        {
+                            amount += Convert.ToInt32(child.Amount);
+                        }
+                        lbl_BookCount.Content = amount.ToString();
+                    }
+                    else if (Cbx_SearchBook.Text == "Tác Giả")
+                    {
+                        var filteredItems = Books.Where(book =>
+                            book.BookAuthor.ToLower().Contains(txt_Search.Text.ToLower())
+                        ).ToList();
+
+                        dtg_ImportBooks.ItemsSource = filteredItems;
+                        int amount = 0;
+                        foreach (Uct_Books child in filteredItems)
+                        {
+                            amount += Convert.ToInt32(child.Amount);
+                        }
+                        lbl_BookCount.Content = amount.ToString();
                     }
                 }
-                if (Cbx_SearchBook.Text == "Tất Cả" || (Cbx_SearchBook.Text == null))
+                else
                 {
-                    foreach (Uct_Books child in wpn_Books.Children)
+                    int amount = 0;
+                    if (string.IsNullOrEmpty(txt_Search.Text))
                     {
-                        if (child.BookName.Contains(txt_Search.Text)
-                            || child.BookAuthor.Contains(txt_Search.Text)
-                            || child.BookID.Contains(txt_Search.Text)
-                            || child.BookGenre.Contains(txt_Search.Text))
+                        foreach (Uct_Books child in wpn_ImportBooks.Children)
                         {
                             child.Visibility = Visibility.Visible;
-                            amount++;
-                        }
-                        else
-                        {
-                            child.Visibility = Visibility.Collapsed;
+                            amount += Convert.ToInt32(child.Amount);
                         }
                     }
-                }
-                else if (Cbx_SearchBook.Text == "Tên Sách")
-                {
-                    foreach (Uct_Books child in wpn_Books.Children)
+                    else
                     {
-                        if (child.BookName.Contains(txt_Search.Text))
+                        if (Cbx_SearchBook.Text == "Tất Cả" || (Cbx_SearchBook.Text == null))
                         {
-                            child.Visibility = Visibility.Visible;
-                            amount++;
+                            foreach (Uct_Books child in wpn_ImportBooks.Children)
+                            {
+                                if (child.BookName.ToLower().Contains(txt_Search.Text.ToLower())
+                                    || child.BookAuthor.ToLower().Contains(txt_Search.Text.ToLower())
+                                    || child.BookID.ToLower().Contains(txt_Search.Text.ToLower())
+                                    || child.BookGenre.ToLower().Contains(txt_Search.Text.ToLower()))
+                                {
+                                    child.Visibility = Visibility.Visible;
+                                    amount += Convert.ToInt32(child.Amount);
+                                }
+                                else
+                                {
+                                    child.Visibility = Visibility.Collapsed;
+                                }
+                            }
                         }
-                        else
+                        else if (Cbx_SearchBook.Text == "Tên Sách")
                         {
-                            child.Visibility = Visibility.Collapsed;
+                            foreach (Uct_Books child in wpn_ImportBooks.Children)
+                            {
+                                if (child.BookName.ToLower().Contains(txt_Search.Text.ToLower()))
+                                {
+                                    child.Visibility = Visibility.Visible;
+                                    amount += Convert.ToInt32(child.Amount);
+                                }
+                                else
+                                {
+                                    child.Visibility = Visibility.Collapsed;
+                                }
+                            }
+                        }
+                        else if (Cbx_SearchBook.Text == "Thể Loại")
+                        {
+                            foreach (Uct_Books child in wpn_ImportBooks.Children)
+                            {
+                                if (child.BookGenre.ToLower().Contains(txt_Search.Text.ToLower()))
+                                {
+                                    child.Visibility = Visibility.Visible;
+                                    amount += Convert.ToInt32(child.Amount);
+                                }
+                                else
+                                {
+                                    child.Visibility = Visibility.Collapsed;
+                                }
+                            }
+                        }
+                        else if (Cbx_SearchBook.Text == "Tác Giả")
+                        {
+                            foreach (Uct_Books child in wpn_Books.Children)
+                            {
+                                if (child.BookAuthor.ToLower().Contains(txt_Search.Text.ToLower()))
+                                {
+                                    child.Visibility = Visibility.Visible;
+                                    amount += Convert.ToInt32(child.Amount);
+                                }
+                                else
+                                {
+                                    child.Visibility = Visibility.Collapsed;
+                                }
+                            }
                         }
                     }
+                    lbl_BookCount.Content = amount;
                 }
-                else if (Cbx_SearchBook.Text == "Thể Loại")
-                {
-                    foreach (Uct_Books child in wpn_Books.Children)
-                    {
-                        if (child.BookGenre.Contains(txt_Search.Text))
-                        {
-                            child.Visibility = Visibility.Visible;
-                            amount++;
-                        }
-                        else
-                        {
-                            child.Visibility = Visibility.Collapsed;
-                        }
-                    }
-                }
-                else if (Cbx_SearchBook.Text == "Tác Giả")
-                {
-                    foreach (Uct_Books child in wpn_Books.Children)
-                    {
-                        if (child.BookAuthor.Contains(txt_Search.Text))
-                        {
-                            child.Visibility = Visibility.Visible;
-                            amount++;
-                        }
-                        else
-                        {
-                            child.Visibility = Visibility.Collapsed;
-                        }
-                    }
-                }
-                lbl_BookCount.Content = amount;
             }
         }
 
@@ -2369,6 +2567,9 @@ namespace SE104_QLNS
                 wpn_ImportPaper.Children.Clear();
                 LoadAll(this);
                 LoadBook(this, 3);
+                tbl_SumImportMoney.Text = "0";
+                txt_ImportID.Text = GetNextImportPaperID(this);
+                ImportDate.Text = DateTime.Now.ToString();
             }
         }
         private void dtg_ImportBooks_SelectionChanged(object sender, SelectionChangedEventArgs e)

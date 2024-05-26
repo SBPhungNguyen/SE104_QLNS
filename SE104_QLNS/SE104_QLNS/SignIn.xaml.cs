@@ -24,8 +24,8 @@ namespace SE104_QLNS
         public SignIn()
         {
             InitializeComponent();
-            //tb_username.Text = "admin";
-            //tb_password.Password = "admin";
+            tb_username.Text = "admin";
+            tb_password.Password = "admin";
         }
         private void Login(string TenTK, string password)
         {

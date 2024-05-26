@@ -37,6 +37,7 @@
                 <Button Name="btn_Logout"
                         Grid.Column="1"
                         Width="40" 
+                        Visibility="Hidden"
                         Height="30"
                         BorderThickness="0"
                         Cursor="Hand" 
@@ -534,6 +535,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                             <TextBox Name="txt_ImportID"
                                                      Height="25" 
                                                      Width="260" 
+                                                     IsReadOnly="True"
                                                      Margin="17,58,19,393"
                                                      FontSize="14"
                                                      BorderThickness="0,0,0,1"
@@ -549,6 +551,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                                      Height="25" 
                                                      Width="260" 
                                                      Margin="17,91,19,360"
+                                                     IsReadOnly="True"
                                                      FontSize="14"
                                                      BorderThickness="0,0,0,1"
                                                      VerticalContentAlignment="Center"
@@ -557,9 +560,10 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                             <Image x:Name="img_Calendar" 
                                                    Width="20" Height="20" 
                                                    Margin="256,91,20,365" 
+                                                   Visibility="Hidden"
                                                    Source="/Images/icon_calendar.png" 
                                                    Stretch="Fill" 
-                                                   Cursor="Hand"/>
+                                                   />
                                             <ScrollViewer Name="svw_ImportPaper" Visibility="Visible"
                                                           HorizontalAlignment="Center" 
                                                           Canvas.Top="123" 
@@ -577,7 +581,7 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                             <TextBlock Margin="15,400,189,51" Text="Tổng tiền:" FontSize="18" FontWeight="Bold"/>
                                             <TextBlock Name="tbl_SumImportMoney" 
                                                    Margin="113,396,16,45" 
-                                                   Text="9000" 
+                                                   Text="0" 
                                                    FontSize="18" FontWeight="Bold" 
                                                    HorizontalAlignment="Right"/>
                                             <Button Name="btn_ImportBooks"
@@ -656,8 +660,10 @@ BorderThickness="{TemplateBinding BorderThickness}">
                                               Width="287"
                                               Height="30"
                                               Margin="17,0,10,0"
+                                              IsReadOnly="True"
                                               IsTextSearchEnabled="True"
-                                              ItemsSource="{Binding BookSearchItemsOriginal}" SelectionChanged="cbx_BookSearch_SelectionChanged">
+                                              ItemsSource="{Binding BookSearchItemsOriginal}" 
+                                              SelectionChanged="cbx_BookSearch_SelectionChanged">
                                         <ComboBox.ItemsPanel>
                                             <ItemsPanelTemplate>
                                                 <VirtualizingStackPanel/>
@@ -3134,7 +3140,7 @@ FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor=
                                         </ControlTemplate>
                                     </Button.Template>
                                 </Button>
-                                <Button x:Name="btn_UpdateThamSo" Height="40" Width="100" HorizontalAlignment="Right" Margin="0,-30,50,0"
+                                <Button x:Name="btn_UpdateThamSo" Height="40" Width="130" HorizontalAlignment="Right" Margin="0,-30,25,0"
                                 FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor="Hand" Click="btn_UpdateThamSo_Click">
                                     <Button.Style>
                                         <Style TargetType="{x:Type Button}">
@@ -3148,16 +3154,16 @@ FontFamily="Tahoma" FontSize="17" FontWeight="Bold" Foreground="#154348" Cursor=
                                     </Button.Style>
                                     <Button.Template>
                                         <ControlTemplate TargetType="{x:Type Button}">
-                                            <Border Width="100" Height="40"
+                                            <Border Width="130" Height="40"
                                                         CornerRadius="10"
                                                         Background="{TemplateBinding Background}"
                                                         BorderThickness="0"
                                                         BorderBrush="#3CB76D">
                                                 <Grid>
-                                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                                    <StackPanel Orientation="Horizontal" Margin="0,0,-30,0">
                                                         <Image Source="/Images/icon_pencil.png" Margin="15,0,0,0"
                                         Stretch="Fill" Height="25" Width="25"/>
-                                                        <TextBlock Text="Sửa"
+                                                        <TextBlock Text="Cập nhật"
                                                    Padding="10,0,0,0"
                                         VerticalAlignment="Center"
                                         FontFamily="Tahoma"
