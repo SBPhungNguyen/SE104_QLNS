@@ -24,8 +24,6 @@ namespace SE104_QLNS
         public SignIn()
         {
             InitializeComponent();
-            tb_username.Text = "admin";
-            tb_password.Password = "admin";
         }
         private void Login(string TenTK, string password)
         {
@@ -37,20 +35,21 @@ namespace SE104_QLNS
                 try
                 {
                     connection.Open();
-                    string sqlQuery = "SELECT TenTK, MatKhau FROM NGUOIDUNG WHERE TenTK = @TenTK";
+                    string sqlQuery = "SELECT MaNV, TenTK, MatKhau FROM NGUOIDUNG WHERE TenTK = @TenTK";
                     SqlCommand command = new SqlCommand(sqlQuery, connection);
                     command.Parameters.AddWithValue("@TenTK", TenTK);
 
                     SqlDataReader reader = command.ExecuteReader();
                     if (reader.Read())
                     {
+                        string maNhanVien = reader["MaNV"].ToString();
                         string dbTenTK = reader["TenTK"].ToString();
                         string dbPassword = reader["MatKhau"].ToString();
 
                         if (password == dbPassword)
                         {
                             // Show login successful notification
-                            MainWindow main = new MainWindow();
+                            MainWindow main = new MainWindow(maNhanVien);
                             main.Show();
                             this.Close();
                         }
@@ -58,14 +57,12 @@ namespace SE104_QLNS
                         {
                             // Show incorrect password notification
                             Notification notification = new Notification("Lỗi", "Sai mât khẩu!");
-                            notification.Show();
                         }
                     }
                     else
                     {
                         // Show username not found notification
                         Notification notification = new Notification("Lỗi", "Không tìm thấy username!");
-                        notification.Show();
                     }
 
                     reader.Close();
@@ -73,7 +70,7 @@ namespace SE104_QLNS
                 catch (Exception ex)
                 {
                     Notification notification = new Notification("Lỗi", "Đã gặp lỗi khi lấy thông tin đăng nhập: " + ex.Message);
-                    notification.Show();
+                    
                 }
             }
 

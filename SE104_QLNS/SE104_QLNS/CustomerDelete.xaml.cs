@@ -87,8 +87,7 @@ namespace SE104_QLNS
 
                     command.ExecuteNonQuery();
                     Notification notification = new Notification("Xóa Thành Công", "Xóa khách hàng mã " + tbl_CustomerID.Text + " thành công!"); ;
-
-
+                    
                 }
                 catch (Exception ex)
                 {

@@ -99,7 +99,8 @@
                 <DataGrid  Name="dtg_BillDetail" ItemsSource="{Binding ImportInfo}" Style="{StaticResource DataGrid}" Height="415" Margin="0,5,0,0">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="#" Binding="{Binding BookNum}" Width="0.5*" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Mã sách" Binding="{Binding ImportBookID}" Width="*" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Mã sách" Binding="{Binding ImportBookID}" Width="0.5*" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Sản phẩm" Binding="{Binding ImportBookName}" Width="1.5*" IsReadOnly="True"/>
                         <DataGridTemplateColumn Header="Ảnh" Width="Auto" IsReadOnly="True">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>

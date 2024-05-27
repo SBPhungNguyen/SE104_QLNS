@@ -60,7 +60,7 @@ namespace SE104_QLNS.View
             InitializeComponent();
             this.DataContext = this;
             this.state = state;
-            parent = mainwindow;   
+            parent = mainwindow;
         }
         public void BookSetState(int state)
         {
@@ -129,6 +129,9 @@ namespace SE104_QLNS.View
             this.BookPriceImport = PriceImport;
             this.BookPriceExport = PriceExport;
             this.Amount = Amount;
+            BookSellAmount = 1;
+            BookTotalSellPrice = Convert.ToInt32(BookPriceExport) * BookSellAmount;
+            parent.UpdateSellPrice();
         }
 
         private void btn_Button_Click(object sender, RoutedEventArgs e)

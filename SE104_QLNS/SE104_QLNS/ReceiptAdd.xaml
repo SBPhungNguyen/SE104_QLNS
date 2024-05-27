@@ -63,9 +63,9 @@
                 <TextBlock Text="SĐT:" FontSize="18" Height="25" Margin="61,78,584,225" RenderTransformOrigin="0.184,-0.376"/>
                 <TextBlock Text="Email:" FontSize="18" Height="25" Margin="61,110,567,193" RenderTransformOrigin="0.184,-0.376" />
                 <TextBlock Text="Địa chỉ:" FontSize="18" Height="25" Margin="61,143,585,160" RenderTransformOrigin="0.184,-0.376"/>
-                <TextBlock Text="Số nợ thu trước:" FontSize="18" Height="25" Margin="392,201,223,102" RenderTransformOrigin="0.184,-0.376"/>
+                <TextBlock Text="Số nợ trước thu:" FontSize="18" Height="25" Margin="392,201,223,102" RenderTransformOrigin="0.184,-0.376"/>
                 <TextBlock Text="Tiền thu:" FontSize="18" Height="25" Margin="392,238,251,65" RenderTransformOrigin="0.184,-0.376" />
-                <TextBlock Text="Nợ sau khi thu:" FontSize="18" Height="25" Margin="392,272,225,31" RenderTransformOrigin="0.184,-0.376"/>
+                <TextBlock Text="Số nợ sau thu:" FontSize="18" Height="25" Margin="392,272,225,31" RenderTransformOrigin="0.184,-0.376"/>
 
                 <ComboBox Name="cbx_CustomerID" Text="NV000001" FontSize="18" Height="25" Margin="205,11,425,292" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"
                      BorderThickness="0,0,0,1" VerticalContentAlignment="Bottom" SelectionChanged="cbx_CustomerID_SelectionChanged"/>
@@ -74,7 +74,7 @@
                 <TextBlock Name="tbl_CustomerPhone" Text="" FontSize="18" Height="25" Margin="205,78,380,225" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"/>
                 <TextBlock Name="tbl_CustomerEmail" Text="" FontSize="18" Height="25" Margin="205,110,166,193" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"/>
                 <TextBlock Name="tbl_CustomerAddress" TextWrapping="Wrap" Text="" FontSize="18" Margin="205,143,108,132" RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"/>
-                <TextBox Name="tbx_DebtBefore"  IsReadOnly="True" Text="" FontSize="18" Margin="552,201,21,100" RenderTransformOrigin="0.184,-0.376" TextWrapping="Wrap" FontWeight="Bold"/>
+                <TextBox Name="tbx_DebtBefore"  IsReadOnly="True" Text="0" FontSize="18" Margin="552,201,21,100" RenderTransformOrigin="0.184,-0.376" TextWrapping="Wrap" FontWeight="Bold"/>
                 <TextBox Name="tbl_Paid" Text="0" FontSize="18" Height="25" Margin="552,238,21,65" PreviewTextInput="tbl_Paid_PreviewTextInput"
                          RenderTransformOrigin="0.184,-0.376" FontWeight="Bold"
                      BorderThickness="0,0,0,1" TextChanged="tbl_Paid_TextChanged"/>

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -158,6 +159,28 @@ namespace SE104_QLNS
         {
             if(isPasswordVisible)
             password=txt_EmployeePass.Text;
+        }
+
+        private void txt_EmployeeCard_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (e.Text == "\b")
+            {
+                return;
+            }
+
+            // Only allow numbers and decimal point (if allowed)
+            e.Handled = !Regex.IsMatch(e.Text, "[0-9.]");
+        }
+
+        private void txt_EmployeePhone_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (e.Text == "\b")
+            {
+                return;
+            }
+
+            // Only allow numbers and decimal point (if allowed)
+            e.Handled = !Regex.IsMatch(e.Text, "[0-9.]");
         }
     }
 }

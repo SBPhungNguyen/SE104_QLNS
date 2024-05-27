@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -122,5 +123,17 @@ namespace SE104_QLNS
                 txt_CustomerPhone.Text = "0";
             }
         }
+
+        private void txt_CustomerPhone_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (e.Text == "\b")
+            {
+                return;
+            }
+
+            // Only allow numbers and decimal point (if allowed)
+            e.Handled = !Regex.IsMatch(e.Text, "[0-9.]");
+        }
+    
     }
 }

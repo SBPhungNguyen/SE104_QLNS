@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -132,6 +133,28 @@ namespace SE104_QLNS
             {
                 txt_EmployeePhone.Text = "0";
             }
+        }
+
+        private void txt_EmployeeCard_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (e.Text == "\b")
+            {
+                return;
+            }
+
+            // Only allow numbers and decimal point (if allowed)
+            e.Handled = !Regex.IsMatch(e.Text, "[0-9.]");
+        }
+
+        private void txt_EmployeePhone_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (e.Text == "\b")
+            {
+                return;
+            }
+
+            // Only allow numbers and decimal point (if allowed)
+            e.Handled = !Regex.IsMatch(e.Text, "[0-9.]");
         }
     }
 }

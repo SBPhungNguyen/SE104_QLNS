@@ -30,10 +30,11 @@ namespace SE104_QLNS
     public int BookNum { get; set; }
         public string ImportBookReceiptID { get; set; }
         public string ImportBookID { get; set; }
+        public string ImportBookName { get; set; }
         public string ImportBookURL { get; set; }
         public string ImportNum { get; set; }
         public string ImportPrice { get; set; }
-        public ImportedBookInfo(int bookNum, string importBookReceiptID, string importBookID, string importBookURL, string importNum, string importPrice)
+        public ImportedBookInfo(int bookNum, string importBookReceiptID, string importBookName, string importBookID, string importBookURL, string importNum, string importPrice)
         {
             BookNum = bookNum;
             ImportBookReceiptID = importBookReceiptID;
@@ -41,6 +42,7 @@ namespace SE104_QLNS
             ImportBookURL = importBookURL;
             ImportNum = importNum;
             ImportPrice = importPrice;
+            ImportBookName = importBookName;
         }
     }
     public partial class ImportedBookReceiptInfo : Window
@@ -100,11 +102,11 @@ namespace SE104_QLNS
             {
 
                 string MaSach = "", SoLuongNhap = "", DonGiaNhap = "", BookURL="";
-
+                string TenSach = "";
                 try
                 {
                     connection.Open();
-                    string sqlQuery = "SELECT * FROM CT_PHIEUNHAP JOIN SACH ON CT_PHIEUNHAP.MASACH = SACH.MASACH WHERE MaPhieuNhap=@MaPhieuNhap ";
+                    string sqlQuery = "SELECT * FROM CT_PHIEUNHAP JOIN SACH ON CT_PHIEUNHAP.MASACH = SACH.MASACH JOIN DAUSACH ON DAUSACH.MaDauSach = SACH.MaDauSach WHERE MaPhieuNhap=@MaPhieuNhap ";
                     SqlCommand command = new SqlCommand(sqlQuery, connection);
                     command.Parameters.AddWithValue("@MaPhieuNhap", importedBookReceiptInfo.ImportBookReceiptID);
 
@@ -115,6 +117,7 @@ namespace SE104_QLNS
                         while (reader.Read())
                         {
                             MaSach = reader["MaSach"].ToString();
+                            TenSach = reader["TenDauSach"].ToString();
                             SoLuongNhap = reader["SoLuongNhap"].ToString();
                             BookURL = reader["HinhAnhSach"].ToString();
                             DonGiaNhap = reader["DonGiaNhap"].ToString();
@@ -122,7 +125,7 @@ namespace SE104_QLNS
 
 
                             ImportedBookInfo info = new ImportedBookInfo(order, importedBookReceiptInfo.ImportBookReceiptID
-                                , MaSach, BookURL, SoLuongNhap, DonGiaNhap);
+                                , TenSach, MaSach, BookURL, SoLuongNhap, DonGiaNhap);
                             importedBookReceiptInfo.ImportInfo.Add(info);
                             order++;
                             Amount += Convert.ToInt32(SoLuongNhap);

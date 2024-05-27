@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -93,11 +94,7 @@ namespace SE104_QLNS
 
         private void btn_Add_Click(object sender, RoutedEventArgs e) 
         {
-            if(Convert.ToInt32(txt_Quantity.Text) < Convert.ToInt32(parent.SoLuongNhapToiThieu))
-            {
-                Notification noti = new Notification("Vi phạm quy định", "Số lượng sách nhập phải lớn hơn " + parent.SoLuongNhapToiThieu);
-                return;
-            }
+            
 
             Connection connect = new Connection();
             string connectionString = connect.connection;
@@ -105,6 +102,17 @@ namespace SE104_QLNS
             {
                 try
                 {
+                    if (txt_ImportPrice.Text == "0")
+                    {
+                        Notification noti = new Notification("Lỗi", "Giá nhập và giá bán không thể bằng 0");
+                        return;
+                    }
+                    if (Convert.ToInt32(txt_Quantity.Text) < Convert.ToInt32(parent.SoLuongNhapToiThieu))
+                    {
+                        Notification noti = new Notification("Vi phạm quy định", "Số lượng sách nhập phải lớn hơn " + parent.SoLuongNhapToiThieu);
+                        return;
+                    }
+
                     connection.Open();
                     
                         //Get Genre Code
@@ -331,14 +339,16 @@ namespace SE104_QLNS
 
         private void txt_ImportPrice_TextChanged(object sender, TextChangedEventArgs e)
         {
-            int convertedImportPrice;
+            int convertedImportPrice=-1;
             if (int.TryParse(txt_ImportPrice.Text, out convertedImportPrice))
             {
+                txt_ImportPrice.Text = convertedImportPrice.ToString();
                 txt_ExportPrice.Text= (convertedImportPrice*ImportExportRate/100).ToString();
             }
             else
             {
                 txt_ImportPrice.Text = "0";
+                convertedImportPrice = -1;
             }
         }
 
@@ -358,6 +368,41 @@ namespace SE104_QLNS
             {
                 txt_Quantity.Text = "0";
             }
+        }
+
+        private void txt_ImportPrice_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (e.Text == "\b")
+            {
+                return;
+            }
+
+            // Only allow numbers and decimal point (if allowed)
+            e.Handled = !Regex.IsMatch(e.Text, "[0-9.]");
+        }
+
+        private void txt_Quantity_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+
+            if (e.Text == "\b")
+            {
+                return;
+            }
+
+            // Only allow numbers and decimal point (if allowed)
+            e.Handled = !Regex.IsMatch(e.Text, "[0-9.]");
+        }
+
+        private void txt_DistributeYear_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+
+            if (e.Text == "\b")
+            {
+                return;
+            }
+
+            // Only allow numbers and decimal point (if allowed)
+            e.Handled = !Regex.IsMatch(e.Text, "[0-9.]");
         }
     }
 }

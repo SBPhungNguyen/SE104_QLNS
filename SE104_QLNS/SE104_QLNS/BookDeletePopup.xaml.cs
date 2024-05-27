@@ -105,6 +105,13 @@ namespace SE104_QLNS
                     reader.Read();
                     reader.Close();
 
+                    //delete empty PHIEUNHAP
+                    sqlQuery = @" DELETE HOADON WHERE MAHD NOT IN (SELECT DISTINCT MAHD FROM CT_HOADON)";
+                    command = new SqlCommand(sqlQuery, connection);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
+
                     //Delete from CT_PHIEUNHAP
                     sqlQuery = "DELETE FROM CT_PHIEUNHAP WHERE MaSach = @MaSach";
 
@@ -120,6 +127,8 @@ namespace SE104_QLNS
                     reader = command.ExecuteReader();
                     reader.Read();
                     reader.Close();
+
+
 
                     //Delete The Book
                     sqlQuery = "DELETE FROM SACH WHERE MaSach = @MaSach";

@@ -52,7 +52,12 @@ namespace SE104_QLNS
                     while (reader.Read())
                     {
                         string MaKH = reader["MaKH"].ToString();
-                        cbx_CustomerID.Items.Add(MaKH);
+                        string DebtString = reader["SoTienNo"].ToString();
+                        int DebtInt = Convert.ToInt32(DebtString.Substring(0, DebtString.Length - 5));
+                        if (DebtInt > 0)
+                        {
+                            cbx_CustomerID.Items.Add(MaKH);
+                        }
                     }
                 }
                 reader.Close();
@@ -149,7 +154,7 @@ namespace SE104_QLNS
 
         private void tbl_Paid_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if ((tbx_DebtBefore == null)|| (tbx_DebtBefore.Text=="")) return;
+            if ((tbx_DebtBefore == null)|| (tbx_DebtBefore.Text=="") || parent==null) return;
 
             if (int.TryParse(tbl_Paid.Text, out int parsedValue))
             {

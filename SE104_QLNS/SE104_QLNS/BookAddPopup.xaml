@@ -93,10 +93,10 @@
                             Height="30" FontSize="18" 
                            Margin="362,207,10,231"/>
                 <TextBox Name="txt_DistributeYear" FontWeight="Bold"
-                         BorderThickness="0,0,0,1"
+                         BorderThickness="0,0,0,1" PreviewTextInput="txt_DistributeYear_PreviewTextInput"
                            Height="30" FontSize="18" 
                            Margin="362,244,10,194" TextChanged="txt_DistributeYear_TextChanged"/>
-                <TextBox Name="txt_ImportPrice" FontWeight="Bold"
+                <TextBox Name="txt_ImportPrice" FontWeight="Bold" PreviewTextInput="txt_ImportPrice_PreviewTextInput"
                          BorderThickness="0,0,0,1"
                            Height="30" FontSize="18" 
                            Margin="362,281,10,157" TextChanged="txt_ImportPrice_TextChanged"/>
@@ -105,7 +105,7 @@
            Height="30" FontSize="18" 
            Margin="362,318,10,120"/>
                 <TextBox Name="txt_Quantity" FontWeight="Bold"
-         BorderThickness="0,0,0,1"
+         BorderThickness="0,0,0,1" PreviewTextInput="txt_Quantity_PreviewTextInput"
            Height="30" FontSize="18" 
            Margin="362,356,10,82" TextChanged="txt_Quantity_TextChanged"/>
                 <Button Name="btn_Add" Height="35" Margin="45,410,298,23"

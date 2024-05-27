@@ -29,8 +29,8 @@ namespace SE104_QLNS
         public Notification(string title, string info)
         {
             InitializeComponent();
-            this.Visibility = Visibility.Visible;
-            this.Topmost = true;
+            //this.Visibility = Visibility.Visible;
+            //this.Topmost = true;
             NotificationTitle.Text = title;
             NotificationInfo.Text = info;
             Size textSize = NotificationInfo.DesiredSize;
@@ -39,6 +39,8 @@ namespace SE104_QLNS
             // Update window height based on ActualInfoHeight
             this.Height = ActualInfoHeight + 200;  // Add height of top row and some padding
 
+            this.Show();
+            this.Topmost = true;
         }
         private void btn_Save_Click(object sender, RoutedEventArgs e)
         {

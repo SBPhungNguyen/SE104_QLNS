@@ -59,6 +59,11 @@ namespace SE104_QLNS
         }
         private void btn_Delete_Click(object sender, RoutedEventArgs e)
         {
+            if(tbl_EmployeeID.Text==parent.CurrentEmployeeID)
+            {
+                Notification noti = new Notification("Lỗi", "Không thể xóa Nhân viên hiện tại đang đăng nhập");
+                return;
+            }
             Connection connect = new Connection();
             string connectionString = connect.connection;
             using (SqlConnection connection = new SqlConnection(connectionString))

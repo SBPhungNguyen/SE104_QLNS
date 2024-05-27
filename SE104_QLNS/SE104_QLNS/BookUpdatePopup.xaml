@@ -96,7 +96,7 @@
                            Margin="362,171,10,267" Style="{StaticResource MonthYearComboxbox}"/>
                 <TextBox Name="txt_ImportPrice" FontWeight="Bold"
                            BorderThickness="0,0,0,1"
-                           Text="Giá nhập:" Height="30" FontSize="18" 
+                           Text="Giá nhập:" Height="30" FontSize="18" PreviewTextInput="txt_ImportPrice_PreviewTextInput"
                            Margin="362,285,10,153" TextChanged="txt_ImportPrice_TextChanged"/>
                 <TextBox Name="txt_ExportPrice" FontWeight="Bold" IsReadOnly="True"
                          BorderThickness="0,0,0,1"

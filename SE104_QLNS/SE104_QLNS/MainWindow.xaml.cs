@@ -55,6 +55,8 @@ namespace SE104_QLNS
         Uct_Author selectedauthor = null;
         Uct_CustomerReceipt selectedcustomerreceipt = null;
 
+        public string CurrentEmployeeID;
+
         public string ApDungQuyDinhKiemTraSoTienThu = "";
         public string SoLuongNhapToiThieu = "";
         public string SoLuongTonToiDaTruocNhap = "";
@@ -84,6 +86,18 @@ namespace SE104_QLNS
             DataContext = this;
 
             LoadAll(this);
+            txb_BillDate.Text = DateTime.Now.ToString();
+            Cbx_SearchBook.SelectedIndex = 0;
+            ImportExportComboBox.SelectedIndex = 0;
+            ImportDate.Text = DateTime.Now.ToString();
+        }
+        public MainWindow(string employeeid)
+        {
+            InitializeComponent();
+            DataContext = this;
+
+            LoadAll(this);
+            CurrentEmployeeID = employeeid;
             txb_BillDate.Text = DateTime.Now.ToString();
             Cbx_SearchBook.SelectedIndex = 0;
             ImportExportComboBox.SelectedIndex = 0;
@@ -847,6 +861,7 @@ namespace SE104_QLNS
             {
                 mainwindow.Customers.Clear();
                 cbx_CustomerID.Items.Clear();
+                cbx_CustomerID.Items.Add("Thêm mới");
 
                 string MaKH = "", HoTenKH = "", SDT = "", DiaChi = "",
                 Email = "", SoTienNo = "", GioiTinh = "", NgaySinh = "", SoTienMua = "";
@@ -888,8 +903,8 @@ namespace SE104_QLNS
                         }
                     }
                     reader.Close();
-                    cbx_CustomerID.Items.Add("Thêm mới");
-                    cbx_CustomerID.SelectedIndex = 0;
+                    if(cbx_CustomerID.SelectedIndex==-1)
+                    cbx_CustomerID.SelectedIndex = 1;
                 }
                 catch (Exception ex)
                 {
@@ -1249,6 +1264,7 @@ namespace SE104_QLNS
                     BooksSell.Add(book);
                 }
             }
+            UpdateSellPrice();
         }
         private void ImportExportComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -1332,9 +1348,11 @@ namespace SE104_QLNS
                 tbl_CustomerPhoneNumber.IsReadOnly = false;
                 tbl_CustomerDetailAdress.IsReadOnly = false;
                 tbl_CustomerEmail.IsReadOnly = false;
-                txt_CustomerDateOfBirth.IsReadOnly = false;
+                txt_CustomerDateOfBirth.IsReadOnly = true;
                 cbx_CustomerGender.SelectedIndex = 1;
+                cbx_CustomerGender.IsEnabled = true;
 
+                dpk_CustomerBirthday.Visibility = Visibility.Visible;
                 btn_SaveNewCustomerInfomation.Visibility = Visibility.Visible;
                 tbl_CustomerName.Text = "Tên khách hàng";
                 tbl_CustomerPhoneNumber.Text = "Số điện thoại";
@@ -1345,12 +1363,14 @@ namespace SE104_QLNS
             }
             else
             {
+                dpk_CustomerBirthday.Visibility = Visibility.Hidden;
                 btn_SaveNewCustomerInfomation.Visibility = Visibility.Hidden;
                 tbl_CustomerName.IsReadOnly = true;
                 tbl_CustomerPhoneNumber.IsReadOnly = true;
                 tbl_CustomerDetailAdress.IsReadOnly = true;
                 tbl_CustomerEmail.IsReadOnly = true;
                 txt_CustomerDateOfBirth.IsReadOnly = true;
+                cbx_CustomerGender.IsEnabled = false;
 
                 string connectionString = connect.connection;
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -1370,11 +1390,15 @@ namespace SE104_QLNS
                             tbl_CustomerPhoneNumber.Text = reader["SDT"].ToString();
                             tbl_CustomerDetailAdress.Text = reader["DiaChi"].ToString();
                             tbl_CustomerEmail.Text = reader["Email"].ToString();
-                            tbl_CustomerDebtDisplay.Text = reader["SoTienNo"].ToString();
+                            string DebtDisplay = reader["SoTienNo"].ToString();
+                            tbl_CustomerDebtDisplay.Text = DebtDisplay.Substring(0, DebtDisplay.Length-5)+"đ";
                             string GioiTinh = reader["GioiTinh"].ToString();
                             txt_CustomerDateOfBirth.Text = reader["NgaySinh"].ToString(); // Assuming date/time data type
+                            string[] split_line = reader["NgaySinh"].ToString().Split(' ');
+                            txt_CustomerDateOfBirth.Text = split_line[0];
 
-                            if (GioiTinh == "1")
+
+                            if (GioiTinh == "True")
                                 cbx_CustomerGender.Text = "Nam";
                             else
                                 cbx_CustomerGender.Text = "Nữ";
@@ -1391,27 +1415,27 @@ namespace SE104_QLNS
         private void btn_SaveNewCustomerInfomation_Click(object sender, RoutedEventArgs e)
         {
             string MaKH = GetNextCustomerID(this);
-            if (tbl_CustomerName.Text == "Tên khách hàng")
+            if (tbl_CustomerName.Text == "Tên khách hàng"|| tbl_CustomerName.Text == "")
             {
                 Notification noti = new Notification("Thiếu Thông Tin", "Vui lòng nhập đầy đủ thông tin cho khách hàng.");
                 return;
             }
-            if (tbl_CustomerPhoneNumber.Text == "Số điện thoại")
+            if (tbl_CustomerPhoneNumber.Text == "Số điện thoại"|| tbl_CustomerPhoneNumber.Text == "")
             {
                 Notification noti = new Notification("Thiếu Thông Tin", "Vui lòng nhập đầy đủ thông tin cho khách hàng.");
                 return;
             }
-            if (tbl_CustomerDetailAdress.Text == "Địa chỉ")
+            if (tbl_CustomerDetailAdress.Text == "Địa chỉ" || tbl_CustomerDetailAdress.Text == "")
             {
                 Notification noti = new Notification("Thiếu Thông Tin", "Vui lòng nhập đầy đủ thông tin cho khách hàng.");
                 return;
             }
-            if (tbl_CustomerEmail.Text == "Email")
+            if (tbl_CustomerEmail.Text == "Email" || tbl_CustomerEmail.Text == "")
             {
                 Notification noti = new Notification("Thiếu Thông Tin", "Vui lòng nhập đầy đủ thông tin cho khách hàng.");
                 return;
             }
-            if (txt_CustomerDateOfBirth.Text == "Ngày Sinh")
+            if (txt_CustomerDateOfBirth.Text == "Ngày Sinh" || txt_CustomerDateOfBirth.Text == "")
             {
                 Notification noti = new Notification("Thiếu Thông Tin", "Vui lòng nhập đầy đủ thông tin cho khách hàng.");
                 return;
@@ -1427,6 +1451,11 @@ namespace SE104_QLNS
             {
                 try
                 {
+                    if(!int.TryParse(tbl_CustomerPhoneNumber.Text, out int sdt))
+                    {
+                        Notification noti = new Notification("Lỗi", "Hãy nhập đúng Số điện thoại");
+                        return;
+                    }
                     connection.Open();
                     string sqlQuery = $"INSERT INTO KHACHHANG (MAKH, HoTenKH, Email, SDT, NgaySinh, GioiTinh, DiaChi, SoTienNo, SoTienMua) " +
                       $"VALUES (@MaKH, @HoTenKH, @Email, @SDT, @NgaySinh, @GioiTinh, @DiaChi, @SoTienNo, @SoTienMua)";
@@ -1467,6 +1496,8 @@ namespace SE104_QLNS
                     btn_SaveNewCustomerInfomation.Visibility = Visibility.Hidden;
                     Notification notification = new Notification("Tạo Thành Công", "Thêm Khách hàng mã " + MaKH + " thành công!");
 
+                    LoadAll(this);
+                    cbx_CustomerID.SelectedIndex = cbx_CustomerID.Items.Count-1;
                 }
                 catch (Exception ex)
                 {
@@ -1474,13 +1505,12 @@ namespace SE104_QLNS
                     Notification noti = new Notification("Lỗi", "Đã gặp lỗi khi thêm vào KHACHHANG: " + ex.Message);
                 }
             }
-            LoadAll(this);
         }
         private void dtg_SellList_CurrentCellChanged(object sender, EventArgs e)
         {
             UpdateSellPrice();
         }
-        private void UpdateSellPrice()
+        public void UpdateSellPrice()
         {
             int money = 0;
             foreach (Uct_Books book in BooksSell)
@@ -1653,6 +1683,12 @@ namespace SE104_QLNS
         }
         private void btn_SaveBillToDatabase_Click(object sender, RoutedEventArgs e)
         {
+            if(BooksSell.Count==0)
+            {
+                Notification noti = new Notification("Lỗi", "Không thể lưu hóa đơn trống");
+                return;
+            }
+            
             string NextExportId = GetNextExportPaperID(this);
             string MaKH = cbx_CustomerID.Text;
             if (MaKH == "Thêm mới")
@@ -1667,6 +1703,11 @@ namespace SE104_QLNS
                     //check if the books can be sold first
                     foreach (Uct_Books book in BooksSell)
                     {
+                        if (book.BookSellAmount < 1)
+                        {
+                            Notification noti = new Notification("Lỗi", "Số lượng sách mã " + book.BookID + " bán không thể bằng 0");
+                            return;
+                        }
                         if (Convert.ToInt32(book.Amount) - book.BookSellAmount < Convert.ToInt32(SoLuongTonToiThieuSauBan))
                         {
                             Notification noti = new Notification("Vi phạm quy định", "Số lượng sách mã " + book.BookID + " sau khi bán bé hơn quy định: " + SoLuongTonToiThieuSauBan);
@@ -1784,7 +1825,7 @@ namespace SE104_QLNS
         {
             if ((selectedimportreceipt != null) && (!isImportPaperDelete))
             {
-                selectedimportreceipt.Show();
+                selectedimportreceipt.ShowDialog();
             }
         }
         private void btn_ImportBookReceiptDelete_Click(object sender, RoutedEventArgs e)
@@ -1894,7 +1935,7 @@ namespace SE104_QLNS
         private void dtg_BillList_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if ((selectedbillinfo != null) && (!isExportPaperDelete))
-                selectedbillinfo.Show();
+                selectedbillinfo.ShowDialog();
         }
         //Books
         private void dtg_Books_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -2437,6 +2478,11 @@ namespace SE104_QLNS
         //Imports
         private void btn_ImportBooks_Click(object sender, RoutedEventArgs e)
         {
+            if(tbl_SumImportMoney.Text=="0")
+            {
+                Notification notification = new Notification("Lỗi", "Vui lòng chọn sản phẩm và nhập số lượng lớn hơn 0");
+                return;
+            }
             string connectionString = connect.connection;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -2648,7 +2694,7 @@ namespace SE104_QLNS
             if (!isBookUpdate && !isBookDelete && selectedbook != null)
             {
                 BookInfoPopup bookInfoPopup = new BookInfoPopup(selectedbook);
-                bookInfoPopup.Show();
+                bookInfoPopup.ShowDialog();
             }
         }
         private void btn_EmployeeAdd_Click(object sender, RoutedEventArgs e)
@@ -2769,7 +2815,7 @@ namespace SE104_QLNS
                         child.Visibility = Visibility.Collapsed;
                     }
                 }
-                Bills[Bills.Count - 1].Show();
+                Bills[Bills.Count - 1].ShowDialog();
             }
         }
         //Author
@@ -2952,7 +2998,7 @@ namespace SE104_QLNS
             btn_EditGenre.Background = new SolidColorBrush(Colors.Transparent);
 
             GenreAdd genreadd = new GenreAdd(this, 0, selectedgenre);
-            genreadd.Show();
+            genreadd.ShowDialog();
         }
 
         private void dtg_GenreList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -3183,7 +3229,7 @@ namespace SE104_QLNS
             if ((selectedcustomerreceipt != null) && (!isCustomerReceiptDelete))
             {
                 ReceiptInfo receiptinfo = new ReceiptInfo(selectedcustomerreceipt);
-                receiptinfo.Show();
+                receiptinfo.ShowDialog();
             }
         }
 
@@ -3481,5 +3527,17 @@ namespace SE104_QLNS
             else
                 cbx_CheckMoneyReceivedFromCustomer.IsChecked = false;
         }
+
+        private void tbl_CustomerPhoneNumber_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (e.Text == "\b")
+            {
+                return;
+            }
+
+            // Only allow numbers and decimal point (if allowed)
+            e.Handled = !Regex.IsMatch(e.Text, "[0-9.]");
+        }
+    
     }
 }
