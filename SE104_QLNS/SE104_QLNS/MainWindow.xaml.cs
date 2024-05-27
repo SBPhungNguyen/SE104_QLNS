@@ -684,7 +684,7 @@ namespace SE104_QLNS
                     string Thang = "", Nam = "";
 
                     //Add to Month from BAOCAOTON
-                    sqlQuery = "SELECT Thang FROM BAOCAOTON";
+                    sqlQuery = "SELECT DISTINCT Thang FROM BAOCAOTON ORDER BY Thang ASC";
                     command = new SqlCommand(sqlQuery, connection);
                     reader = command.ExecuteReader();
                     cbx_AmountReportMonth.Items.Clear();
@@ -713,7 +713,7 @@ namespace SE104_QLNS
                     reader.Close();
 
                     //Add to Year from BAOCAOTON
-                    sqlQuery = "SELECT Nam FROM BAOCAOTON";
+                    sqlQuery = "SELECT DISTINCT Nam FROM BAOCAOTON ORDER BY Nam ASC";
                     command = new SqlCommand(sqlQuery, connection);
                     reader = command.ExecuteReader();
                     cbx_AmountReportYear.Items.Clear();
@@ -786,7 +786,7 @@ namespace SE104_QLNS
                     string Thang = "", Nam = "";
 
                     //Add to Month from BAOCAOTON
-                    sqlQuery = "SELECT Thang FROM BAOCAOCONGNO";
+                    sqlQuery = "SELECT DISTINCT Thang FROM BAOCAOCONGNO ORDER BY Thang ASC";
                     command = new SqlCommand(sqlQuery, connection);
                     reader = command.ExecuteReader();
                     cbx_CustomerDebtReportMonth.Items.Clear();
@@ -815,7 +815,7 @@ namespace SE104_QLNS
                     reader.Close();
 
                     //Add to Year from BaoCAOCONGNO
-                    sqlQuery = "SELECT Nam FROM BAOCAOCONGNO";
+                    sqlQuery = "SELECT DISTINCT Nam FROM BAOCAOCONGNO ORDER BY Nam Asc";
                     command = new SqlCommand(sqlQuery, connection);
                     reader = command.ExecuteReader();
 
@@ -843,7 +843,6 @@ namespace SE104_QLNS
                         }
                     }
                     reader.Close();
-
                 }
                 catch (Exception ex)
                 {
@@ -1572,27 +1571,16 @@ namespace SE104_QLNS
                  //create new 
             {
                 reader.Close();
-                int previousMonth = int.Parse(DateTime.Now.Month.ToString()) - 1;
-                int previousYear = int.Parse(DateTime.Now.Year.ToString());
 
-                // Handle January of the following year
-                if (previousMonth == 0)
-                {
-                    previousMonth = 12;
-                    previousYear--;
-                }
-
-                //Get TonCuoi from previous
-                string thangTruoc = previousMonth.ToString();
-                string namTruoc = previousYear.ToString();
+                int thang = 0, nam = 0;
                 int TonCuoiTruoc = 0;
-                sqlQuery = $"SELECT TonCuoi FROM BAOCAOTON WHERE THANG=@THANG AND NAM=@NAM AND MASACH=@MASACH";
+                sqlQuery = "SELECT Top 1 Thang, Nam, TonCuoi FROM baocaoton WHERE MaSach=@MaSach ORDER BY Nam DESC, Thang DESC;";
                 command = new SqlCommand(sqlQuery, connection);
                 command.Parameters.AddWithValue("@MaSach", BookID);
-                command.Parameters.AddWithValue("@Thang", thangTruoc);
-                command.Parameters.AddWithValue("@Nam", namTruoc);
                 reader = command.ExecuteReader();
                 reader.Read();
+                thang = Convert.ToInt32(reader["Thang"]);
+                nam = Convert.ToInt32(reader["Nam"]);
                 TonCuoiTruoc = Convert.ToInt32(reader["TonCuoi"]);
                 reader.Close();
 
@@ -1609,6 +1597,37 @@ namespace SE104_QLNS
                 reader = command.ExecuteReader();
                 reader.Read();
                 reader.Close();
+
+                thang++;
+                if (thang == 13)
+                {
+                    thang = 1;
+                    nam++;
+                }
+
+                //Fill in all the empty BAOCAOTON
+                while (thang < DateTime.Now.Month || nam < DateTime.Now.Year)
+                {
+                    sqlQuery = "INSERT INTO BAOCAOTON (Thang, Nam, MaSach, TonDau, PhatSinh, TonCuoi) " +
+                    $"VALUES (@Thang, @Nam, @MaSach, @TonDau, @PhatSinh, @TonCuoi)";
+                    command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@Thang", thang);
+                    command.Parameters.AddWithValue("@Nam", nam);
+                    command.Parameters.AddWithValue("@MaSach", BookID);
+                    command.Parameters.AddWithValue("@TonDau", TonCuoiTruoc);
+                    command.Parameters.AddWithValue("@PhatSinh", 0);
+                    command.Parameters.AddWithValue("@TonCuoi", TonCuoiTruoc);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
+
+                    thang++;
+                    if (thang == 13)
+                    {
+                        thang = 1;
+                        nam++;
+                    }
+                }
             }
             LoadAll(this);
         }
@@ -1652,16 +1671,15 @@ namespace SE104_QLNS
                 }
 
                 //Get NoCuoi from previous
-                string thangTruoc = previousMonth.ToString();
-                string namTruoc = previousYear.ToString();
+                int thang = 0, nam = 0;
                 int NoCuoiTruoc = 0;
-                sqlQuery = $"SELECT NoCuoi FROM BAOCAOCONGNO WHERE THANG=@THANG AND NAM=@NAM AND MaKH=@MaKH";
+                sqlQuery = "SELECT Top 1 Thang, Nam, NoCuoi FROM baocaocongno WHERE MaKH=@MaKH ORDER BY Nam DESC, Thang DESC;";
                 command = new SqlCommand(sqlQuery, connection);
                 command.Parameters.AddWithValue("@MaKH", MaKH);
-                command.Parameters.AddWithValue("@Thang", thangTruoc);
-                command.Parameters.AddWithValue("@Nam", namTruoc);
                 reader = command.ExecuteReader();
                 reader.Read();
+                thang = Convert.ToInt32(reader["Thang"]);
+                nam = Convert.ToInt32(reader["Nam"]);
                 NoCuoiTruoc = Convert.ToInt32(reader["NoCuoi"]);
                 reader.Close();
 
@@ -1678,6 +1696,37 @@ namespace SE104_QLNS
                 reader = command.ExecuteReader();
                 reader.Read();
                 reader.Close();
+
+                thang++;
+                if (thang == 13)
+                {
+                    thang = 1;
+                    nam++;
+                }
+
+                //Fill in all the empty BAOCAOTON
+                while (thang < DateTime.Now.Month || nam < DateTime.Now.Year)
+                {
+                    sqlQuery = "INSERT INTO BAOCAOCONGNO (Thang, Nam, MaKH, NoDau, PhatSinh, NoCuoi) " +
+                    $"VALUES (@Thang, @Nam, @MaKH, @NoDau, @PhatSinh, @NoCuoi)";
+                    command = new SqlCommand(sqlQuery, connection);
+                    command.Parameters.AddWithValue("@Thang", thang);
+                    command.Parameters.AddWithValue("@Nam", nam);
+                    command.Parameters.AddWithValue("@MaKH", MaKH);
+                    command.Parameters.AddWithValue("@NoDau", NoCuoiTruoc);
+                    command.Parameters.AddWithValue("@PhatSinh", 0);
+                    command.Parameters.AddWithValue("@NoCuoi", NoCuoiTruoc);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    reader.Close();
+
+                    thang++;
+                    if (thang == 13)
+                    {
+                        thang = 1;
+                        nam++;
+                    }
+                }
             }
             LoadAll(this);
         }
